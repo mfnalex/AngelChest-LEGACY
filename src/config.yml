@@ -1,0 +1,93 @@
+#########################
+#####   AngelChest  #####
+#########################
+
+# After this amount of seconds, the AngelChest is automatically destroyed
+# and drops its contents
+# Default is 600 seconds = 10 minutes
+angelchest-duration: 600
+
+# When the block where the player dies is not empty (e.g. water, laval, half slab)
+# we will search for an empty block inside max-radius. Default is 10 blocks.
+# If there is absolutely no free space inside this radius, the chest
+# is spawned exactly where the player died and may replace a transparent block, so
+# to not set this value too low.
+max-radius: 10
+
+# Should we check for updates?
+# When enabled, a message is printed in the console if a new version has
+# been found, and OPs will be notified when they join the server.
+# When set to true, we will check for updates on startup and every 24 hours
+# When set to on-startup, we will only check on startup
+# When set to false, don't check for updates
+check-for-updates: true
+
+#########################
+##### localization ######
+#########################
+
+# Available color codes:
+# &0 Black        &6 Gold       &c Red
+# &1 Dark Blue    &7 Gray       &d Light Purple
+# &2 Dark Green   &8 Dark Gray  &e Yellow
+# &3 Dark Aqua    &9 Blue       &f White
+# &4 Dark Red     &a Green     
+# &5 Dark Purple  &b Aqua
+
+# Available formatting codes:
+# &k Obfuscated   &m Strikethrough
+# &l Bold         &o Italic
+# &n Underline    &r Reset
+
+##### Hologram text and name of the AngelChest. %s is the player's name
+hologram-text: "&a&l[AngelChest]&r\n&b%s"
+angelchest-inventory-name: "&a[AngelChest] &b%s&r"
+
+##### English
+message-all-your-angelchests-were-already-unlocked: "&eAll your AngelChest were already unlocked."
+message-angelchest-created: "&aAn Angel collected your stuff and put it into a chest located at the place of your death."
+message-angelchest-disappeared: "&cYou were too slow... Your AngelChest has disappeared and dropped its contents."
+message-error-players-only: "&cError: This command can only be run by players."
+message-inventory-was-empty: "&eAn Angel searched for your stuff but could not find anything."
+message-not-allowed-to-break-other-angelchests: "&cYou are not allowed to break other people's AngelChest."
+message-not-allowed-to-open-other-angelchests: "&cYou are not allowed to open other people's AngelChest."
+message-unlocked-more-angelchests: "&aYou have unlocked %d AngelChests."
+message-unlocked-one-angelchest: "&aYou have unlocked your AngelChest."
+message-you-dont-have-any-angelchests: "&eYou don't have any AngelChests."
+message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory back, but some items are still in the AngelChest."
+message-you-got-your-inventory-back: "&aYou got your inventory back!"
+
+##### Simplified Chinese 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
+#message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
+#message-angelchest-created: "&a一位善良的天使捡起了你的物品并放到了你死亡地点附近的箱子内."
+#message-angelchest-disappeared: "&c你来晚了... 你的天御之箱消失且物品掉到了地上."
+#message-error-players-only: "&c错误: 这个指令只能由玩家执行."
+#message-inventory-was-empty: "&e天使并没有找到你掉落的物品."
+#message-not-allowed-to-break-other-angelchests: "&c你不能破坏其它玩家的天御之箱."
+#message-not-allowed-to-open-other-angelchests: "&你不能打开其它玩家的天御之箱."
+#message-unlocked-more-angelchests: "&a你解锁了%d 的天御之箱."
+#message-unlocked-one-angelchest: "&你解锁了你的的天御之箱."
+#message-you-dont-have-any-angelchests: "&e你没有任何的天御之箱."
+#message-you-got-part-of-your-inventory-back: "&e你取回了一些物品,但还有一些物品在天御之箱内."
+#message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
+
+##### Traditional Chinese 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
+#message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
+#message-angelchest-created: "&a一個善良的小天使幫你把所有的掉落物蒐集起來了，並放置在您死亡的地點"
+#message-angelchest-disappeared: "&c你晚了一步... 小天使箱子已經消失，你的物品也掉了出來"
+#message-error-players-only: "&c錯誤： 該指令只能由玩家使用"
+#message-inventory-was-empty: "&e小天使發現你在死亡時未掉落任何物品"
+#message-not-allowed-to-break-other-angelchests: "&c你無法破壞其他人的小天使箱子!"
+#message-not-allowed-to-open-other-angelchests: "&c你無法使用其他人的小天使箱子!"
+#message-unlocked-more-angelchests: "&a成功解鎖 %d個 小天使箱子"
+#message-unlocked-one-angelchest: "&a成功將你的小天使箱子解鎖了"
+#message-you-dont-have-any-angelchests: "&e你沒有任何小天使箱子"
+#message-you-got-part-of-your-inventory-back: "&e你取回了一部分的物品，但仍有物品遺留在小天使箱子裡"
+#message-you-got-your-inventory-back: "&a成功將物品取回!"
+
+#########################
+#####     Done!     #####
+#########################
+
+# please do not change the following line manually!
+config-version: 6
