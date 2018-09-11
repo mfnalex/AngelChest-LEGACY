@@ -46,8 +46,10 @@ public class Hologram {
 	}
 	
 	public void destroy() {
-		for(ArmorStand armorStand : armorStands) {
+		for(ArmorStand armorStand : armorStands.toArray(new ArmorStand[armorStands.size()])) {
 			armorStand.remove();
+			armorStands.remove(armorStand);
+			System.out.println("Removing armor stand "+armorStand.getLocation().toString());
 		}
 	}
 

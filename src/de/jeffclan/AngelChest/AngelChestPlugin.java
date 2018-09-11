@@ -2,6 +2,7 @@ package de.jeffclan.AngelChest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
@@ -18,6 +19,10 @@ public class AngelChestPlugin extends JavaPlugin {
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
 	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;
+	
+	public boolean debug = false;
+	
+	ArrayList<String> disabledWorlds;
 	
 	Messages messages;
 	UpdateChecker updateChecker;
@@ -41,7 +46,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		// Deletes old armorstands
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
-				getLogger().info(blockArmorStandCombinations.size()+"");
+				//getLogger().info(blockArmorStandCombinations.size()+"");
 				for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
 					if(!isAngelChest(comb.block)) {
 						comb.armorStand.remove();
@@ -77,6 +82,8 @@ public class AngelChestPlugin extends JavaPlugin {
 			updateChecker.checkForUpdate();
 		}
 		
+		if (debug) getLogger().info("Disabled Worlds: "+disabledWorlds.size());
+		
 	}
 	
 	public void onDisable() {
@@ -97,6 +104,8 @@ public class AngelChestPlugin extends JavaPlugin {
 		getConfig().addDefault("check-for-updates", "true");
 		getConfig().addDefault("angelchest-duration", 600);
 		getConfig().addDefault("max-radius", 10);
+		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");
+		
 		
 		if (getConfig().getInt("config-version", 0) != currentConfigVersion) {
 			getLogger().warning("========================================================");

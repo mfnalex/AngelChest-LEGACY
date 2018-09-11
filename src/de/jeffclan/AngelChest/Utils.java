@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -57,6 +58,15 @@ public class Utils {
 		}
 		return null;
 	}
+	
+	public static boolean isWorldEnabled(World world, AngelChestPlugin plugin) {
+		
+		if(plugin.disabledWorlds.contains(world.getName().toLowerCase())) {
+			return false;
+		}
+		
+		return true;
+	}
 
 	/**
 	 * Puts everything from source into destination.
@@ -87,6 +97,7 @@ public class Utils {
 	}
 
 	public static void destroyAngelChest(Block block, AngelChest angelChest, AngelChestPlugin plugin) {
+		
 
 		if (!plugin.isAngelChest(block))
 			return;

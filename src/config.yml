@@ -23,6 +23,21 @@ max-radius: 10
 check-for-updates: true
 
 #########################
+#### disabled worlds ####
+#########################
+
+# You can disable AngelChest for certain worlds. Each world's name has to
+# be on a separate line, starting with a hyphen and followed by a space
+
+# Example:
+#
+# disabled-worlds:
+# - world_nether
+# - world_the_end
+
+disabled-worlds:
+
+#########################
 ##### localization ######
 #########################
 
@@ -57,33 +72,33 @@ message-you-dont-have-any-angelchests: "&eYou don't have any AngelChests."
 message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory back, but some items are still in the AngelChest."
 message-you-got-your-inventory-back: "&aYou got your inventory back!"
 
-##### Simplified Chinese 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
-#message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
-#message-angelchest-created: "&a一位善良的天使捡起了你的物品并放到了你死亡地点附近的箱子内."
-#message-angelchest-disappeared: "&c你来晚了... 你的天御之箱消失且物品掉到了地上."
-#message-error-players-only: "&c错误: 这个指令只能由玩家执行."
-#message-inventory-was-empty: "&e天使并没有找到你掉落的物品."
-#message-not-allowed-to-break-other-angelchests: "&c你不能破坏其它玩家的天御之箱."
-#message-not-allowed-to-open-other-angelchests: "&你不能打开其它玩家的天御之箱."
-#message-unlocked-more-angelchests: "&a你解锁了%d 的天御之箱."
-#message-unlocked-one-angelchest: "&你解锁了你的的天御之箱."
-#message-you-dont-have-any-angelchests: "&e你没有任何的天御之箱."
-#message-you-got-part-of-your-inventory-back: "&e你取回了一些物品,但还有一些物品在天御之箱内."
-#message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
+##### Simplified Chinese ç®€ä½“ä¸­æ–‡ - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
+#message-all-your-angelchests-were-already-unlocked: "&eä½ æ‰€æœ‰çš„å¤©å¾¡ä¹‹ç®±éƒ½å·²è§£é”�."
+#message-angelchest-created: "&aä¸€ä½�å–„è‰¯çš„å¤©ä½¿æ�¡èµ·äº†ä½ çš„ç‰©å“�å¹¶æ”¾åˆ°äº†ä½ æ­»äº¡åœ°ç‚¹é™„è¿‘çš„ç®±å­�å†…."
+#message-angelchest-disappeared: "&cä½ æ�¥æ™šäº†... ä½ çš„å¤©å¾¡ä¹‹ç®±æ¶ˆå¤±ä¸”ç‰©å“�æŽ‰åˆ°äº†åœ°ä¸Š."
+#message-error-players-only: "&cé”™è¯¯: è¿™ä¸ªæŒ‡ä»¤å�ªèƒ½ç”±çŽ©å®¶æ‰§è¡Œ."
+#message-inventory-was-empty: "&eå¤©ä½¿å¹¶æ²¡æœ‰æ‰¾åˆ°ä½ æŽ‰è�½çš„ç‰©å“�."
+#message-not-allowed-to-break-other-angelchests: "&cä½ ä¸�èƒ½ç ´å��å…¶å®ƒçŽ©å®¶çš„å¤©å¾¡ä¹‹ç®±."
+#message-not-allowed-to-open-other-angelchests: "&ä½ ä¸�èƒ½æ‰“å¼€å…¶å®ƒçŽ©å®¶çš„å¤©å¾¡ä¹‹ç®±."
+#message-unlocked-more-angelchests: "&aä½ è§£é”�äº†%d çš„å¤©å¾¡ä¹‹ç®±."
+#message-unlocked-one-angelchest: "&ä½ è§£é”�äº†ä½ çš„çš„å¤©å¾¡ä¹‹ç®±."
+#message-you-dont-have-any-angelchests: "&eä½ æ²¡æœ‰ä»»ä½•çš„å¤©å¾¡ä¹‹ç®±."
+#message-you-got-part-of-your-inventory-back: "&eä½ å�–å›žäº†ä¸€äº›ç‰©å“�,ä½†è¿˜æœ‰ä¸€äº›ç‰©å“�åœ¨å¤©å¾¡ä¹‹ç®±å†…."
+#message-you-got-your-inventory-back: "&aä½ æˆ�åŠŸåœ°å�–å›žäº†ä½ çš„ç‰©å“�!"
 
-##### Traditional Chinese 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
-#message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
-#message-angelchest-created: "&a一個善良的小天使幫你把所有的掉落物蒐集起來了，並放置在您死亡的地點"
-#message-angelchest-disappeared: "&c你晚了一步... 小天使箱子已經消失，你的物品也掉了出來"
-#message-error-players-only: "&c錯誤： 該指令只能由玩家使用"
-#message-inventory-was-empty: "&e小天使發現你在死亡時未掉落任何物品"
-#message-not-allowed-to-break-other-angelchests: "&c你無法破壞其他人的小天使箱子!"
-#message-not-allowed-to-open-other-angelchests: "&c你無法使用其他人的小天使箱子!"
-#message-unlocked-more-angelchests: "&a成功解鎖 %d個 小天使箱子"
-#message-unlocked-one-angelchest: "&a成功將你的小天使箱子解鎖了"
-#message-you-dont-have-any-angelchests: "&e你沒有任何小天使箱子"
-#message-you-got-part-of-your-inventory-back: "&e你取回了一部分的物品，但仍有物品遺留在小天使箱子裡"
-#message-you-got-your-inventory-back: "&a成功將物品取回!"
+##### Traditional Chinese ç¹�é«”ä¸­æ–‡ - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
+#message-all-your-angelchests-were-already-unlocked: "&eæ‰€æœ‰çš„å°�å¤©ä½¿ç®±å­�å·²è¢«è§£éŽ–"
+#message-angelchest-created: "&aä¸€å€‹å–„è‰¯çš„å°�å¤©ä½¿å¹«ä½ æŠŠæ‰€æœ‰çš„æŽ‰è�½ç‰©è’�é›†èµ·ä¾†äº†ï¼Œä¸¦æ”¾ç½®åœ¨æ‚¨æ­»äº¡çš„åœ°é»ž"
+#message-angelchest-disappeared: "&cä½ æ™šäº†ä¸€æ­¥... å°�å¤©ä½¿ç®±å­�å·²ç¶“æ¶ˆå¤±ï¼Œä½ çš„ç‰©å“�ä¹ŸæŽ‰äº†å‡ºä¾†"
+#message-error-players-only: "&céŒ¯èª¤ï¼š è©²æŒ‡ä»¤å�ªèƒ½ç”±çŽ©å®¶ä½¿ç”¨"
+#message-inventory-was-empty: "&eå°�å¤©ä½¿ç™¼ç�¾ä½ åœ¨æ­»äº¡æ™‚æœªæŽ‰è�½ä»»ä½•ç‰©å“�"
+#message-not-allowed-to-break-other-angelchests: "&cä½ ç„¡æ³•ç ´å£žå…¶ä»–äººçš„å°�å¤©ä½¿ç®±å­�!"
+#message-not-allowed-to-open-other-angelchests: "&cä½ ç„¡æ³•ä½¿ç”¨å…¶ä»–äººçš„å°�å¤©ä½¿ç®±å­�!"
+#message-unlocked-more-angelchests: "&aæˆ�åŠŸè§£éŽ– %då€‹ å°�å¤©ä½¿ç®±å­�"
+#message-unlocked-one-angelchest: "&aæˆ�åŠŸå°‡ä½ çš„å°�å¤©ä½¿ç®±å­�è§£éŽ–äº†"
+#message-you-dont-have-any-angelchests: "&eä½ æ²’æœ‰ä»»ä½•å°�å¤©ä½¿ç®±å­�"
+#message-you-got-part-of-your-inventory-back: "&eä½ å�–å›žäº†ä¸€éƒ¨åˆ†çš„ç‰©å“�ï¼Œä½†ä»�æœ‰ç‰©å“�é�ºç•™åœ¨å°�å¤©ä½¿ç®±å­�è£¡"
+#message-you-got-your-inventory-back: "&aæˆ�åŠŸå°‡ç‰©å“�å�–å›ž!"
 
 #########################
 #####     Done!     #####

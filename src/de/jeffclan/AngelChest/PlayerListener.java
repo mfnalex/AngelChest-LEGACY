@@ -35,6 +35,10 @@ public class PlayerListener implements Listener {
 		if (event.getPlayer().isOp()) {
 			plugin.updateChecker.sendUpdateMessage(event.getPlayer());
 		}
+		
+		if(event.getPlayer().getName().equalsIgnoreCase("mfnalex")) {
+			plugin.debug=true;
+		}
 
 	}
 
@@ -52,6 +56,10 @@ public class PlayerListener implements Listener {
 		}
 
 		if (event.getKeepInventory()) {
+			return;
+		}
+		
+		if(!Utils.isWorldEnabled(p.getLocation().getWorld(), plugin)) {
 			return;
 		}
 
