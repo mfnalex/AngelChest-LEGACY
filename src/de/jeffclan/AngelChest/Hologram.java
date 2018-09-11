@@ -15,11 +15,11 @@ public class Hologram {
 	double lineOffset = -0.2D;
 	double currentOffset = 0.0D;
 	
-	public Hologram(Block block, String text) {
-		this(block.getLocation().add(new Vector(0.5,-0.5,0.5)),text);
+	public Hologram(Block block, String text,AngelChestPlugin plugin) {
+		this(block.getLocation().add(new Vector(0.5,-0.5,0.5)),block,text,plugin);
 	}
 
-	public Hologram(Location location, String text) {
+	public Hologram(Location location, Block block, String text, AngelChestPlugin plugin) {
 
 		armorStands = new ArrayList<ArmorStand>();
 
@@ -36,6 +36,8 @@ public class Hologram {
 			as.setVisible(false);
 
 			armorStands.add(as);
+			
+			plugin.blockArmorStandCombinations.add(new BlockArmorStandCombination(block,as));
 			
 			currentOffset += lineOffset;
 

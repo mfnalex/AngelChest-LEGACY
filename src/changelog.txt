@@ -1,0 +1,2 @@
+Changes from 1.1.1 -> 1.2.0:
+- Integrated automatic detection of armor stands that have not been been removed. 

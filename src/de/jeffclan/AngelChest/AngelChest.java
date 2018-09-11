@@ -28,7 +28,7 @@ public class AngelChest {
 		inv = Bukkit.createInventory(null, 54, inventoryName);
 		if(playerItems != null && playerItems.length>0) { inv.addItem(playerItems); }
 		createChest(block);
-		hologram = new Hologram(block, hologramText);
+		hologram = new Hologram(block, hologramText,plugin);
 		
 		AngelChest me = this;
 		

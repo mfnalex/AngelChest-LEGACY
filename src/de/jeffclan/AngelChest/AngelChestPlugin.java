@@ -1,9 +1,11 @@
 package de.jeffclan.AngelChest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,12 +17,17 @@ public class AngelChestPlugin extends JavaPlugin {
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
+	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;
 	
 	Messages messages;
 	UpdateChecker updateChecker;
 	
+	
+	
 	@Override
 	public void onEnable() {
+		
+		AngelChestPlugin myself = this;
 		
 		createConfig();
 		
@@ -29,6 +36,27 @@ public class AngelChestPlugin extends JavaPlugin {
 		
 		playerSettings = new HashMap<Player,PlayerSetting>();
 		angelChests = new HashMap<Block,AngelChest>();
+		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
+		
+		// Deletes old armorstands
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				getLogger().info(blockArmorStandCombinations.size()+"");
+				for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
+					if(!isAngelChest(comb.block)) {
+						comb.armorStand.remove();
+						blockArmorStandCombinations.remove(comb);
+						//getLogger().info("Removed armor stand that has been left behind at @ " + comb.block.getLocation().toString());
+					}
+				}
+				for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
+					if(!isAngelChest(entry.getKey())) {
+						Utils.destroyAngelChest(entry.getKey(), entry.getValue(), myself);
+					}
+				}
+			}
+		}, 0L, 1 * 20);
+		
 		
 		this.getCommand("unlock").setExecutor(new CommandUnlock(this));
 		
@@ -109,6 +137,7 @@ public class AngelChestPlugin extends JavaPlugin {
 	}
 
 	public boolean isAngelChest(Block block) {
+		if(block.getType() != Material.CHEST) return false;
 		return angelChests.containsKey(block);
 	}
 	
