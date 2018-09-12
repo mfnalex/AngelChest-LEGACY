@@ -75,7 +75,7 @@ public class PlayerListener implements Listener {
 		Block angelChestBlock = p.getLocation().getBlock();
 		Block fixedAngelChestBlock = angelChestBlock;
 		
-		System.out.println(plugin.getConfig().getInt("max-radius"));
+		//System.out.println(plugin.getConfig().getInt("max-radius"));
 
 		if (!angelChestBlock.getType().equals(Material.AIR)) {
 			List<Block> blocksNearby = Utils.getNearbyBlocks(angelChestBlock.getLocation(),

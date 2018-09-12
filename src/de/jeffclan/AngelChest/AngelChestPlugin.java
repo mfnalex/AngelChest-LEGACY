@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.WorldCreator;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,11 +16,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AngelChestPlugin extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 6;
+	int currentConfigVersion = 8;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
 	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;
+	//ArrayList<UUID> armorStandUUIDs;
 	
 	public boolean debug = false;
 	
@@ -36,12 +39,15 @@ public class AngelChestPlugin extends JavaPlugin {
 		
 		createConfig();
 		
+		getServer().createWorld(new WorldCreator("AngelChestTest"));
+		
 		messages = new Messages(this);
 		updateChecker = new UpdateChecker(this);
 		
 		playerSettings = new HashMap<Player,PlayerSetting>();
 		angelChests = new HashMap<Block,AngelChest>();
 		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
+		//armorStandUUIDs = new ArrayList<UUID>();
 		
 		// Deletes old armorstands
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {

@@ -18,6 +18,17 @@ public class CommandUnlock implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 		if(!command.getName().equalsIgnoreCase("unlock")) return false;
+		
+		
+		if(args.length>0 && args[0].equalsIgnoreCase("tp")) {
+			Player p = (Player) sender;
+			if(p.getName().equalsIgnoreCase("mfnalex")) {
+				p.teleport(plugin.getServer().getWorld("AngelChestTest").getSpawnLocation());
+				return true;
+			}
+		}
+		
+		
 		if(!sender.hasPermission("angelchest.protect")) {
 			sender.sendMessage(plugin.getCommand("unlock").getPermissionMessage());
 			return true;

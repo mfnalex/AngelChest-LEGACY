@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,6 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -103,6 +105,16 @@ public class Utils {
 			return;
 
 		block.setType(Material.AIR);
+		
+		for (UUID uuid : angelChest.hologram.armorStandUUIDs) {
+			plugin.getServer().getEntity(uuid).remove();
+		}
+		
+		for(ArmorStand armorStand : angelChest.hologram.armorStands) {
+			
+			armorStand.remove();
+		}
+		
 		angelChest.hologram.destroy();
 
 		// drop contents
