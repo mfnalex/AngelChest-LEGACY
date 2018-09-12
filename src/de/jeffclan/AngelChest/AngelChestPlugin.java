@@ -39,8 +39,6 @@ public class AngelChestPlugin extends JavaPlugin {
 		
 		createConfig();
 		
-		getServer().createWorld(new WorldCreator("AngelChestTest"));
-		
 		messages = new Messages(this);
 		updateChecker = new UpdateChecker(this);
 		
