@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -72,17 +73,29 @@ public class PlayerListener implements Listener {
 		// Enable keep inventory to prevent drops
 		event.setKeepInventory(true);
 
-		Block angelChestBlock = p.getLocation().getBlock();
+		Block tmp;
+		
+		if(p.getLocation().getBlockY() < 1) {
+			Location ltmp = p.getLocation();
+			ltmp.setY(1);
+			tmp = ltmp.getBlock();
+		} else {
+			tmp = p.getLocation().getBlock();
+		}
+		
+		Block angelChestBlock = tmp;
+		
 		Block fixedAngelChestBlock = angelChestBlock;
 		
 		//System.out.println(plugin.getConfig().getInt("max-radius"));
+		
 
 		if (!angelChestBlock.getType().equals(Material.AIR)) {
 			List<Block> blocksNearby = Utils.getNearbyBlocks(angelChestBlock.getLocation(),
 					plugin.getConfig().getInt("max-radius"));
 
 			for (Block b : blocksNearby.toArray(new Block[blocksNearby.size()])) {
-				if (!b.getType().equals(Material.AIR)) {
+				if (!b.getType().equals(Material.AIR) || b.getY() < 1) {
 					blocksNearby.remove(b);
 				}
 			}
