@@ -1,6 +1,6 @@
 main: de.jeffclan.AngelChest.AngelChestPlugin
 name: AngelChest
-version: 1.3.1
+version: 1.4.0
 api-version: 1.13
 description: Puts your inventory into a protected chest when you die.
 website: https://www.spigotmc.org/resources/1-13-angelchest.60383/

@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AngelChestPlugin extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 8;
+	int currentConfigVersion = 9;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
@@ -106,6 +106,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		saveDefaultConfig();
 		
 		getConfig().addDefault("check-for-updates", "true");
+		getConfig().addDefault("show-location", false);
 		getConfig().addDefault("angelchest-duration", 600);
 		getConfig().addDefault("max-radius", 10);
 		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");

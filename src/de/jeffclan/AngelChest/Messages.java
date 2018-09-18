@@ -9,7 +9,7 @@ public class Messages {
 	public final String MSG_PLAYERSONLY,MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS,MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS,
 	MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED, MSG_UNLOCKED_ONE_ANGELCHEST, MSG_UNLOCKED_MORE_ANGELCHESTS, MSG_INVENTORY_WAS_EMPTY,
 	MSG_ANGELCHEST_CREATED, MSG_ANGELCHEST_DISAPPEARED, MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS, MSG_YOU_GOT_YOUR_INVENTORY_BACK
-	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME;
+	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION;
 
 	Messages(AngelChestPlugin plugin) {
 		this.plugin = plugin;
@@ -49,6 +49,8 @@ public class Messages {
 		HOLOGRAM_TEXT = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("hologram-text","&a&l[AngelChest]&r\n&b%s"));
 		
 		ANGELCHEST_INVENTORY_NAME = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("angelchest-inventory-name","&a[AngelChest] &b%s&r"));
+		
+		MSG_ANGELCHEST_LOCATION = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-angelchest-location","&eLocation of your AngelChest: %s"));
 		
 		
 	}

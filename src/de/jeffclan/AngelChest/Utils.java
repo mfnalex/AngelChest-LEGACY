@@ -167,5 +167,12 @@ public class Utils {
 	        }
 	        return blocks;
 	    }
+
+	public static String locationToString(Block block) {
+		if(block == null) {
+			return "<none>";
+		}
+		return String.format("%d, %d, %d (%s)", block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
+	}
 	 
 }

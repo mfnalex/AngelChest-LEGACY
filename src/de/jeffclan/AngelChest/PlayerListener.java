@@ -127,6 +127,9 @@ public class PlayerListener implements Listener {
 
 		// send message after one twentieth second
 		Utils.sendDelayedMessage(p, plugin.messages.MSG_ANGELCHEST_CREATED, 1, plugin);
+		if(plugin.getConfig().getBoolean("show-location")) {
+			Utils.sendDelayedMessage(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , Utils.locationToString(fixedAngelChestBlock) ), 2, plugin);
+		}
 	}
 
 	@EventHandler

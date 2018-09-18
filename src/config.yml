@@ -14,6 +14,10 @@ angelchest-duration: 600
 # to not set this value too low.
 max-radius: 10
 
+# When set to true, players will receive a message telling them where the AngelChest
+# is located.
+show-location: false
+
 # Should we check for updates?
 # When enabled, a message is printed in the console if a new version has
 # been found, and OPs will be notified when they join the server.
@@ -71,6 +75,7 @@ message-unlocked-one-angelchest: "&aYou have unlocked your AngelChest."
 message-you-dont-have-any-angelchests: "&eYou don't have any AngelChests."
 message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory back, but some items are still in the AngelChest."
 message-you-got-your-inventory-back: "&aYou got your inventory back!"
+message-angelchest-location: "&eLocation of your AngelChest: %s"
 
 ##### Chinese Simplified 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
 #message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
@@ -85,6 +90,7 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 #message-you-dont-have-any-angelchests: "&e你没有任何的天御之箱."
 #message-you-got-part-of-your-inventory-back: "&e你取回了一些物品,但还有一些物品在天御之箱内."
 #message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
+#message-angelchest-location: "&eLocation of your AngelChest: %s"
 
 ##### Chinese Traditional 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
 #message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
@@ -99,6 +105,7 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 #message-you-dont-have-any-angelchests: "&e你沒有任何小天使箱子"
 #message-you-got-part-of-your-inventory-back: "&e你取回了一部分的物品，但仍有物品遺留在小天使箱子裡"
 #message-you-got-your-inventory-back: "&a成功將物品取回!"
+#message-angelchest-location: "&eLocation of your AngelChest: %s"
 
 ##### French - Thanks to AngelCynara for translating! -> https://www.spigotmc.org/members/angelcynara.398643/ 
 #message-all-your-angelchests-were-already-unlocked: "&eTout vos AngeCoffres sont débloqués."
@@ -113,6 +120,7 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 #message-you-dont-have-any-angelchests: "&eVous n'avez pas de AngeCoffre."
 #message-you-got-part-of-your-inventory-back: "&eVous avez récuperer une partie de votre inventaire , mais il en reste dans l' AngeCoffre."
 #message-you-got-your-inventory-back: "&aVous avez récuperer votre inventaire."
+#message-angelchest-location: "&eLocation of your AngelChest: %s"
 
 ##### German
 #message-all-your-angelchests-were-already-unlocked: "&eAlle deine AngelChests waren bereits aufgeschlossen."
@@ -127,6 +135,7 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 #message-you-dont-have-any-angelchests: "&eDu hast keine AngelChest."
 #message-you-got-part-of-your-inventory-back: "&eEin Teil deines Inventars wurde wiederhergestellt, aber manche Sachen sind noch in der AngelChest."
 #message-you-got-your-inventory-back: "&aDein Inventar wurde wiederhergestellt!"
+#message-angelchest-location: "&ePosition deiner AngelChest: %s"
 
 
 #########################
@@ -134,4 +143,4 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 #########################
 
 # please do not change the following line manually!
-config-version: 8
+config-version: 9
