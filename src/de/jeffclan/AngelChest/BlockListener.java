@@ -1,9 +1,11 @@
 package de.jeffclan.AngelChest;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 
 public class BlockListener implements Listener {
 	
@@ -25,5 +27,16 @@ public class BlockListener implements Listener {
 		}
 		Utils.destroyAngelChest(event.getBlock(), angelChest, plugin);
 	}
+	
+	@EventHandler
+    public void onEntityExplode(EntityExplodeEvent event) {
+            for (Block block : event.blockList()){
+                if(block.getType() == Material.CHEST){
+                   if(plugin.isAngelChest(block)) {
+                	   event.blockList().remove(block);
+                   }
+                }
+            }
+    }
 	
 }

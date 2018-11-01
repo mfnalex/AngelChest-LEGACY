@@ -1,3 +1,6 @@
+Changes from 1.4.0 -> 1.4.1:
+- Mob explosions cannot destroy the AngelChests
+
 Changes from 1.3.1 -> 1.4.0:
 - Added config option "show-location" (defaulting to false). When enabled, you get a message where your AngelChest is located.
 
