@@ -30,7 +30,7 @@ public class BlockListener implements Listener {
 	
 	@EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-            for (Block block : event.blockList()){
+            for (Block block : event.blockList().toArray(new Block[event.blockList().size()])){
                 if(block.getType() == Material.CHEST){
                    if(plugin.isAngelChest(block)) {
                 	   event.blockList().remove(block);
