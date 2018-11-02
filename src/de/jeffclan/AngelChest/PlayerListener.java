@@ -148,7 +148,7 @@ public class PlayerListener implements Listener {
 		// event.getPlayer().sendMessage("This is " + angelChest.owner.getName()+"'s
 		// AngelChest.");
 		// Test here if player is allowed to open THIS angelchest
-		if (angelChest.isProtected && !event.getPlayer().equals(angelChest.owner)
+		if (angelChest.isProtected && event.getPlayer().getUniqueId().compareTo(angelChest.owner.getUniqueId()) != 0
 				&& !event.getPlayer().hasPermission("angelchest.protect.ignore")) {
 			event.getPlayer().sendMessage(plugin.messages.MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS);
 			event.setCancelled(true);
