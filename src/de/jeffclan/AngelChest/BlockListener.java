@@ -20,7 +20,7 @@ public class BlockListener implements Listener {
 		if(!event.getBlock().getType().equals(Material.CHEST)) return;
 		if(!plugin.isAngelChest(event.getBlock())) return;
 		AngelChest angelChest = plugin.getAngelChest(event.getBlock());
-		if(!angelChest.owner.equals(event.getPlayer()) && !event.getPlayer().hasPermission("angelchest.protect.ignore")) {
+		if(!angelChest.owner.equals(event.getPlayer().getUniqueId()) && !event.getPlayer().hasPermission("angelchest.protect.ignore")) {
 			event.getPlayer().sendMessage(plugin.messages.MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS);
 			event.setCancelled(true);
 			return;

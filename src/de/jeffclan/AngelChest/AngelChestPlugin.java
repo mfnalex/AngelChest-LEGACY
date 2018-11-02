@@ -2,13 +2,10 @@ package de.jeffclan.AngelChest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.WorldCreator;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -140,7 +137,7 @@ public class AngelChestPlugin extends JavaPlugin {
 	
 	public void unregisterPlayer(Player p) {
 		if(isPlayerRegistered(p)) {
-			PlayerSetting toBeSaved = playerSettings.get(p);
+			//PlayerSetting toBeSaved = playerSettings.get(p);
 			playerSettings.remove(p);
 			// Save stuff to file
 		}

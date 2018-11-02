@@ -149,7 +149,7 @@ public class Utils {
 	public static ArrayList<AngelChest> getAllAngelChestsFromPlayer(Player p, AngelChestPlugin plugin) {
 		ArrayList<AngelChest> angelChests = new ArrayList<AngelChest>();
 		for (AngelChest angelChest : plugin.angelChests.values()) {
-			if (!angelChest.owner.equals(p))
+			if (!angelChest.owner.equals(p.getUniqueId()))
 				continue;
 			angelChests.add(angelChest);
 		}
