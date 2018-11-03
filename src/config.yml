@@ -7,11 +7,11 @@
 # Default is 600 seconds = 10 minutes
 angelchest-duration: 600
 
-# When the block where the player dies is not empty (e.g. water, laval, half slab)
+# When the block where the player dies is not empty (e.g. water, lava, half slab)
 # we will search for an empty block inside max-radius. Default is 10 blocks.
 # If there is absolutely no free space inside this radius, the chest
 # is spawned exactly where the player died and may replace a transparent block, so
-# to not set this value too low.
+# do not set this value too low.
 max-radius: 10
 
 # When set to true, players will receive a message telling them where the AngelChest
@@ -58,12 +58,12 @@ disabled-worlds:
 # &l Bold         &o Italic
 # &n Underline    &r Reset
 
-##### Hologram text and name of the AngelChest. %s is the player's name
+##### Hologram text and name of the AngelChest. %s is the player's name. \n is a new line.
 hologram-text: "&a&l[AngelChest]&r\n&b%s"
 angelchest-inventory-name: "&a[AngelChest] &b%s&r"
 
 ##### English
-message-all-your-angelchests-were-already-unlocked: "&eAll your AngelChest were already unlocked."
+message-all-your-angelchests-were-already-unlocked: "&eAll your AngelChests were already unlocked."
 message-angelchest-created: "&aAn Angel collected your stuff and put it into a chest located at the place of your death."
 message-angelchest-disappeared: "&cYou were too slow... Your AngelChest has disappeared and dropped its contents."
 message-error-players-only: "&cError: This command can only be run by players."
