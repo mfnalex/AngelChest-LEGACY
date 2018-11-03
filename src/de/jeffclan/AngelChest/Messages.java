@@ -4,7 +4,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class Messages {
 
-	private AngelChestPlugin plugin;
+	//private AngelChestPlugin plugin;
 
 	public final String MSG_PLAYERSONLY,MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS,MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS,
 	MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED, MSG_UNLOCKED_ONE_ANGELCHEST, MSG_UNLOCKED_MORE_ANGELCHESTS, MSG_INVENTORY_WAS_EMPTY,
@@ -12,7 +12,7 @@ public class Messages {
 	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION;
 
 	Messages(AngelChestPlugin plugin) {
-		this.plugin = plugin;
+		//this.plugin = plugin;
 
 		MSG_PLAYERSONLY = ChatColor.translateAlternateColorCodes('&', plugin.getConfig()
 				.getString("message-error-players-only", "&cError: This command can only be run by players."));
