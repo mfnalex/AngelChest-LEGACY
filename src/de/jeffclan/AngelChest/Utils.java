@@ -167,6 +167,21 @@ public class Utils {
 	        }
 	        return blocks;
 	    }
+	 
+	 public static List<Block> getPossibleChestLocations(Location location, int radius) {
+	        List<Block> blocks = new ArrayList<Block>();
+	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
+	            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
+	                for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
+	                	Block block = location.getWorld().getBlockAt(x,y,z);
+	                	if(block.getType() == Material.AIR && y > 0) {
+	                		blocks.add(block);
+	                	}
+	                }
+	            }
+	        }
+	        return blocks;
+	    }
 
 	public static String locationToString(Block block) {
 		if(block == null) {

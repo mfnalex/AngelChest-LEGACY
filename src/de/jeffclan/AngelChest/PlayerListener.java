@@ -91,14 +91,9 @@ public class PlayerListener implements Listener {
 		
 
 		if (!angelChestBlock.getType().equals(Material.AIR)) {
-			List<Block> blocksNearby = Utils.getNearbyBlocks(angelChestBlock.getLocation(),
+			List<Block> blocksNearby = Utils.getPossibleChestLocations(angelChestBlock.getLocation(),
 					plugin.getConfig().getInt("max-radius"));
 
-			for (Block b : blocksNearby.toArray(new Block[blocksNearby.size()])) {
-				if (!b.getType().equals(Material.AIR) || b.getY() < 1) {
-					blocksNearby.remove(b);
-				}
-			}
 
 			if (blocksNearby.size() > 0) {
 				Collections.sort(blocksNearby, new Comparator<Block>() {
