@@ -1,3 +1,6 @@
+Changes from 1.5 -> 1.5.1:
+- Fixes exception when AngelChest time runs out after player has disconnected
+
 Changes from 1.4.0 -> 1.4.1:
 - Mob explosions cannot destroy the AngelChests
 
