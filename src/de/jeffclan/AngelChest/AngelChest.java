@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,7 +38,10 @@ public class AngelChest {
 			public void run() {
 				if(plugin.isAngelChest(block)) {
 					Utils.destroyAngelChest(block, me, plugin);
-					plugin.getServer().getPlayer(owner).sendMessage(plugin.messages.MSG_ANGELCHEST_DISAPPEARED);
+					Player player = plugin.getServer().getPlayer(owner);
+					if(player != null) {
+						player.sendMessage(plugin.messages.MSG_ANGELCHEST_DISAPPEARED);
+					}
 				}
 			}
 		}, plugin.getConfig().getLong("angelchest-duration")*20);
