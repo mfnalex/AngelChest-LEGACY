@@ -1,3 +1,6 @@
+Changes from 1.5.1 -> 1.5.2:
+- Disabled world list is now case insensitive
+
 Changes from 1.5 -> 1.5.1:
 - Fixes exception when AngelChest time runs out after player has disconnected
 
