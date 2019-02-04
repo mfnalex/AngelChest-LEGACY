@@ -22,7 +22,7 @@ public class AngelChestPlugin extends JavaPlugin {
 	
 	public boolean debug = false;
 	
-	CaseInsensitiveStringList disabledWorlds;
+	ArrayList<String> disabledWorlds;
 	
 	Messages messages;
 	UpdateChecker updateChecker;
@@ -106,7 +106,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		getConfig().addDefault("show-location", false);
 		getConfig().addDefault("angelchest-duration", 600);
 		getConfig().addDefault("max-radius", 10);
-		disabledWorlds = (CaseInsensitiveStringList) getConfig().getStringList("disabled-worlds");
+		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");
 		
 		
 		if (getConfig().getInt("config-version", 0) != currentConfigVersion) {
