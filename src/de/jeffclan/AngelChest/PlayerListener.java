@@ -70,8 +70,9 @@ public class PlayerListener implements Listener {
 			return;
 		}
 
-		// Enable keep inventory to prevent drops
+		// Enable keep inventory to prevent drops and clear the drops.
 		event.setKeepInventory(true);
+		event.getDrops().clear();
 
 		Block tmp;
 		
