@@ -63,9 +63,10 @@ public class Utils {
 	
 	public static boolean isWorldEnabled(World world, AngelChestPlugin plugin) {
 		
-		//if(plugin.disabledWorlds.contains(world.getName().toLowerCase())) {
-		if(plugin.disabledWorlds.stream().noneMatch(s -> s.equalsIgnoreCase(world.getName()))) {
-			return false;
+		for(String worldName : plugin.disabledWorlds) {
+			if(world.getName().equalsIgnoreCase(worldName)) {
+				return false;
+			}
 		}
 		
 		return true;
