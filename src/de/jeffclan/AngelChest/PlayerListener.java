@@ -70,9 +70,8 @@ public class PlayerListener implements Listener {
 			return;
 		}
 
-		// Enable keep inventory to prevent drops and clear the drops.
+		// Enable keep inventory to prevent drops (this is not preventing the drops at the moment due to spigot)
 		event.setKeepInventory(true);
-		event.getDrops().clear();
 
 		Block tmp;
 		
@@ -120,6 +119,9 @@ public class PlayerListener implements Listener {
 
 		// Delete players inventory
 		p.getInventory().clear();
+		
+		// Clear the drops
+		event.getDrops().clear();
 
 		// send message after one twentieth second
 		Utils.sendDelayedMessage(p, plugin.messages.MSG_ANGELCHEST_CREATED, 1, plugin);
