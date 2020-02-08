@@ -13,6 +13,11 @@ commands:
     description: "Unlocks your AngelChests"
     aliases: [unlockchest,acunlock]
     usage: /<command>s
+  aclist:
+    permission: angelchest.use
+    description: "Lists info about your AngelChests"
+    aliases: [listchest, acinfo]
+    usage: "/<command>"
 permissions:
   angelchest.use:
     description: "Players with this permission will have their items put into a chest on death by an Angel"

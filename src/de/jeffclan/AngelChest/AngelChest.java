@@ -16,6 +16,8 @@ public class AngelChest {
 	UUID owner;
 	Hologram hologram;
 	boolean isProtected;
+	long configDuration;
+	long taskStart;
 	
 	
 	public AngelChest(UUID owner,Block block, ItemStack[] playerItems,AngelChestPlugin plugin) {
@@ -34,6 +36,9 @@ public class AngelChest {
 		
 		AngelChest me = this;
 		
+		configDuration = plugin.getConfig().getLong("angelchest-duration");
+		taskStart = System.currentTimeMillis();
+
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
 				if(plugin.isAngelChest(block)) {
@@ -44,7 +49,7 @@ public class AngelChest {
 					}
 				}
 			}
-		}, plugin.getConfig().getLong("angelchest-duration")*20);
+		}, configDuration * 20);
 	}
 	
 	private void createChest(Block block) {
@@ -59,4 +64,7 @@ public class AngelChest {
 		
 	}
 	
+	public long secondsRemaining() {
+		return configDuration - ((System.currentTimeMillis() - taskStart) / 1000);
+	}
 }
