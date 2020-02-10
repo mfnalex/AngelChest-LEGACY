@@ -8,17 +8,21 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class AngelChest {
 
-	final Inventory inv;
+	final ItemStack[] armorInv;
+	final ItemStack[] storageInv;
+	final ItemStack[] extraInv;
+	final Inventory overflowInv;
 	Block block;
 	UUID owner;
 	Hologram hologram;
 	boolean isProtected;
 	
 	
-	public AngelChest(UUID owner,Block block, ItemStack[] playerItems,AngelChestPlugin plugin) {
+	public AngelChest(UUID owner,Block block, PlayerInventory playerItems, AngelChestPlugin plugin) {
 		
 		this.owner=owner;
 		this.block=block;
@@ -26,11 +30,13 @@ public class AngelChest {
 		
 		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
 		String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getPlayer(owner).getName());
-		
-		inv = Bukkit.createInventory(null, 54, inventoryName);
-		if(playerItems != null && playerItems.length>0) { inv.addItem(playerItems); }
+		overflowInv = Bukkit.createInventory(null, 54, inventoryName);
 		createChest(block);
 		hologram = new Hologram(block, hologramText,plugin);
+		
+		armorInv = playerItems.getArmorContents();
+		storageInv = playerItems.getStorageContents();
+		extraInv = playerItems.getExtraContents();
 		
 		AngelChest me = this;
 		
