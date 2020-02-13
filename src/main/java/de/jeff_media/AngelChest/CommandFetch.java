@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Directional;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -60,22 +62,31 @@ public class CommandFetch implements CommandExecutor {
 
 		Location pLoc = p.getLocation();
 		String dir = Utils.getCardinalDirection(p);
+		BlockFace facing = BlockFace.NORTH;
 		if (dir == "N") {
-			pLoc.add(-2,0,0);
+			pLoc.add(0,0,-2);
+			facing = BlockFace.SOUTH;
 		} else if (dir == "NE") {
-			pLoc.add(0,2,-2);
+			pLoc.add(2,0,-2);
+			facing = BlockFace.SOUTH;
 		} else if (dir == "E") {
-			pLoc.add(0,2,0);
+			pLoc.add(2,0,0);
+			facing = BlockFace.WEST;
 		} else if (dir == "SE") {
-			pLoc.add(0,2,2);
+			pLoc.add(2,0,2);
+			facing = BlockFace.WEST;
 		} else if (dir == "S") {
 			pLoc.add(0,0,2);
+			facing = BlockFace.NORTH;
 		} else if (dir == "SW") {
-			pLoc.add(0,-2,2);
+			pLoc.add(-2,0,2);
+			facing = BlockFace.NORTH;
 		} else if (dir == "W") {
-			pLoc.add(0,-2,0);
+			pLoc.add(-2,0,0);
+			facing = BlockFace.EAST;
 		} else if (dir == "NW") {
-			pLoc.add(0,-2,-2);
+			pLoc.add(-2,0,-2);
+			facing = BlockFace.EAST;
 		}
 
 		AngelChest ac = angelChestsFromThisPlayer.get(chestIdx);
@@ -85,6 +96,13 @@ public class CommandFetch implements CommandExecutor {
 		// Move the block in game
 		oldBlock.setType(Material.AIR);
 		newBlock.setType(Material.CHEST);
+
+		// Make the chest face the player
+		Directional blockData = ((Directional) newBlock.getBlockData());
+		blockData.setFacing(facing);
+		newBlock.setBlockData(blockData);
+
+		// Move the hologram
 		ac.destroyHologram(plugin);
 		ac.createHologram(newBlock, plugin);
 
