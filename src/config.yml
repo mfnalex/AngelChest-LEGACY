@@ -137,6 +137,20 @@ message-angelchest-location: "&eLocation of your AngelChest: %s"
 #message-you-got-your-inventory-back: "&aDein Inventar wurde wiederhergestellt!"
 #message-angelchest-location: "&ePosition deiner AngelChest: %s"
 
+##### Polish – Polski
+#message-all-your-angelchests-were-already-unlocked: "&eWszystkie twoje AnielskieSkrzynie zostaly juz odblokowane."
+#message-angelchest-created: "&aAniol zebral twoje rzeczy i wlozyl je do skrzyni znajdujacej sie w miejscu twojej smierci."
+#message-angelchest-disappeared: "&cByles zbyt wolny... Twoja AnielskaSkrzynia pekla i upuscila zawartosc."
+#message-error-players-only: "&cError: Ta komenda moze byc wywolana wylacznie przez graczy."
+#message-inventory-was-empty: "&eAniol szukal twoich rzeczy, ale nic nie mogl znalezc."
+#message-not-allowed-to-break-other-angelchests: "&cNie mozesz niszczyc AnielskichSkrzyn innych graczy."
+#message-not-allowed-to-open-other-angelchests: "&cNie mozesz otwierac AnielskichSkrzyn innych graczy."
+#message-unlocked-more-angelchests: "&aOdblokowales %d Anielskie(ich)Skrzyn(ie)."
+#message-unlocked-one-angelchest: "&aOdblokowales AnielskaSkrzynie."
+#message-you-dont-have-any-angelchests: "&eNie masz zadnej AnielskiejSkrzyni"
+#message-you-got-part-of-your-inventory-back: "&eOdzyskales czesc ekwipunku, ale niektore przedmioty wciaz znajduja sie w AnielskiejSkrzyni."
+#message-you-got-your-inventory-back: "&aOdzyskales swoj ekwipunek!"
+#message-angelchest-location: "&eLokalizacja Twojej AnielskiejSkrzyni: %s"
 
 #########################
 #####     Done!     #####
