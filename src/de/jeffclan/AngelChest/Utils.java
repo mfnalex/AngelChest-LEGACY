@@ -19,6 +19,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class Utils {
 
@@ -82,25 +83,77 @@ public class Utils {
 	 * @param dest
 	 * @return true if everything could be stored, otherwise false
 	 */
-	public static boolean tryToMergeInventories(Inventory source, Inventory dest) {
+	public static boolean tryToMergeInventories(AngelChest source, PlayerInventory dest) {
+		if(!isEmpty(source.overflowInv))
+			return false; // Already applied inventory
 
-		ArrayList<ItemStack> sourceItemsWithoutAir = new ArrayList<ItemStack>();
-		for (ItemStack item : source.getContents()) {
-			if (isEmpty(item))
-				continue;
-			sourceItemsWithoutAir.add(item);
+		ArrayList<ItemStack> overflow = new ArrayList<ItemStack>();
+		ItemStack[] armor_merged = dest.getArmorContents();
+		ItemStack[] storage_merged = dest.getStorageContents();
+		ItemStack[] extra_merged = dest.getExtraContents();
+
+		// Try to auto-equip armor
+		for(int i = 0; i < armor_merged.length; i ++) {
+			if(isEmpty(armor_merged[i])) {
+				armor_merged[i] = source.armorInv[i];
+			} else if(!isEmpty(source.armorInv[i])) {
+				overflow.add(source.armorInv[i]);
+			}
+			source.armorInv[i] = null;
 		}
+
+		// Try keep storage layout
+		for(int i = 0; i < storage_merged.length; i ++) {
+			if(isEmpty(storage_merged[i])) {
+				storage_merged[i] = source.storageInv[i];
+			} else if(!isEmpty(source.storageInv[i])) {
+				overflow.add(source.storageInv[i]);
+			}
+			source.storageInv[i] = null;
+		}
+
+		// Try to merge extra (offhand?)
+		for(int i = 0; i < extra_merged.length; i ++) {
+			if(isEmpty(extra_merged[i])) {
+				extra_merged[i] = source.extraInv[i];
+			} else if(!isEmpty(source.extraInv[i])) {
+				overflow.add(source.extraInv[i]);
+			}
+			source.extraInv[i] = null;
+		}
+
+		// Apply merged inventories
+		dest.setArmorContents(armor_merged);
+		dest.setStorageContents(storage_merged);
+		dest.setExtraContents(extra_merged);
+
+		// Try to place overflow items into empty storage slots
 		HashMap<Integer, ItemStack> unstorable = dest
-				.addItem(sourceItemsWithoutAir.toArray(new ItemStack[sourceItemsWithoutAir.size()]));
-		source.clear();
+			.addItem(overflow.toArray(new ItemStack[overflow.size()]));
+		source.overflowInv.clear();
 
 		if (unstorable.size() == 0) {
 			return true;
 		}
 
-		source.addItem(unstorable.values().toArray(new ItemStack[unstorable.size()]));
+		source.overflowInv.addItem(unstorable.values()
+			.toArray(new ItemStack[unstorable.size()]));
 
 		return false;
+	}
+
+	public static void dropItems(Block block, ItemStack[] invContent) {
+		//plugin.getLogger().info("Dropped AngelChest's contents at " + block.getLocation().toString());
+		for (ItemStack itemStack : invContent) {
+			if (Utils.isEmpty(itemStack))
+				continue;
+			block.getWorld().dropItem(block.getLocation(), itemStack);
+		}
+	}
+
+	public static void dropItems(Block block, Inventory inv) {
+		dropItems(block, inv.getContents());
+		inv.clear();
 	}
 
 	public static void destroyAngelChest(Block block, AngelChest angelChest, AngelChestPlugin plugin) {
@@ -123,16 +176,11 @@ public class Utils {
 		angelChest.hologram.destroy();
 
 		// drop contents
-		if (!Utils.isEmpty(angelChest.inv)) {
-			//plugin.getLogger().info("Dropped AngelChest's contents at " + block.getLocation().toString());
-			for (ItemStack itemStack : angelChest.inv.getContents()) {
-				if (Utils.isEmpty(itemStack))
-					continue;
-				block.getWorld().dropItem(block.getLocation(), itemStack);
-			}
-		}
+		dropItems(block, angelChest.armorInv);
+		dropItems(block, angelChest.storageInv);
+		dropItems(block, angelChest.extraInv);
+		dropItems(block, angelChest.overflowInv);
 
-		angelChest.inv.clear();
 		plugin.angelChests.remove(block);
 		block.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 1);
 	}

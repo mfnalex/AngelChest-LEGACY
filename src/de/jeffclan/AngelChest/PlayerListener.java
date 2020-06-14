@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerListener implements Listener {
 
@@ -115,7 +115,7 @@ public class PlayerListener implements Listener {
 		}
 
 		plugin.angelChests.put(fixedAngelChestBlock,
-				new AngelChest(p.getUniqueId(), fixedAngelChestBlock, event.getDrops().toArray(new ItemStack[event.getDrops().size()]), plugin));
+				new AngelChest(p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin));
 
 		// Delete players inventory
 		p.getInventory().clear();
@@ -153,13 +153,13 @@ public class PlayerListener implements Listener {
 			return;
 		}
 		// p.openInventory(angelChest.inv);
-		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest.inv, p.getInventory());
+		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
 		if (succesfullyStoredEverything) {
 			event.getPlayer().sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
 			Utils.destroyAngelChest(block, angelChest, plugin);
 		} else {
 			event.getPlayer().sendMessage(plugin.messages.MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK);
-			event.getPlayer().openInventory(angelChest.inv);
+			event.getPlayer().openInventory(angelChest.overflowInv);
 		}
 
 		event.setCancelled(true);
@@ -169,7 +169,7 @@ public class PlayerListener implements Listener {
 	public void onInventoryClose(InventoryCloseEvent event) {
 
 		for (AngelChest angelChest : plugin.angelChests.values()) {
-			if (angelChest.inv.equals(event.getInventory())) {
+			if (angelChest.overflowInv.equals(event.getInventory())) {
 				// This is an AngelChest!
 
 				Inventory inv = event.getInventory();
