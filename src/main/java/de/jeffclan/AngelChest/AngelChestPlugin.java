@@ -2,6 +2,7 @@ package de.jeffclan.AngelChest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AngelChestPlugin extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 12;
+	int currentConfigVersion = 13;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
@@ -102,7 +103,12 @@ public class AngelChestPlugin extends JavaPlugin {
 		}
 		
 		// Destroy all Angel Chests, including hologram AND CONTENTS!
-		for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
+		Iterator<Entry<Block,AngelChest>> it = angelChests.entrySet().iterator();
+		//for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
+		//	Utils.destroyAngelChest(entry.getKey(), entry.getValue(), this);
+		//}
+		while(it.hasNext()) {
+			Entry<Block,AngelChest> entry = (Entry<Block,AngelChest>) it.next();
 			Utils.destroyAngelChest(entry.getKey(), entry.getValue(), this);
 		}
 	}

@@ -21,7 +21,7 @@ public class CommandList implements CommandExecutor {
 		if(!command.getName().equalsIgnoreCase("aclist")) return false;
 		
 		if(args.length==5 && args[0].equals("tp")) {
-			AngelChestTeleporter.teleportPlayerToChest(plugin,(Player)sender, args);
+			AngelChestCommandUtils.teleportPlayerToChest(plugin,(Player)sender, args);
 			return true;
 		}
 		
@@ -51,6 +51,8 @@ public class CommandList implements CommandExecutor {
 			return;
 		}
 		
+		p.sendMessage(plugin.messages.MSG_ANGELCHEST_LOCATION);
+		
 		int chestIndex = 1;
 		Block b;
 
@@ -61,16 +63,19 @@ public class CommandList implements CommandExecutor {
 			long hour = (remaining / 60) / 60;
 
 			b = angelChest.block;
-			String tpCommand="/acinfo tp "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
+			String tpCommand=null;
+			String unlockCommand=null;
+			if(p.hasPermission("angelchest.tp")) {
+				tpCommand="/acinfo tp "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
+			}
+			if(angelChest.isProtected) {
+				unlockCommand="/acunlock "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
+			}
 			
 			String text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
 				chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
 			);
-			if(p.hasPermission("angelchest.tp")) {
-				TpLinkUtil.sendLink(p, text, tpCommand);
-			} else {
-				p.sendMessage(text);
-			}
+			p.spigot().sendMessage(LinkUtils.getLinks(p, text, tpCommand,unlockCommand,plugin));
 			chestIndex++;
 		}
 	}

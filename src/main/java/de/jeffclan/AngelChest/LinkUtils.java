@@ -8,34 +8,44 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
-public class TpLinkUtil {
+public class LinkUtils {
 	
-	protected static void sendLink(Player p, String preText, String command) {
+	protected static TextComponent getLinks(Player p, String preText, String commandTp, String commandUnlock,AngelChestPlugin plugin) {
 		  TextComponent text = new TextComponent(preText);
 		
-		  TextComponent link = createCommandLink("[Teleport]",command,net.md_5.bungee.api.ChatColor.GOLD); 
+		  String placeholder = "";
+		  if(p.hasPermission("angelchest.tp") && commandTp != null) {
+			  TextComponent link = createCommandLink(plugin.messages.LINK_TP,commandTp);
+			  text.addExtra(link);
+			  placeholder = " ";
+		  }
+		  if(commandUnlock != null) {
+			  TextComponent link = createCommandLink(plugin.messages.LINK_UNLOCK,commandUnlock);
+			  text.addExtra(placeholder);
+			  text.addExtra(link);
+		  }
 		  
 		  //TextComponent placeholder = new TextComponent(" | ");
 		  //placeholder.setColor(net.md_5.bungee.api.ChatColor.GRAY);
 		  
-		  text.addExtra(link);
+
 //		  text.addExtra(placeholder);
 //		  text.addExtra(donate);
 //		  text.addExtra(placeholder);
 //		  text.addExtra(changelog);
 	        
-	      p.spigot().sendMessage(text);
+		  return text;
 	}
 	
-	private static TextComponent createCommandLink(String text, String command, net.md_5.bungee.api.ChatColor color) {
+	private static TextComponent createCommandLink(String text, String command) {
 		// Hover text
 		/*ComponentBuilder hoverCB = new ComponentBuilder(
                 text+" Link: ").bold(true)
                 .append(link).bold(false);*/
 		
 		TextComponent tc = new TextComponent(text);
-		tc.setBold(true);
-		tc.setColor(color);
+		//tc.setBold(true);
+		//tc.setColor(color);
 		tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,command));
 		//tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, null));
 		return tc;

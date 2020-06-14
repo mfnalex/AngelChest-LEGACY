@@ -66,6 +66,10 @@ disabled-worlds:
 hologram-text: "&a&l[AngelChest]&r\n&b%s"
 angelchest-inventory-name: "&a[AngelChest] &b%s&r"
 
+##### Clickable Links when running /acinfo or /aclist
+link-unlock: "&5[Unlock]&r"
+link-teleport: "&6[TP]&r"
+
 ##### English
 message-all-your-angelchests-were-already-unlocked: "&eAll your AngelChests were already unlocked."
 message-angelchest-created: "&aAn Angel collected your stuff and put it into a chest located at the place of your death."
@@ -161,4 +165,4 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #########################
 
 # please do not change the following line manually!
-config-version: 12
+config-version: 13

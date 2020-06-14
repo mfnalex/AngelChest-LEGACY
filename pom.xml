@@ -34,15 +34,15 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		
-				<extensions>
+
+		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
 				<version>3.4.1</version>
 			</extension>
 		</extensions>
-		
+
 	</build>
 
 	<repositories>
@@ -59,9 +59,10 @@
 			<version>1.15.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
-	
-		<distributionManagement>
+
+	<distributionManagement>
 		<repository>
 			<id>jeff-ftp</id>
 			<url>ftps://ftp.jeff-media.de/maven2</url>
