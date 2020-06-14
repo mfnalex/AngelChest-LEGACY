@@ -5,6 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 public class BlockListener implements Listener {
@@ -30,13 +33,44 @@ public class BlockListener implements Listener {
 	
 	@EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-            for (Block block : event.blockList().toArray(new Block[event.blockList().size()])){
-                if(block.getType() == Material.CHEST){
-                   if(plugin.isAngelChest(block)) {
-                	   event.blockList().remove(block);
-                   }
-                }
-            }
+		for (Block block : event.blockList().toArray(new Block[event.blockList().size()])){
+			if(block.getType() == Material.CHEST){
+				if(plugin.isAngelChest(block)) {
+					event.blockList().remove(block);
+				}
+			}
+		}
     }
+	
+	@EventHandler
+    public void onBlockExplode(BlockExplodeEvent event) {
+		for (Block block : event.blockList().toArray(new Block[event.blockList().size()])){
+			if(block.getType() == Material.CHEST){
+				if(plugin.isAngelChest(block)) {
+					event.blockList().remove(block);
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+    public void onBlockPistonExtendEvent(BlockPistonExtendEvent event) {
+		Block block = event.getBlock();
+		if(block.getType() == Material.CHEST){
+			if(plugin.isAngelChest(block)) {
+				event.setCancelled(true);
+			}
+		}
+	}
+	
+	@EventHandler
+    public void onBlockPistonRetractEvent(BlockPistonRetractEvent event) {
+		Block block = event.getBlock();
+		if(block.getType() == Material.CHEST){
+			if(plugin.isAngelChest(block)) {
+				event.setCancelled(true);
+			}
+		}
+	}
 	
 }

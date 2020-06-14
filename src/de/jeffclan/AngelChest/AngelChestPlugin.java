@@ -68,7 +68,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		
 		getServer().getPluginManager().registerEvents(new PlayerListener(this),this);
 		getServer().getPluginManager().registerEvents(new HologramListener(this),this);
-		getServer().getPluginManager().registerEvents(new BlockListener(this),  this);
+		getServer().getPluginManager().registerEvents(new BlockListener(this),this);
 		
 		@SuppressWarnings("unused")
 		Metrics metrics = new Metrics(this);
