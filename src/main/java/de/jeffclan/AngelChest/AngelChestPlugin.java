@@ -104,7 +104,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		saveDefaultConfig();
 		
 		getConfig().addDefault("check-for-updates", "true");
-		getConfig().addDefault("show-location", false);
+		getConfig().addDefault("show-location", true);
 		getConfig().addDefault("angelchest-duration", 600);
 		getConfig().addDefault("max-radius", 10);
 		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");

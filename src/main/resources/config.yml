@@ -16,7 +16,7 @@ max-radius: 10
 
 # When set to true, players will receive a message telling them where the AngelChest
 # is located.
-show-location: false
+show-location: true
 
 # Should we check for updates?
 # When enabled, a message is printed in the console if a new version has

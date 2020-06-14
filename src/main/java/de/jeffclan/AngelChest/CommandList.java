@@ -18,7 +18,12 @@ public class CommandList implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
-		if(!command.getName().equalsIgnoreCase("aclist")) return false;		
+		if(!command.getName().equalsIgnoreCase("aclist")) return false;
+		
+		if(args.length==5 && args[1].equals("tp")) {
+			AngelChestTeleporter.teleportPlayerToChest(plugin,(Player)sender, args);
+			return true;
+		}
 		
 		if(!sender.hasPermission("angelchest.use")) {
 			sender.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
@@ -48,11 +53,14 @@ public class CommandList implements CommandExecutor {
 			long sec = remaining % 60;
 			long min = (remaining / 60) % 60;
 			long hour = (remaining / 60) / 60;
+			
+			String tpCommand="/tp 0 100 0";
 
 			b = angelChest.block;
-			p.sendMessage(String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
+			String text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
 				chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
-			));
+			);
+			TpLinkUtil.sendLink(p, text, tpCommand);
 			chestIndex++;
 		}
 

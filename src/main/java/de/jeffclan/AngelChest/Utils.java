@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -249,7 +250,8 @@ public class Utils {
 		if(block == null) {
 			return "<none>";
 		}
-		return String.format("%d, %d, %d (%s)", block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
+		return String.format(ChatColor.GREEN+"X:"+ChatColor.WHITE+" %d " + ChatColor.GREEN + "Y: " + ChatColor.WHITE+"%d " +
+		ChatColor.GREEN+"Z: " + ChatColor.WHITE+"%d (%s)", block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
 	}
 	 
 }
