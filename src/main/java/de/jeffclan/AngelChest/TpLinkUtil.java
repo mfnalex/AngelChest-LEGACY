@@ -2,6 +2,7 @@ package de.jeffclan.AngelChest;
 
 import org.bukkit.entity.Player;
 
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -36,6 +37,7 @@ public class TpLinkUtil {
 		tc.setBold(true);
 		tc.setColor(color);
 		tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,command));
+		//tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, null));
 		return tc;
 	}
 

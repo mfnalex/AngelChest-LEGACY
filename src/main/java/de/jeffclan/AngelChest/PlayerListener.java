@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,7 +19,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerListener implements Listener {
 
@@ -125,21 +125,31 @@ public class PlayerListener implements Listener {
 
 		// send message after one twentieth second
 		Utils.sendDelayedMessage(p, plugin.messages.MSG_ANGELCHEST_CREATED, 1, plugin);
+
 		if(plugin.getConfig().getBoolean("show-location")) {
-			Utils.sendDelayedMessage(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , Utils.locationToString(fixedAngelChestBlock) ), 2, plugin);
+			//Utils.sendDelayedMessage(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , Utils.locationToString(fixedAngelChestBlock) ), 2, plugin);
+			/*final int x = fixedAngelChestBlock.getX();
+			final int y = fixedAngelChestBlock.getY();
+			final int z = fixedAngelChestBlock.getZ();
+			final String world = fixedAngelChestBlock.getWorld().getName();
+			String locString = Utils.locationToString(fixedAngelChestBlock);*/
+			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+				public void run() {
+					//TpLinkUtil.sendLink(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , locString )+" ", "/acinfo tp "+x+" "+y+" "+z+" "+world);
+					plugin.commandListExecutor.sendListOfAngelChests(p);
+				}},2);
 		}
 	}
 
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
+		System.out.println("PlayerInteractEvent");
 		Player p = event.getPlayer();
 		if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			return;
 		if (event.getClickedBlock() == null)
 			return;
 		Block block = event.getClickedBlock();
-		if (!(block.getState() instanceof Chest))
-			return;
 		if (!plugin.isAngelChest(block))
 			return;
 		AngelChest angelChest = plugin.angelChests.get(block);

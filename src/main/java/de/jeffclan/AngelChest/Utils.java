@@ -1,6 +1,7 @@
 package de.jeffclan.AngelChest;
 
 import java.util.Arrays;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -166,7 +167,9 @@ public class Utils {
 		block.setType(Material.AIR);
 		
 		for (UUID uuid : angelChest.hologram.armorStandUUIDs) {
-			plugin.getServer().getEntity(uuid).remove();
+			if(plugin.getServer().getEntity(uuid)!=null) {
+				plugin.getServer().getEntity(uuid).remove();
+			}
 		}
 		
 		for(ArmorStand armorStand : angelChest.hologram.armorStands) {
@@ -252,6 +255,12 @@ public class Utils {
 		}
 		return String.format(ChatColor.GREEN+"X:"+ChatColor.WHITE+" %d " + ChatColor.GREEN + "Y: " + ChatColor.WHITE+"%d " +
 		ChatColor.GREEN+"Z: " + ChatColor.WHITE+"%d (%s)", block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
+	}
+	
+	static void renameFileInPluginDir(AngelChestPlugin plugin,String oldName, String newName) {
+		File oldFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + oldName);
+		File newFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + newName);
+		oldFile.getAbsoluteFile().renameTo(newFile.getAbsoluteFile());
 	}
 	 
 }

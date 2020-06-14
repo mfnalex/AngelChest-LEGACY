@@ -13,11 +13,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AngelChestPlugin extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 9;
+	int currentConfigVersion = 12;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
 	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;
+	Material chestMaterial;
+	
+	CommandList commandListExecutor;
 	//ArrayList<UUID> armorStandUUIDs;
 	
 	public boolean debug = false;
@@ -65,7 +68,8 @@ public class AngelChestPlugin extends JavaPlugin {
 		
 		
 		this.getCommand("unlock").setExecutor(new CommandUnlock(this));
-		this.getCommand("aclist").setExecutor(new CommandList(this));
+		commandListExecutor = new CommandList(this);
+		this.getCommand("aclist").setExecutor(commandListExecutor);
 		
 		getServer().getPluginManager().registerEvents(new PlayerListener(this),this);
 		getServer().getPluginManager().registerEvents(new HologramListener(this),this);
@@ -107,20 +111,28 @@ public class AngelChestPlugin extends JavaPlugin {
 		getConfig().addDefault("show-location", true);
 		getConfig().addDefault("angelchest-duration", 600);
 		getConfig().addDefault("max-radius", 10);
+		getConfig().addDefault("material", "CHEST");
 		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");
 		
 		
 		if (getConfig().getInt("config-version", 0) != currentConfigVersion) {
-			getLogger().warning("========================================================");
-			getLogger().warning("YOU ARE USING AN OLD CONFIG FILE!");
-			getLogger().warning("This is not a problem, as AngelChest will just use the");
-			getLogger().warning("default settings for unset values. However, if you want");
-			getLogger().warning("to configure the new options, please go to");
-			getLogger().warning("https://www.spigotmc.org/resources/1-13-angelchest.60383/");
-			getLogger().warning("and replace your config.yml with the new one. You can");
-			getLogger().warning("then insert your old changes into the new file.");
-			getLogger().warning("========================================================");
-			usingMatchingConfig = false;
+			showOldConfigWarning();
+			ConfigUpdater configUpdater = new ConfigUpdater(this);
+			configUpdater.updateConfig();
+			configUpdater = null;
+			usingMatchingConfig = true;
+			//createConfig();
+		}
+		
+		if(Material.getMaterial(getConfig().getString("material"))==null) {
+			getLogger().warning("Invalid Material: "+getConfig().getString("material")+" - falling back to CHEST");
+			chestMaterial = Material.CHEST;
+		} else {
+			chestMaterial = Material.getMaterial(getConfig().getString("material"));
+			if(!chestMaterial.isBlock()) {
+				getLogger().warning("Not a block: "+getConfig().getString("material")+" - falling back to CHEST");
+				chestMaterial = Material.CHEST;
+			}
 		}
 	}
 	
@@ -149,7 +161,7 @@ public class AngelChestPlugin extends JavaPlugin {
 	}
 
 	public boolean isAngelChest(Block block) {
-		if(block.getType() != Material.CHEST) return false;
+		if(block.getType() != chestMaterial) return false;
 		return angelChests.containsKey(block);
 	}
 	
@@ -158,6 +170,14 @@ public class AngelChestPlugin extends JavaPlugin {
 			return angelChests.get(block);
 		}
 		return null;
+	}
+	
+	private void showOldConfigWarning() {
+		getLogger().warning("==============================================");
+		getLogger().warning("You were using an old config file. AngelChest");
+		getLogger().warning("has updated the file to the newest version.");
+		getLogger().warning("Your changes have been kept.");
+		getLogger().warning("==============================================");
 	}
 
 }

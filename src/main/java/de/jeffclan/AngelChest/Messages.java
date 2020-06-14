@@ -51,7 +51,7 @@ public class Messages {
 		
 		ANGELCHEST_INVENTORY_NAME = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("angelchest-inventory-name","&a[AngelChest] &b%s&r"));
 		
-		MSG_ANGELCHEST_LOCATION = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-angelchest-location","&eLocation of your AngelChest: %s"));
+		MSG_ANGELCHEST_LOCATION = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-angelchest-location","&eLocation of your AngelChests:"));
 		
 		
 	}

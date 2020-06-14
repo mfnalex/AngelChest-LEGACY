@@ -22,10 +22,12 @@ public class AngelChest {
 	boolean isProtected;
 	long configDuration;
 	long taskStart;
+	AngelChestPlugin plugin;
 	
 	
 	public AngelChest(UUID owner,Block block, PlayerInventory playerItems, AngelChestPlugin plugin) {
 		
+		this.plugin=plugin;
 		this.owner=owner;
 		this.block=block;
 		this.isProtected = plugin.getServer().getPlayer(owner).hasPermission("angelchest.protect");
@@ -59,7 +61,7 @@ public class AngelChest {
 	}
 	
 	private void createChest(Block block) {
-		block.setType(Material.CHEST);
+		block.setType(plugin.chestMaterial);
 	}
 	
 	public void unlock() {
@@ -67,10 +69,16 @@ public class AngelChest {
 	}
 	
 	public void saveToFile() {
-		
+		// Just stuff everything into a YAMLConfiguration
+	}
+	
+	public void destroy() {
+		Utils.destroyAngelChest(block, this, plugin);
 	}
 	
 	public long secondsRemaining() {
-		return configDuration - ((System.currentTimeMillis() - taskStart) / 1000);
+		long seconds = configDuration - ((System.currentTimeMillis() - taskStart) / 1000);
+		if(seconds<0) seconds = 0;
+		return seconds;
 	}
 }
