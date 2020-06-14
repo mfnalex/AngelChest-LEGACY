@@ -3,10 +3,13 @@ package de.jeffclan.AngelChest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -165,11 +168,42 @@ public class AngelChestPlugin extends JavaPlugin {
 		return angelChests.containsKey(block);
 	}
 	
+	public boolean isAngelChestHologram(Entity e) {
+		// Skip this because it is checked in the listener and this method is not needed elsewhere
+		//if(!(e instanceof ArmorStand)) return false;
+		
+		if(getAllArmorStands().contains(e)) return true;
+		return false;
+	}
+	
 	public AngelChest getAngelChest(Block block) {
 		if(angelChests.containsKey(block)) {
 			return angelChests.get(block);
 		}
 		return null;
+	}
+	
+	public AngelChest getAngelChestByHologram(ArmorStand armorStand) {
+		for(AngelChest as : angelChests.values()) {
+			if( as == null) continue;
+			if(as.hologram == null) continue;
+			if(as.hologram.armorStands.contains(armorStand)) {
+				return as;
+			}
+		}
+		return null;
+	}
+	
+	ArrayList<ArmorStand> getAllArmorStands() {
+		ArrayList<ArmorStand> armorStands = new ArrayList<ArmorStand>();
+		for(AngelChest ac : angelChests.values()) {
+			if(ac==null || ac.hologram==null) continue;
+			for(ArmorStand armorStand : ac.hologram.armorStands) {
+				if(armorStand == null) continue;
+				armorStands.add(armorStand);
+			}
+		}
+		return armorStands;
 	}
 	
 	private void showOldConfigWarning() {

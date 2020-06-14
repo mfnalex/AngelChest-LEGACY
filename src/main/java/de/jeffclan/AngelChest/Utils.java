@@ -23,6 +23,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+
 public class Utils {
 
 	public static boolean isEmpty(Inventory inv) {
@@ -157,7 +158,7 @@ public class Utils {
 		dropItems(block, inv.getContents());
 		inv.clear();
 	}
-
+	
 	public static void destroyAngelChest(Block block, AngelChest angelChest, AngelChestPlugin plugin) {
 		
 

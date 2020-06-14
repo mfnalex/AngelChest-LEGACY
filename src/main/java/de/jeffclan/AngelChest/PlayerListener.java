@@ -9,12 +9,15 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -142,7 +145,7 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event) {
+	public void onAngelChestRightClick(PlayerInteractEvent event) {
 		System.out.println("PlayerInteractEvent");
 		Player p = event.getPlayer();
 		if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
@@ -163,20 +166,24 @@ public class PlayerListener implements Listener {
 			return;
 		}
 		// p.openInventory(angelChest.inv);
-		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
-		if (succesfullyStoredEverything) {
-			event.getPlayer().sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
-			Utils.destroyAngelChest(block, angelChest, plugin);
-		} else {
-			event.getPlayer().sendMessage(plugin.messages.MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK);
-			event.getPlayer().openInventory(angelChest.overflowInv);
-		}
+		openAngelChest(p, block, angelChest);
 
 		event.setCancelled(true);
 	}
 
+	void openAngelChest(Player p, Block block, AngelChest angelChest) {
+		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
+		if (succesfullyStoredEverything) {
+			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
+			Utils.destroyAngelChest(block, angelChest, plugin);
+		} else {
+			p.sendMessage(plugin.messages.MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK);
+			p.openInventory(angelChest.overflowInv);
+		}
+	}
+
 	@EventHandler
-	public void onInventoryClose(InventoryCloseEvent event) {
+	public void onAngelChestClose(InventoryCloseEvent event) {
 
 		for (AngelChest angelChest : plugin.angelChests.values()) {
 			if (angelChest.overflowInv.equals(event.getInventory())) {
@@ -195,5 +202,28 @@ public class PlayerListener implements Listener {
 			}
 		}
 	}
+	
+    @EventHandler
+    public void onArmorStandRightClick(PlayerInteractAtEntityEvent event)
+    {
+    	if(event.getRightClicked()==null) {
+    		return;
+    	}
+        if (!event.getRightClicked().getType().equals(EntityType.ARMOR_STAND))
+        {
+            return;
+        }
+        if(!plugin.isAngelChestHologram(event.getRightClicked())) {
+        	return;
+        }
+        AngelChest as = plugin.getAngelChestByHologram((ArmorStand) event.getRightClicked());
+		if (!as.owner.equals(event.getPlayer().getUniqueId())
+				&& !event.getPlayer().hasPermission("angelchest.protect.ignore") && as.isProtected) {
+			event.getPlayer().sendMessage(plugin.messages.MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS);
+			event.setCancelled(true);
+			return;
+		}
+		openAngelChest(event.getPlayer(), as.block, as);
+    }
 
 }
