@@ -1,5 +1,6 @@
 package de.jeffclan.AngelChest;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -171,14 +172,23 @@ public class Utils {
 	        }
 	        return blocks;
 	    }
-	 
+	
+	// Only allow chests to spawn in these types
+	public static List<Material> safeBlockTypes = Arrays.asList(Material.AIR);
+
+	// Prevent chests from spawning ontop of these types
+	public static List<Material> notSolidTypes = Arrays.asList(Material.AIR, Material.GRASS_PATH);
+
 	 public static List<Block> getPossibleChestLocations(Location location, int radius) {
 	        List<Block> blocks = new ArrayList<Block>();
 	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
 	            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
 	                for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
-	                	Block block = location.getWorld().getBlockAt(x,y,z);
-	                	if(block.getType() == Material.AIR && y > 0) {
+						Block block = location.getWorld().getBlockAt(x,y,z);
+						Block oneBelow = location.getWorld().getBlockAt(x,y - 1,z);
+						if(safeBlockTypes.contains(block.getType())
+								&& !notSolidTypes.contains(oneBelow.getType())
+								&& y > 0) {
 	                		blocks.add(block);
 	                	}
 	                }
