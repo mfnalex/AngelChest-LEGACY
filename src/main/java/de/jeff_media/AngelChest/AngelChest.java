@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.UUID;
 
@@ -27,10 +27,10 @@ public class AngelChest {
 	long configDuration;
 	long taskStart;
 	int experience = 0;
-	AngelChestPlugin plugin;
+	Main plugin;
 	
 	
-	public AngelChest(UUID owner,Block block, PlayerInventory playerItems, AngelChestPlugin plugin) {
+	public AngelChest(UUID owner,Block block, PlayerInventory playerItems, Main plugin) {
 		
 		this.plugin=plugin;
 		this.owner=owner;

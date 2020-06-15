@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class AngelChestPlugin extends JavaPlugin {
+public class Main extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
 	int currentConfigVersion = 16;
@@ -41,7 +41,7 @@ public class AngelChestPlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		
-		AngelChestPlugin myself = this;
+		Main myself = this;
 		
 		createConfig();
 		

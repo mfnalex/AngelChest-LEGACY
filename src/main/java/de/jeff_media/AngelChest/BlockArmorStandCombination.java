@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;

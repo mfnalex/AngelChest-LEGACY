@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

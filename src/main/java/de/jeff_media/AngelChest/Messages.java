@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import org.bukkit.ChatColor;
 
@@ -14,7 +14,7 @@ public class Messages {
 	
 	final String LINK_TP, LINK_UNLOCK;
 
-	Messages(AngelChestPlugin plugin) {
+	Messages(Main plugin) {
 		//this.plugin = plugin;
 
 		MSG_PLAYERSONLY = ChatColor.translateAlternateColorCodes('&', plugin.getConfig()

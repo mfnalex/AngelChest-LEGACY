@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,14 +10,14 @@ import org.bukkit.entity.Player;
 
 public class UpdateChecker {
 
-	private AngelChestPlugin plugin;
+	private Main plugin;
 	String latestVersionLink = String.format("https://api.jeff-media.de/%s/%s-latest-version.txt",
 			"angelchest","angelchest");
 	String downloadLink = "https://www.spigotmc.org/resources/1-13-angelchest.60383/";
 	private String currentVersion = "undefined";
 	private String latestVersion = "undefined";
 
-	public UpdateChecker(AngelChestPlugin plugin) {
+	public UpdateChecker(Main plugin) {
 		this.plugin = plugin;
 	}
 

@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -6,9 +6,9 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 public class HologramListener implements Listener {
 	
-	AngelChestPlugin plugin;
+	Main plugin;
 	
-	public HologramListener(AngelChestPlugin plugin) {
+	public HologramListener(Main plugin) {
 		this.plugin = plugin;
 	}
 	

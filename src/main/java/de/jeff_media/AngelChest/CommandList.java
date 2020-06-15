@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 
@@ -10,9 +10,9 @@ import org.bukkit.entity.Player;
 
 public class CommandList implements CommandExecutor {
 	
-	AngelChestPlugin plugin;
+	Main plugin;
 	
-	public CommandList(AngelChestPlugin plugin) {
+	public CommandList(Main plugin) {
 		this.plugin = plugin;
 	}
 

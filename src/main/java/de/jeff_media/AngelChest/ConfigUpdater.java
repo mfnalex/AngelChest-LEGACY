@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,9 +15,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ConfigUpdater {
 
-	AngelChestPlugin plugin;
+	Main plugin;
 
-	ConfigUpdater(AngelChestPlugin plugin) {
+	ConfigUpdater(Main plugin) {
 		this.plugin = plugin;
 	}
 

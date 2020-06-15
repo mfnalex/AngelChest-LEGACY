@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ import org.bukkit.inventory.Inventory;
 
 public class PlayerListener implements Listener {
 
-	AngelChestPlugin plugin;
+	Main plugin;
 
-	PlayerListener(AngelChestPlugin plugin) {
+	PlayerListener(Main plugin) {
 		this.plugin = plugin;
 	}
 

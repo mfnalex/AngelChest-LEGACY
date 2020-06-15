@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -11,9 +11,9 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 
 public class BlockListener implements Listener {
 
-	AngelChestPlugin plugin;
+	Main plugin;
 
-	public BlockListener(AngelChestPlugin plugin) {
+	public BlockListener(Main plugin) {
 		this.plugin = plugin;
 	}
 

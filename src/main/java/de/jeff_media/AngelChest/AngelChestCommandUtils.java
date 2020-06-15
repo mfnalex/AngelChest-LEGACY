@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 public class AngelChestCommandUtils {
-	protected static void teleportPlayerToChest(AngelChestPlugin plugin, Player p, String[] args) {
+	protected static void teleportPlayerToChest(Main plugin, Player p, String[] args) {
 		if(!p.hasPermission("angelchest.tp")) {
 			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 			return;
@@ -49,7 +49,7 @@ public class AngelChestCommandUtils {
 		p.teleport(teleportLocation, TeleportCause.PLUGIN);
 	}
 	
-	protected static void unlockSingleChest(AngelChestPlugin plugin, Player p, String[] args) {
+	protected static void unlockSingleChest(Main plugin, Player p, String[] args) {
 //		if(!p.hasPermission("angelchest.tp")) {
 //			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 //			return;

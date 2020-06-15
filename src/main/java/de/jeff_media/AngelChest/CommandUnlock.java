@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 
@@ -9,9 +9,9 @@ import org.bukkit.entity.Player;
 
 public class CommandUnlock implements CommandExecutor {
 	
-	AngelChestPlugin plugin;
+	Main plugin;
 	
-	public CommandUnlock(AngelChestPlugin plugin) {
+	public CommandUnlock(Main plugin) {
 		this.plugin = plugin;
 	}
 

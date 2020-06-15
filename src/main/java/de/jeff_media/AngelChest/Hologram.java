@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,11 +17,11 @@ public class Hologram {
 	double lineOffset = -0.2D;
 	double currentOffset = 0.0D;
 	
-	public Hologram(Block block, String text,AngelChestPlugin plugin) {
+	public Hologram(Block block, String text,Main plugin) {
 		this(block.getLocation().add(new Vector(0.5,-0.5,0.5)),block,text,plugin);
 	}
 
-	public Hologram(Location location, Block block, String text, AngelChestPlugin plugin) {
+	public Hologram(Location location, Block block, String text, Main plugin) {
 
 		armorStands = new ArrayList<ArmorStand>();
 		armorStandUUIDs = new ArrayList<UUID>();

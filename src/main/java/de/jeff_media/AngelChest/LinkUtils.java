@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import org.bukkit.entity.Player;
 
@@ -10,7 +10,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class LinkUtils {
 	
-	protected static TextComponent getLinks(Player p, String preText, String commandTp, String commandUnlock,AngelChestPlugin plugin) {
+	protected static TextComponent getLinks(Player p, String preText, String commandTp, String commandUnlock,Main plugin) {
 		  TextComponent text = new TextComponent(preText);
 		
 		  String placeholder = "";

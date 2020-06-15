@@ -1,4 +1,4 @@
-package de.jeffclan.AngelChest;
+package de.jeff_media.AngelChest;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,7 +71,7 @@ public class Utils {
 		return null;
 	}
 	
-	public static boolean isWorldEnabled(World world, AngelChestPlugin plugin) {
+	public static boolean isWorldEnabled(World world, Main plugin) {
 		
 		for(String worldName : plugin.disabledWorlds) {
 			if(world.getName().equalsIgnoreCase(worldName)) {
@@ -168,7 +168,7 @@ public class Utils {
 		inv.clear();
 	}
 	
-	public static void sendDelayedMessage(Player p, String message, long delay, AngelChestPlugin plugin) {
+	public static void sendDelayedMessage(Player p, String message, long delay, Main plugin) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
 				if (p == null)
@@ -182,7 +182,7 @@ public class Utils {
 		}, delay);
 	}
 
-	public static ArrayList<AngelChest> getAllAngelChestsFromPlayer(Player p, AngelChestPlugin plugin) {
+	public static ArrayList<AngelChest> getAllAngelChestsFromPlayer(Player p, Main plugin) {
 		ArrayList<AngelChest> angelChests = new ArrayList<AngelChest>();
 		for (AngelChest angelChest : plugin.angelChests.values()) {
 			if (!angelChest.owner.equals(p.getUniqueId()))
@@ -218,7 +218,7 @@ public class Utils {
 	        return blocks;
 	    }
 	
-	 public static List<Block> getPossibleChestLocations(Location location, int radius, AngelChestPlugin plugin) {
+	 public static List<Block> getPossibleChestLocations(Location location, int radius, Main plugin) {
 	        List<Block> blocks = new ArrayList<Block>();
 	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
 	            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
@@ -244,7 +244,7 @@ public class Utils {
 		ChatColor.GREEN+"Z: " + ChatColor.WHITE+"%d (%s)", block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
 	}
 	
-	static void renameFileInPluginDir(AngelChestPlugin plugin,String oldName, String newName) {
+	static void renameFileInPluginDir(Main plugin,String oldName, String newName) {
 		File oldFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + oldName);
 		File newFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + newName);
 		oldFile.getAbsoluteFile().renameTo(newFile.getAbsoluteFile());
