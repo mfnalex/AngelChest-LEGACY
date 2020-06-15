@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 16;
+	int currentConfigVersion = 17;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;

@@ -1,6 +1,7 @@
 # Changelog
 ## 2.1.0
 - AngelChests survive server restarts
+- Prevent Minepacks backpacks from being put into AngelChests
 
 ## 2.0.0
 - Hopefully fixed the armor stands not disappearing once and for all

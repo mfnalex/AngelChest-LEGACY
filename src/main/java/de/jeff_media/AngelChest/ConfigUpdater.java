@@ -64,7 +64,10 @@ public class ConfigUpdater {
 			String newline = line;
 			if (line.startsWith("config-version:")) {
 
-			} else if(line.startsWith("- ")) {
+			} else if(line.startsWith("hologram-text:") && oldValues.get("hologram-text")!=null) {
+				newline = "hologram-text: " + "\"" + oldValues.get("hologram-text").toString().replaceAll("\n", "\\\\n") + "\"";
+			}
+			else if(line.startsWith("- ")) {
 				newline = null;
 			} else if (line.startsWith("disabled-worlds:")) {
 				newline = null;
@@ -97,6 +100,8 @@ public class ConfigUpdater {
 						if (node.startsWith("message-") || node.startsWith("link-") || node.equalsIgnoreCase("hologram-text")
 								|| node.equalsIgnoreCase("angelchest-inventory-name")) // needs double quotes
 							quotes = "\"";
+						
+						
 
 						newline = node + ": " + quotes + oldValues.get(node).toString() + quotes;
 						if (plugin.debug)

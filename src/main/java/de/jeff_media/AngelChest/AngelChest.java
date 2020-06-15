@@ -112,10 +112,10 @@ public class AngelChest {
 		createChest(block);
 		hologram = new Hologram(block, hologramText,plugin);
 		
-		// Remove curse of vanishing equipment
+		// Remove curse of vanishing equipment and Minepacks backpacks
 		for(ItemStack i : playerItems.getContents()) {
 			if(!Utils.isEmpty(i)) {
-				if(i.getEnchantments().containsKey(Enchantment.VANISHING_CURSE)) {
+				if(i.getEnchantments().containsKey(Enchantment.VANISHING_CURSE) || MinepacksHook.isMinepacksBackpack(i,plugin)) {
 					playerItems.remove(i);
 				}
 			}
@@ -161,7 +161,6 @@ public class AngelChest {
 		yaml.set("overflowInv", overflowInv.getContents());
 		yaml.set("block", block.getLocation());
 		yaml.set("owner", owner.toString());
-		// TODO: Hologram
 		yaml.set("isProtected",isProtected);
 		yaml.set("configDuration", configDuration);
 		yaml.set("taskStart", taskStart);

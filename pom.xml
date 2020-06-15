@@ -50,6 +50,10 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
+		<repository>
+	<id>pcgf-repo</id>
+	<url>https://repo.pcgamingfreaks.at/repository/maven-everything</url>
+</repository>
 	</repositories>
 
 	<dependencies>
@@ -59,6 +63,11 @@
 			<version>1.15.2-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+    <groupId>at.pcgamingfreaks</groupId>
+    <artifactId>Minepacks-API</artifactId>
+    <version>2.3.8</version><!-- Check api-version shield for newest version -->
+</dependency>
 
 	</dependencies>
 
