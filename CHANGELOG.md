@@ -2,6 +2,7 @@
 ## 2.1.0
 - AngelChests survive server restarts
 - Prevent Minepacks backpacks from being put into AngelChests
+- Fixed newlines disappearing in hologram-text during automatic config update (you will have to add the newline again once)
 
 ## 2.0.0
 - Hopefully fixed the armor stands not disappearing once and for all
