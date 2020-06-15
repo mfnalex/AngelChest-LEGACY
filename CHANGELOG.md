@@ -1,11 +1,15 @@
 # Changelog
-## 2.0.0-SNAPSHOT
+## 2.0.0
+- Hopefully fixed the armor stands not disappearing once and for all
 - Added option to list all AngelChests
 - Added new permission "angelchest.tp" that allows to tp to your AngelChests. When you have this permission, there will be a clickable link next to each AngelChest when running /acinfo or /aclist
-- Prevent the AngelChest from spawning on certain blocks
+- AngelChest can hold the experience that would be normally dropped, or drop the XP orbs naturally like in vanilla (configurable)
+- Prevent the AngelChest from spawning on certain blocks (configurable)
 - Automatically applies armor when opening an AngelChest
 - Prevent the AngelChest from being damaged by bed explosions, pistons, etc.
 - Made AngelChest material configurable, default: CHEST
+- Items with Curse of Vanishing will disappear
 - AngelChests can also be opened by rightclicking the hologram
 - Converted project to maven
-- TODO: Make items where not to spawn configurable (with placeholder in default config for preset lists like __LIST__
+
+Thanks to XDleader555 for his awesome contributions!

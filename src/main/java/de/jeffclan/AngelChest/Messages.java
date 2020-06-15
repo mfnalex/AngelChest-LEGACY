@@ -59,7 +59,6 @@ public class Messages {
 		
 		LINK_UNLOCK = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-unlock","&5[Unlock]&r"));
 		
-		
 	}
 
 }

@@ -4,7 +4,11 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Particle;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +26,7 @@ public class AngelChest {
 	boolean isProtected;
 	long configDuration;
 	long taskStart;
+	int experience = 0;
 	AngelChestPlugin plugin;
 	
 	
@@ -38,6 +43,15 @@ public class AngelChest {
 		createChest(block);
 		hologram = new Hologram(block, hologramText,plugin);
 		
+		// Remove curse of vanishing equipment
+		for(ItemStack i : playerItems.getContents()) {
+			if(!Utils.isEmpty(i)) {
+				if(i.getEnchantments().containsKey(Enchantment.VANISHING_CURSE)) {
+					playerItems.remove(i);
+				}
+			}
+		}
+		
 		armorInv = playerItems.getArmorContents();
 		storageInv = playerItems.getStorageContents();
 		extraInv = playerItems.getExtraContents();
@@ -50,7 +64,7 @@ public class AngelChest {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
 				if(plugin.isAngelChest(block)) {
-					Utils.destroyAngelChest(block, me, plugin);
+					destroy();
 					Player player = plugin.getServer().getPlayer(owner);
 					if(player != null) {
 						player.sendMessage(plugin.messages.MSG_ANGELCHEST_DISAPPEARED);
@@ -73,7 +87,36 @@ public class AngelChest {
 	}
 	
 	public void destroy() {
-		Utils.destroyAngelChest(block, this, plugin);
+		if (!plugin.isAngelChest(block))
+			return;
+
+		block.setType(Material.AIR);
+		
+		for (UUID uuid : hologram.armorStandUUIDs) {
+			if(plugin.getServer().getEntity(uuid)!=null) {
+				plugin.getServer().getEntity(uuid).remove();
+			}
+		}
+		
+		for(ArmorStand armorStand : hologram.armorStands) {
+			if(armorStand==null) continue;
+			armorStand.remove();
+		}
+		
+		hologram.destroy();
+
+		// drop contents
+		Utils.dropItems(block, armorInv);
+		Utils.dropItems(block, storageInv);
+		Utils.dropItems(block, extraInv);
+		Utils.dropItems(block, overflowInv);
+		
+		if(experience>0) {
+			Utils.dropExp(block, experience);
+		}
+
+		plugin.angelChests.remove(block);
+		block.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 1);
 	}
 	
 	public long secondsRemaining() {

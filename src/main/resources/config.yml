@@ -22,6 +22,25 @@ show-location: true
 # e.g. CHEST, ENDER_CHEST, OBSIDIAN, ...
 material: CHEST
 
+# You probably don't want your AngelChest to spawn on blocks like GRASS_PATH, FARMLAND, etc.
+# as that would destroy those blocks. You can blacklist them here.
+dont-spawn-on:
+- AIR
+- FARMLAND
+- GRASS_PATH
+- LAVA
+- GRASS
+- TALL_GRASS
+
+# You can specify inside which existing blocks the AngelChest may spawn.
+only-spawn-in:
+- AIR
+- WATER
+
+# Does the AngelChest also take the experience orbs?
+# When set to false, experience orbs will drop like in vanilla
+preserve-xp: true
+
 # Should we check for updates?
 # When enabled, a message is printed in the console if a new version has
 # been found, and OPs will be notified when they join the server.
@@ -160,9 +179,24 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-your-inventory-back: "&aOdzyskales swoj ekwipunek!"
 #message-angelchest-location: "&eLokalizacja Twojej AnielskiejSkrzyni:"
 
+##### Portuguese
+#message-all-your-angelchests-were-already-unlocked: "&eTodos os seus AngelChests estavam desbloqueados."
+#message-angelchest-created: "&aUm anjo coletou seus itens e os guardou dentro de um baú no local de sua morte."
+#message-angelchest-disappeared: "&cVocê foi muito lento... Seu AngelChest desapareceu e jogou seus itens no chão."
+#message-error-players-only: "&cErro: Esse comando só funciona com jogadores."
+#message-inventory-was-empty: "&eUm anjo procurou por suas coisas, mas não encontrou nada."
+#message-not-allowed-to-break-other-angelchests: "&cVocê não tem permissão para quebrar o AngelChest de outras pessoas."
+#message-not-allowed-to-open-other-angelchests: "&cVocê não tem permissão para abrir o AngelChest de outras pessoas."
+#message-unlocked-more-angelchests: "&aVocê abriu o AngelChest de %d."
+#message-unlocked-one-angelchest: "&aVocê abriu o seu AngelChest."
+#message-you-dont-have-any-angelchests: "&eVocê não tem nenhum AngelChest."
+#message-you-got-part-of-your-inventory-back: "&eVocê conseguiu uma parte do seu inventário de volta, mas alguns itens ainda estão no AngelChest."
+#message-you-got-your-inventory-back: "&aVocê recuperou seu inventário!"
+#message-angelchest-location: "&eLocal do seu AngelChest:"
+
 #########################
 #####     Done!     #####
 #########################
 
 # please do not change the following line manually!
-config-version: 13
+config-version: 16

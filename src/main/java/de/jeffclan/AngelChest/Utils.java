@@ -1,6 +1,8 @@
 package de.jeffclan.AngelChest;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +20,9 @@ import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -146,12 +151,16 @@ public class Utils {
 	}
 
 	public static void dropItems(Block block, ItemStack[] invContent) {
-		//plugin.getLogger().info("Dropped AngelChest's contents at " + block.getLocation().toString());
 		for (ItemStack itemStack : invContent) {
 			if (Utils.isEmpty(itemStack))
 				continue;
 			block.getWorld().dropItem(block.getLocation(), itemStack);
 		}
+	}
+	
+	public static void dropExp(Block block, int xp) {
+		ExperienceOrb orb = (ExperienceOrb) block.getWorld().spawnEntity(block.getLocation(), EntityType.EXPERIENCE_ORB);
+		orb.setExperience(xp);
 	}
 
 	public static void dropItems(Block block, Inventory inv) {
@@ -159,37 +168,6 @@ public class Utils {
 		inv.clear();
 	}
 	
-	public static void destroyAngelChest(Block block, AngelChest angelChest, AngelChestPlugin plugin) {
-		
-
-		if (!plugin.isAngelChest(block))
-			return;
-
-		block.setType(Material.AIR);
-		
-		for (UUID uuid : angelChest.hologram.armorStandUUIDs) {
-			if(plugin.getServer().getEntity(uuid)!=null) {
-				plugin.getServer().getEntity(uuid).remove();
-			}
-		}
-		
-		for(ArmorStand armorStand : angelChest.hologram.armorStands) {
-			
-			armorStand.remove();
-		}
-		
-		angelChest.hologram.destroy();
-
-		// drop contents
-		dropItems(block, angelChest.armorInv);
-		dropItems(block, angelChest.storageInv);
-		dropItems(block, angelChest.extraInv);
-		dropItems(block, angelChest.overflowInv);
-
-		plugin.angelChests.remove(block);
-		block.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 1);
-	}
-
 	public static void sendDelayedMessage(Player p, String message, long delay, AngelChestPlugin plugin) {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
@@ -214,6 +192,20 @@ public class Utils {
 		return angelChests;
 	}
 	
+	public static void sortBlocksByDistance(Block angelChestBlock, List<Block> blocksNearby) {
+		Collections.sort(blocksNearby, new Comparator<Block>() {
+			public int compare(Block b1, Block b2) {
+				double dist1 = b1.getLocation().distance(angelChestBlock.getLocation());
+				double dist2 = b2.getLocation().distance(angelChestBlock.getLocation());
+				if (dist1 > dist2)
+					return 1;
+				if (dist2 > dist1)
+					return -1;
+				return 0;
+			}
+		});
+	}
+	
 	 public static List<Block> getNearbyBlocks(Location location, int radius) {
 	        List<Block> blocks = new ArrayList<Block>();
 	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
@@ -226,21 +218,15 @@ public class Utils {
 	        return blocks;
 	    }
 	
-	// Only allow chests to spawn in these types
-	public static List<Material> safeBlockTypes = Arrays.asList(Material.AIR);
-
-	// Prevent chests from spawning ontop of these types
-	public static List<Material> notSolidTypes = Arrays.asList(Material.AIR, Material.GRASS_PATH);
-
-	 public static List<Block> getPossibleChestLocations(Location location, int radius) {
+	 public static List<Block> getPossibleChestLocations(Location location, int radius, AngelChestPlugin plugin) {
 	        List<Block> blocks = new ArrayList<Block>();
 	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
 	            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
 	                for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
 						Block block = location.getWorld().getBlockAt(x,y,z);
 						Block oneBelow = location.getWorld().getBlockAt(x,y - 1,z);
-						if(safeBlockTypes.contains(block.getType())
-								&& !notSolidTypes.contains(oneBelow.getType())
+						if(plugin.onlySpawnIn.contains(block.getType())
+								&& !plugin.dontSpawnOn.contains(oneBelow.getType())
 								&& y > 0) {
 	                		blocks.add(block);
 	                	}

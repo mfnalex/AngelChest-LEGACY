@@ -28,7 +28,7 @@ public class BlockListener implements Listener {
 			event.setCancelled(true);
 			return;
 		}
-		Utils.destroyAngelChest(event.getBlock(), angelChest, plugin);
+		angelChest.destroy();
 	}
 
 	@EventHandler

@@ -1,14 +1,10 @@
 package de.jeffclan.AngelChest;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -53,7 +49,7 @@ public class PlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent event) {
+	public void spawnAngelChest(PlayerDeathEvent event) {
 		Player p = event.getEntity();
 		if (!p.hasPermission("angelchest.use")) {
 			return;
@@ -93,32 +89,30 @@ public class PlayerListener implements Listener {
 		//System.out.println(plugin.getConfig().getInt("max-radius"));
 		
 
-		if (!angelChestBlock.getType().equals(Material.AIR)) {
+		//if (!angelChestBlock.getType().equals(Material.AIR)) {
 			List<Block> blocksNearby = Utils.getPossibleChestLocations(angelChestBlock.getLocation(),
-					plugin.getConfig().getInt("max-radius"));
-
+					plugin.getConfig().getInt("max-radius"),plugin);
 
 			if (blocksNearby.size() > 0) {
-				Collections.sort(blocksNearby, new Comparator<Block>() {
-					public int compare(Block b1, Block b2) {
-						double dist1 = b1.getLocation().distance(angelChestBlock.getLocation());
-						double dist2 = b2.getLocation().distance(angelChestBlock.getLocation());
-						if (dist1 > dist2)
-							return 1;
-						if (dist2 > dist1)
-							return -1;
-						return 0;
-					}
-				});
+				Utils.sortBlocksByDistance(angelChestBlock, blocksNearby);
 				
 				fixedAngelChestBlock = blocksNearby.get(0);
 
 			}
 
-		}
+		//}
 
-		plugin.angelChests.put(fixedAngelChestBlock,
-				new AngelChest(p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin));
+		AngelChest ac =new AngelChest(p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin); 
+		plugin.angelChests.put(fixedAngelChestBlock,ac);
+		
+		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && plugin.getConfig().getBoolean("preserve-xp")) {
+			if(plugin.getConfig().getBoolean("full-xp")) {
+				ac.experience=ExperienceUtils.getPlayerExp(p);
+			} else {
+				ac.experience=event.getDroppedExp();
+			}
+			event.setDroppedExp(0);
+		}
 
 		// Delete players inventory
 		p.getInventory().clear();
@@ -144,9 +138,10 @@ public class PlayerListener implements Listener {
 		}
 	}
 
+
+
 	@EventHandler
 	public void onAngelChestRightClick(PlayerInteractEvent event) {
-		System.out.println("PlayerInteractEvent");
 		Player p = event.getPlayer();
 		if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
 			return;
@@ -172,10 +167,13 @@ public class PlayerListener implements Listener {
 	}
 
 	void openAngelChest(Player p, Block block, AngelChest angelChest) {
+		if(angelChest.experience!=0) {
+			p.giveExp(angelChest.experience);
+		}
 		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
 		if (succesfullyStoredEverything) {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
-			Utils.destroyAngelChest(block, angelChest, plugin);
+			angelChest.destroy();
 		} else {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK);
 			p.openInventory(angelChest.overflowInv);
@@ -193,7 +191,7 @@ public class PlayerListener implements Listener {
 				if (Utils.isEmpty(inv)) {
 					// plugin.angelChests.remove(Utils.getKeyByValue(plugin.angelChests,
 					// angelChest));
-					Utils.destroyAngelChest(Utils.getKeyByValue(plugin.angelChests, angelChest), angelChest, plugin);
+					angelChest.destroy();
 					// event.getPlayer().sendMessage("You have emptied an AngelChest. It is now
 					// gone.");
 				}

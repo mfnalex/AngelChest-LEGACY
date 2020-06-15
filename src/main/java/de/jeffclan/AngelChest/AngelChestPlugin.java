@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class AngelChestPlugin extends JavaPlugin {
 	
 	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 13;
+	int currentConfigVersion = 16;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
@@ -30,6 +30,8 @@ public class AngelChestPlugin extends JavaPlugin {
 	public boolean debug = false;
 	
 	ArrayList<String> disabledWorlds;
+	ArrayList<Material> dontSpawnOn;
+	ArrayList<Material> onlySpawnIn;
 	
 	Messages messages;
 	UpdateChecker updateChecker;
@@ -44,6 +46,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		createConfig();
 		
 		messages = new Messages(this);
+		
 		updateChecker = new UpdateChecker(this);
 		
 		playerSettings = new HashMap<Player,PlayerSetting>();
@@ -64,7 +67,7 @@ public class AngelChestPlugin extends JavaPlugin {
 				}
 				for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
 					if(!isAngelChest(entry.getKey())) {
-						Utils.destroyAngelChest(entry.getKey(), entry.getValue(), myself);
+						entry.getValue().destroy();
 					}
 				}
 			}
@@ -109,7 +112,7 @@ public class AngelChestPlugin extends JavaPlugin {
 		//}
 		while(it.hasNext()) {
 			Entry<Block,AngelChest> entry = (Entry<Block,AngelChest>) it.next();
-			Utils.destroyAngelChest(entry.getKey(), entry.getValue(), this);
+			entry.getValue().destroy();
 		}
 	}
 	
@@ -121,7 +124,45 @@ public class AngelChestPlugin extends JavaPlugin {
 		getConfig().addDefault("angelchest-duration", 600);
 		getConfig().addDefault("max-radius", 10);
 		getConfig().addDefault("material", "CHEST");
+		getConfig().addDefault("preserve-xp", true);
+		getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");
+		
+		ArrayList<String> dontSpawnOnTmp = (ArrayList<String>) getConfig().getStringList("dont-spawn-on");
+		dontSpawnOn = new ArrayList<Material>();
+		
+		ArrayList<String> onlySpawnInTmp = (ArrayList<String>) getConfig().getStringList("only-spawn-in");
+		onlySpawnIn = new ArrayList<Material>();
+		
+		for(String string : dontSpawnOnTmp) {
+			Material mat = Material.getMaterial(string.toUpperCase());
+			if(mat==null) {			
+				getLogger().warning(String.format("Invalid Material while parsing %s: %s", string,"dont-spawn-on"));
+				continue;
+			}
+			if(!mat.isBlock()) {
+				getLogger().warning(String.format("Invalid Block while parsing %s: %s", string, "dont-spawn-on"));
+				continue;
+			}
+			//System.out.println(mat.name() + " added to blacklist");
+			dontSpawnOn.add(mat);
+		}
+		dontSpawnOnTmp=null;
+		
+		for(String string : onlySpawnInTmp) {
+			Material mat = Material.getMaterial(string.toUpperCase());
+			if(mat==null) {
+				getLogger().warning(String.format("Invalid Material while parsing %s: %s", string,"only-spawn-in"));
+				continue;
+			}
+			if(!mat.isBlock()) {
+				getLogger().warning(String.format("Invalid Block while parsing %s: %s", string, "only-spawn-in"));
+				continue;
+			}
+			//System.out.println(mat.name() + " added to whitelist");
+			onlySpawnIn.add(mat);
+		}
+		onlySpawnInTmp=null;
 		
 		
 		if (getConfig().getInt("config-version", 0) != currentConfigVersion) {
@@ -143,6 +184,7 @@ public class AngelChestPlugin extends JavaPlugin {
 				chestMaterial = Material.CHEST;
 			}
 		}
+
 	}
 	
 	public PlayerSetting getPlayerSettings(Player p) {

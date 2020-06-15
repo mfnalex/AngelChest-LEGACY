@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -62,7 +63,9 @@ public class ConfigUpdater {
 		for (String line : linesInDefaultConfig) {
 			String newline = line;
 			if (line.startsWith("config-version:")) {
-				// dont replace config-version
+
+			} else if(line.startsWith("- ")) {
+				newline = null;
 			} else if (line.startsWith("disabled-worlds:")) {
 				newline = null;
 				newLines.add("disabled-worlds:");
@@ -71,6 +74,18 @@ public class ConfigUpdater {
 						newLines.add("- " + disabledWorld);
 					}
 				}
+			} else if (line.startsWith("dont-spawn-on:")) {
+				newline = null;
+				newLines.add("dont-spawn-on:");
+					for (Material mat : plugin.dontSpawnOn) {
+						newLines.add("- " + mat.name());
+					}
+			} else if (line.startsWith("only-spawn-in:")) {
+				newline = null;
+				newLines.add("only-spawn-in:");
+					for (Material mat : plugin.onlySpawnIn) {
+						newLines.add("- " + mat.name());
+					}
 			} else {
 				for (String node : oldValues.keySet()) {
 					if (line.startsWith(node + ":")) {
@@ -79,7 +94,7 @@ public class ConfigUpdater {
 
 						//if (node.equalsIgnoreCase("sorting-method")) // needs single quotes
 						//	quotes = "'";
-						if (node.startsWith("message-") || node.equalsIgnoreCase("hologram-text")
+						if (node.startsWith("message-") || node.startsWith("link-") || node.equalsIgnoreCase("hologram-text")
 								|| node.equalsIgnoreCase("angelchest-inventory-name")) // needs double quotes
 							quotes = "\"";
 

@@ -1,5 +1,7 @@
 package de.jeffclan.AngelChest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
@@ -32,7 +34,19 @@ public class AngelChestCommandUtils {
 			return;
 		}
 		
-		p.teleport(loc, TeleportCause.PLUGIN);
+		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(loc, plugin.getConfig().getInt("max-radius"), plugin);
+		Utils.sortBlocksByDistance(loc.getBlock(), possibleSpawnPoints);
+		
+		Location teleportLocation = loc;
+		
+		if(possibleSpawnPoints.size()>0) {
+			teleportLocation = possibleSpawnPoints.get(0).getLocation();
+		}
+		
+		teleportLocation.setDirection(loc.toVector().subtract(teleportLocation.toVector()));
+		teleportLocation.add(0.5,0,0.5);
+		
+		p.teleport(teleportLocation, TeleportCause.PLUGIN);
 	}
 	
 	protected static void unlockSingleChest(AngelChestPlugin plugin, Player p, String[] args) {
@@ -63,5 +77,6 @@ public class AngelChestCommandUtils {
 		}
 		
 		ac.unlock();
+		p.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
 	}
 }
