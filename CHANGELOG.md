@@ -10,6 +10,7 @@
 - Made AngelChest material configurable, default: CHEST
 - Items with Curse of Vanishing will disappear
 - AngelChests can also be opened by rightclicking the hologram
+- Automatic config updater
 - Converted project to maven
 
 Thanks to XDleader555 for his awesome contributions!
