@@ -32,9 +32,6 @@ public class Hologram {
 
 			ArmorStand as = (ArmorStand) location.getWorld().spawnEntity(location.add(new Vector(0,lineOffset,0)), EntityType.ARMOR_STAND); // Spawn the ArmorStand
 			armorStandUUIDs.add(as.getUniqueId());
-		//	plugin.armorStandUUIDs.add(as.getUniqueId());
-			
-			//System.out.println("Spawned Armor Stand");
 
 			as.setGravity(false);
 			as.setCanPickupItems(false);
@@ -55,7 +52,7 @@ public class Hologram {
 	public void destroy() {
 		for(ArmorStand armorStand : armorStands.toArray(new ArmorStand[armorStands.size()])) {
 			//System.out.println("DESTROYING ARMOR STAND @ " + armorStand.getLocation().toString());
-			armorStand.remove();
+			if(armorStand!=null) armorStand.remove();
 			
 			armorStands.remove(armorStand);
 			

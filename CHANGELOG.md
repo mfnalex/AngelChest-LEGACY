@@ -1,4 +1,7 @@
 # Changelog
+## 2.1.0
+- AngelChests survive server restarts
+
 ## 2.0.0
 - Hopefully fixed the armor stands not disappearing once and for all
 - Added option to list all AngelChests

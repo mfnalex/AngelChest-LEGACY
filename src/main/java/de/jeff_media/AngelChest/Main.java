@@ -1,5 +1,6 @@
 package de.jeff_media.AngelChest;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,7 +44,7 @@ public class Main extends JavaPlugin {
 		
 		Main myself = this;
 		
-		createConfig();
+		ConfigUtils.createConfig(this);
 		
 		messages = new Messages(this);
 		
@@ -52,6 +53,8 @@ public class Main extends JavaPlugin {
 		playerSettings = new HashMap<Player,PlayerSetting>();
 		angelChests = new HashMap<Block,AngelChest>();
 		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
+		
+		loadAllAngelChestsFromFile();
 		//armorStandUUIDs = new ArrayList<UUID>();
 		
 		// Deletes old armorstands
@@ -97,8 +100,35 @@ public class Main extends JavaPlugin {
 		
 		if (debug) getLogger().info("Disabled Worlds: "+disabledWorlds.size());
 		
+		
+		// Schedule DurationTimer
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run() {
+				for(AngelChest ac : angelChests.values()) {
+					if(ac==null) continue;
+					ac.secondsLeft--;
+					if(ac.secondsLeft<=0) {
+						ac.destroy();
+					}
+				}
+			}	
+		}, 0, 20);
+		
 	}
 	
+	private void loadAllAngelChestsFromFile() {
+		File dir = new File(getDataFolder().getPath() + File.separator + "angelchests");
+		  File[] directoryListing = dir.listFiles();
+		  if (directoryListing != null) {
+		    for (File child : directoryListing) {
+		    	System.out.println("Loading AngelChest " + child.getName());
+		      AngelChest ac = new AngelChest(child,this);
+		      angelChests.put(ac.block, ac);
+		    }
+		  }
+		
+	}
+
 	public void onDisable() {
 		
 		for(Player p : getServer().getOnlinePlayers()) {
@@ -112,80 +142,12 @@ public class Main extends JavaPlugin {
 		//}
 		while(it.hasNext()) {
 			Entry<Block,AngelChest> entry = (Entry<Block,AngelChest>) it.next();
-			entry.getValue().destroy();
+			entry.getValue().saveToFile();
+			entry.getValue().hologram.destroy();
 		}
 	}
 	
-	public void createConfig() {
-		saveDefaultConfig();
-		
-		getConfig().addDefault("check-for-updates", "true");
-		getConfig().addDefault("show-location", true);
-		getConfig().addDefault("angelchest-duration", 600);
-		getConfig().addDefault("max-radius", 10);
-		getConfig().addDefault("material", "CHEST");
-		getConfig().addDefault("preserve-xp", true);
-		getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
-		disabledWorlds = (ArrayList<String>) getConfig().getStringList("disabled-worlds");
-		
-		ArrayList<String> dontSpawnOnTmp = (ArrayList<String>) getConfig().getStringList("dont-spawn-on");
-		dontSpawnOn = new ArrayList<Material>();
-		
-		ArrayList<String> onlySpawnInTmp = (ArrayList<String>) getConfig().getStringList("only-spawn-in");
-		onlySpawnIn = new ArrayList<Material>();
-		
-		for(String string : dontSpawnOnTmp) {
-			Material mat = Material.getMaterial(string.toUpperCase());
-			if(mat==null) {			
-				getLogger().warning(String.format("Invalid Material while parsing %s: %s", string,"dont-spawn-on"));
-				continue;
-			}
-			if(!mat.isBlock()) {
-				getLogger().warning(String.format("Invalid Block while parsing %s: %s", string, "dont-spawn-on"));
-				continue;
-			}
-			//System.out.println(mat.name() + " added to blacklist");
-			dontSpawnOn.add(mat);
-		}
-		dontSpawnOnTmp=null;
-		
-		for(String string : onlySpawnInTmp) {
-			Material mat = Material.getMaterial(string.toUpperCase());
-			if(mat==null) {
-				getLogger().warning(String.format("Invalid Material while parsing %s: %s", string,"only-spawn-in"));
-				continue;
-			}
-			if(!mat.isBlock()) {
-				getLogger().warning(String.format("Invalid Block while parsing %s: %s", string, "only-spawn-in"));
-				continue;
-			}
-			//System.out.println(mat.name() + " added to whitelist");
-			onlySpawnIn.add(mat);
-		}
-		onlySpawnInTmp=null;
-		
-		
-		if (getConfig().getInt("config-version", 0) != currentConfigVersion) {
-			showOldConfigWarning();
-			ConfigUpdater configUpdater = new ConfigUpdater(this);
-			configUpdater.updateConfig();
-			configUpdater = null;
-			usingMatchingConfig = true;
-			//createConfig();
-		}
-		
-		if(Material.getMaterial(getConfig().getString("material"))==null) {
-			getLogger().warning("Invalid Material: "+getConfig().getString("material")+" - falling back to CHEST");
-			chestMaterial = Material.CHEST;
-		} else {
-			chestMaterial = Material.getMaterial(getConfig().getString("material"));
-			if(!chestMaterial.isBlock()) {
-				getLogger().warning("Not a block: "+getConfig().getString("material")+" - falling back to CHEST");
-				chestMaterial = Material.CHEST;
-			}
-		}
-
-	}
+	
 	
 	public PlayerSetting getPlayerSettings(Player p) {
 		registerPlayer(p);
@@ -252,14 +214,6 @@ public class Main extends JavaPlugin {
 			}
 		}
 		return armorStands;
-	}
-	
-	private void showOldConfigWarning() {
-		getLogger().warning("==============================================");
-		getLogger().warning("You were using an old config file. AngelChest");
-		getLogger().warning("has updated the file to the newest version.");
-		getLogger().warning("Your changes have been kept.");
-		getLogger().warning("==============================================");
 	}
 
 }

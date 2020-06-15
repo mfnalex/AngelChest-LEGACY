@@ -57,10 +57,10 @@ public class CommandList implements CommandExecutor {
 		Block b;
 
 		for(AngelChest angelChest : angelChestsFromThisPlayer) {
-			long remaining = angelChest.secondsRemaining();
-			long sec = remaining % 60;
-			long min = (remaining / 60) % 60;
-			long hour = (remaining / 60) / 60;
+			int remaining = angelChest.secondsLeft;
+			int sec = remaining % 60;
+			int min = (remaining / 60) % 60;
+			int hour = (remaining / 60) / 60;
 
 			b = angelChest.block;
 			String tpCommand=null;
