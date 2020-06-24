@@ -1,4 +1,12 @@
 # Changelog
+## 2.1.2
+- Fixed exception on server startup when AngelChests were located in Multiverse worlds
+- AngelChests now survive even when the world is renamed
+- Improved the way AngelChests saved to disk on server shutdown
+
+## 2.1.1
+- Fixed infinite experience bug when a user does not take all items out of the AngelChest
+
 ## 2.1.0
 - AngelChests survive server restarts
 - Prevent Minepacks backpacks from being put into AngelChests

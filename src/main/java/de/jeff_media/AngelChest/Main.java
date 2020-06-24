@@ -116,14 +116,18 @@ public class Main extends JavaPlugin {
 		
 	}
 	
-	private void loadAllAngelChestsFromFile() {
+	protected void loadAllAngelChestsFromFile() {
 		File dir = new File(getDataFolder().getPath() + File.separator + "angelchests");
 		  File[] directoryListing = dir.listFiles();
 		  if (directoryListing != null) {
 		    for (File child : directoryListing) {
-		    	System.out.println("Loading AngelChest " + child.getName());
+				getLogger().info("Loading AngelChest " + child.getName());
 		      AngelChest ac = new AngelChest(child,this);
-		      angelChests.put(ac.block, ac);
+		      if(ac.success) {
+				  angelChests.put(ac.block, ac);
+			  } else {
+				  getLogger().info("Error while loading "+child.getName()+", probably the world is not loaded yet. Will try again on next world load.");
+			  }
 		    }
 		  }
 		

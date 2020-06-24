@@ -169,6 +169,7 @@ public class PlayerListener implements Listener {
 	void openAngelChest(Player p, Block block, AngelChest angelChest) {
 		if(angelChest.experience!=0) {
 			p.giveExp(angelChest.experience);
+			angelChest.experience=0;
 		}
 		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
 		if (succesfullyStoredEverything) {

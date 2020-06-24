@@ -17,11 +17,13 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class AngelChest {
 
-	final ItemStack[] armorInv;
-	final ItemStack[] storageInv;
-	final ItemStack[] extraInv;
-	final Inventory overflowInv;
+	ItemStack[] armorInv;
+	ItemStack[] storageInv;
+	ItemStack[] extraInv;
+	Inventory overflowInv;
+	boolean success = true;
 	Block block;
+	UUID worldid;
 	UUID owner;
 	Hologram hologram;
 	boolean isProtected;
@@ -30,15 +32,47 @@ public class AngelChest {
 	int secondsLeft;
 	int experience = 0;
 	Main plugin;
-	
+
+	private YamlConfiguration loadYaml(File file) throws Throwable {
+		return YamlConfiguration.loadConfiguration(file);
+	}
+
+
 	public AngelChest(File file, Main plugin) {
-		YamlConfiguration yaml = YamlConfiguration.loadConfiguration(file);
+		YamlConfiguration yaml;
+		try {
+			yaml = loadYaml(file);
+		} catch(Throwable t) {
+			plugin.getLogger().warning("Could not load legacy AngelChest file "+file.getName());
+			success = false;
+			return;
+		}
 		this.plugin=plugin;
+
 		this.owner=UUID.fromString(yaml.getString("owner"));
-		this.block=yaml.getLocation("block").getBlock();
+
 		this.isProtected = yaml.getBoolean("isProtected");
 		this.secondsLeft = yaml.getInt("secondsLeft");
-		
+
+		// Check if this is the current save format
+		int saveVersion = yaml.getInt("angelchest-saveversion",1);
+		if(saveVersion == 1) {
+			try {
+				this.block=yaml.getLocation("block").getBlock();
+				this.worldid = block.getWorld().getUID();
+			} catch (Exception ignored) {
+				success=false;
+			}
+			if(!success) return;
+		} else {
+			this.worldid = UUID.fromString(yaml.getString("worldid"));
+			if(plugin.getServer().getWorld(worldid)==null) {
+				success = false;
+				return;
+			}
+			this.block = plugin.getServer().getWorld(worldid).getBlockAt(yaml.getInt("x"),yaml.getInt("y"),yaml.getInt("z"));
+		}
+
 		//String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
 		String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getOfflinePlayer(owner).getName());
 		
@@ -155,11 +189,16 @@ public class AngelChest {
 		File yamlFile = new File(plugin.getDataFolder() + File.separator + "angelchests",
 				this.hashCode() + ".yml");
 		YamlConfiguration yaml = YamlConfiguration.loadConfiguration(yamlFile);
+		yaml.set("angelchest-saveversion",2);
 		yaml.set("armorInv", armorInv);
 		yaml.set("storageInv",storageInv);
 		yaml.set("extraInv", extraInv);
 		yaml.set("overflowInv", overflowInv.getContents());
-		yaml.set("block", block.getLocation());
+		yaml.set("worldid", block.getLocation().getWorld().getUID().toString());
+		//yaml.set("block", block.getLocation());
+		yaml.set("x",block.getX());
+		yaml.set("y",block.getY());
+		yaml.set("z",block.getZ());
 		yaml.set("owner", owner.toString());
 		yaml.set("isProtected",isProtected);
 		yaml.set("configDuration", configDuration);
