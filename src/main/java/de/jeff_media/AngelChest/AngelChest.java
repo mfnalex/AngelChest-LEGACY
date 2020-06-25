@@ -27,10 +27,11 @@ public class AngelChest {
 	UUID owner;
 	Hologram hologram;
 	boolean isProtected;
-	long configDuration;
-	long taskStart;
+	//long configDuration;
+	//long taskStart;
 	int secondsLeft;
 	int experience = 0;
+	int levels = 0;
 	Main plugin;
 
 	private YamlConfiguration loadYaml(File file) throws Throwable {
@@ -50,7 +51,7 @@ public class AngelChest {
 		this.plugin=plugin;
 
 		this.owner=UUID.fromString(yaml.getString("owner"));
-
+		this.levels=yaml.getInt("levels",0);
 		this.isProtected = yaml.getBoolean("isProtected");
 		this.secondsLeft = yaml.getInt("secondsLeft");
 
@@ -114,8 +115,8 @@ public class AngelChest {
 		
 		//AngelChest me = this;
 		
-		configDuration = plugin.getConfig().getLong("angelchest-duration");
-		taskStart = System.currentTimeMillis();
+		//configDuration = plugin.getConfig().getLong("angelchest-duration");
+		//taskStart = System.currentTimeMillis();
 
 		/*Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
@@ -138,7 +139,7 @@ public class AngelChest {
 		this.owner=owner;
 		this.block=block;
 		this.isProtected = plugin.getServer().getPlayer(owner).hasPermission("angelchest.protect");
-		this.secondsLeft = plugin.getConfig().getInt("angelchest-duration");
+		this.secondsLeft = plugin.groupUtils.getDurationPerPlayer(plugin.getServer().getPlayer(owner));
 		
 		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
 		String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getPlayer(owner).getName());
@@ -161,8 +162,8 @@ public class AngelChest {
 		
 		//AngelChest me = this;
 		
-		configDuration = plugin.getConfig().getLong("angelchest-duration");
-		taskStart = System.currentTimeMillis();
+		//configDuration = plugin.getConfig().getLong("angelchest-duration");
+		//taskStart = System.currentTimeMillis();
 
 		/*Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
@@ -201,10 +202,11 @@ public class AngelChest {
 		yaml.set("z",block.getZ());
 		yaml.set("owner", owner.toString());
 		yaml.set("isProtected",isProtected);
-		yaml.set("configDuration", configDuration);
-		yaml.set("taskStart", taskStart);
+		//yaml.set("configDuration", configDuration);
+		//yaml.set("taskStart", taskStart);
 		yaml.set("secondsLeft",secondsLeft);
 		yaml.set("experience", experience);
+		yaml.set("levels",levels);
 		
 		// Duplicate Start
 		block.setType(Material.AIR);
@@ -255,8 +257,12 @@ public class AngelChest {
 			Utils.dropExp(block, experience);
 		}
 
-		plugin.angelChests.remove(block);
+
 		block.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 1);
+	}
+
+	void remove() {
+		plugin.angelChests.remove(block);
 	}
 	
 	/*public long secondsRemaining() {

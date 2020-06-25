@@ -1,5 +1,9 @@
 # TODO
 
+## Add Xp permission and level
+- Add a permission to keep vanilla XP inside chest
+- Add a permission to keep full level
+
 ## Find a way to get full XP a player has
 There is no way to get the amount of XP a player has... Once we have one, add the following config node:
 

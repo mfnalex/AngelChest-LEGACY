@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.UUID;
 
+import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -16,9 +17,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
-	
-	private static final int updateCheckInterval = 86400;
-	int currentConfigVersion = 17;
+
+	int currentConfigVersion = 20;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	HashMap<Block,AngelChest> angelChests;
@@ -26,8 +26,7 @@ public class Main extends JavaPlugin {
 	Material chestMaterial;
 	
 	CommandList commandListExecutor;
-	//ArrayList<UUID> armorStandUUIDs;
-	
+
 	public boolean debug = false;
 	
 	ArrayList<String> disabledWorlds;
@@ -35,21 +34,18 @@ public class Main extends JavaPlugin {
 	ArrayList<Material> onlySpawnIn;
 	
 	Messages messages;
-	UpdateChecker updateChecker;
+	PluginUpdateChecker updateChecker;
+	GroupUtils groupUtils;
 	
 	
 	
 	@Override
 	public void onEnable() {
 		
-		Main myself = this;
-		
-		ConfigUtils.createConfig(this);
-		
-		messages = new Messages(this);
-		
-		updateChecker = new UpdateChecker(this);
-		
+		//Main myself = this;
+
+		ConfigUtils.reloadCompleteConfig(this);
+
 		playerSettings = new HashMap<Player,PlayerSetting>();
 		angelChests = new HashMap<Block,AngelChest>();
 		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
@@ -74,12 +70,13 @@ public class Main extends JavaPlugin {
 					}
 				}
 			}
-		}, 0L, 1 * 20);
+		}, 0L, 2 * 20);
 		
 		
 		this.getCommand("unlock").setExecutor(new CommandUnlock(this));
 		commandListExecutor = new CommandList(this);
 		this.getCommand("aclist").setExecutor(commandListExecutor);
+		this.getCommand("acreload").setExecutor(new CommandReload(this));
 		
 		getServer().getPluginManager().registerEvents(new PlayerListener(this),this);
 		getServer().getPluginManager().registerEvents(new HologramListener(this),this);
@@ -88,27 +85,24 @@ public class Main extends JavaPlugin {
 		@SuppressWarnings("unused")
 		Metrics metrics = new Metrics(this);
 		
-		if (getConfig().getString("check-for-updates", "true").equalsIgnoreCase("true")) {
-			Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-				public void run() {
-					updateChecker.checkForUpdate();
-				}
-			}, 0L, updateCheckInterval * 20);
-		} else if (getConfig().getString("check-for-updates", "true").equalsIgnoreCase("on-startup")) {
-			updateChecker.checkForUpdate();
-		}
-		
+
 		if (debug) getLogger().info("Disabled Worlds: "+disabledWorlds.size());
 		
 		
 		// Schedule DurationTimer
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
-				for(AngelChest ac : angelChests.values()) {
+				Iterator<AngelChest> it = angelChests.values().iterator();
+				while(it.hasNext()) {
+					AngelChest ac = it.next();
 					if(ac==null) continue;
 					ac.secondsLeft--;
 					if(ac.secondsLeft<=0) {
+						if(getServer().getPlayer(ac.owner)!=null) {
+							getServer().getPlayer(ac.owner).sendMessage(messages.MSG_ANGELCHEST_DISAPPEARED);
+						}
 						ac.destroy();
+						it.remove();
 					}
 				}
 			}	
@@ -185,9 +179,8 @@ public class Main extends JavaPlugin {
 	public boolean isAngelChestHologram(Entity e) {
 		// Skip this because it is checked in the listener and this method is not needed elsewhere
 		//if(!(e instanceof ArmorStand)) return false;
-		
-		if(getAllArmorStands().contains(e)) return true;
-		return false;
+
+		return getAllArmorStands().contains(e);
 	}
 	
 	public AngelChest getAngelChest(Block block) {

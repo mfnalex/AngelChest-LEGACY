@@ -1,4 +1,15 @@
 # Changelog
+## 2.2.0
+- Added groups to allow custom chest durations per player (see groups.example.yml)
+- Added /acreload command to reload the configuration file
+- Added permissions:
+  - angelchest.xp: stores and restores amount of dropped XP in the chest
+  - angelchest.xp.levels: stores and restores amount of levels the player had
+  - angelchest.reload: allows usage of /acreload
+- Fixed weird config update bug regarding UTF-8 problems
+- Fixed exception in console when an AngelChest despawns because of its time limit
+- Improved general performance
+
 ## 2.1.2
 - Fixed exception on server startup when AngelChests were located in Multiverse worlds
 - AngelChests now survive even when the world is renamed

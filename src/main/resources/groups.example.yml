@@ -1,0 +1,27 @@
+# You can define a custom AngelChest duration for certain groups.
+# Players will need the angelchest.group.[groupname] permission.
+# You can also set whether and how much of the experience will be stored.
+# If a player is in no group, the default values will be used.
+#
+# Available options:
+#   angelchest-duration: <duration in seconds>
+#   preserve-xp: <true|false>
+#   preserve-xp-type: <vanilla|levels>
+#
+# Note: You MUST rename this file to groups.yml if you wish to use it.
+
+admin:
+  angelchest-duration: 1500
+  preserve-xp-type: levels
+mod:
+  angelchest-duration: 1200
+  preserve-xp-type: levels
+donor:
+  angelchest-duration: 900
+  preserve-xp-type: levels
+noob:
+  angelchest-duration: 300
+  preserve-xp-type: vanilla
+idiot:
+  angelchest-duration: 150
+  preserve-xp: false

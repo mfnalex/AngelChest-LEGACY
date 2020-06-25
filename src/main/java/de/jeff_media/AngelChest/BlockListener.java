@@ -29,6 +29,7 @@ public class BlockListener implements Listener {
 			return;
 		}
 		angelChest.destroy();
+		angelChest.remove();
 	}
 
 	@EventHandler

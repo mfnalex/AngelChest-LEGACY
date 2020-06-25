@@ -3,6 +3,7 @@ package de.jeff_media.AngelChest;
 import java.io.File;
 import java.util.ArrayList;
 
+import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import org.bukkit.Material;
 
 public class ConfigUtils {
@@ -14,12 +15,37 @@ public class ConfigUtils {
 			categoriesFolder.mkdir();
 		}
 	}
+
+	static void reloadCompleteConfig(Main main) {
+		main.reloadConfig();
+		createConfig(main);
+		if(main.updateChecker != null) {
+			main.updateChecker.stop();
+		}
+		initUpdateChecker(main);
+		main.messages = new Messages(main);
+		File groupsFile = new File(main.getDataFolder()+File.separator+"groups.yml");
+		main.groupUtils = new GroupUtils(main,groupsFile);
+	}
+
+	static void initUpdateChecker(Main main) {
+		main.updateChecker = new PluginUpdateChecker(main,"https://api.jeff-media.de/angelchest/angelchest-latest-version.txt","https://www.spigotmc.org/resources/1-12-1-15-angelchest.60383/","https://github.com/JEFF-Media-GbR/Spigot-AngelChest/blob/master/CHANGELOG.md","https://www.paypal.me/mfnalex");
+
+		if (main.getConfig().getString("check-for-updates", "true").equalsIgnoreCase("true")) {
+			main.updateChecker.check((long) (main.getConfig().getDouble("check-interval")*60*60));
+		} else if (main.getConfig().getString("check-for-updates", "true").equalsIgnoreCase("on-startup")) {
+			main.updateChecker.check();
+		}
+
+	}
 	
 	static void createConfig(Main main) {
 		main.saveDefaultConfig();
+		main.saveResource("groups.example.yml", true);
 		createDirectories(main);
 		
 		main.getConfig().addDefault("check-for-updates", "true");
+		main.getConfig().addDefault("check-interval",4);
 		main.getConfig().addDefault("show-location", true);
 		main.getConfig().addDefault("angelchest-duration", 600);
 		main.getConfig().addDefault("max-radius", 10);

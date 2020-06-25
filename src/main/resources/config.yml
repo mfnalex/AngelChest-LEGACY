@@ -2,8 +2,33 @@
 #####   AngelChest  #####
 #########################
 
+# The following permissions are available:
+#
+# angelchest.use             Spawns AngelChest on death instead of dropping the items
+# angelchest.protect         The AngelChest is locked for other players
+# angelchest.protect.ignore  Players can open other player's locked AngelChests
+# angelchest.xp              The AngelChest stores the amount of XP that would be dropped
+# angelchest.xp.levels       The AngelChest stores the amount of XP levels a player had
+#                            Note: If the AngelChest despawns or is broken, it will only
+#                            drop the normal amount of XP
+# angelchest.tp              The player can teleport to their AngelChests
+# angelchest.reload          Allows reloading the config using /acreload
+
+# The following commands are available:
+#
+# /acinfo or /aclist         Shows a list of your AngelChests, including teleport and unlock links
+#                            if you have the angelchest.tp and/or angelchest.protect permissions
+# /unlock or /acunlock       Unlocks all of your AngelChests if you have the angelchest.protect permission
+# /acreload                  Reloads the config
+
+############################
+##### General settings #####
+############################
+
 # After this amount of seconds, the AngelChest is automatically destroyed
-# and drops its contents
+# and drops its contents. You can override this for certain players by
+# setting up groups and giving players the angelchest.group.<groupname>
+# permission. See groups.example.yml for more information.
 # Default is 600 seconds = 10 minutes
 angelchest-duration: 600
 
@@ -29,25 +54,22 @@ dont-spawn-on:
 - FARMLAND
 - GRASS_PATH
 - LAVA
-- GRASS
-- TALL_GRASS
 
 # You can specify inside which existing blocks the AngelChest may spawn.
 only-spawn-in:
 - AIR
 - WATER
 
-# Does the AngelChest also take the experience orbs?
-# When set to false, experience orbs will drop like in vanilla
-preserve-xp: true
-
 # Should we check for updates?
 # When enabled, a message is printed in the console if a new version has
 # been found, and OPs will be notified when they join the server.
-# When set to true, we will check for updates on startup and every 24 hours
+# When set to true, we will check for updates on startup and every X hours
 # When set to on-startup, we will only check on startup
 # When set to false, don't check for updates
 check-for-updates: true
+
+# When check-for-updates is true, AngelChest will check every X hours
+check-interval: 4
 
 #########################
 #### disabled worlds ####
@@ -199,4 +221,4 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #########################
 
 # please do not change the following line manually!
-config-version: 17
+config-version: 20

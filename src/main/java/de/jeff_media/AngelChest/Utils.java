@@ -57,9 +57,7 @@ public class Utils {
 			return true;
 		if (itemStack.getAmount() == 0)
 			return true;
-		if (itemStack.getType().equals(Material.AIR))
-			return true;
-		return false;
+		return itemStack.getType().equals(Material.AIR);
 	}
 
 	public static <T, E> T getKeyByValue(Map<T, E> map, E value) {

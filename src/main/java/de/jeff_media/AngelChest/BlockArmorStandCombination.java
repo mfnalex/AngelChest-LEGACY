@@ -5,8 +5,8 @@ import org.bukkit.entity.ArmorStand;
 
 public class BlockArmorStandCombination {
 	
-	public Block block;
-	public ArmorStand armorStand;
+	public final Block block;
+	public final ArmorStand armorStand;
 	
 	BlockArmorStandCombination(Block block, ArmorStand armorStand) {
 		this.block=block;

@@ -32,14 +32,6 @@ public class PlayerListener implements Listener {
 
 		plugin.registerPlayer(event.getPlayer());
 
-		if (event.getPlayer().isOp()) {
-			plugin.updateChecker.sendUpdateMessage(event.getPlayer());
-		}
-		
-		if(event.getPlayer().getName().equalsIgnoreCase("mfnalex")) {
-			plugin.debug=true;
-		}
-
 	}
 
 	@EventHandler
@@ -105,12 +97,11 @@ public class PlayerListener implements Listener {
 		AngelChest ac =new AngelChest(p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin); 
 		plugin.angelChests.put(fixedAngelChestBlock,ac);
 		
-		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && plugin.getConfig().getBoolean("preserve-xp")) {
-			if(plugin.getConfig().getBoolean("full-xp")) {
-				ac.experience=ExperienceUtils.getPlayerExp(p);
-			} else {
-				ac.experience=event.getDroppedExp();
+		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && p.hasPermission("angelchest.xp")) {
+			if(p.hasPermission("angelchest.xp.levels")) {
+				ac.levels = p.getLevel();
 			}
+			ac.experience=event.getDroppedExp();
 			event.setDroppedExp(0);
 		}
 
@@ -167,10 +158,19 @@ public class PlayerListener implements Listener {
 	}
 
 	void openAngelChest(Player p, Block block, AngelChest angelChest) {
-		if(angelChest.experience!=0) {
+
+		if((p.hasPermission("angelchest.xp") || p.hasPermission("angelchest.xp.levels")) && angelChest.experience!=0) {
 			p.giveExp(angelChest.experience);
+			angelChest.levels = 0;
 			angelChest.experience=0;
 		}
+		if(p.hasPermission("angelchest.xp.levels") && angelChest.levels!=0 && angelChest.levels> p.getLevel()) {
+			p.setExp(0);
+			p.setLevel(angelChest.levels);
+			angelChest.levels = 0;
+			angelChest.experience = 0;
+		}
+
 		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
 		if (succesfullyStoredEverything) {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);

@@ -1,9 +1,8 @@
 package de.jeff_media.AngelChest;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -26,6 +25,12 @@ public class ConfigUpdater {
 	// Don't worry! Your changes will be kept
 
 	void updateConfig() {
+
+		try {
+			Files.deleteIfExists(new File(plugin.getDataFolder().getAbsolutePath()+File.separator+"config.old.yml").toPath());
+		} catch (IOException e) {
+
+		}
 		
 		if (plugin.debug)
 			plugin.getLogger().info("rename config.yml -> config.old.yml");
@@ -35,7 +40,7 @@ public class ConfigUpdater {
 		plugin.saveDefaultConfig();
 
 		File oldConfigFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "config.old.yml");
-		FileConfiguration oldConfig = new YamlConfiguration();
+		FileConfiguration oldConfig = YamlConfiguration.loadConfiguration(oldConfigFile);
 
 		try {
 			oldConfig.load(oldConfigFile);
@@ -50,7 +55,7 @@ public class ConfigUpdater {
 		try {
 
 			Scanner scanner = new Scanner(
-					new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "config.yml"));
+					new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "config.yml"),"UTF-8");
 			while (scanner.hasNextLine()) {
 				linesInDefaultConfig.add(scanner.nextLine() + "");
 			}
@@ -114,10 +119,10 @@ public class ConfigUpdater {
 				newLines.add(newline);
 		}
 
-		FileWriter fw;
+		BufferedWriter fw;
 		String[] linesArray = newLines.toArray(new String[linesInDefaultConfig.size()]);
 		try {
-			fw = new FileWriter(plugin.getDataFolder().getAbsolutePath() + File.separator + "config.yml");
+			fw = Files.newBufferedWriter(new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "config.yml").toPath(), StandardCharsets.UTF_8);
 			for (int i = 0; i < linesArray.length; i++) {
 				fw.write(linesArray[i] + "\n");
 			}

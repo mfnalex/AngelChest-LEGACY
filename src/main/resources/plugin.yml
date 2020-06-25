@@ -1,6 +1,6 @@
 main: de.jeff_media.AngelChest.Main
 name: AngelChest
-version: 2.1.2
+version: 2.2.0
 api-version: 1.13
 description: Puts your inventory into a protected chest when you die.
 website: https://www.spigotmc.org/resources/1-13-angelchest.60383/
@@ -18,8 +18,13 @@ commands:
   aclist:
     permission: angelchest.use
     description: "Lists info about your AngelChests"
-    aliases: [acinfo]
+    aliases: [acinfo,angelchests]
     usage: "/<command>"
+  acreload:
+    permission: angelchest.reload
+    description: "Reloads AngelChest configuration"
+    aliases: [angelchestreload]
+    usage: "</command>"
 permissions:
   angelchest.use:
     description: "Players with this permission will have their items put into a chest on death by an Angel"
@@ -27,5 +32,11 @@ permissions:
     description: "Players with this permission have their AngelChests protected from other players. They can unlock their chests unsing /unlock"
   angelchest.protect.ignore:
     description: "Players with this permission can open other player's protected AngelChests"
+  angelchest.xp:
+    description: "The amount of dropped experience will also be stored in the AngelChest"
+  angelchest.xp.levels:
+    description: "The full experience level of the player will be stored in the AngelChest"
   angelchest.tp:
     description: "Allows players to teleport to their AngelChests using /aclist or /acinfo"
+  angelchest.reload:
+    description: "Allows to reload the configuration using /acreload"
