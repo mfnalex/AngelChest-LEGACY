@@ -175,6 +175,7 @@ public class PlayerListener implements Listener {
 		if (succesfullyStoredEverything) {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
 			angelChest.destroy();
+			angelChest.remove();
 		} else {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK);
 			p.openInventory(angelChest.overflowInv);
