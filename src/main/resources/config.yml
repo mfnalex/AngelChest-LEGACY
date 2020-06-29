@@ -45,6 +45,7 @@ show-location: true
 
 # You can choose the Material to use for the AngelChest,
 # e.g. CHEST, ENDER_CHEST, OBSIDIAN, ...
+# When using PLAYER_HEAD, the head of the player is used.
 material: CHEST
 
 # You probably don't want your AngelChest to spawn on blocks like GRASS_PATH, FARMLAND, etc.
@@ -70,6 +71,19 @@ check-for-updates: true
 
 # When check-for-updates is true, AngelChest will check every X hours
 check-interval: 4
+
+#########################
+####     economy     ####
+#########################
+
+# You can setup a certain price for some actions. This will only work if you
+# use Vault and a supported economy plugin.
+# If you need more options to adjust the prices for certain actions, please
+# leave a message in the SpigotMC discussion or open an issue at GitHub.
+# If you request a feature in the review section, it will probably be ignored.
+
+# How much does it cost to teleport yourself to one of your AngelChests
+price-teleport: 0
 
 #########################
 #### disabled worlds ####
@@ -216,9 +230,25 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-your-inventory-back: "&aVocê recuperou seu inventário!"
 #message-angelchest-location: "&eLocal do seu AngelChest:"
 
+
+##### Spanish
+#message-all-your-angelchests-were-already-unlocked: "&eTodos tus AngelChest ya se encuentran desbloqueados."
+#message-angelchest-created: "&aUn Angel ha colectado tus objetos y los ha puesto en un cofre en el lugar de tu muerte."
+#message-angelchest-disappeared: "&cHas sido muy lento... Tu AngelChest ha desaparecido y ha dropeado los objetos"
+#message-error-players-only: "&cError: Este comando solo puede ser ejecutado por jugadores."
+#message-inventory-was-empty: "&eUn Angel ha buscado tus objetos pero no pudo encontrar nada."
+#message-not-allowed-to-break-other-angelchests: "&cNo tienes permitido romper los AngelChest de otros jugadores."
+#message-not-allowed-to-open-other-angelchests: "&cNo tienes permitido abrir los AngelChest de otros jugadores."
+#message-unlocked-more-angelchests: "&aHas desbloqueado %d AngelChests."
+#message-unlocked-one-angelchest: "&aHas desbloqueado un AngelChest."
+#message-you-dont-have-any-angelchests: "&eNo posees ningun AngelChest."
+#message-you-got-part-of-your-inventory-back: "&eHas obtenido una parte de tu inventario de vuelta, pero algunos objetos siguen en tu AngelChest."
+#message-you-got-your-inventory-back: "&aHas obtenido tu inventario de vuelta!"
+#message-angelchest-location: "&eLugares de tus AngelChests:"
+
 #########################
 #####     Done!     #####
 #########################
 
 # please do not change the following line manually!
-config-version: 20
+config-version: 22

@@ -50,6 +50,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("angelchest-duration", 600);
 		main.getConfig().addDefault("max-radius", 10);
 		main.getConfig().addDefault("material", "CHEST");
+		main.getConfig().addDefault("player-head","{PLAYER}");
 		main.getConfig().addDefault("preserve-xp", true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");

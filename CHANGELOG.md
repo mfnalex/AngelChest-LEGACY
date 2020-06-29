@@ -1,4 +1,14 @@
 # Changelog
+## 2.4.0
+- Added option to charge a player for teleports
+
+## 2.3.0
+- Added Spanish translation
+- Added option to use player heads as chest material
+
+## 2.2.1
+- Fixed AngelChest still being visible in /acinfo after it has been collected
+
 ## 2.2.0
 - Added groups to allow custom chest durations per player (see groups.example.yml)
 - Added /acreload command to reload the configuration file

@@ -1,5 +1,8 @@
 # TODO
 
+## Essentials
+- Find out why EssentialsX prevents chest spawning
+
 ## Add Xp permission and level
 - Add a permission to keep vanilla XP inside chest
 - Add a permission to keep full level

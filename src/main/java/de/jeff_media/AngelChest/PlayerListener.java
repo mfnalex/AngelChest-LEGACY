@@ -94,7 +94,7 @@ public class PlayerListener implements Listener {
 
 		//}
 
-		AngelChest ac =new AngelChest(p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin); 
+		AngelChest ac =new AngelChest(p,p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin);
 		plugin.angelChests.put(fixedAngelChestBlock,ac);
 		
 		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && p.hasPermission("angelchest.xp")) {
