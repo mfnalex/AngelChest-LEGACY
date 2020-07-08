@@ -20,6 +20,11 @@ commands:
     description: "Lists info about your AngelChests"
     aliases: [acinfo,angelchests]
     usage: "/<command>"
+  acfetch:
+    permission: angelchest.fetch
+    description: "Remotely retrieves your AngelChest. For use with economy plugins."
+    aliases: [acretrieve]
+    usage: "/<command>"
   acreload:
     permission: angelchest.reload
     description: "Reloads AngelChest configuration"
