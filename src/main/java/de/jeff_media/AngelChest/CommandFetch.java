@@ -24,17 +24,17 @@ public class CommandFetch implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 		if(!command.getName().equalsIgnoreCase("acfetch")) return false;		
 
-		if(!sender.hasPermission("angelchest.fetch")) {
-			sender.sendMessage(plugin.getCommand("acfetch").getPermissionMessage());
-			return true;
-		}
-
 		if(!(sender instanceof Player)) {
 			sender.sendMessage(plugin.messages.MSG_PLAYERSONLY);
 			return true;
 		}
 
 		Player p = (Player) sender;
+
+		if(!sender.hasPermission("angelchest.fetch")) {
+			sender.sendMessage(plugin.getCommand("acfetch").getPermissionMessage());
+			return true;
+		}
 
 		// Get all AngelChests by this player
 		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
@@ -57,6 +57,12 @@ public class CommandFetch implements CommandExecutor {
 
 		if(chestIdx >= angelChestsFromThisPlayer.size() || chestIdx < 0) {
 			p.sendMessage("Invalid AngelChest!");
+			return true;
+		}
+
+        // Only charge the player if they select a valid chest
+		double price = plugin.getConfig().getDouble("price-fetch");
+		if(price>0 && !AngelChestCommandUtils.hasEnoughMoney(p,price,plugin)) {
 			return true;
 		}
 

@@ -85,6 +85,9 @@ check-interval: 4
 # How much does it cost to teleport yourself to one of your AngelChests
 price-teleport: 0
 
+# How much does it cost to teleport your AngelChests to you
+price-fetch: 0
+
 #########################
 #### disabled worlds ####
 #########################
@@ -251,4 +254,4 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #########################
 
 # please do not change the following line manually!
-config-version: 22
+config-version: 23
