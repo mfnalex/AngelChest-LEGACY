@@ -43,12 +43,6 @@ public class AngelChestCommandUtils {
 	}
 
 	protected static void teleportPlayerToChest(Main plugin, Player p, String[] args) {
-
-		double price = plugin.getConfig().getDouble("price-teleport");
-		if(price>0 && !hasEnoughMoney(p,price,plugin)) {
-			return;
-		}
-
 		if(!p.hasPermission("angelchest.tp")) {
 			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 			return;
@@ -71,6 +65,11 @@ public class AngelChestCommandUtils {
 			return;
 		}
 		
+		double price = plugin.getConfig().getDouble("price-teleport");
+		if(price>0 && !hasEnoughMoney(p,price,plugin)) {
+			return;
+		}
+
 		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(loc, plugin.getConfig().getInt("max-radius"), plugin);
 		Utils.sortBlocksByDistance(loc.getBlock(), possibleSpawnPoints);
 		
