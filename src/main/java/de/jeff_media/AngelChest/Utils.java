@@ -80,7 +80,23 @@ public class Utils {
 		return true;
 	}
 	
-	
+	public static Block findSafeBlock(Block playerLoc, Main plugin) {
+		Block fixedAngelChestBlock = playerLoc;
+
+		//System.out.println(plugin.getConfig().getInt("max-radius"));
+
+		if (!playerLoc.getType().equals(Material.AIR)) {
+			List<Block> blocksNearby = Utils.getPossibleChestLocations(playerLoc.getLocation(),
+					plugin.getConfig().getInt("max-radius"), plugin);
+
+			if (blocksNearby.size() > 0) {
+				Utils.sortBlocksByDistance(fixedAngelChestBlock, blocksNearby);
+				fixedAngelChestBlock = blocksNearby.get(0);
+			}
+		}
+
+		return fixedAngelChestBlock;
+	}
 
 	/**
 	 * Puts everything from source into destination.

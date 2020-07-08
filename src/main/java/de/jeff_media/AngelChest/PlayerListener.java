@@ -1,7 +1,5 @@
 package de.jeff_media.AngelChest;
 
-import java.util.List;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -74,28 +72,10 @@ public class PlayerListener implements Listener {
 			tmp = p.getLocation().getBlock();
 		}
 		
-		Block angelChestBlock = tmp;
-		
-		Block fixedAngelChestBlock = angelChestBlock;
-		
-		//System.out.println(plugin.getConfig().getInt("max-radius"));
-		
+		Block angelChestBlock = Utils.findSafeBlock(tmp, plugin);
 
-		//if (!angelChestBlock.getType().equals(Material.AIR)) {
-			List<Block> blocksNearby = Utils.getPossibleChestLocations(angelChestBlock.getLocation(),
-					plugin.getConfig().getInt("max-radius"),plugin);
-
-			if (blocksNearby.size() > 0) {
-				Utils.sortBlocksByDistance(angelChestBlock, blocksNearby);
-				
-				fixedAngelChestBlock = blocksNearby.get(0);
-
-			}
-
-		//}
-
-		AngelChest ac =new AngelChest(p,p.getUniqueId(), fixedAngelChestBlock, p.getInventory(), plugin);
-		plugin.angelChests.put(fixedAngelChestBlock,ac);
+		AngelChest ac =new AngelChest(p,p.getUniqueId(), angelChestBlock, p.getInventory(), plugin);
+		plugin.angelChests.put(angelChestBlock,ac);
 		
 		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && p.hasPermission("angelchest.xp")) {
 			if(p.hasPermission("angelchest.xp.levels")) {
