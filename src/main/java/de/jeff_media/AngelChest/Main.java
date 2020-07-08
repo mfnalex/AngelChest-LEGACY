@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import org.bukkit.Bukkit;

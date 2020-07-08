@@ -2,9 +2,7 @@ package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Skull;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
