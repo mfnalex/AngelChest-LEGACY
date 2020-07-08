@@ -153,7 +153,6 @@ public class AngelChest {
 
 
     private void createChest(Block block, String uuid) {
-        Material mat = plugin.chestMaterial;
         block.setType(plugin.chestMaterial);
         if(plugin.chestMaterial==Material.PLAYER_HEAD) {
             Skull state = (Skull) block.getState();
