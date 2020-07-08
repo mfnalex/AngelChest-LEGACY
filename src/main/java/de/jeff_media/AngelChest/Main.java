@@ -74,8 +74,7 @@ public class Main extends JavaPlugin {
 		
 		
 		this.getCommand("unlock").setExecutor(new CommandUnlock(this));
-		commandListExecutor = new CommandList(this);
-		this.getCommand("aclist").setExecutor(commandListExecutor);
+		this.getCommand("aclist").setExecutor(new CommandList(this));
 		this.getCommand("acfetch").setExecutor(new CommandFetch(this));
 		this.getCommand("acreload").setExecutor(new CommandReload(this));
 		
