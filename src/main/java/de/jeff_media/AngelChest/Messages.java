@@ -11,7 +11,7 @@ public class Messages {
 	MSG_ANGELCHEST_CREATED, MSG_ANGELCHEST_DISAPPEARED, MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS, MSG_YOU_GOT_YOUR_INVENTORY_BACK
 	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION, MSG_NOT_ENOUGH_MONEY;
 	
-	final String LINK_TP, LINK_UNLOCK;
+	final String LINK_TP, LINK_FETCH, LINK_UNLOCK;
 
 	Messages(Main plugin) {
 		//this.plugin = plugin;
@@ -57,6 +57,8 @@ public class Messages {
 		MSG_ANGELCHEST_LOCATION = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-angelchest-location","&eLocation of your AngelChests:").replaceAll(": %s", ""));
 		
 		LINK_TP = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-teleport","&6[TP]&r"));
+
+		LINK_FETCH = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-fetch","&6[Fetch]&r"));
 		
 		LINK_UNLOCK = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-unlock","&5[Unlock]&r"));
 		

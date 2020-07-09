@@ -156,9 +156,13 @@ public class AngelChestCommandUtils {
 
 			b = angelChest.block;
 			String tpCommand=null;
+			String fetchCommand=null;
 			String unlockCommand=null;
 			if(p.hasPermission("angelchest.tp")) {
 				tpCommand="/actp " + chestIndex;
+			}
+			if(p.hasPermission("angelchest.fetch")) {
+				fetchCommand="/acfetch " + chestIndex;
 			}
 			if(angelChest.isProtected) {
 				unlockCommand="/acunlock "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
@@ -167,7 +171,7 @@ public class AngelChestCommandUtils {
 			String text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
 				chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
 			);
-			p.spigot().sendMessage(LinkUtils.getLinks(p, text, tpCommand,unlockCommand,plugin));
+			p.spigot().sendMessage(LinkUtils.getLinks(p, text, tpCommand, unlockCommand, fetchCommand, plugin));
 			chestIndex++;
 		}
 	}
