@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.io.File;
 import java.io.IOException;
@@ -127,11 +126,10 @@ public class AngelChest {
         this.isProtected = plugin.getServer().getPlayer(owner).hasPermission("angelchest.protect");
         this.secondsLeft = plugin.groupUtils.getDurationPerPlayer(plugin.getServer().getPlayer(owner));
 
-        String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getPlayer(owner).getName());
         overflowInv = Bukkit.createInventory(null, 54, inventoryName);
         createChest(block,p.getUniqueId().toString());
-        hologram = new Hologram(block, hologramText, plugin);
+        createHologram(block, plugin);
 
         // Remove curse of vanishing equipment and Minepacks backpacks
         for (ItemStack i : playerItems.getContents()) {
@@ -155,7 +153,6 @@ public class AngelChest {
 
 
     private void createChest(Block block, String uuid) {
-        Material mat = plugin.chestMaterial;
         block.setType(plugin.chestMaterial);
         if(plugin.chestMaterial==Material.PLAYER_HEAD) {
             Skull state = (Skull) block.getState();
@@ -215,20 +212,8 @@ public class AngelChest {
         if (!plugin.isAngelChest(block))
             return;
 
-        // Duplicate Start
         block.setType(Material.AIR);
-        for (UUID uuid : hologram.armorStandUUIDs) {
-            if (plugin.getServer().getEntity(uuid) != null) {
-                plugin.getServer().getEntity(uuid).remove();
-            }
-        }
-        for (ArmorStand armorStand : hologram.armorStands) {
-            if (armorStand == null) continue;
-            armorStand.remove();
-        }
-        if (hologram != null) hologram.destroy();
-        // Duplicate End
-
+        destroyHologram(plugin);
 
         // drop contents
         Utils.dropItems(block, armorInv);
@@ -252,5 +237,23 @@ public class AngelChest {
 		long seconds = configDuration - ((System.currentTimeMillis() - taskStart) / 1000);
 		if(seconds<0) seconds = 0;
 		return seconds;
-	}*/
+    }*/
+    
+	public void createHologram(Block block, Main plugin) {
+		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
+		hologram = new Hologram(block, hologramText, plugin);
+	}
+
+	public void destroyHologram(Main plugin) {
+        for (UUID uuid : hologram.armorStandUUIDs) {
+            if (plugin.getServer().getEntity(uuid) != null) {
+                plugin.getServer().getEntity(uuid).remove();
+            }
+        }
+        for (ArmorStand armorStand : hologram.armorStands) {
+            if (armorStand == null) continue;
+            armorStand.remove();
+        }
+        if (hologram != null) hologram.destroy();
+	}
 }

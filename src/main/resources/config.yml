@@ -11,11 +11,14 @@
 # angelchest.xp.levels       The AngelChest stores the amount of XP levels a player had
 #                            Note: If the AngelChest despawns or is broken, it will only
 #                            drop the normal amount of XP
+# angelchest.fetch           Allows the player to teleport their chests to them
 # angelchest.tp              The player can teleport to their AngelChests
 # angelchest.reload          Allows reloading the config using /acreload
 
 # The following commands are available:
 #
+# /acfetch                   Teleports their chest to the player
+# /actp or /acteleport       Teleports the player to their chest
 # /acinfo or /aclist         Shows a list of your AngelChests, including teleport and unlock links
 #                            if you have the angelchest.tp and/or angelchest.protect permissions
 # /unlock or /acunlock       Unlocks all of your AngelChests if you have the angelchest.protect permission
@@ -85,6 +88,9 @@ check-interval: 4
 # How much does it cost to teleport yourself to one of your AngelChests
 price-teleport: 0
 
+# How much does it cost to teleport your AngelChests to you
+price-fetch: 0
+
 #########################
 #### disabled worlds ####
 #########################
@@ -123,6 +129,7 @@ angelchest-inventory-name: "&a[AngelChest] &b%s&r"
 
 ##### Clickable Links when running /acinfo or /aclist
 link-unlock: "&5[Unlock]&r"
+link-fetch: "&6[Fetch]&r"
 link-teleport: "&6[TP]&r"
 
 ##### English
@@ -251,4 +258,4 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #########################
 
 # please do not change the following line manually!
-config-version: 22
+config-version: 24

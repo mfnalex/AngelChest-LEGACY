@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import org.bukkit.Bukkit;
@@ -74,8 +73,9 @@ public class Main extends JavaPlugin {
 		
 		
 		this.getCommand("unlock").setExecutor(new CommandUnlock(this));
-		commandListExecutor = new CommandList(this);
-		this.getCommand("aclist").setExecutor(commandListExecutor);
+		this.getCommand("aclist").setExecutor(new CommandList(this));
+		this.getCommand("acfetch").setExecutor(new CommandFetch(this));
+		this.getCommand("actp").setExecutor(new CommandTeleportTo(this));
 		this.getCommand("acreload").setExecutor(new CommandReload(this));
 		
 		getServer().getPluginManager().registerEvents(new PlayerListener(this),this);

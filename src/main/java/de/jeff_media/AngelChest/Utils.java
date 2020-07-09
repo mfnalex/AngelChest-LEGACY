@@ -1,6 +1,5 @@
 package de.jeff_media.AngelChest;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.io.File;
@@ -10,17 +9,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -80,7 +75,23 @@ public class Utils {
 		return true;
 	}
 	
-	
+	public static Block findSafeBlock(Block playerLoc, Main plugin) {
+		Block fixedAngelChestBlock = playerLoc;
+
+		//System.out.println(plugin.getConfig().getInt("max-radius"));
+
+		if (!playerLoc.getType().equals(Material.AIR)) {
+			List<Block> blocksNearby = Utils.getPossibleChestLocations(playerLoc.getLocation(),
+					plugin.getConfig().getInt("max-radius"), plugin);
+
+			if (blocksNearby.size() > 0) {
+				Utils.sortBlocksByDistance(fixedAngelChestBlock, blocksNearby);
+				fixedAngelChestBlock = blocksNearby.get(0);
+			}
+		}
+
+		return fixedAngelChestBlock;
+	}
 
 	/**
 	 * Puts everything from source into destination.
@@ -247,5 +258,33 @@ public class Utils {
 		File newFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + newName);
 		oldFile.getAbsoluteFile().renameTo(newFile.getAbsoluteFile());
 	}
-	 
+
+	// from sk89q
+	public static String getCardinalDirection(Player player) {
+		double rotation = player.getLocation().getYaw() % 360;
+		if (rotation < 0) {
+			rotation += 360.0;
+		}
+		 if (0 <= rotation && rotation < 22.5) {
+			return "S";
+		} else if (22.5 <= rotation && rotation < 67.5) {
+			return "SW";
+		} else if (67.5 <= rotation && rotation < 112.5) {
+			return "W";
+		} else if (112.5 <= rotation && rotation < 157.5) {
+			return "NW";
+		} else if (157.5 <= rotation && rotation < 202.5) {
+			return "N";
+		} else if (202.5 <= rotation && rotation < 247.5) {
+			return "NE";
+		} else if (247.5 <= rotation && rotation < 292.5) {
+			return "E";
+		} else if (292.5 <= rotation && rotation < 337.5) {
+			return "SE";
+		} else if (337.5 <= rotation && rotation < 360.0) {
+			return "S";
+		} else {
+			return null;
+		}
+	}
 }

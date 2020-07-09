@@ -2,15 +2,12 @@ package de.jeff_media.AngelChest;
 
 import org.bukkit.entity.Player;
 
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class LinkUtils {
 	
-	protected static TextComponent getLinks(Player p, String preText, String commandTp, String commandUnlock,Main plugin) {
+	protected static TextComponent getLinks(Player p, String preText, String commandTp, String commandUnlock, String commandFetch, Main plugin) {
 		  TextComponent text = new TextComponent(preText);
 		
 		  String placeholder = "";
@@ -19,6 +16,11 @@ public class LinkUtils {
 			  text.addExtra(link);
 			  placeholder = " ";
 		  }
+		  if(p.hasPermission("angelchest.fetch") && commandFetch != null) {
+			TextComponent link = createCommandLink(plugin.messages.LINK_FETCH,commandFetch);
+			text.addExtra(placeholder);
+			text.addExtra(link);
+		}
 		  if(commandUnlock != null) {
 			  TextComponent link = createCommandLink(plugin.messages.LINK_UNLOCK,commandUnlock);
 			  text.addExtra(placeholder);
