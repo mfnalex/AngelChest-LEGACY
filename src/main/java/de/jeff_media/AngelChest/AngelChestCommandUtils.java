@@ -54,7 +54,7 @@ public class AngelChestCommandUtils {
 		}
 
 		if(angelChestsFromThisPlayer.size() > 1 && args.length == 0) {
-			p.sendMessage("Please specify which AngelChest you would like to retrieve");
+			p.sendMessage("Please specify which AngelChest you would like select");
 			sendListOfAngelChests(plugin, p);
 			return null;
 		}
