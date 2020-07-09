@@ -146,6 +146,7 @@ message-you-dont-have-any-angelchests: "&eYou don't have any AngelChests."
 message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory back, but some items are still in the AngelChest."
 message-you-got-your-inventory-back: "&aYou got your inventory back!"
 message-angelchest-location: "&eLocations of your AngelChests:"
+message-not-enough-money: "&cYou don't have enough money."
 
 ##### Chinese Simplified 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
 #message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
@@ -161,6 +162,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&e你取回了一些物品,但还有一些物品在天御之箱内."
 #message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
 #message-angelchest-location: "&eLocations of your AngelChests:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 ##### Chinese Traditional 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
 #message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
@@ -176,6 +178,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&e你取回了一部分的物品，但仍有物品遺留在小天使箱子裡"
 #message-you-got-your-inventory-back: "&a成功將物品取回!"
 #message-angelchest-location: "&eLocations of your AngelChests:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 ##### French - Thanks to AngelCynara for translating! -> https://www.spigotmc.org/members/angelcynara.398643/ 
 #message-all-your-angelchests-were-already-unlocked: "&eTout vos AngeCoffres sont débloqués."
@@ -191,6 +194,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&eVous avez récuperer une partie de votre inventaire , mais il en reste dans l' AngeCoffre."
 #message-you-got-your-inventory-back: "&aVous avez récuperer votre inventaire."
 #message-angelchest-location: "&eLocations of your AngelChests:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 ##### German
 #message-all-your-angelchests-were-already-unlocked: "&eAlle deine AngelChests waren bereits aufgeschlossen."
@@ -206,6 +210,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&eEin Teil deines Inventars wurde wiederhergestellt, aber manche Sachen sind noch in der AngelChest."
 #message-you-got-your-inventory-back: "&aDein Inventar wurde wiederhergestellt!"
 #message-angelchest-location: "&ePositionen deiner AngelChests:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 ##### Polish – Polski – Thanks to JanekR_Prorok for translating! –> https://www.spigotmc.org/members/janekr_prorok.887102/
 #message-all-your-angelchests-were-already-unlocked: "&eWszystkie twoje AnielskieSkrzynie zostaly juz odblokowane."
@@ -221,6 +226,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&eOdzyskales czesc ekwipunku, ale niektore przedmioty wciaz znajduja sie w AnielskiejSkrzyni."
 #message-you-got-your-inventory-back: "&aOdzyskales swoj ekwipunek!"
 #message-angelchest-location: "&eLokalizacja Twojej AnielskiejSkrzyni:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 ##### Portuguese
 #message-all-your-angelchests-were-already-unlocked: "&eTodos os seus AngelChests estavam desbloqueados."
@@ -236,6 +242,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&eVocê conseguiu uma parte do seu inventário de volta, mas alguns itens ainda estão no AngelChest."
 #message-you-got-your-inventory-back: "&aVocê recuperou seu inventário!"
 #message-angelchest-location: "&eLocal do seu AngelChest:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 
 ##### Spanish
@@ -252,6 +259,7 @@ message-angelchest-location: "&eLocations of your AngelChests:"
 #message-you-got-part-of-your-inventory-back: "&eHas obtenido una parte de tu inventario de vuelta, pero algunos objetos siguen en tu AngelChest."
 #message-you-got-your-inventory-back: "&aHas obtenido tu inventario de vuelta!"
 #message-angelchest-location: "&eLugares de tus AngelChests:"
+#message-not-enough-money: "&cYou don't have enough money."
 
 #########################
 #####     Done!     #####

@@ -1,6 +1,6 @@
 main: de.jeff_media.AngelChest.Main
 name: AngelChest
-version: 2.4.0
+version: 2.5.0-SNAPSHOT
 api-version: 1.13
 description: Puts your inventory into a protected chest when you die.
 website: https://www.spigotmc.org/resources/1-13-angelchest.60383/
@@ -22,12 +22,12 @@ commands:
     usage: "/<command>"
   acfetch:
     permission: angelchest.fetch
-    description: "Remotely retrieves your AngelChest. For use with economy plugins."
+    description: "Remotely retrieves your AngelChest"
     aliases: [acretrieve]
     usage: "/<command>"
   actp:
     permission: angelchest.tp
-    description: "Teleports player to their AngelChest. For use with economy plugins."
+    description: "Teleports player to their AngelChest"
     aliases: [acteleport]
     usage: "/<command>"
   acreload:
