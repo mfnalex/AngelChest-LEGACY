@@ -1,7 +1,5 @@
 package de.jeff_media.AngelChest;
 
-import java.util.ArrayList;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -36,29 +34,10 @@ public class CommandFetch implements CommandExecutor {
 			return true;
 		}
 
-		// Get all AngelChests by this player
-		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
-
-		if(angelChestsFromThisPlayer.size()==0) {
-			p.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
-			return true;
-		}
-
-		if(angelChestsFromThisPlayer.size() > 1 && args.length == 0) {
-			p.sendMessage("Please specify which AngelChest you would like to retrieve");
-			return true;
-		}
-
-		int chestIdx = 0;
-
-		if(args.length > 0) {
-			chestIdx = Integer.parseInt(args[0]) - 1;
-		}
-
-		if(chestIdx >= angelChestsFromThisPlayer.size() || chestIdx < 0) {
-			p.sendMessage("Invalid AngelChest!");
-			return true;
-		}
+        AngelChest ac = AngelChestCommandUtils.argIdx2AngelChest(plugin, p, args);
+        if(ac == null) {
+            return true;
+        }
 
         // Only charge the player if they select a valid chest
 		double price = plugin.getConfig().getDouble("price-fetch");
@@ -95,7 +74,6 @@ public class CommandFetch implements CommandExecutor {
 			facing = BlockFace.EAST;
 		}
 
-		AngelChest ac = angelChestsFromThisPlayer.get(chestIdx);
 		Block newBlock = Utils.findSafeBlock(pLoc.getBlock(), plugin);
 		Block oldBlock = ac.block;
 

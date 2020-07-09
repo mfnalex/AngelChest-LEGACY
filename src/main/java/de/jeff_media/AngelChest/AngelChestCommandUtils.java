@@ -1,5 +1,6 @@
 package de.jeff_media.AngelChest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
@@ -42,24 +43,42 @@ public class AngelChestCommandUtils {
 
 	}
 
-	protected static void teleportPlayerToChest(Main plugin, Player p, String[] args) {
+	// Parses the first argument for the chest index in acinfo and returns a valid chest if it exists
+	protected static AngelChest argIdx2AngelChest(Main plugin, Player p, String[] args) {
+		// Get all AngelChests by this player
+		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
+
+		if(angelChestsFromThisPlayer.size()==0) {
+			p.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
+			return null;
+		}
+
+		if(angelChestsFromThisPlayer.size() > 1 && args.length == 0) {
+			p.sendMessage("Please specify which AngelChest you would like to retrieve");
+			plugin.commandListExecutor.sendListOfAngelChests(p);
+			return null;
+		}
+
+		int chestIdx = 0;
+
+		if(args.length > 0) {
+			chestIdx = Integer.parseInt(args[0]) - 1;
+		}
+
+		if(chestIdx >= angelChestsFromThisPlayer.size() || chestIdx < 0) {
+			p.sendMessage("Invalid AngelChest!");
+			return null;
+		}
+
+		return angelChestsFromThisPlayer.get(chestIdx);
+	}
+
+	protected static void teleportPlayerToChest(Main plugin, Player p, AngelChest ac) {
 		if(!p.hasPermission("angelchest.tp")) {
 			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 			return;
 		}
-		int x = Integer.parseInt(args[1]);
-		int y = Integer.parseInt(args[2]);
-		int z = Integer.parseInt(args[3]);
-		String world = args[4];
-		
-		Location loc = new Location(plugin.getServer().getWorld(world), x, y, z);
-		Block block = loc.getBlock();
-		
-		if(!plugin.angelChests.containsKey(block)) {
-			p.sendMessage(ChatColor.RED+"The AngelChest could not be found.");
-			return;
-		}
-		AngelChest ac = plugin.getAngelChest(block);
+
 		if(!ac.owner.equals(p.getUniqueId())) {
 			p.sendMessage(ChatColor.RED+"You do not own this AngelChest.");
 			return;
@@ -70,6 +89,7 @@ public class AngelChestCommandUtils {
 			return;
 		}
 
+		Location loc = ac.block.getLocation();
 		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(loc, plugin.getConfig().getInt("max-radius"), plugin);
 		Utils.sortBlocksByDistance(loc.getBlock(), possibleSpawnPoints);
 		

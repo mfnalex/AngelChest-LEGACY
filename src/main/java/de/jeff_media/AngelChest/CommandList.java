@@ -21,11 +21,6 @@ public class CommandList implements CommandExecutor {
 
 		if(!command.getName().equalsIgnoreCase("aclist")) return false;
 		
-		if(args.length==5 && args[0].equals("tp")) {
-			AngelChestCommandUtils.teleportPlayerToChest(plugin,(Player)sender, args);
-			return true;
-		}
-		
 		if(!sender.hasPermission("angelchest.use")) {
 			sender.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 			return true;
@@ -67,7 +62,7 @@ public class CommandList implements CommandExecutor {
 			String tpCommand=null;
 			String unlockCommand=null;
 			if(p.hasPermission("angelchest.tp")) {
-				tpCommand="/acinfo tp "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
+				tpCommand="/actp " + chestIndex;
 			}
 			if(angelChest.isProtected) {
 				unlockCommand="/acunlock "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
