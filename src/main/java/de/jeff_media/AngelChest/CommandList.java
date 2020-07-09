@@ -30,6 +30,7 @@ public class CommandList implements CommandExecutor {
 		
 		Player p = (Player) sender;
 		
+		p.sendMessage(plugin.messages.MSG_ANGELCHEST_LOCATION);
 		AngelChestCommandUtils.sendListOfAngelChests(plugin, p);
 
 		return true;

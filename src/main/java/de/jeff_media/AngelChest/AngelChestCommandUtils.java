@@ -145,8 +145,6 @@ public class AngelChestCommandUtils {
 			return;
 		}
 		
-		p.sendMessage(plugin.messages.MSG_ANGELCHEST_LOCATION);
-		
 		int chestIndex = 1;
 		Block b;
 
