@@ -21,7 +21,7 @@ public class CommandUnlock implements CommandExecutor {
 		
 		if(args.length==4) {
 			AngelChestCommandUtils.unlockSingleChest(plugin, (Player) sender, args);
-			plugin.commandListExecutor.sendListOfAngelChests((Player) sender);
+			AngelChestCommandUtils.sendListOfAngelChests(plugin, (Player) sender);
 			return true;
 		}
 		
