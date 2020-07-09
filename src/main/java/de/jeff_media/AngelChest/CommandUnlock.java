@@ -19,16 +19,11 @@ public class CommandUnlock implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
 		if(!command.getName().equalsIgnoreCase("unlock")) return false;
 		
-		if(args.length==4) {
-			AngelChestCommandUtils.unlockSingleChest(plugin, (Player) sender, args);
-			AngelChestCommandUtils.sendListOfAngelChests(plugin, (Player) sender);
-			return true;
-		}
-		
 		if(!sender.hasPermission("angelchest.protect")) {
 			sender.sendMessage(plugin.getCommand("unlock").getPermissionMessage());
 			return true;
 		}
+
 		if(! ( sender instanceof Player)) {
 			sender.sendMessage(plugin.messages.MSG_PLAYERSONLY);
 			return true;
@@ -36,37 +31,19 @@ public class CommandUnlock implements CommandExecutor {
 		
 		Player p = (Player) sender;
 		
-		// Get all AngelChests by this player
-		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
-		
-		if(angelChestsFromThisPlayer.size()==0) {
-			p.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
-			return true;
-		}
-		
-		int chestsUnlocked = 0;
-		
-		for(AngelChest angelChest : angelChestsFromThisPlayer) {
-			if(angelChest.isProtected) {
-				angelChest.unlock();
-				chestsUnlocked++;
+		if(args.length > 0) {
+			if(args[0].equals("all")) {
+				AngelChestCommandUtils.unlockAllChests(plugin, p);
+				return true;
 			}
 		}
 		
-		if(chestsUnlocked == 0) {
-			p.sendMessage(plugin.messages.MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED);
+		AngelChest ac = AngelChestCommandUtils.argIdx2AngelChest(plugin, p, args);
+		if(ac == null) {
 			return true;
 		}
-		
-		else if(chestsUnlocked == 1) {
-			p.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
-			return true;
-		}
-		
-		else {
-			p.sendMessage(String.format(plugin.messages.MSG_UNLOCKED_MORE_ANGELCHESTS,chestsUnlocked));
-			return true;
-		}
-	}
 
+		AngelChestCommandUtils.unlockSingleChest(plugin, p, ac);
+		return true;
+	}
 }

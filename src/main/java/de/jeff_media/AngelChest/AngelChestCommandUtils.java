@@ -105,24 +105,12 @@ public class AngelChestCommandUtils {
 		p.teleport(teleportLocation, TeleportCause.PLUGIN);
 	}
 	
-	protected static void unlockSingleChest(Main plugin, Player p, String[] args) {
+	protected static void unlockSingleChest(Main plugin, Player p, AngelChest ac) {
 //		if(!p.hasPermission("angelchest.tp")) {
 //			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 //			return;
 //		}
-		int x = Integer.parseInt(args[0]);
-		int y = Integer.parseInt(args[1]);
-		int z = Integer.parseInt(args[2]);
-		String world = args[3];
-		
-		Location loc = new Location(plugin.getServer().getWorld(world), x, y, z);
-		Block block = loc.getBlock();
-		
-		if(!plugin.angelChests.containsKey(block)) {
-			p.sendMessage(ChatColor.RED+"The AngelChest could not be found.");
-			return;
-		}
-		AngelChest ac = plugin.getAngelChest(block);
+
 		if(!ac.owner.equals(p.getUniqueId())) {
 			p.sendMessage(ChatColor.RED+"You do not own this AngelChest.");
 			return;
@@ -165,7 +153,7 @@ public class AngelChestCommandUtils {
 				fetchCommand="/acfetch " + chestIndex;
 			}
 			if(angelChest.isProtected) {
-				unlockCommand="/acunlock "+b.getX()+" "+b.getY()+" "+b.getZ()+" "+b.getWorld().getName();
+				unlockCommand="/acunlock " + chestIndex;
 			}
 			
 			String text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
@@ -173,6 +161,35 @@ public class AngelChestCommandUtils {
 			);
 			p.spigot().sendMessage(LinkUtils.getLinks(p, text, tpCommand, unlockCommand, fetchCommand, plugin));
 			chestIndex++;
+		}
+	}
+
+
+	protected static void unlockAllChests(Main plugin, Player p) {
+		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
+
+		int chestsUnlocked = 0;
+			
+		for(AngelChest angelChest : angelChestsFromThisPlayer) {
+			if(angelChest.isProtected) {
+				angelChest.unlock();
+				chestsUnlocked++;
+			}
+		}
+		
+		if(chestsUnlocked == 0) {
+			p.sendMessage(plugin.messages.MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED);
+			return;
+		}
+		
+		else if(chestsUnlocked == 1) {
+			p.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
+			return;
+		}
+		
+		else {
+			p.sendMessage(String.format(plugin.messages.MSG_UNLOCKED_MORE_ANGELCHESTS,chestsUnlocked));
+			return;
 		}
 	}
 }
