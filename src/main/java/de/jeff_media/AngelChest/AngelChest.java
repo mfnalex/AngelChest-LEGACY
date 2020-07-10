@@ -74,9 +74,7 @@ public class AngelChest {
         //String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getOfflinePlayer(owner).getName());
 
-        createChest(block,owner.toString());
-        String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getOfflinePlayer(owner).getName());
-        hologram = new Hologram(block, hologramText, plugin);
+        createChest(block,owner);
 
         // Load OverflowInv
         overflowInv = Bukkit.createInventory(null, 54, inventoryName);
@@ -128,8 +126,7 @@ public class AngelChest {
 
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getPlayer(owner).getName());
         overflowInv = Bukkit.createInventory(null, 54, inventoryName);
-        createChest(block,p.getUniqueId().toString());
-        createHologram(block, plugin);
+        createChest(block,p.getUniqueId());
 
         // Remove curse of vanishing equipment and Minepacks backpacks
         for (ItemStack i : playerItems.getContents()) {
@@ -150,16 +147,22 @@ public class AngelChest {
         return YamlConfiguration.loadConfiguration(file);
     }
 
-
-
-    private void createChest(Block block, String uuid) {
+    // Creates a physcial chest
+    protected void createChest(Block block, UUID uuid) {
         block.setType(plugin.chestMaterial);
         if(plugin.chestMaterial==Material.PLAYER_HEAD) {
             Skull state = (Skull) block.getState();
-            state.setOwningPlayer(plugin.getServer().getOfflinePlayer(UUID.fromString(uuid)));
+            state.setOwningPlayer(plugin.getServer().getOfflinePlayer(uuid));
             state.update();
         }
+        createHologram(plugin, block, uuid);
+    }
 
+    // Destroys a physical chest
+    protected void destroyChest(Block b) {
+        b.setType(Material.AIR);
+        b.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, b.getLocation(), 1);
+        destroyHologram(plugin);
     }
 
     public void unlock() {
@@ -212,8 +215,8 @@ public class AngelChest {
         if (!plugin.isAngelChest(block))
             return;
 
-        block.setType(Material.AIR);
-        destroyHologram(plugin);
+        // remove the physical chest
+        destroyChest(block);
 
         // drop contents
         Utils.dropItems(block, armorInv);
@@ -224,9 +227,6 @@ public class AngelChest {
         if (experience > 0) {
             Utils.dropExp(block, experience);
         }
-
-
-        block.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, block.getLocation(), 1);
     }
 
     void remove() {
@@ -239,8 +239,8 @@ public class AngelChest {
 		return seconds;
     }*/
     
-	public void createHologram(Block block, Main plugin) {
-		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
+	public void createHologram(Main plugin, Block block, UUID uuid) {
+		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getOfflinePlayer(uuid).getName());
 		hologram = new Hologram(block, hologramText, plugin);
 	}
 
