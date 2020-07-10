@@ -1,10 +1,8 @@
 package de.jeff_media.AngelChest;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.Directional;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -45,46 +43,58 @@ public class CommandFetch implements CommandExecutor {
 			return true;
 		}
 
-		Location pLoc = p.getLocation();
+		Location newLoc = p.getLocation();
 		String dir = Utils.getCardinalDirection(p);
-		BlockFace facing = BlockFace.NORTH;
-		if (dir == "N") {
-			pLoc.add(0,0,-2);
-			facing = BlockFace.SOUTH;
-		} else if (dir == "NE") {
-			pLoc.add(2,0,-2);
-			facing = BlockFace.SOUTH;
-		} else if (dir == "E") {
-			pLoc.add(2,0,0);
-			facing = BlockFace.WEST;
-		} else if (dir == "SE") {
-			pLoc.add(2,0,2);
-			facing = BlockFace.WEST;
-		} else if (dir == "S") {
-			pLoc.add(0,0,2);
-			facing = BlockFace.NORTH;
-		} else if (dir == "SW") {
-			pLoc.add(-2,0,2);
-			facing = BlockFace.NORTH;
-		} else if (dir == "W") {
-			pLoc.add(-2,0,0);
-			facing = BlockFace.EAST;
-		} else if (dir == "NW") {
-			pLoc.add(-2,0,-2);
-			facing = BlockFace.EAST;
+		BlockFace facing;
+	
+		// Set the relative direction of the block and offset the new chest location
+		switch(dir){
+			case "N":
+				newLoc.add(0,0,-2);
+				facing = BlockFace.SOUTH;
+				break;
+			case "NE":
+				newLoc.add(2,0,-2);
+				facing = BlockFace.SOUTH;
+				break;
+			case "E":
+				newLoc.add(2,0,0);
+				facing = BlockFace.WEST;
+				break;
+			case "SE":
+				newLoc.add(2,0,2);
+				facing = BlockFace.WEST;
+				break;
+			case "S":
+				newLoc.add(0,0,2);
+				facing = BlockFace.NORTH;
+				break;
+			case "SW":
+				newLoc.add(-2,0,2);
+				facing = BlockFace.NORTH;
+				break;
+			case "W":
+				newLoc.add(-2,0,0);
+				facing = BlockFace.EAST;
+				break;
+			case "NW":
+				newLoc.add(-2,0,-2);
+				facing = BlockFace.EAST;
+				break;
+			default:
+				plugin.getLogger().info("Unable to get block facing direction");
+				facing = BlockFace.NORTH;
 		}
 
-		Block newBlock = Utils.findSafeBlock(pLoc.getBlock(), plugin);
+		Block newBlock = Utils.findSafeBlock(newLoc.getBlock(), plugin);
 		Block oldBlock = ac.block;
-		
+
 		// Move the block in game
 		ac.destroyChest(oldBlock);
 		ac.createChest(newBlock, p.getUniqueId());
 
 		// Make the chest face the player
-		Directional blockData = ((Directional) newBlock.getBlockData());
-		blockData.setFacing(facing);
-		newBlock.setBlockData(blockData);
+		AngelChestCommandUtils.setBlockDirection(newBlock, facing);
 
 		// Swap the block in code
 		plugin.angelChests.put(newBlock, plugin.angelChests.remove(oldBlock));

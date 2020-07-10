@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.block.BlockFace;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.Plugin;
@@ -73,6 +76,43 @@ public class AngelChestCommandUtils {
 		return angelChestsFromThisPlayer.get(chestIdx);
 	}
 
+	protected static BlockFace getBlockDirection(Block b) {
+		BlockFace dir;
+		try {
+			// check for player skull
+			dir = ((Rotatable) b.getBlockData()).getRotation();
+			dir = dir.getOppositeFace();
+		} catch(Exception e) {
+			try {
+				// check for chest
+				dir = ((Directional) b.getBlockData()).getFacing();
+			} catch(Exception e2) {
+				// Can't get block rotation, probably because it doesn't support it
+				return BlockFace.NORTH;
+			}
+		}
+		return dir;
+	}
+
+	protected static void setBlockDirection(Block b, BlockFace dir) {
+		try {
+			// check for player skull
+			Rotatable blockdata = ((Rotatable) b.getBlockData());
+			blockdata.setRotation(dir.getOppositeFace());
+			b.setBlockData(blockdata);
+		} catch(Exception e) {
+			try {
+				// check for chest
+				Directional blockdata = ((Directional) b.getBlockData());
+				blockdata.setFacing(dir);
+				b.setBlockData(blockdata);
+			} catch(Exception e2) {
+				// Can't set block rotation, probably because it doesn't support it
+				return;
+			}
+		}
+	}
+
 	protected static void teleportPlayerToChest(Main plugin, Player p, AngelChest ac) {
 		if(!p.hasPermission("angelchest.tp")) {
 			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
@@ -89,20 +129,42 @@ public class AngelChestCommandUtils {
 			return;
 		}
 
-		Location loc = ac.block.getLocation();
-		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(loc, plugin.getConfig().getInt("max-radius"), plugin);
-		Utils.sortBlocksByDistance(loc.getBlock(), possibleSpawnPoints);
+		Location acloc = ac.block.getLocation();
+		Location tploc = acloc.clone();
 		
-		Location teleportLocation = loc;
-		
-		if(possibleSpawnPoints.size()>0) {
-			teleportLocation = possibleSpawnPoints.get(0).getLocation();
+		// offset the target location
+		switch(getBlockDirection(ac.block)){
+			case SOUTH:
+				tploc.add(0,0,2);
+				break;
+			case WEST:
+				tploc.add(-2,0,0);
+				break;
+			case NORTH:
+				tploc.add(0,0,-2);
+				break;
+			case EAST:
+				tploc.add(2,0,0);
+				break;
+			default:
+				break;
 		}
+
+		// Search for a safe spawn point
+		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(tploc, plugin.getConfig().getInt("max-radius"), plugin);
+		Utils.sortBlocksByDistance(tploc.getBlock(), possibleSpawnPoints);
+
+		if(possibleSpawnPoints.size()>0) {
+			tploc = possibleSpawnPoints.get(0).getLocation();
+		}
+
+		// Set yaw and pitch of camera
+		Location headloc = tploc.clone();
+		headloc.add(0,1,0);
+		tploc.setDirection(acloc.toVector().subtract(headloc.toVector()));
+		tploc.add(0.5,0,0.5);
 		
-		teleportLocation.setDirection(loc.toVector().subtract(teleportLocation.toVector()));
-		teleportLocation.add(0.5,0,0.5);
-		
-		p.teleport(teleportLocation, TeleportCause.PLUGIN);
+		p.teleport(tploc, TeleportCause.PLUGIN);
 	}
 	
 	protected static void unlockSingleChest(Main plugin, Player p, AngelChest ac) {
