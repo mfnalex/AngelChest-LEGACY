@@ -76,21 +76,17 @@ public class CommandFetch implements CommandExecutor {
 
 		Block newBlock = Utils.findSafeBlock(pLoc.getBlock(), plugin);
 		Block oldBlock = ac.block;
-
+		
 		// Move the block in game
-		oldBlock.setType(Material.AIR);
-		newBlock.setType(Material.CHEST);
+		ac.destroyChest(oldBlock);
+		ac.createChest(newBlock, p.getUniqueId());
 
 		// Make the chest face the player
 		Directional blockData = ((Directional) newBlock.getBlockData());
 		blockData.setFacing(facing);
 		newBlock.setBlockData(blockData);
 
-		// Move the hologram
-		ac.destroyHologram(plugin);
-		ac.createHologram(newBlock, plugin);
-
-		// Move the block in code
+		// Swap the block in code
 		plugin.angelChests.put(newBlock, plugin.angelChests.remove(oldBlock));
 		plugin.angelChests.get(newBlock).block = newBlock;
 
