@@ -23,6 +23,8 @@ public class Hologram {
 
 	public Hologram(Location location, Block block, String text, Main plugin) {
 
+		plugin.debug("Creating hologram with text " + text + " at "+location.toString());
+
 		armorStands = new ArrayList<ArmorStand>();
 		armorStandUUIDs = new ArrayList<UUID>();
 

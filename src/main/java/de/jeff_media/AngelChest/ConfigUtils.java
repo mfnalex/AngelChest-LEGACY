@@ -23,6 +23,7 @@ public class ConfigUtils {
 			main.updateChecker.stop();
 		}
 		initUpdateChecker(main);
+		main.debug = main.getConfig().getBoolean("debug",false);
 		main.messages = new Messages(main);
 		File groupsFile = new File(main.getDataFolder()+File.separator+"groups.yml");
 		main.groupUtils = new GroupUtils(main,groupsFile);

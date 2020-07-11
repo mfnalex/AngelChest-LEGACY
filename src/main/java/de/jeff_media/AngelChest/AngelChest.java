@@ -37,6 +37,7 @@ public class AngelChest {
     Main plugin;
 
     public AngelChest(File file, Main plugin) {
+        plugin.debug("Creating AngelChest from file " + file.getName());
         YamlConfiguration yaml;
         try {
             yaml = loadYaml(file);
@@ -118,6 +119,8 @@ public class AngelChest {
 
     public AngelChest(Player p, UUID owner, Block block, PlayerInventory playerItems, Main plugin) {
 
+        plugin.debug("Creating AngelChest natively for player "+p.getName());
+
         this.plugin = plugin;
         this.owner = owner;
         this.block = block;
@@ -149,6 +152,7 @@ public class AngelChest {
 
     // Creates a physcial chest
     protected void createChest(Block block, UUID uuid) {
+        plugin.debug("Attempting to create chest with material " + plugin.chestMaterial.name() + " at "+block.getLocation().toString());
         block.setType(plugin.chestMaterial);
         if(plugin.chestMaterial==Material.PLAYER_HEAD) {
             Skull state = (Skull) block.getState();
@@ -160,6 +164,7 @@ public class AngelChest {
 
     // Destroys a physical chest
     protected void destroyChest(Block b) {
+        plugin.debug("Destroying chest at "+b.getLocation()+toString());
         b.setType(Material.AIR);
         b.getLocation().getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, b.getLocation(), 1);
         destroyHologram(plugin);

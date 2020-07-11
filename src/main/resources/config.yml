@@ -305,5 +305,8 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #####     Done!     #####
 #########################
 
+# Debug mode - you probably do not want this.
+debug: false
+
 # please do not change the following line manually!
-config-version: 25
+config-version: 26

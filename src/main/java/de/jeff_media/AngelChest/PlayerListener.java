@@ -23,6 +23,8 @@ public class PlayerListener implements Listener {
 
 	PlayerListener(Main plugin) {
 		this.plugin = plugin;
+
+		plugin.debug("PlayerListener created");
 	}
 
 	@EventHandler
@@ -40,21 +42,26 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void spawnAngelChest(PlayerDeathEvent event) {
+		plugin.debug("PlayerListener -> spawnAngelChest");
 		Player p = event.getEntity();
 		if (!p.hasPermission("angelchest.use")) {
+			plugin.debug("Cancelled: no permission (angelchest.use)");
 			return;
 		}
 
 		if (event.getKeepInventory()) {
+			plugin.debug("Cancelled: event#getKeepInventory() == true");
 			return;
 		}
 		
 		if(!Utils.isWorldEnabled(p.getLocation().getWorld(), plugin)) {
+			plugin.debug("Cancelled: world disabled ("+p.getLocation().getWorld());
 			return;
 		}
 
 		// Don't do anything if player's inventory is empty anyway
 		if (event.getDrops() == null || event.getDrops().size() == 0) {
+			plugin.debug("Cancelled: event#getDrops == null || event#getDrops#size =0 0");
 			Utils.sendDelayedMessage(p, plugin.messages.MSG_INVENTORY_WAS_EMPTY, 1, plugin);
 			return;
 		}
@@ -63,7 +70,9 @@ public class PlayerListener implements Listener {
 		event.setKeepInventory(true);
 
 		Block tmp;
-		
+
+		plugin.debug("Debug 1");
+
 		if(p.getLocation().getBlockY() < 1) {
 			Location ltmp = p.getLocation();
 			ltmp.setY(1);
@@ -73,9 +82,11 @@ public class PlayerListener implements Listener {
 		}
 		
 		Block angelChestBlock = Utils.findSafeBlock(tmp, plugin);
+		plugin.debug("Debug 2");
 
 		AngelChest ac =new AngelChest(p,p.getUniqueId(), angelChestBlock, p.getInventory(), plugin);
 		plugin.angelChests.put(angelChestBlock,ac);
+		plugin.debug("Debug 3");
 		
 		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && p.hasPermission("angelchest.xp")) {
 			if(p.hasPermission("angelchest.xp.levels")) {

@@ -14,7 +14,10 @@ public class BlockListener implements Listener {
 	Main plugin;
 
 	public BlockListener(Main plugin) {
+
 		this.plugin = plugin;
+
+		plugin.debug("BlockListener created");
 	}
 
 	@EventHandler

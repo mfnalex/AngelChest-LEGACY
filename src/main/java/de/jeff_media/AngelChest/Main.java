@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	int currentConfigVersion = 25;
+	int currentConfigVersion = 26;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
@@ -37,7 +37,9 @@ public class Main extends JavaPlugin {
 	PluginUpdateChecker updateChecker;
 	GroupUtils groupUtils;
 	
-	
+	void debug(String t) {
+		if(debug) getLogger().info(t);
+	}
 	
 	@Override
 	public void onEnable() {
@@ -49,7 +51,8 @@ public class Main extends JavaPlugin {
 		playerSettings = new HashMap<Player,PlayerSetting>();
 		angelChests = new LinkedHashMap<Block,AngelChest>();
 		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
-		
+
+		debug("Loading AngelChests from disk");
 		loadAllAngelChestsFromFile();
 		//armorStandUUIDs = new ArrayList<UUID>();
 		
@@ -61,24 +64,27 @@ public class Main extends JavaPlugin {
 					if(!isAngelChest(comb.block)) {
 						comb.armorStand.remove();
 						blockArmorStandCombinations.remove(comb);
+						debug("Removing BlockArmorStandCombination because of missing AngelChest");
 						//getLogger().info("Removed armor stand that has been left behind at @ " + comb.block.getLocation().toString());
 					}
 				}
 				for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
 					if(!isAngelChest(entry.getKey())) {
 						entry.getValue().destroy();
+						debug("Removing block from list because it's no AngelChest");
 					}
 				}
 			}
 		}, 0L, 2 * 20);
 		
-		
+		debug("Registering commands");
 		this.getCommand("unlock").setExecutor(new CommandUnlock(this));
 		this.getCommand("aclist").setExecutor(new CommandList(this));
 		this.getCommand("acfetch").setExecutor(new CommandFetch(this));
 		this.getCommand("actp").setExecutor(new CommandTeleportTo(this));
 		this.getCommand("acreload").setExecutor(new CommandReload(this));
-		
+
+		debug("Registering listeners");
 		getServer().getPluginManager().registerEvents(new PlayerListener(this),this);
 		getServer().getPluginManager().registerEvents(new HologramListener(this),this);
 		getServer().getPluginManager().registerEvents(new BlockListener(this),this);
@@ -185,6 +191,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	public AngelChest getAngelChest(Block block) {
+		debug("Getting AngelChest for block "+block.getLocation().toString());
 		if(angelChests.containsKey(block)) {
 			return angelChests.get(block);
 		}
