@@ -261,6 +261,23 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-angelchest-location: "&eLugares de tus AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
 
+##### Turkish (If u found an error contact with Cazcez#0190 on discord! || Hata bulursanız discord üzerinden Cazcez#0190 ile iletişime geçiniz)
+#message-all-your-angelchests-were-already-unlocked: "&eTüm AngelChest'lerinin kilidi zaten açık."
+#message-angelchest-created: "&aBir melek eşyalarını topladı ve öldüğün konumda ki bir sandığa koydu."
+#message-angelchest-disappeared: "&cÇok yavaştın... AngelChest'in yok oldu ve içindekileri yere bıraktı."
+#message-error-players-only: "&cHata: Bu komut sadece oyuncular tarafından kullanılabilir."
+#message-inventory-was-empty: "&eBir melek eşyalarını aradı fakat hiçbir şey bulamadı."
+#message-not-allowed-to-break-other-angelchests: "&cDiğer oyuncuların AngelChest'ini kırmak için yetkin yok."
+#message-not-allowed-to-open-other-angelchests: "&cDiğer oyuncuların AngelChest'ini açmak için yetkin yok"
+#message-unlocked-more-angelchests: "&a %d AngelChests'lerinin kilidini açtın."
+#message-unlocked-one-angelchest: "&aKendi AngelChest'inin kilidini açtın."
+#message-you-dont-have-any-angelchests: "&eHiç AngelChest'e sahip değilsin."
+#message-you-got-part-of-your-inventory-back: "&eEnvanterinin bir parçasını elde ettin, Ama bazı eşyaların hala AngelChest'de."
+#message-you-got-your-inventory-back: "&aEnvanterini geri aldın!"
+#message-angelchest-location: "&eAngelChest'lerinin konumu:"
+#message-not-enough-money: "&cYeterli paraya sahip değilsin."
+
+
 #########################
 #####     Done!     #####
 #########################
