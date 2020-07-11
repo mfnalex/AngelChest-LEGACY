@@ -57,7 +57,7 @@ public class AngelChestCommandUtils {
 		}
 
 		if(angelChestsFromThisPlayer.size() > 1 && args.length == 0) {
-			p.sendMessage("Please specify which AngelChest you would like select");
+			p.sendMessage(plugin.messages.MSG_PLEASE_SELECT_CHEST);
 			sendListOfAngelChests(plugin, p);
 			return null;
 		}
@@ -69,7 +69,7 @@ public class AngelChestCommandUtils {
 		}
 
 		if(chestIdx >= angelChestsFromThisPlayer.size() || chestIdx < 0) {
-			p.sendMessage("Invalid AngelChest!");
+			p.sendMessage(plugin.messages.ERR_INVALIDCHEST);
 			return null;
 		}
 
@@ -97,15 +97,15 @@ public class AngelChestCommandUtils {
 	protected static void setBlockDirection(Block b, BlockFace dir) {
 		try {
 			// check for player skull
-			Rotatable blockdata = ((Rotatable) b.getBlockData());
-			blockdata.setRotation(dir.getOppositeFace());
-			b.setBlockData(blockdata);
+			Rotatable blockData = ((Rotatable) b.getBlockData());
+			blockData.setRotation(dir.getOppositeFace());
+			b.setBlockData(blockData);
 		} catch(Exception e) {
 			try {
 				// check for chest
-				Directional blockdata = ((Directional) b.getBlockData());
-				blockdata.setFacing(dir);
-				b.setBlockData(blockdata);
+				Directional blockData = ((Directional) b.getBlockData());
+				blockData.setFacing(dir);
+				b.setBlockData(blockData);
 			} catch(Exception e2) {
 				// Can't set block rotation, probably because it doesn't support it
 				return;
@@ -120,7 +120,7 @@ public class AngelChestCommandUtils {
 		}
 
 		if(!ac.owner.equals(p.getUniqueId())) {
-			p.sendMessage(ChatColor.RED+"You do not own this AngelChest.");
+			p.sendMessage(plugin.messages.ERR_NOTOWNER);
 			return;
 		}
 		
@@ -174,11 +174,11 @@ public class AngelChestCommandUtils {
 //		}
 
 		if(!ac.owner.equals(p.getUniqueId())) {
-			p.sendMessage(ChatColor.RED+"You do not own this AngelChest.");
+			p.sendMessage(plugin.messages.ERR_NOTOWNER);
 			return;
 		}
 		if(!ac.isProtected) {
-			p.sendMessage(ChatColor.RED+"This AngelChest is already unlocked.");
+			p.sendMessage(plugin.messages.ERR_ALREADYUNLOCKED);
 			return;
 		}
 		

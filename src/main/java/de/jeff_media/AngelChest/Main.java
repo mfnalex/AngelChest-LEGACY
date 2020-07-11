@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
@@ -17,10 +18,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	int currentConfigVersion = 24;
+	int currentConfigVersion = 25;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
-	HashMap<Block,AngelChest> angelChests;
+	LinkedHashMap<Block,AngelChest> angelChests;
 	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;
 	Material chestMaterial;
 	
@@ -46,7 +47,7 @@ public class Main extends JavaPlugin {
 		ConfigUtils.reloadCompleteConfig(this);
 
 		playerSettings = new HashMap<Player,PlayerSetting>();
-		angelChests = new HashMap<Block,AngelChest>();
+		angelChests = new LinkedHashMap<Block,AngelChest>();
 		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
 		
 		loadAllAngelChestsFromFile();

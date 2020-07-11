@@ -9,9 +9,15 @@ public class Messages {
 	final String MSG_PLAYERSONLY,MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS,MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS,
 	MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED, MSG_UNLOCKED_ONE_ANGELCHEST, MSG_UNLOCKED_MORE_ANGELCHESTS, MSG_INVENTORY_WAS_EMPTY,
 	MSG_ANGELCHEST_CREATED, MSG_ANGELCHEST_DISAPPEARED, MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS, MSG_YOU_GOT_YOUR_INVENTORY_BACK
-	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION, MSG_NOT_ENOUGH_MONEY;
+	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION, MSG_NOT_ENOUGH_MONEY,
+	MSG_PLEASE_SELECT_CHEST;
 	
 	final String LINK_TP, LINK_FETCH, LINK_UNLOCK;
+
+	// The following messages shouldn't really appear
+	final String ERR_NOTOWNER = ChatColor.RED+"You do not own this AngelChest.";
+	final String ERR_ALREADYUNLOCKED = ChatColor.RED+"This AngelChest is already unlocked.";
+	final String ERR_INVALIDCHEST = ChatColor.RED + "Invalid AngelChest!";
 
 	Messages(Main plugin) {
 		//this.plugin = plugin;
@@ -55,6 +61,8 @@ public class Messages {
 		ANGELCHEST_INVENTORY_NAME = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("angelchest-inventory-name","&a[AngelChest] &b%s&r"));
 		
 		MSG_ANGELCHEST_LOCATION = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-angelchest-location","&eLocation of your AngelChests:").replaceAll(": %s", ""));
+
+		MSG_PLEASE_SELECT_CHEST = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("message-please-select-chest","&7Please specify which AngelChest you would like to select."));
 		
 		LINK_TP = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-teleport","&6[TP]&r"));
 

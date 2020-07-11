@@ -1,4 +1,12 @@
 # Changelog
+## 2.5.1
+- Updated Turkish translation
+
+## 2.5.0
+- Added /acfetch command (thanks @ XDleader555)
+- Updated API to 1.16.1
+- Added Dutch translation (thanks @ Xeyame)
+
 ## 2.4.0
 - Added option to charge a player for teleports
 

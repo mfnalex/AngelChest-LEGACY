@@ -54,7 +54,6 @@ material: CHEST
 # You probably don't want your AngelChest to spawn on blocks like GRASS_PATH, FARMLAND, etc.
 # as that would destroy those blocks. You can blacklist them here.
 dont-spawn-on:
-- AIR
 - FARMLAND
 - GRASS_PATH
 - LAVA
@@ -147,6 +146,7 @@ message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory
 message-you-got-your-inventory-back: "&aYou got your inventory back!"
 message-angelchest-location: "&eLocations of your AngelChests:"
 message-not-enough-money: "&cYou don't have enough money."
+message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### Chinese Simplified 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
 #message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
@@ -163,6 +163,7 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### Chinese Traditional 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
 #message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
@@ -179,6 +180,24 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-your-inventory-back: "&a成功將物品取回!"
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+
+##### Dutch - Thanks to Xeyame for translating -> https://github.com/Xeyame
+#message-all-your-angelchests-were-already-unlocked: "&eAl je AngerChests zijn al ontgrendeld."
+#message-angelchest-created: "&aEen engel heeft je spullen verzameld, en het in een kist op je overledensplaats gedaan."
+#message-angelchest-disappeared: "&cJe was te langzaam, je AngerChest is verdwenen en heeft zijn inhoud laten vallen"
+#message-error-players-only: "&cError: Dit kan alleen door spelers worden gedaan."
+#message-inventory-was-empty: "&eEen engel heeft voor je spullen gezocht, maar kon niks vinden."
+#message-not-allowed-to-break-other-angelchests: "&cJe mag de AngelChest van andere mensen niet breken."
+#message-not-allowed-to-open-other-angelchests: "&cJe mag de AngelChest van andere mensen niet open maken."
+#message-unlocked-more-angelchests: "&aJe hebt %d AngelChests opengemaakt."
+#message-unlocked-one-angelchest: "&aJe hebt je AngelChest opengemaakt."
+#message-you-dont-have-any-angelchests: "&eJe hebt geen AngelChest."
+#message-you-got-part-of-your-inventory-back: "&eJe hebt een deel van je inventaris terug gekregen, maar sommige items zitten nog steeds in de AngelChest."
+#message-you-got-your-inventory-back: "&aJe hebt je inventaris terug gekregen!"
+#message-angelchest-location: "&eLocatie van je AngelChest: %s"
+#message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### French - Thanks to AngelCynara for translating! -> https://www.spigotmc.org/members/angelcynara.398643/ 
 #message-all-your-angelchests-were-already-unlocked: "&eTout vos AngeCoffres sont débloqués."
@@ -195,6 +214,7 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-your-inventory-back: "&aVous avez récuperer votre inventaire."
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### German
 #message-all-your-angelchests-were-already-unlocked: "&eAlle deine AngelChests waren bereits aufgeschlossen."
@@ -210,7 +230,8 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-part-of-your-inventory-back: "&eEin Teil deines Inventars wurde wiederhergestellt, aber manche Sachen sind noch in der AngelChest."
 #message-you-got-your-inventory-back: "&aDein Inventar wurde wiederhergestellt!"
 #message-angelchest-location: "&ePositionen deiner AngelChests:"
-#message-not-enough-money: "&cYou don't have enough money."
+#message-not-enough-money: "&cDu hast nicht genug Geld."
+#message-please-select-chest: "&7Bitte gib an welche AngelChest du auswählen möchtest."
 
 ##### Polish – Polski – Thanks to JanekR_Prorok for translating! –> https://www.spigotmc.org/members/janekr_prorok.887102/
 #message-all-your-angelchests-were-already-unlocked: "&eWszystkie twoje AnielskieSkrzynie zostaly juz odblokowane."
@@ -227,6 +248,7 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-your-inventory-back: "&aOdzyskales swoj ekwipunek!"
 #message-angelchest-location: "&eLokalizacja Twojej AnielskiejSkrzyni:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### Portuguese
 #message-all-your-angelchests-were-already-unlocked: "&eTodos os seus AngelChests estavam desbloqueados."
@@ -243,7 +265,7 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-your-inventory-back: "&aVocê recuperou seu inventário!"
 #message-angelchest-location: "&eLocal do seu AngelChest:"
 #message-not-enough-money: "&cYou don't have enough money."
-
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### Spanish
 #message-all-your-angelchests-were-already-unlocked: "&eTodos tus AngelChest ya se encuentran desbloqueados."
@@ -260,8 +282,9 @@ message-not-enough-money: "&cYou don't have enough money."
 #message-you-got-your-inventory-back: "&aHas obtenido tu inventario de vuelta!"
 #message-angelchest-location: "&eLugares de tus AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
-##### Turkish (If u found an error contact with Cazcez#0190 on discord! || Hata bulursanız discord üzerinden Cazcez#0190 ile iletişime geçiniz)
+##### Turkish
 #message-all-your-angelchests-were-already-unlocked: "&eTüm AngelChest'lerinin kilidi zaten açık."
 #message-angelchest-created: "&aBir melek eşyalarını topladı ve öldüğün konumda ki bir sandığa koydu."
 #message-angelchest-disappeared: "&cÇok yavaştın... AngelChest'in yok oldu ve içindekileri yere bıraktı."
@@ -283,4 +306,4 @@ message-not-enough-money: "&cYou don't have enough money."
 #########################
 
 # please do not change the following line manually!
-config-version: 24
+config-version: 25
