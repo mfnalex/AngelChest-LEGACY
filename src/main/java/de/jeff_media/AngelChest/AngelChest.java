@@ -15,6 +15,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 public class AngelChest {
@@ -132,18 +133,32 @@ public class AngelChest {
         createChest(block,p.getUniqueId());
 
         // Remove curse of vanishing equipment and Minepacks backpacks
-        for (ItemStack i : playerItems.getContents()) {
-            if (!Utils.isEmpty(i)) {
-                if (i.getEnchantments().containsKey(Enchantment.VANISHING_CURSE) || MinepacksHook.isMinepacksBackpack(i, plugin)) {
-                    playerItems.remove(i);
-                }
+        for (int i = 0; i<playerItems.getSize();i++) {
+            if (Utils.isEmpty(playerItems.getItem(i))) {
+                continue;
             }
+            if(toBeRemoved(playerItems.getItem(i))) playerItems.setItem(i,null);
         }
 
         armorInv = playerItems.getArmorContents();
         storageInv = playerItems.getStorageContents();
         extraInv = playerItems.getExtraContents();
 
+    }
+
+    private boolean toBeRemoved(ItemStack i) {
+        if(plugin.getConfig().getBoolean("remove-curse-of-vanishing")
+                && i.getEnchantments().containsKey(Enchantment.VANISHING_CURSE)) {
+            return true;
+        }
+        if(plugin.getConfig().getBoolean("remove-curse-of-binding")
+                && i.getEnchantments().containsKey(Enchantment.BINDING_CURSE)) {
+            return true;
+        }
+        if (MinepacksHook.isMinepacksBackpack(i, plugin)) {
+            return true;
+        }
+        return false;
     }
 
     private YamlConfiguration loadYaml(File file) throws Throwable {

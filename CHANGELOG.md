@@ -1,4 +1,7 @@
 # Changelog
+## 2.6.0
+- Added "remove-curse-of-binding" and "remove-curse-of-vanishing" config options. When true, items with those enchantments will not be added to the AngelChest
+
 ## 2.5.1
 - Fixed AngelChests not working anymore when using /acreload after changing the chest material
 - Fixed AngelChests being destroyed by water if PLAYER_HEAD is used as chest material
