@@ -3,10 +3,7 @@ package de.jeff_media.AngelChest;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockExplodeEvent;
-import org.bukkit.event.block.BlockPistonExtendEvent;
-import org.bukkit.event.block.BlockPistonRetractEvent;
+import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
 public class BlockListener implements Listener {
@@ -33,6 +30,14 @@ public class BlockListener implements Listener {
 		}
 		angelChest.destroy();
 		angelChest.remove();
+	}
+
+	@EventHandler
+	public void onLiquidDestroysChest(BlockFromToEvent event) {
+		// Despite the name, this event only fires when liquid or a teleporting dragon egg changes a block
+		if(plugin.isAngelChest(event.getToBlock())) {
+			event.setCancelled(true);
+		}
 	}
 
 	@EventHandler

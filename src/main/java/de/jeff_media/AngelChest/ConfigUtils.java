@@ -16,7 +16,10 @@ public class ConfigUtils {
 		}
 	}
 
-	static void reloadCompleteConfig(Main main) {
+	static void reloadCompleteConfig(Main main,boolean reload) {
+		if(reload) {
+			main.saveAllAngelChestsToFile();
+		}
 		main.reloadConfig();
 		createConfig(main);
 		if(main.updateChecker != null) {
@@ -27,6 +30,10 @@ public class ConfigUtils {
 		main.messages = new Messages(main);
 		File groupsFile = new File(main.getDataFolder()+File.separator+"groups.yml");
 		main.groupUtils = new GroupUtils(main,groupsFile);
+		if(reload) {
+			main.loadAllAngelChestsFromFile();
+		}
+
 	}
 
 	static void initUpdateChecker(Main main) {
@@ -102,11 +109,11 @@ public class ConfigUtils {
 			//createConfig();
 		}
 		
-		if(Material.getMaterial(main.getConfig().getString("material"))==null) {
+		if(Material.getMaterial(main.getConfig().getString("material").toUpperCase())==null) {
 			main.getLogger().warning("Invalid Material: "+main.getConfig().getString("material")+" - falling back to CHEST");
 			main.chestMaterial = Material.CHEST;
 		} else {
-			main.chestMaterial = Material.getMaterial(main.getConfig().getString("material"));
+			main.chestMaterial = Material.getMaterial(main.getConfig().getString("material").toUpperCase());
 			if(!main.chestMaterial.isBlock()) {
 				main.getLogger().warning("Not a block: "+main.getConfig().getString("material")+" - falling back to CHEST");
 				main.chestMaterial = Material.CHEST;

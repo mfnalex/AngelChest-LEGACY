@@ -22,7 +22,7 @@ public class CommandReload implements CommandExecutor  {
             return true;
         }
 
-        ConfigUtils.reloadCompleteConfig(main);
+        ConfigUtils.reloadCompleteConfig(main,true);
 
         commandSender.sendMessage(ChatColor.GREEN+"AngelChest configuration has been reloaded.");
 

@@ -1,10 +1,7 @@
 package de.jeff_media.AngelChest;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.Map.Entry;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
@@ -46,7 +43,7 @@ public class Main extends JavaPlugin {
 		
 		//Main myself = this;
 
-		ConfigUtils.reloadCompleteConfig(this);
+		ConfigUtils.reloadCompleteConfig(this,false);
 
 		playerSettings = new HashMap<Player,PlayerSetting>();
 		angelChests = new LinkedHashMap<Block,AngelChest>();
@@ -117,7 +114,7 @@ public class Main extends JavaPlugin {
 		
 	}
 	
-	protected void loadAllAngelChestsFromFile() {
+	void loadAllAngelChestsFromFile() {
 		File dir = new File(getDataFolder().getPath() + File.separator + "angelchests");
 		  File[] directoryListing = dir.listFiles();
 		  if (directoryListing != null) {
@@ -139,9 +136,13 @@ public class Main extends JavaPlugin {
 		for(Player p : getServer().getOnlinePlayers()) {
 			unregisterPlayer(p);
 		}
-		
+		saveAllAngelChestsToFile();
+
+	}
+
+	void saveAllAngelChestsToFile() {
 		// Destroy all Angel Chests, including hologram AND CONTENTS!
-		Iterator<Entry<Block,AngelChest>> it = angelChests.entrySet().iterator();
+		Iterator<Entry<Block, AngelChest>> it = angelChests.entrySet().iterator();
 		//for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
 		//	Utils.destroyAngelChest(entry.getKey(), entry.getValue(), this);
 		//}
@@ -151,9 +152,8 @@ public class Main extends JavaPlugin {
 			entry.getValue().hologram.destroy();
 		}
 	}
-	
-	
-	
+
+
 	public PlayerSetting getPlayerSettings(Player p) {
 		registerPlayer(p);
 		return playerSettings.get(p);

@@ -1,6 +1,9 @@
 # Changelog
 ## 2.5.1
+- Fixed AngelChests not working anymore when using /acreload after changing the chest material
+- Fixed AngelChests being destroyed by water if PLAYER_HEAD is used as chest material
 - Updated Turkish translation
+- Added debug mode
 
 ## 2.5.0
 - Added /acfetch command (thanks @ XDleader555)
