@@ -52,10 +52,14 @@ public class Main extends JavaPlugin {
 		debug("Loading AngelChests from disk");
 		loadAllAngelChestsFromFile();
 		//armorStandUUIDs = new ArrayList<UUID>();
+
+
 		
-		// Deletes old armorstands
+		// Deletes old armorstands and restores broken AngelChests (only case where I currently know this happens is when a endcrystal spanws in a chest)
+		Main plugin = this;
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			public void run() {
+
 				//getLogger().info(blockArmorStandCombinations.size()+"");
 				for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
 					if(!isAngelChest(comb.block)) {
@@ -66,9 +70,14 @@ public class Main extends JavaPlugin {
 					}
 				}
 				for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
-					if(!isAngelChest(entry.getKey())) {
+					/*if(!isAngelChest(entry.getKey())) {
 						entry.getValue().destroy();
 						debug("Removing block from list because it's no AngelChest");
+					}*/
+					if(isBrokenAngelChest(entry.getKey())) {
+						Block block = entry.getKey();
+						debug("Fixing broken AngelChest at "+block.getLocation());
+						entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
 					}
 				}
 			}
@@ -179,8 +188,12 @@ public class Main extends JavaPlugin {
 	}
 
 	public boolean isAngelChest(Block block) {
-		if(block.getType() != chestMaterial) return false;
+		//if(block.getType() != chestMaterial) return false;
 		return angelChests.containsKey(block);
+	}
+
+	public boolean isBrokenAngelChest(Block block) {
+		return block.getType() != chestMaterial;
 	}
 	
 	public boolean isAngelChestHologram(Entity e) {
