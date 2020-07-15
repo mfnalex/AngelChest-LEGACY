@@ -135,7 +135,7 @@ link-unlock: "&5[Unlock]&r"
 link-fetch: "&6[Fetch]&r"
 link-teleport: "&6[TP]&r"
 
-##### English
+##### Messages
 message-all-your-angelchests-were-already-unlocked: "&eAll your AngelChests were already unlocked."
 message-angelchest-created: "&aAn Angel collected your stuff and put it into a chest located at the place of your death."
 message-angelchest-disappeared: "&cYou were too slow... Your AngelChest has disappeared and dropped its contents."
@@ -151,6 +151,25 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 message-angelchest-location: "&eLocations of your AngelChests:"
 message-not-enough-money: "&cYou don't have enough money."
 message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+
+##### Default translations - to use one, just uncomment them. Of course you can also change those.
+
+##### English
+#message-all-your-angelchests-were-already-unlocked: "&eAll your AngelChests were already unlocked."
+#message-angelchest-created: "&aAn Angel collected your stuff and put it into a chest located at the place of your death."
+#message-angelchest-disappeared: "&cYou were too slow... Your AngelChest has disappeared and dropped its contents."
+#message-error-players-only: "&cError: This command can only be run by players."
+#message-inventory-was-empty: "&eAn Angel searched for your stuff but could not find anything."
+#message-not-allowed-to-break-other-angelchests: "&cYou are not allowed to break other people's AngelChest."
+#message-not-allowed-to-open-other-angelchests: "&cYou are not allowed to open other people's AngelChest."
+#message-unlocked-more-angelchests: "&aYou have unlocked %d AngelChests."
+#message-unlocked-one-angelchest: "&aYou have unlocked your AngelChest."
+#message-you-dont-have-any-angelchests: "&eYou don't have any AngelChests."
+#message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory back, but some items are still in the AngelChest."
+#message-you-got-your-inventory-back: "&aYou got your inventory back!"
+#message-angelchest-location: "&eLocations of your AngelChests:"
+#message-not-enough-money: "&cYou don't have enough money."
+#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
 ##### Chinese Simplified 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
 #message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
