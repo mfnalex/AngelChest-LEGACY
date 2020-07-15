@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	int currentConfigVersion = 28;
+	int currentConfigVersion = 29;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
@@ -27,12 +27,14 @@ public class Main extends JavaPlugin {
 	public boolean debug = false;
 	
 	ArrayList<String> disabledWorlds;
+	ArrayList<String> disabledRegions;
 	ArrayList<Material> dontSpawnOn;
 	ArrayList<Material> onlySpawnIn;
 	
 	Messages messages;
 	PluginUpdateChecker updateChecker;
 	GroupUtils groupUtils;
+	WorldGuardHandler worldGuardHandler;
 	
 	void debug(String t) {
 		if(debug) getLogger().info(t);
@@ -100,6 +102,7 @@ public class Main extends JavaPlugin {
 		
 
 		if (debug) getLogger().info("Disabled Worlds: "+disabledWorlds.size());
+		if (debug) getLogger().info("Disabled WorldGuard regions: "+disabledRegions.size());
 		
 		
 		// Schedule DurationTimer

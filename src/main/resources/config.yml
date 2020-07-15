@@ -109,6 +109,21 @@ price-fetch: 0
 
 disabled-worlds:
 
+##########################
+#### disabled regions ####
+##########################
+
+# You can disable AngelChest for certain WorldGuard region. Each region's name has to
+# be on a separate line, starting with a hyphen and followed by a space
+
+# Example:
+#
+# disabled-worldguard-regions:
+# - spawn
+# - pvparena
+
+disabled-worldguard-regions:
+
 #########################
 ##### localization ######
 #########################
@@ -349,4 +364,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 28
+config-version: 29

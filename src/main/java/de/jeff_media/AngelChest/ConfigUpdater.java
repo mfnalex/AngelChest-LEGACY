@@ -74,7 +74,9 @@ public class ConfigUpdater {
 			}
 			else if(line.startsWith("- ")) {
 				newline = null;
-			} else if (line.startsWith("disabled-worlds:")) {
+			}
+
+			else if (line.startsWith("disabled-worlds:")) {
 				newline = null;
 				newLines.add("disabled-worlds:");
 				if (plugin.disabledWorlds != null) {
@@ -82,7 +84,19 @@ public class ConfigUpdater {
 						newLines.add("- " + disabledWorld);
 					}
 				}
-			} else if (line.startsWith("dont-spawn-on:")) {
+			}
+
+			else if (line.startsWith("disabled-worldguard-regions:")) {
+				newline = null;
+				newLines.add("disabled-worldguard-regions:");
+				if (plugin.disabledRegions != null) {
+					for (String disabledRegion : plugin.disabledRegions) {
+						newLines.add("- " + disabledRegion);
+					}
+				}
+			}
+
+			else if (line.startsWith("dont-spawn-on:")) {
 				newline = null;
 				newLines.add("dont-spawn-on:");
 					for (Material mat : plugin.dontSpawnOn) {

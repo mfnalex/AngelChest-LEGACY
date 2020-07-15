@@ -59,6 +59,11 @@ public class PlayerListener implements Listener {
 			return;
 		}
 
+		if(plugin.worldGuardHandler.isBlacklisted(p.getLocation().getBlock())) {
+			plugin.debug("Cancelled: region disabled.");
+			return;
+		}
+
 		// Don't do anything if player's inventory is empty anyway
 		if (event.getDrops() == null || event.getDrops().size() == 0) {
 			plugin.debug("Cancelled: event#getDrops == null || event#getDrops#size =0 0");

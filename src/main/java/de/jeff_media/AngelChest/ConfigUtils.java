@@ -30,6 +30,7 @@ public class ConfigUtils {
 		main.messages = new Messages(main);
 		File groupsFile = new File(main.getDataFolder()+File.separator+"groups.yml");
 		main.groupUtils = new GroupUtils(main,groupsFile);
+		main.worldGuardHandler = new WorldGuardHandler(main);
 		if(reload) {
 			main.loadAllAngelChestsFromFile();
 		}
@@ -64,6 +65,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("remove-curse-of-binding",true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
+		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");
 		
 		ArrayList<String> dontSpawnOnTmp = (ArrayList<String>) main.getConfig().getStringList("dont-spawn-on");
 		main.dontSpawnOn = new ArrayList<Material>();
