@@ -271,6 +271,23 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 
+##### Russian
+#message-all-your-angelchests-were-already-unlocked: "&eВсе ваши Ангельские сундуки разблокированы."
+#message-angelchest-created: "&aАнгел собрал ваши вещи и положил в сундук на месте вашей смерти."
+#message-angelchest-disappeared: "&cВы слишком медленны... Ваш Ангельский сундук исчез и выбросил все вещи."
+#message-error-players-only: "&cОшибка: эта команда может быть выполнена только игроками."
+#message-inventory-was-empty: "&eАнгел искал ваши вещи, но ничего не нашел."
+#message-not-allowed-to-break-other-angelchests: "&cВам не разрешено ломать Ангельский сундук других игроков."
+#message-not-allowed-to-open-other-angelchests: "&cВам не разрешено открывать Ангельский сундук других игроков."
+#message-unlocked-more-angelchests: "&aВы открыли Ангельский сундук игрока %d."
+#message-unlocked-one-angelchest: "&aВы открыли свой Ангельский сундук."
+#message-you-dont-have-any-angelchests: "&eУ вас нет Ангельских сундуков."
+#message-you-got-part-of-your-inventory-back: "&eВы вернули часть своих вещей, но некоторые все еще находятся в Ангельском сундуке."
+#message-you-got-your-inventory-back: "&aВаши вещи вернулись!"
+#message-angelchest-location: "&eРасположения ваших Ангельских сундуков:"
+#message-not-enough-money: "&cНе хватает денег."
+#message-please-select-chest: "&7Пожалуйста, укажите, какой Ангельский сундук желаете выбрать."
+
 ##### Spanish
 #message-all-your-angelchests-were-already-unlocked: "&eTodos tus AngelChest ya se encuentran desbloqueados."
 #message-angelchest-created: "&aUn Angel ha colectado tus objetos y los ha puesto en un cofre en el lugar de tu muerte."
@@ -313,4 +330,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 27
+config-version: 28

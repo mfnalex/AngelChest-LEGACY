@@ -1,4 +1,8 @@
 # Changelog
+
+## 2.7.0-SNAPSHOT
+- Added Russian translation
+
 ## 2.6.1
 - Fixed AngelChests disappearing at the moment it is spawned when the player dies at the exact spot where and when the ender dragon spawns a crystal
 
