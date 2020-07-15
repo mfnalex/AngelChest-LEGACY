@@ -2,6 +2,7 @@
 
 ## 2.7.0-SNAPSHOT
 - Added Russian translation
+- Removed xp settings from groups.default.yml because that is controlled via permissions
 
 ## 2.6.1
 - Fixed AngelChests disappearing at the moment it is spawned when the player dies at the exact spot where and when the ender dragon spawns a crystal
