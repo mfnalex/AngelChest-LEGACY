@@ -17,10 +17,18 @@ public class WorldGuardHandler {
     Main main;
     WorldGuardPlugin wg;
     RegionContainer container;
+    boolean disabled = false;
 
     WorldGuardHandler(Main main) {
         this.main=main;
-        wg = WorldGuardPlugin.inst();
+        try {
+            Class.forName("com.sk89q.worldguard.bukkit.WorldGuardPlugin").getMethod("inst",null);
+            wg = WorldGuardPlugin.inst();
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            //System.out.println("WorldGuard not found");
+            disabled = true;
+            return;
+        }
         if(wg != null) {
             main.getLogger().info("Successfully hooked into WorldGuard");
             container = WorldGuard.getInstance().getPlatform().getRegionContainer();
@@ -28,7 +36,7 @@ public class WorldGuardHandler {
     }
 
     boolean isBlacklisted(Block block) {
-        System.out.println("CHECKING IF THIS BLOCK IS IN PROTECTED REGION");
+        if(disabled) return false;
         if(wg==null) return false;
         if(main.disabledRegions==null || main.disabledRegions.size()==0) return false;
         /*com.sk89q.worldedit.util.Location wloc = BukkitAdapter.adapt(loc);

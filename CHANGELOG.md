@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.7.0-SNAPSHOT
+## 2.7.1
+- Fixed exception and plugin not enabling when WorldGuard is not installed
+- Removed forgotten debug message
+
+## 2.7.0
 - Added WorldGuard region blacklist
   - You can add certain WorldGuard regions to your `disabled-worldguard-regions` list in the config.yml. Players in that region will not spawn an AngelChest.
 - Added Russian translation
