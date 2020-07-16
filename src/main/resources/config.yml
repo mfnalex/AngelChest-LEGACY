@@ -125,6 +125,15 @@ disabled-worlds:
 disabled-worldguard-regions:
 
 #########################
+## protection plugins  ##
+#########################
+
+# AngelChest can check if a player has permissions to place blocks where he died. If
+# the player is prohibited from placing blocks there, AngelChest will not spawn a
+# chest if the following option is set to true.
+only-spawn-chests-if-player-may-build: false
+
+#########################
 ##### localization ######
 #########################
 
@@ -193,15 +202,15 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-error-players-only: "&c错误: 这个指令只能由玩家执行."
 #message-inventory-was-empty: "&e天使并没有找到你掉落的物品."
 #message-not-allowed-to-break-other-angelchests: "&c你不能破坏其它玩家的天御之箱."
-#message-not-allowed-to-open-other-angelchests: "&你不能打开其它玩家的天御之箱."
+#message-not-allowed-to-open-other-angelchests: "&c你不能打开其它玩家的天御之箱."
 #message-unlocked-more-angelchests: "&a你解锁了%d 的天御之箱."
-#message-unlocked-one-angelchest: "&你解锁了你的的天御之箱."
+#message-unlocked-one-angelchest: "&a你解锁了你的的天御之箱."
 #message-you-dont-have-any-angelchests: "&e你没有任何的天御之箱."
 #message-you-got-part-of-your-inventory-back: "&e你取回了一些物品,但还有一些物品在天御之箱内."
 #message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
-#message-angelchest-location: "&eLocations of your AngelChests:"
-#message-not-enough-money: "&cYou don't have enough money."
-#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-angelchest-location: "&e你的天御之箱的位置:"
+#message-not-enough-money: "&c你没有足够的金钱."
+#message-please-select-chest: "&7请指定你要选择的天御之箱."
 
 ##### Chinese Traditional 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
 #message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
@@ -216,9 +225,9 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-you-dont-have-any-angelchests: "&e你沒有任何小天使箱子"
 #message-you-got-part-of-your-inventory-back: "&e你取回了一部分的物品，但仍有物品遺留在小天使箱子裡"
 #message-you-got-your-inventory-back: "&a成功將物品取回!"
-#message-angelchest-location: "&eLocations of your AngelChests:"
-#message-not-enough-money: "&cYou don't have enough money."
-#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-angelchest-location: "&e你的小天使箱子的位置:"
+#message-not-enough-money: "&c你沒有足夠的金錢."
+#message-please-select-chest: "&7請指定你要選擇的小天使箱子."
 
 ##### Dutch - Thanks to Xeyame for translating -> https://github.com/Xeyame
 #message-all-your-angelchests-were-already-unlocked: "&eAl je AngerChests zijn al ontgrendeld."
@@ -364,4 +373,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 29
+config-version: 30

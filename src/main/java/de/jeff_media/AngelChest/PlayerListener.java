@@ -78,6 +78,12 @@ public class PlayerListener implements Listener {
 			return;
 		}
 
+		if(plugin.getConfig().getBoolean("only-spawn-chests-if-player-may-build")
+				&& !ProtectionUtils.playerMayBuildHere(p,p.getLocation(),plugin)) {
+			plugin.debug("Cancelled: BlockPlaceEvent cancelled");
+			return;
+		}
+
 		// Don't do anything if player's inventory is empty anyway
 		if (event.getDrops() == null || event.getDrops().size() == 0) {
 			plugin.debug("Cancelled: event#getDrops == null || event#getDrops#size =0 0");
