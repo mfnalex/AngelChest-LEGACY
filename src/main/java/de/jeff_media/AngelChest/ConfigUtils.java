@@ -65,6 +65,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("preserve-xp", true);
 		main.getConfig().addDefault("remove-curse-of-vanishing",true);
 		main.getConfig().addDefault("remove-curse-of-binding",true);
+		main.getConfig().addDefault("only-spawn-chests-if-player-may-build",false);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
 		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");

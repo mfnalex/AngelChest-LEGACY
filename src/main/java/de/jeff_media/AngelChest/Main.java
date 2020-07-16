@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	int currentConfigVersion = 29;
+	int currentConfigVersion = 30;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;

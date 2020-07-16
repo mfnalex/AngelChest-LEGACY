@@ -125,6 +125,15 @@ disabled-worlds:
 disabled-worldguard-regions:
 
 #########################
+## protection plugins  ##
+#########################
+
+# AngelChest can check if a player has permissions to place blocks where he died. If
+# the player is prohibited from placing blocks there, AngelChest will not spawn a
+# chest if the following option is set to true.
+only-spawn-chests-if-player-may-build: false
+
+#########################
 ##### localization ######
 #########################
 
@@ -364,4 +373,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 29
+config-version: 30
