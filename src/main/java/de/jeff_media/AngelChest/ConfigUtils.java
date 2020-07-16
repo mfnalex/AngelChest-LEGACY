@@ -109,7 +109,7 @@ public class ConfigUtils {
 		
 		
 		if (main.getConfig().getInt("config-version", 0) != main.currentConfigVersion) {
-			System.out.println("ANGELCHEST DEBUG: " + main.getConfig().getInt("config-version",0)+" / "+main.currentConfigVersion);
+			//System.out.println("ANGELCHEST DEBUG: " + main.getConfig().getInt("config-version",0)+" / "+main.currentConfigVersion);
 			showOldConfigWarning(main);
 			ConfigUpdater configUpdater = new ConfigUpdater(main);
 			configUpdater.updateConfig();

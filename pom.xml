@@ -124,6 +124,7 @@
         <dependency><!-- WorldGuard legacy -->
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-legacy</artifactId>
+            <scope>provided</scope>
             <version>6.2</version>
         </dependency>
         <dependency>
