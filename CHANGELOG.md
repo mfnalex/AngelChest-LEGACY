@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.8.1-SNAPSHOT
+- Updated Chinese and Chinese (Traditional) translations
+
 ## 2.8.0
 - Fixed compatibility with 1.12.2 again
 - Fixed WorldGuard compatability, now works with:
