@@ -43,6 +43,11 @@
                             <pattern>de.jeff_media.PluginUpdateChecker</pattern>
                             <shadedPattern>de.jeff_media.AngelChest</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <!-- Replace this with your package! -->
+                            <shadedPattern>de.jeff_media.AngelChest</shadedPattern>
+                        </relocation>
                     </relocations>
                 </configuration>
                 <executions>
