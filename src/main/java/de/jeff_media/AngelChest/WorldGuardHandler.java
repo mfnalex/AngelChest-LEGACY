@@ -14,35 +14,61 @@ import java.util.List;
 
 public class WorldGuardHandler {
 
+
     Main main;
     WorldGuardPlugin wg;
     RegionContainer container;
     boolean disabled = false;
 
+    // This is for WorldGuard 7+ only.
+    // If an older version is installed, this class will redirect the check to the legacy handler
+    WorldGuardLegacyHandler legacyHandler = null;
+
     WorldGuardHandler(Main main) {
         this.main=main;
+
+        if(main.getServer().getPluginManager().getPlugin("WorldGuard") == null) {
+            main.debug("WorldGuard is not installed at all.");
+            disabled = true;
+            return;
+        }
+
         try {
-            Class.forName("com.sk89q.worldguard.bukkit.WorldGuardPlugin").getMethod("inst",null);
+            Class.forName("com.sk89q.worldguard.bukkit.WorldGuardPlugin").getMethod("inst");
             wg = WorldGuardPlugin.inst();
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             //System.out.println("WorldGuard not found");
             disabled = true;
             return;
         }
+
+        // Getting here means WorldGuard is installed
+
         if(wg != null) {
-            main.getLogger().info("Successfully hooked into WorldGuard");
-            container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            try {
+                // This only works on WorldGuard 7+
+                container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                main.getLogger().info("Successfully hooked into WorldGuard 7+");
+            } catch(NoClassDefFoundError e) {
+                // Ok, try again with version 6
+                legacyHandler = new WorldGuardLegacyHandler(this);
+                return;
+            }
         }
+
+
     }
 
     boolean isBlacklisted(Block block) {
         if(disabled) return false;
+        if(legacyHandler!=null) return legacyHandler.isBlacklisted(block);
         if(wg==null) return false;
         if(main.disabledRegions==null || main.disabledRegions.size()==0) return false;
-        /*com.sk89q.worldedit.util.Location wloc = BukkitAdapter.adapt(loc);
-        com.sk89q.worldedit.world.World wworld = BukkitAdapter.adapt(loc.getWorld());*/
+
         RegionManager regions = container.get(BukkitAdapter.adapt(block.getWorld()));
         List<String> regionList = regions.getApplicableRegionsIDs(getBlockVector3(block));
+
+        main.debug("Checking Regions in WG7+");
 
         for(String r : regionList) {
             main.debug("Player died in region " +r);

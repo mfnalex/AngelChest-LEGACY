@@ -37,7 +37,7 @@ public class Main extends JavaPlugin {
 	WorldGuardHandler worldGuardHandler;
 	
 	void debug(String t) {
-		if(debug) getLogger().info(t);
+		if(debug) getLogger().info("[DEBUG] " + t);
 	}
 	
 	@Override

@@ -120,7 +120,11 @@ public class PlayerListener implements Listener {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				public void run() {
 					//TpLinkUtil.sendLink(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , locString )+" ", "/acinfo tp "+x+" "+y+" "+z+" "+world);
-					AngelChestCommandUtils.sendListOfAngelChests(plugin, p);
+					try {
+						AngelChestCommandUtils.sendListOfAngelChests(plugin, p);
+					} catch(Throwable throwable) {
+						//e.printStackTrace();
+					}
 				}},2);
 		}
 	}

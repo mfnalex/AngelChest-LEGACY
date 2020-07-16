@@ -94,7 +94,11 @@ public class CommandFetch implements CommandExecutor {
 		ac.createChest(newBlock, p.getUniqueId());
 
 		// Make the chest face the player
-		AngelChestCommandUtils.setBlockDirection(newBlock, facing);
+		try {
+			AngelChestBlockDataUtils.setBlockDirection(newBlock, facing);
+		} catch (Throwable throwable) {
+			// NoClassDefFoundError in <1.13
+		}
 
 		// Swap the block in code
 		plugin.angelChests.put(newBlock, plugin.angelChests.remove(oldBlock));

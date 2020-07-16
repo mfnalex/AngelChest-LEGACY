@@ -76,42 +76,7 @@ public class AngelChestCommandUtils {
 		return angelChestsFromThisPlayer.get(chestIdx);
 	}
 
-	protected static BlockFace getBlockDirection(Block b) {
-		BlockFace dir;
-		try {
-			// check for player skull
-			dir = ((Rotatable) b.getBlockData()).getRotation();
-			dir = dir.getOppositeFace();
-		} catch(Exception e) {
-			try {
-				// check for chest
-				dir = ((Directional) b.getBlockData()).getFacing();
-			} catch(Exception e2) {
-				// Can't get block rotation, probably because it doesn't support it
-				return BlockFace.NORTH;
-			}
-		}
-		return dir;
-	}
 
-	protected static void setBlockDirection(Block b, BlockFace dir) {
-		try {
-			// check for player skull
-			Rotatable blockData = ((Rotatable) b.getBlockData());
-			blockData.setRotation(dir.getOppositeFace());
-			b.setBlockData(blockData);
-		} catch(Exception e) {
-			try {
-				// check for chest
-				Directional blockData = ((Directional) b.getBlockData());
-				blockData.setFacing(dir);
-				b.setBlockData(blockData);
-			} catch(Exception e2) {
-				// Can't set block rotation, probably because it doesn't support it
-				return;
-			}
-		}
-	}
 
 	protected static void teleportPlayerToChest(Main plugin, Player p, AngelChest ac) {
 		if(!p.hasPermission("angelchest.tp")) {
@@ -131,24 +96,27 @@ public class AngelChestCommandUtils {
 
 		Location acloc = ac.block.getLocation();
 		Location tploc = acloc.clone();
-		
-		// offset the target location
-		switch(getBlockDirection(ac.block)){
-			case SOUTH:
-				tploc.add(0,0,2);
-				break;
-			case WEST:
-				tploc.add(-2,0,0);
-				break;
-			case NORTH:
-				tploc.add(0,0,-2);
-				break;
-			case EAST:
-				tploc.add(2,0,0);
-				break;
-			default:
-				break;
-		}
+		 try {
+			 // offset the target location
+			 switch (AngelChestBlockDataUtils.getBlockDirection(ac.block)) {
+				 case SOUTH:
+					 tploc.add(0, 0, 2);
+					 break;
+				 case WEST:
+					 tploc.add(-2, 0, 0);
+					 break;
+				 case NORTH:
+					 tploc.add(0, 0, -2);
+					 break;
+				 case EAST:
+					 tploc.add(2, 0, 0);
+					 break;
+				 default:
+					 break;
+			 }
+		 } catch (Throwable throwable) {
+
+		 }
 
 		// Search for a safe spawn point
 		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(tploc, plugin.getConfig().getInt("max-radius"), plugin);

@@ -169,10 +169,14 @@ public class AngelChest {
     protected void createChest(Block block, UUID uuid) {
         plugin.debug("Attempting to create chest with material " + plugin.chestMaterial.name() + " at "+block.getLocation().toString());
         block.setType(plugin.chestMaterial);
-        if(plugin.chestMaterial==Material.PLAYER_HEAD) {
-            Skull state = (Skull) block.getState();
-            state.setOwningPlayer(plugin.getServer().getOfflinePlayer(uuid));
-            state.update();
+        if(plugin.chestMaterial.name().equalsIgnoreCase("PLAYER_HEAD")) {
+            if(Material.getMaterial("PLAYER_HEAD") == null) {
+                plugin.getLogger().warning("Using a custom PLAYER_HEAD as chest material is NOT SUPPORTED in versions < 1.13. Consider using another chest material.");
+            } else {
+                Skull state = (Skull) block.getState();
+                state.setOwningPlayer(plugin.getServer().getOfflinePlayer(uuid));
+                state.update();
+            }
         }
         createHologram(plugin, block, uuid);
     }
