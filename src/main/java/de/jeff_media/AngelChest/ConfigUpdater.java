@@ -26,6 +26,7 @@ public class ConfigUpdater {
 
 	void updateConfig() {
 
+
 		try {
 			Files.deleteIfExists(new File(plugin.getDataFolder().getAbsolutePath()+File.separator+"config.old.yml").toPath());
 		} catch (IOException e) {

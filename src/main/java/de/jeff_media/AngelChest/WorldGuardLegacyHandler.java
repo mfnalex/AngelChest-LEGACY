@@ -27,14 +27,12 @@ public class WorldGuardLegacyHandler {
      */
     WorldGuardLegacyHandler(WorldGuardHandler handler) {
         this.handler=handler;
-
         wgLegacy = WGBukkit.getPlugin();
         if(wgLegacy==null) {
             handler.main.getLogger().warning("Failed to hook into WorldGuard because it returned null.");
             handler.disabled=true;
             return;
         }
-
         try {
             Method method = wgLegacy.getClass().getMethod("getRegionContainer");
             container = (RegionContainer) method.invoke(wgLegacy);
@@ -42,25 +40,17 @@ public class WorldGuardLegacyHandler {
             toVectorMethod = BukkitUtil.class.getMethod("toVector", Location.class);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             handler.main.getLogger().warning("Failed to hook into WorldGuard although it seems to be installed.");
-
             if(handler.main.debug) {
                 e.printStackTrace();
             }
-
             handler.disabled=true;
         }
-
         handler.main.getLogger().info("Successfully hooked into WorldGuard legacy");
-
     }
-
     boolean isBlacklisted(Block block) {
-
         handler.main.debug("Checking with WorldGuard 6 API if player died in blacklisted region");
-
         if(wgLegacy==null) return false;
         if(handler.main.disabledRegions==null || handler.main.disabledRegions.size()==0) return false;
-
         RegionManager regions = container.get(block.getWorld());
         if(regions==null) return false;
         ApplicableRegionSet regionSet = null;

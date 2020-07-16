@@ -2,6 +2,10 @@
 
 ## 2.8.0
 - Fixed compatibility with 1.12.2 again
+- Fixed WorldGuard compatability, now works with:
+  - WorldGuard 6
+  - WorldGuard 7+
+  - No WorldGuard at all
 
 ## 2.7.1
 - Fixed exception and plugin not enabling when WorldGuard is not installed

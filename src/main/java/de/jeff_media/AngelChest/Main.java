@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		
+
 		//Main myself = this;
 
 		ConfigUtils.reloadCompleteConfig(this,false);

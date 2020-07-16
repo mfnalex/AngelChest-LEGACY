@@ -52,6 +52,8 @@ public class ConfigUtils {
 		main.saveDefaultConfig();
 		main.saveResource("groups.example.yml", true);
 		createDirectories(main);
+
+		if(false) return;
 		
 		main.getConfig().addDefault("check-for-updates", "true");
 		main.getConfig().addDefault("check-interval",4);
@@ -87,6 +89,8 @@ public class ConfigUtils {
 			main.dontSpawnOn.add(mat);
 		}
 		dontSpawnOnTmp=null;
+
+		if(false) return;
 		
 		for(String string : onlySpawnInTmp) {
 			Material mat = Material.getMaterial(string.toUpperCase());
@@ -105,6 +109,7 @@ public class ConfigUtils {
 		
 		
 		if (main.getConfig().getInt("config-version", 0) != main.currentConfigVersion) {
+			System.out.println("ANGELCHEST DEBUG: " + main.getConfig().getInt("config-version",0)+" / "+main.currentConfigVersion);
 			showOldConfigWarning(main);
 			ConfigUpdater configUpdater = new ConfigUpdater(main);
 			configUpdater.updateConfig();
@@ -112,6 +117,8 @@ public class ConfigUtils {
 			main.usingMatchingConfig = true;
 			//createConfig();
 		}
+
+		if(true) return;
 		
 		if(Material.getMaterial(main.getConfig().getString("material").toUpperCase())==null) {
 			main.getLogger().warning("Invalid Material: "+main.getConfig().getString("material")+" - falling back to CHEST");
