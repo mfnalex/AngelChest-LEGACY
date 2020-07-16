@@ -7,6 +7,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -16,6 +17,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
+
+import java.util.Objects;
 
 public class PlayerListener implements Listener {
 
@@ -42,6 +45,17 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void spawnAngelChest(PlayerDeathEvent event) {
+
+		Objects.requireNonNull(plugin.chestMaterial,"Chest Material is null!");
+
+		/*System.out.println("test");
+		if(plugin.chestMaterial==null) {
+			System.out.println("chestmat is null");
+			return;
+		}
+
+		plugin.debug(plugin.chestMaterial.name());*/
+
 		plugin.debug("PlayerListener -> spawnAngelChest");
 		Player p = event.getEntity();
 		if (!p.hasPermission("angelchest.use")) {
@@ -131,7 +145,7 @@ public class PlayerListener implements Listener {
 
 
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST,ignoreCancelled = false)
 	public void onAngelChestRightClick(PlayerInteractEvent event) {
 		Player p = event.getPlayer();
 		if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))

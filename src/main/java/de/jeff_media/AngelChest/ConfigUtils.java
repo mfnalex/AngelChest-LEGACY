@@ -53,8 +53,6 @@ public class ConfigUtils {
 		main.saveResource("groups.example.yml", true);
 		createDirectories(main);
 
-		if(false) return;
-		
 		main.getConfig().addDefault("check-for-updates", "true");
 		main.getConfig().addDefault("check-interval",4);
 		main.getConfig().addDefault("show-location", true);
@@ -118,7 +116,6 @@ public class ConfigUtils {
 			//createConfig();
 		}
 
-		if(true) return;
 		
 		if(Material.getMaterial(main.getConfig().getString("material").toUpperCase())==null) {
 			main.getLogger().warning("Invalid Material: "+main.getConfig().getString("material")+" - falling back to CHEST");

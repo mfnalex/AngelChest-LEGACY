@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.8.1
+- Fixed exceptions when spawning chest. Sorry about that.
+
 ## 2.8.0
 - Fixed compatibility with 1.12.2 again
 - Fixed WorldGuard compatability, now works with:

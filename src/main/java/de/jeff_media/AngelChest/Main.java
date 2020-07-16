@@ -3,8 +3,10 @@ package de.jeff_media.AngelChest;
 import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.Callable;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -98,7 +100,13 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new BlockListener(this),this);
 		
 		@SuppressWarnings("unused")
-		Metrics metrics = new Metrics(this);
+		Metrics metrics = new Metrics(this,3194);
+		metrics.addCustomChart(new Metrics.SimplePie("material", new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				return chestMaterial.name();
+			}
+		}));
 		
 
 		if (debug) getLogger().info("Disabled Worlds: "+disabledWorlds.size());
