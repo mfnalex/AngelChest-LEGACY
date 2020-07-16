@@ -124,6 +124,12 @@ disabled-worlds:
 
 disabled-worldguard-regions:
 
+# If, for some reason, you get errors using WorldGuard and AngelChest together, you can
+# disable the WorldGuard integration, but this will also mean you cannot disable
+# AngelChest in certain regions. If you get errors, please open an issue at github
+# or join our discord: https://discord.jeff-media.de
+disable-worldguard-integration: false
+
 #########################
 ## protection plugins  ##
 #########################
@@ -373,4 +379,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 30
+config-version: 31

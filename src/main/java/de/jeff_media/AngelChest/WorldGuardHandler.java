@@ -27,6 +27,12 @@ public class WorldGuardHandler {
     WorldGuardHandler(Main main) {
         this.main=main;
 
+        if(main.getConfig().getBoolean("disable-worldguard-integration")) {
+            disabled = true;
+            main.getLogger().info("WorldGuard integration has been disabled in the config.yml.");
+            return;
+        }
+
         if(main.getServer().getPluginManager().getPlugin("WorldGuard") == null) {
             main.debug("WorldGuard is not installed at all.");
             disabled = true;
