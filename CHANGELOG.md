@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.8.2
+- Changed PlayerInteractEvent priority to lowest so that GriefDefender does not show a warning when opening the AngelChest. If you use GriefDefender, please also update that to the latest version as that plugin also changed the EventPriority to avoid this issue :)
+
 ## 2.8.1
 - Fixed exceptions when spawning chest. Sorry about that.
 
