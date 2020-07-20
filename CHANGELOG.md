@@ -1,7 +1,6 @@
 # Changelog
 
 ## 2.11.2-SNAPSHOT
-- Trying to prevent GriefDefender from cancelling the spawn of holograms, however it doesnt work yet
 
 ## 2.11.1
 - Removed forgotten debug messages (sorry)
