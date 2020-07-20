@@ -1,6 +1,7 @@
 # Changelog
 
 ## 2.11.2-SNAPSHOT
+- Added Italian translation
 
 ## 2.11.1
 - Removed forgotten debug messages (sorry)
