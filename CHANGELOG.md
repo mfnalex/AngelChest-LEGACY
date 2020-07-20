@@ -1,7 +1,10 @@
 # Changelog
 
-## 2.11.1
+## 2.11.2-SNAPSHOT
 - Trying to prevent GriefDefender from cancelling the spawn of holograms, however it doesnt work yet
+
+## 2.11.1
+- Removed forgotten debug messages (sorry)
 
 ## 2.11.0
 - Added check if chunk is loaded on death. If not, AngelChest tries to load the chunk

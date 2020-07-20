@@ -22,13 +22,13 @@ public class BlockListener implements Listener {
     }
 
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    /*@EventHandler(priority = EventPriority.MONITOR)
     public void onHologramSpawn(EntitySpawnEvent e) {
         if(!plugin.hookUtils.hologramToBeSpawned) return;
             if(!e.isCancelled()) return;
             plugin.debug("Trying to prevent cancellation of EntitySpawnEvent for the hologram");
             e.setCancelled(false);
-    }
+    }*/
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

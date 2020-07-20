@@ -10,7 +10,7 @@ public class HookUtils {
 
     final Main main;
     //ArrayList<Entity> hologramsToBeSpawned = new ArrayList<Entity>();
-    boolean hologramToBeSpawned = false;
+    //boolean hologramToBeSpawned = false;
 
     HookUtils(Main main) {
         this.main=main;

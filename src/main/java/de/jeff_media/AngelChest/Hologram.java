@@ -33,7 +33,7 @@ public class Hologram {
 			String line = scanner.nextLine();
 			if(line.equals("")) continue;
 
-			plugin.hookUtils.hologramToBeSpawned=true;
+			//plugin.hookUtils.hologramToBeSpawned=true;
 
 			ArmorStand as = (ArmorStand) location.getWorld().spawnEntity(location.add(new Vector(0,lineOffset,0)), EntityType.ARMOR_STAND); // Spawn the ArmorStand
 			armorStandUUIDs.add(as.getUniqueId());
@@ -50,7 +50,7 @@ public class Hologram {
 			
 			currentOffset += lineOffset;
 
-			plugin.hookUtils.hologramToBeSpawned=false;
+			//plugin.hookUtils.hologramToBeSpawned=false;
 
 		}
 		scanner.close();

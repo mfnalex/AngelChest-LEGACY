@@ -300,12 +300,10 @@ public class PlayerListener implements Listener {
     public void onArmorStandRightClick(PlayerInteractAtEntityEvent event)
     {
     	if(event.getRightClicked()==null) {
-			System.out.println(1);
     		return;
     	}
         if (!event.getRightClicked().getType().equals(EntityType.ARMOR_STAND))
         {
-			System.out.println(2);
 
             return;
         }
@@ -324,11 +322,8 @@ public class PlayerListener implements Listener {
 			}));
 
 		}
-		System.out.println(event.getRightClicked().getUniqueId());
 
-		System.out.println(4);
         if(as.get()==null) return;
-		System.out.println(5);
 
 		if (!as.get().owner.equals(event.getPlayer().getUniqueId())
 				&& !event.getPlayer().hasPermission("angelchest.protect.ignore") && as.get().isProtected) {
