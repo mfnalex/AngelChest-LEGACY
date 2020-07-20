@@ -226,6 +226,7 @@ message-you-got-your-inventory-back: "&aYou got your inventory back!"
 message-angelchest-location: "&eLocations of your AngelChests:"
 message-not-enough-money: "&cYou don't have enough money."
 message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Default translations - to use one, just uncomment them. Of course you can also change those.
 
@@ -245,6 +246,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Chinese Simplified 简体中文 - Thanks to qsefthuopq for translating! -> https://www.spigotmc.org/members/qsefthuopq.339953/
 #message-all-your-angelchests-were-already-unlocked: "&e你所有的天御之箱都已解锁."
@@ -262,6 +264,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&e你的天御之箱的位置:"
 #message-not-enough-money: "&c你没有足够的金钱."
 #message-please-select-chest: "&7请指定你要选择的天御之箱."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Chinese Traditional 繁體中文 - Thanks to maoding for translating! -> https://www.spigotmc.org/members/maoding.400505/
 #message-all-your-angelchests-were-already-unlocked: "&e所有的小天使箱子已被解鎖"
@@ -279,6 +282,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&e你的小天使箱子的位置:"
 #message-not-enough-money: "&c你沒有足夠的金錢."
 #message-please-select-chest: "&7請指定你要選擇的小天使箱子."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Dutch - Thanks to Xeyame for translating -> https://github.com/Xeyame
 #message-all-your-angelchests-were-already-unlocked: "&eAl je AngerChests zijn al ontgrendeld."
@@ -296,6 +300,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eLocatie van je AngelChest: %s"
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### French - Thanks to AngelCynara for translating! -> https://www.spigotmc.org/members/angelcynara.398643/ 
 #message-all-your-angelchests-were-already-unlocked: "&eTout vos AngeCoffres sont débloqués."
@@ -313,6 +318,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### German
 #message-all-your-angelchests-were-already-unlocked: "&eAlle deine AngelChests waren bereits aufgeschlossen."
@@ -330,6 +336,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&ePositionen deiner AngelChests:"
 #message-not-enough-money: "&cDu hast nicht genug Geld."
 #message-please-select-chest: "&7Bitte gib an welche AngelChest du auswählen möchtest."
+#message-already-unlocked: "&cDiese AngelChest war bereits aufgeschlossen."
 
 ##### Polish – Polski – Thanks to JanekR_Prorok for translating! –> https://www.spigotmc.org/members/janekr_prorok.887102/
 #message-all-your-angelchests-were-already-unlocked: "&eWszystkie twoje AnielskieSkrzynie zostaly juz odblokowane."
@@ -347,6 +354,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eLokalizacja Twojej AnielskiejSkrzyni:"
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Portuguese
 #message-all-your-angelchests-were-already-unlocked: "&eTodos os seus AngelChests estavam desbloqueados."
@@ -364,6 +372,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eLocal do seu AngelChest:"
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Russian
 #message-all-your-angelchests-were-already-unlocked: "&eВсе ваши Ангельские сундуки разблокированы."
@@ -381,6 +390,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eРасположения ваших Ангельских сундуков:"
 #message-not-enough-money: "&cНе хватает денег."
 #message-please-select-chest: "&7Пожалуйста, укажите, какой Ангельский сундук желаете выбрать."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Spanish
 #message-all-your-angelchests-were-already-unlocked: "&eTodos tus AngelChest ya se encuentran desbloqueados."
@@ -398,6 +408,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-angelchest-location: "&eLugares de tus AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
+#message-already-unlocked: "&cThis AngelChest is already unlocked."
 
 ##### Turkish
 #message-all-your-angelchests-were-already-unlocked: "&eTüm AngelChest'lerinin kilidi zaten açık."
@@ -414,6 +425,7 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 #message-you-got-your-inventory-back: "&aEnvanterini geri aldın!"
 #message-angelchest-location: "&eAngelChest'lerinin konumu:"
 #message-not-enough-money: "&cYeterli paraya sahip değilsin."
+#message-already-unlocked: "&cBu AngelChest'in kilidi zaten açık."
 
 
 #########################
@@ -424,4 +436,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 33
+config-version: 35

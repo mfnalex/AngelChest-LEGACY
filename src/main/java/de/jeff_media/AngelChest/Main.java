@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	int currentConfigVersion = 33;
+	int currentConfigVersion = 35;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
@@ -38,6 +38,7 @@ public class Main extends JavaPlugin {
 	GroupUtils groupUtils;
 	WorldGuardHandler worldGuardHandler;
 	HookUtils hookUtils;
+	AngelChestDebugger debugger;
 	
 	void debug(String t) {
 		if(debug) getLogger().info("[DEBUG] " + t);
@@ -74,15 +75,17 @@ public class Main extends JavaPlugin {
 						//getLogger().info("Removed armor stand that has been left behind at @ " + comb.block.getLocation().toString());
 					}
 				}
-				for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
+
+
+				for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
 					/*if(!isAngelChest(entry.getKey())) {
 						entry.getValue().destroy();
 						debug("Removing block from list because it's no AngelChest");
 					}*/
 					if(isBrokenAngelChest(entry.getKey())) {
 						Block block = entry.getKey();
-						debug("Fixing broken AngelChest at "+block.getLocation());
-						entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
+						//debug("Fixing broken AngelChest at "+block.getLocation());
+						//entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
 					}
 				}
 			}

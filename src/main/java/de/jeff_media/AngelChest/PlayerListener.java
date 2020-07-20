@@ -19,6 +19,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PlayerListener implements Listener {
 
@@ -135,6 +136,8 @@ public class PlayerListener implements Listener {
 		// send message after one twentieth second
 		Utils.sendDelayedMessage(p, plugin.messages.MSG_ANGELCHEST_CREATED, 1, plugin);
 
+
+
 		if(plugin.getConfig().getBoolean("show-location")) {
 			//Utils.sendDelayedMessage(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , Utils.locationToString(fixedAngelChestBlock) ), 2, plugin);
 			/*final int x = fixedAngelChestBlock.getX();
@@ -152,6 +155,9 @@ public class PlayerListener implements Listener {
 					}
 				}},2);
 		}
+
+		//Utils.reloadAngelChest(ac,plugin);
+
 	}
 
 	private void clearInventory(Inventory inv) {
@@ -295,23 +301,43 @@ public class PlayerListener implements Listener {
     public void onArmorStandRightClick(PlayerInteractAtEntityEvent event)
     {
     	if(event.getRightClicked()==null) {
+			System.out.println(1);
     		return;
     	}
         if (!event.getRightClicked().getType().equals(EntityType.ARMOR_STAND))
         {
+			System.out.println(2);
+
             return;
         }
-        if(!plugin.isAngelChestHologram(event.getRightClicked())) {
-        	return;
+        AtomicReference<AngelChest> as  = new AtomicReference<>();
+        if(plugin.isAngelChestHologram(event.getRightClicked())) {
+			as.set(plugin.getAngelChestByHologram((ArmorStand) event.getRightClicked()));
+			//System.out.println("GETBYHOLOGRAM1");
         }
-        AngelChest as = plugin.getAngelChestByHologram((ArmorStand) event.getRightClicked());
-		if (!as.owner.equals(event.getPlayer().getUniqueId())
-				&& !event.getPlayer().hasPermission("angelchest.protect.ignore") && as.isProtected) {
+
+        else {
+        	plugin.blockArmorStandCombinations.forEach((combination -> {
+        		if(event.getRightClicked().getUniqueId().equals(combination.armorStand.getUniqueId())) {
+        			as.set(plugin.getAngelChest(combination.block));
+					//System.out.println("GETBYHOLOGRAM2");
+				}
+			}));
+
+		}
+		System.out.println(event.getRightClicked().getUniqueId());
+
+		System.out.println(4);
+        if(as.get()==null) return;
+		System.out.println(5);
+
+		if (!as.get().owner.equals(event.getPlayer().getUniqueId())
+				&& !event.getPlayer().hasPermission("angelchest.protect.ignore") && as.get().isProtected) {
 			event.getPlayer().sendMessage(plugin.messages.MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS);
 			event.setCancelled(true);
 			return;
 		}
-		openAngelChest(event.getPlayer(), as.block, as);
+		openAngelChest(event.getPlayer(), as.get().block, as.get());
     }
 
 }

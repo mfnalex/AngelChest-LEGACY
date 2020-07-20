@@ -32,6 +32,7 @@ public class ConfigUtils {
 		main.groupUtils = new GroupUtils(main,groupsFile);
 		main.worldGuardHandler = new WorldGuardHandler(main);
 		main.hookUtils = new HookUtils(main);
+		//main.debugger = new AngelChestDebugger(main);
 		if(reload) {
 			main.loadAllAngelChestsFromFile();
 		}

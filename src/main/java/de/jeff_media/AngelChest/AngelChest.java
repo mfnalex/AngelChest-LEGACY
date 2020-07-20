@@ -83,6 +83,14 @@ public class AngelChest {
         //String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getOfflinePlayer(owner).getName());
 
+        if(!block.getChunk().isLoaded()) {
+            plugin.debug("Chunk is not loaded, trying to load Chunk...");
+            block.getChunk().load();
+            if(!block.getChunk().isLoaded()) {
+                plugin.debug("The chunk is still unloaded... creating the chest will probably fail.");
+            }
+        }
+
         createChest(block,owner);
 
         // Load OverflowInv
@@ -156,15 +164,6 @@ public class AngelChest {
 
         removeKeepedItems();
 
-        /* DEBUG
-        if(plugin.debug) {
-            System.out.println("This chest contains:");
-            for(ItemStack is : storageInv) {
-                if(is==null) continue;
-                System.out.println(is.getType().name());
-            }
-        }*/
-
     }
 
     private void removeKeepedItems() {
@@ -183,18 +182,6 @@ public class AngelChest {
                 extraInv[i]=null;
             }
         }
-
-       /* DEBUG
-       Bukkit.getScheduler().runTaskLater(plugin,() -> {
-
-            for(ItemStack is : storageInv) {
-                System.out.println("CONTAINS "+is);
-            }
-
-
-        },100);*/
-
-
     }
 
     private boolean toBeRemoved(ItemStack i) {
@@ -360,12 +347,6 @@ public class AngelChest {
         plugin.debug("Removing AngelChest");
         plugin.angelChests.remove(block);
     }
-	
-	/*public long secondsRemaining() {
-		long seconds = configDuration - ((System.currentTimeMillis() - taskStart) / 1000);
-		if(seconds<0) seconds = 0;
-		return seconds;
-    }*/
     
 	public void createHologram(Main plugin, Block block, UUID uuid) {
 		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getOfflinePlayer(uuid).getName());

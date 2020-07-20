@@ -6,6 +6,10 @@ import org.bukkit.ChatColor;
 public class Messages {
 	//private AngelChestPlugin plugin;
 
+	final Main plugin;
+
+
+
 	final String MSG_PLAYERSONLY,MSG_NOT_ALLOWED_TO_BREAK_OTHER_ANGELCHESTS,MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS,
 	MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED, MSG_UNLOCKED_ONE_ANGELCHEST, MSG_UNLOCKED_MORE_ANGELCHESTS, MSG_INVENTORY_WAS_EMPTY,
 	MSG_ANGELCHEST_CREATED, MSG_ANGELCHEST_DISAPPEARED, MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS, MSG_YOU_GOT_YOUR_INVENTORY_BACK
@@ -16,10 +20,11 @@ public class Messages {
 
 	// The following messages shouldn't really appear
 	final String ERR_NOTOWNER = ChatColor.RED+"You do not own this AngelChest.";
-	final String ERR_ALREADYUNLOCKED = ChatColor.RED+"This AngelChest is already unlocked.";
+	final String ERR_ALREADYUNLOCKED;
 	final String ERR_INVALIDCHEST = ChatColor.RED + "Invalid AngelChest!";
 
 	Messages(Main plugin) {
+		this.plugin=plugin;
 		//this.plugin = plugin;
 
 		MSG_PLAYERSONLY = ChatColor.translateAlternateColorCodes('&', plugin.getConfig()
@@ -69,7 +74,12 @@ public class Messages {
 		LINK_FETCH = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-fetch","&6[Fetch]&r"));
 		
 		LINK_UNLOCK = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("link-unlock","&5[Unlock]&r"));
-		
+
+		ERR_ALREADYUNLOCKED = getMsg("already-unlocked","&cThis AngelChest is already unlocked.");
 	}
 
+
+	private String getMsg(String path, String defaultText) {
+		return ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("message-"+path,defaultText));
+	}
 }

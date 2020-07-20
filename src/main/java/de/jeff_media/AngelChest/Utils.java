@@ -296,6 +296,17 @@ public class Utils {
 
 	}
 
+	/**
+	 * Somehow the holograms are often not clickable after creation. It gets fixed by using /acreload or fetching the chest.
+	 * Instead of debugging this now, I just added this reload method. I know it's a stupid fix but I want this
+	 * fixed now. TODO: Remove this and properly check why some holograms get not get recognized properly
+	 */
+	static void reloadAngelChest(AngelChest ac, Main main) {
+		ac.saveToFile();
+		main.loadAllAngelChestsFromFile();
+
+	}
+
     public static boolean isEmpty(ItemStack[] items) {
 		if(items==null) return true;
 		return (items.length==0);
