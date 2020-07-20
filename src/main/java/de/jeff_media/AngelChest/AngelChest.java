@@ -148,37 +148,43 @@ public class AngelChest {
 
         removeKeepedItems();
 
+        /* DEBUG
+        if(plugin.debug) {
+            System.out.println("This chest contains:");
+            for(ItemStack is : storageInv) {
+                if(is==null) continue;
+                System.out.println(is.getType().name());
+            }
+        }*/
 
     }
 
     private void removeKeepedItems() {
 
-        for(ItemStack is : armorInv) {
-            if(HookUtils.keepOnDeath(is)) {
-                System.out.println("REMOVING");
-                is=null;
+        for(int i = 0; i <armorInv.length;i++) {
+            if(HookUtils.keepOnDeath(armorInv[i])) {
+                armorInv[i]=null;
             }
         }
-        for(ItemStack is : storageInv) {
-            if(HookUtils.keepOnDeath(is)) {
-                System.out.println("REMOVING");
-                is=null;
+        for(int i = 0; i <storageInv.length;i++) {
+            if(HookUtils.keepOnDeath(storageInv[i])) {
+                storageInv[i]=null;
             }
-        }for(ItemStack is : extraInv) {
-            if(HookUtils.keepOnDeath(is)) {
-                System.out.println("REMOVING");
-                is=null;
+        }for(int i = 0; i <extraInv.length;i++) {
+            if(HookUtils.keepOnDeath(extraInv[i])) {
+                extraInv[i]=null;
             }
         }
 
-        Bukkit.getScheduler().runTaskLater(plugin,() -> {
+       /* DEBUG
+       Bukkit.getScheduler().runTaskLater(plugin,() -> {
 
             for(ItemStack is : storageInv) {
                 System.out.println("CONTAINS "+is);
             }
 
 
-        },100);
+        },100);*/
 
 
     }

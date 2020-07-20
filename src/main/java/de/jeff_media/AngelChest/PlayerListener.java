@@ -186,17 +186,18 @@ public class PlayerListener implements Listener {
 
 	}
 
+	/* Debug
 	@EventHandler
 	public void onPlayerRespawnEvent(PlayerRespawnEvent e) {
 
-		Player p = e.getPlayer();
-		System.out.println("Yuis");
+		//Player p = e.getPlayer();
+		//System.out.println("Respawn");
 		for(ItemStack itemStack : p.getInventory()) {
 			if(itemStack==null) continue;
 			System.out.println(itemStack.getType().name());
 		}
 
-	}
+	}*/
 
 	@EventHandler(priority = EventPriority.LOWEST,ignoreCancelled = false)
 	public void onAngelChestRightClick(PlayerInteractEvent event) {
