@@ -2,6 +2,7 @@ package de.jeff_media.AngelChest;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -10,15 +11,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class PlayerListener implements Listener {
 
@@ -64,8 +65,13 @@ public class PlayerListener implements Listener {
 		}
 
 		if (event.getKeepInventory()) {
-			plugin.debug("Cancelled: event#getKeepInventory() == true");
-			return;
+			if(plugin.getConfig().getBoolean("ignore-keep-inventory",false)) {
+				plugin.debug("Cancelled: event#getKeepInventory() == true");
+				return;
+			} else {
+				plugin.debug("event#getKeepInventory() == true but we ignore it because of config settings");
+				event.setKeepInventory(false);
+			}
 		}
 		
 		if(!Utils.isWorldEnabled(p.getLocation().getWorld(), plugin)) {
@@ -121,8 +127,8 @@ public class PlayerListener implements Listener {
 			event.setDroppedExp(0);
 		}
 
-		// Delete players inventory
-		p.getInventory().clear();
+		// Delete players inventory except excluded items
+		clearInventory(p.getInventory());
 		
 		// Clear the drops
 		event.getDrops().clear();
@@ -149,7 +155,48 @@ public class PlayerListener implements Listener {
 		}
 	}
 
+	private void clearInventory(Inventory inv) {
+		for(int i = 0; i < inv.getSize(); i++) {
+			if(HookUtils.keepOnDeath(inv.getItem(i))) {
+				continue;
+			}
+			inv.setItem(i,null);
+		}
 
+	}
+
+
+	@EventHandler
+	public void onDeathBecauseTotemNotEquipped(EntityResurrectEvent e) {
+		if(!(e.getEntity() instanceof Player)) return;
+
+		if(!plugin.getConfig().getBoolean("totem-of-undying-works-everywhere")) return;
+
+		Player p = (Player) e.getEntity();
+
+
+		for(ItemStack is : p.getInventory()) {
+			if(is==null) continue;
+			if(is.getType()== Material.TOTEM_OF_UNDYING) {
+				e.setCancelled(false);
+				is.setAmount(is.getAmount()-1);
+				return;
+			}
+		}
+
+	}
+
+	@EventHandler
+	public void onPlayerRespawnEvent(PlayerRespawnEvent e) {
+
+		Player p = e.getPlayer();
+		System.out.println("Yuis");
+		for(ItemStack itemStack : p.getInventory()) {
+			if(itemStack==null) continue;
+			System.out.println(itemStack.getType().name());
+		}
+
+	}
 
 	@EventHandler(priority = EventPriority.LOWEST,ignoreCancelled = false)
 	public void onAngelChestRightClick(PlayerInteractEvent event) {

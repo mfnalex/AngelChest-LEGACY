@@ -55,6 +55,7 @@ public class ConfigUtils {
 
 		main.getConfig().addDefault("check-for-updates", "true");
 		main.getConfig().addDefault("check-interval",4);
+		main.getConfig().addDefault("totem-of-undying-works-everywhere",true);
 		main.getConfig().addDefault("show-location", true);
 		main.getConfig().addDefault("angelchest-duration", 600);
 		main.getConfig().addDefault("max-radius", 10);
@@ -65,6 +66,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("remove-curse-of-binding",true);
 		main.getConfig().addDefault("only-spawn-chests-if-player-may-build",false);
 		main.getConfig().addDefault("disable-worldguard-integration",false);
+		main.getConfig().addDefault("ignore-keep-inventory",false);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
 		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");

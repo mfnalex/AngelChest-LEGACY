@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.9.0-SNAPSHOT
+- Items with Slimefun's "Soulbound" enchantment will not be put into the chest but remain in the player inventory
+- Added config option to allow totems to be used from every inventory slot
+- Added config option "ignore-keep-inventory" so that a chest is spawned even if another plugin allows you to keep your inventory
+
 ## 2.8.2
 - Changed PlayerInteractEvent priority to lowest so that GriefDefender does not show a warning when opening the AngelChest. If you use GriefDefender, please also update that to the latest version as that plugin also changed the EventPriority to avoid this issue :)
 

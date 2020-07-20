@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.IOException;
@@ -137,6 +138,7 @@ public class AngelChest {
             if (Utils.isEmpty(playerItems.getItem(i))) {
                 continue;
             }
+
             if(toBeRemoved(playerItems.getItem(i))) playerItems.setItem(i,null);
         }
 
@@ -144,9 +146,45 @@ public class AngelChest {
         storageInv = playerItems.getStorageContents();
         extraInv = playerItems.getExtraContents();
 
+        removeKeepedItems();
+
+
+    }
+
+    private void removeKeepedItems() {
+
+        for(ItemStack is : armorInv) {
+            if(HookUtils.keepOnDeath(is)) {
+                System.out.println("REMOVING");
+                is=null;
+            }
+        }
+        for(ItemStack is : storageInv) {
+            if(HookUtils.keepOnDeath(is)) {
+                System.out.println("REMOVING");
+                is=null;
+            }
+        }for(ItemStack is : extraInv) {
+            if(HookUtils.keepOnDeath(is)) {
+                System.out.println("REMOVING");
+                is=null;
+            }
+        }
+
+        Bukkit.getScheduler().runTaskLater(plugin,() -> {
+
+            for(ItemStack is : storageInv) {
+                System.out.println("CONTAINS "+is);
+            }
+
+
+        },100);
+
+
     }
 
     private boolean toBeRemoved(ItemStack i) {
+        if(i==null) return false;
         if(plugin.getConfig().getBoolean("remove-curse-of-vanishing")
                 && i.getEnchantments().containsKey(Enchantment.VANISHING_CURSE)) {
             return true;
@@ -158,6 +196,10 @@ public class AngelChest {
         if (MinepacksHook.isMinepacksBackpack(i, plugin)) {
             return true;
         }
+
+        //if(m.hasLore() && m.getLore().contains)
+
+
         return false;
     }
 

@@ -11,6 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 import java.util.List;
+import java.util.Objects;
 
 public class WorldGuardHandler {
 
@@ -53,7 +54,8 @@ public class WorldGuardHandler {
         if(wg != null) {
             try {
                 // This only works on WorldGuard 7+
-                container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                container = Objects.requireNonNull(Objects.requireNonNull(Objects.requireNonNull(WorldGuard.getInstance(),"WorldGuard#getInstance is null")
+                        .getPlatform(),"WorldGuard#getInstance#getPlatform is null").getRegionContainer(),"WorldGuard#getInstance#getRegionContainer is null");
                 main.getLogger().info("Successfully hooked into WorldGuard 7+");
             } catch(NoClassDefFoundError e) {
                 // Ok, try again with version 6
