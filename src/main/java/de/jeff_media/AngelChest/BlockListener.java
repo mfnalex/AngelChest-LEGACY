@@ -4,9 +4,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 
 public class BlockListener implements Listener {
 
@@ -17,6 +19,15 @@ public class BlockListener implements Listener {
         this.plugin = plugin;
 
         plugin.debug("BlockListener created");
+    }
+
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onHologramSpawn(EntitySpawnEvent e) {
+        if(!plugin.hookUtils.hologramToBeSpawned) return;
+            if(!e.isCancelled()) return;
+            plugin.debug("Trying to prevent cancellation of EntitySpawnEvent for the hologram");
+            e.setCancelled(false);
     }
 
     @EventHandler

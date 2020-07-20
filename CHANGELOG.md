@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.11.1
+- Trying to prevent GriefDefender from cancelling the spawn of holograms, however it doesnt work yet
+
 ## 2.11.0
 - Added check if chunk is loaded on death. If not, AngelChest tries to load the chunk
 - Fixed AngelChests duplicating items when the chest material is one that drops when the block below is broken, e.g. torch, lantern, sign etc.
