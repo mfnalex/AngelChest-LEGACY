@@ -14,7 +14,6 @@ public class HookUtils {
         if(!item.getItemMeta().hasLore()) return false;
         for(String lore : item.getItemMeta().getLore()) {
             if(lore.equals(SOULBOUND_LORE)) {
-                System.out.println("detected soulbound");
                 return true;
             }
         }
