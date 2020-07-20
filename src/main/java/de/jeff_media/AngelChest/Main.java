@@ -37,6 +37,7 @@ public class Main extends JavaPlugin {
 	PluginUpdateChecker updateChecker;
 	GroupUtils groupUtils;
 	WorldGuardHandler worldGuardHandler;
+	HookUtils hookUtils;
 	
 	void debug(String t) {
 		if(debug) getLogger().info("[DEBUG] " + t);

@@ -28,36 +28,31 @@ public class CommandList implements CommandExecutor {
 			return true;
 		}
 
-		if(!(sender instanceof Player)) {
-			if(!(sender.hasPermission("angelchest.others"))) {
-				sender.sendMessage(command.getPermissionMessage());
-				return true;
-			}
-
-			if(args.length==0) {
-				sender.sendMessage(plugin.messages.MSG_PLAYERSONLY);
-				return true;
-			}
-
-			Player p = Bukkit.getPlayer(args[args.length-1]);
-			if(p==null) {
-				sender.sendMessage(ChatColor.RED+"Could not find player "+args[args.length-1]);
-				return true;
-			}
-
-			affectedPlayer = Bukkit.getPlayer(args[args.length-1]);
-
+		if(!(sender instanceof Player) && args.length==0) {
+			sender.sendMessage(plugin.messages.MSG_PLAYERSONLY);
 			return true;
+		}
+
+		if(args.length>0 && sender.hasPermission("angelchest.others")) {
+
+			Player p = Bukkit.getPlayer(args[0]);
+			if(p==null) {
+				sender.sendMessage(ChatColor.RED+"Could not find player "+args[0]);
+				return true;
+			}
+
+			affectedPlayer = Bukkit.getPlayer(args[0]);
 		}
 		
 		Player p = (Player) sender;
+		if(affectedPlayer==null) affectedPlayer=p;
 		
 		// Only send this message if the player has chests
 		if(!Utils.getAllAngelChestsFromPlayer(p, plugin).isEmpty()) {
 			p.sendMessage(plugin.messages.MSG_ANGELCHEST_LOCATION);
 		}
 
-		AngelChestCommandUtils.sendListOfAngelChests(plugin, p);
+		AngelChestCommandUtils.sendListOfAngelChests(plugin, p, affectedPlayer);
 
 		return true;
 	}

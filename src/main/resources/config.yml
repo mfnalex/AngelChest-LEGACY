@@ -13,6 +13,7 @@
 #                            drop the normal amount of XP
 # angelchest.fetch           Allows the player to teleport their chests to them
 # angelchest.tp              The player can teleport to their AngelChests
+# angelchest.others          Allows to run /acinfo, /acanluck, /actp and /acfetch for other players using /<command> [parameters] <player>
 # angelchest.reload          Allows reloading the config using /acreload
 
 # The following commands are available:
@@ -85,6 +86,14 @@ remove-curse-of-binding: true
 # When true, totems of undying will work in every inventory slot
 # When false, they only work in the hand/off-hand slot (vanilla default)
 totem-of-undying-works-everywhere: true
+
+# When enabled, AngelChest will handle player respawns. They will be automatically respawned after death once
+# the delay (see option below) has expired
+auto-respawn: false
+
+# When auto-respawn is true, you can define a delay in seconds before the player is respawned.
+auto-respawn-delay: 10
+
 
 # When false (default), AngelChest will only spawn the chest if the player would lose their inventory on death
 # When true, AngelChest will always spawn the chest and ignore whether other plugins would set keepInventory to true
@@ -161,6 +170,18 @@ disable-worldguard-integration: false
 # the player is prohibited from placing blocks there, AngelChest will not spawn a
 # chest if the following option is set to true.
 only-spawn-chests-if-player-may-build: false
+
+#########################
+##    other plugins    ##
+#########################
+
+# AngelChest can hook into certain 3rd party plugins to improve the chest
+# generation. None of those plugins is required, and you do NOT have to
+# disable the integration if a certain plugin is not installed.
+
+# When you have Slimefun installed, AngelChest can check for "Soulbound" items
+# and prevent those from being put into the chest.
+use-slimefun: true
 
 #########################
 ##### localization ######

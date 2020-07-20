@@ -86,7 +86,9 @@ public class AngelChest {
         createChest(block,owner);
 
         // Load OverflowInv
-        overflowInv = Bukkit.createInventory(null, 54, inventoryName);
+        AngelChestHolder holder = new AngelChestHolder();
+        overflowInv = Bukkit.createInventory(holder, 54, inventoryName);
+        holder.setInventory(overflowInv);
         int iOverflow = 0;
         for (ItemStack is : yaml.getList("overflowInv").toArray(new ItemStack[54])) {
             if (is != null) overflowInv.setItem(iOverflow, is);
@@ -168,16 +170,16 @@ public class AngelChest {
     private void removeKeepedItems() {
 
         for(int i = 0; i <armorInv.length;i++) {
-            if(HookUtils.keepOnDeath(armorInv[i])) {
+            if(plugin.hookUtils.keepOnDeath(armorInv[i])) {
                 armorInv[i]=null;
             }
         }
         for(int i = 0; i <storageInv.length;i++) {
-            if(HookUtils.keepOnDeath(storageInv[i])) {
+            if(plugin.hookUtils.keepOnDeath(storageInv[i])) {
                 storageInv[i]=null;
             }
         }for(int i = 0; i <extraInv.length;i++) {
-            if(HookUtils.keepOnDeath(extraInv[i])) {
+            if(plugin.hookUtils.keepOnDeath(extraInv[i])) {
                 extraInv[i]=null;
             }
         }
@@ -336,6 +338,7 @@ public class AngelChest {
     }
 
     public void destroy() {
+        plugin.debug("Destroying AngelChest");
         if (!plugin.isAngelChest(block))
             return;
 
@@ -354,6 +357,7 @@ public class AngelChest {
     }
 
     void remove() {
+        plugin.debug("Removing AngelChest");
         plugin.angelChests.remove(block);
     }
 	

@@ -3,6 +3,9 @@
 ## 2.10.0
 - Added option to use custom player heads instead of the player's head using their base64 value
 - Added option to disable holograms for AngelChests
+- Added option to auto-respawn the player, either instantly or after a set amount of seconds.
+- Added permission node "angelchest.others" to use /aclist, /acunlock, /acfetch and /actp for other players
+- Improved Soulbound detection for Slimefun items
 
 ## 2.9.0
 - Items with Slimefun's "Soulbound" enchantment will not be put into the chest but remain in the player inventory

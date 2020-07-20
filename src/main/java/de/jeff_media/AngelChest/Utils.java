@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -92,6 +91,7 @@ public class Utils {
 
 		return fixedAngelChestBlock;
 	}
+
 
 	/**
 	 * Puts everything from source into destination.
@@ -215,7 +215,7 @@ public class Utils {
 		});
 	}
 	
-	 public static List<Block> getNearbyBlocks(Location location, int radius) {
+	 /*public static List<Block> getNearbyBlocks(Location location, int radius) {
 	        List<Block> blocks = new ArrayList<Block>();
 	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
 	            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
@@ -225,7 +225,7 @@ public class Utils {
 	            }
 	        }
 	        return blocks;
-	    }
+	    }*/
 	
 	 public static List<Block> getPossibleChestLocations(Location location, int radius, Main plugin) {
 	        List<Block> blocks = new ArrayList<Block>();
@@ -245,13 +245,13 @@ public class Utils {
 	        return blocks;
 	    }
 
-	public static String locationToString(Block block) {
+	/*public static String locationToString(Block block) {
 		if(block == null) {
 			return "<none>";
 		}
 		return String.format(ChatColor.GREEN+"X:"+ChatColor.WHITE+" %d " + ChatColor.GREEN + "Y: " + ChatColor.WHITE+"%d " +
 		ChatColor.GREEN+"Z: " + ChatColor.WHITE+"%d (%s)", block.getX(), block.getY(), block.getZ(), block.getWorld().getName());
-	}
+	}*/
 	
 	static void renameFileInPluginDir(Main plugin,String oldName, String newName) {
 		File oldFile = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + oldName);
@@ -295,4 +295,9 @@ public class Utils {
 		return null;
 
 	}
+
+    public static boolean isEmpty(ItemStack[] items) {
+		if(items==null) return true;
+		return (items.length==0);
+    }
 }

@@ -7,16 +7,16 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class LinkUtils {
 	
-	protected static TextComponent getLinks(Player p, String preText, String commandTp, String commandUnlock, String commandFetch, Main plugin) {
+	protected static TextComponent getLinks(Player sendTo, Player affectedPlayer, String preText, String commandTp, String commandUnlock, String commandFetch, Main plugin) {
 		  TextComponent text = new TextComponent(preText);
 		
 		  String placeholder = "";
-		  if(p.hasPermission("angelchest.tp") && commandTp != null) {
+		  if(sendTo.hasPermission("angelchest.tp") && commandTp != null) {
 			  TextComponent link = createCommandLink(plugin.messages.LINK_TP,commandTp);
 			  text.addExtra(link);
 			  placeholder = " ";
 		  }
-		  if(p.hasPermission("angelchest.fetch") && commandFetch != null) {
+		  if(sendTo.hasPermission("angelchest.fetch") && commandFetch != null) {
 			TextComponent link = createCommandLink(plugin.messages.LINK_FETCH,commandFetch);
 			text.addExtra(placeholder);
 			text.addExtra(link);

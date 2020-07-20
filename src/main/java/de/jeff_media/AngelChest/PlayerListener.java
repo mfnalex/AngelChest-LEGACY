@@ -19,7 +19,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class PlayerListener implements Listener {
 
@@ -147,7 +146,7 @@ public class PlayerListener implements Listener {
 				public void run() {
 					//TpLinkUtil.sendLink(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , locString )+" ", "/acinfo tp "+x+" "+y+" "+z+" "+world);
 					try {
-						AngelChestCommandUtils.sendListOfAngelChests(plugin, p);
+						AngelChestCommandUtils.sendListOfAngelChests(plugin, p, p);
 					} catch(Throwable throwable) {
 						//e.printStackTrace();
 					}
@@ -157,7 +156,7 @@ public class PlayerListener implements Listener {
 
 	private void clearInventory(Inventory inv) {
 		for(int i = 0; i < inv.getSize(); i++) {
-			if(HookUtils.keepOnDeath(inv.getItem(i))) {
+			if(plugin.hookUtils.keepOnDeath(inv.getItem(i))) {
 				continue;
 			}
 			inv.setItem(i,null);
@@ -165,6 +164,17 @@ public class PlayerListener implements Listener {
 
 	}
 
+	@EventHandler
+	public void onDeath(PlayerDeathEvent e) {
+		if(!plugin.getConfig().getBoolean("auto-respawn")) return;
+		int delay = plugin.getConfig().getInt("auto-respawn-delay");
+
+		Bukkit.getScheduler().runTaskLater(plugin,() -> {
+			if(e.getEntity().isDead()) {
+				e.getEntity().spigot().respawn();
+			}
+		},1L+(delay*20));
+	}
 
 	@EventHandler
 	public void onDeathBecauseTotemNotEquipped(EntityResurrectEvent e) {
@@ -239,7 +249,12 @@ public class PlayerListener implements Listener {
 			angelChest.experience = 0;
 		}
 
-		boolean succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
+
+
+		boolean succesfullyStoredEverything = false;
+		boolean isOwnChest = angelChest.owner == p.getUniqueId();
+
+		succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
 		if (succesfullyStoredEverything) {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
 			angelChest.destroy();
@@ -254,20 +269,25 @@ public class PlayerListener implements Listener {
 	public void onAngelChestClose(InventoryCloseEvent event) {
 
 		for (AngelChest angelChest : plugin.angelChests.values()) {
-			if (angelChest.overflowInv.equals(event.getInventory())) {
-				// This is an AngelChest!
-
-				Inventory inv = event.getInventory();
-				if (Utils.isEmpty(inv)) {
-					// plugin.angelChests.remove(Utils.getKeyByValue(plugin.angelChests,
-					// angelChest));
-					angelChest.destroy();
-					// event.getPlayer().sendMessage("You have emptied an AngelChest. It is now
-					// gone.");
-				}
-
-				return;
+			if (!angelChest.overflowInv.equals(event.getInventory())) {
+				continue;
 			}
+
+			Inventory inv = event.getInventory();
+			if (Utils.isEmpty(angelChest.overflowInv)
+					&& Utils.isEmpty(angelChest.armorInv)
+					&& Utils.isEmpty(angelChest.extraInv)
+					&& Utils.isEmpty(angelChest.storageInv)) {
+				// plugin.angelChests.remove(Utils.getKeyByValue(plugin.angelChests,
+				// angelChest));
+				angelChest.destroy();
+
+				plugin.debug("Inventory empty, removing chest");
+				// event.getPlayer().sendMessage("You have emptied an AngelChest. It is now
+				// gone.");
+			}
+
+			return;
 		}
 	}
 	

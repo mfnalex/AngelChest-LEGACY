@@ -2,6 +2,8 @@ package de.jeff_media.AngelChest;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +19,7 @@ public class CommandUnlock implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+		Player affectedPlayer = null;
 		if(!command.getName().equalsIgnoreCase("unlock")) return false;
 		
 		if(!sender.hasPermission("angelchest.protect")) {
@@ -24,12 +27,24 @@ public class CommandUnlock implements CommandExecutor {
 			return true;
 		}
 
-		if(! ( sender instanceof Player)) {
+		if(!(sender instanceof Player) && args.length==0) {
 			sender.sendMessage(plugin.messages.MSG_PLAYERSONLY);
 			return true;
 		}
+
+		if(args.length>1 && sender.hasPermission("angelchest.others")) {
+
+			Player p = Bukkit.getPlayer(args[1]);
+			if(p==null) {
+				sender.sendMessage(ChatColor.RED+"Could not find player "+args[1]);
+				return true;
+			}
+
+			affectedPlayer = Bukkit.getPlayer(args[1]);
+		}
 		
 		Player p = (Player) sender;
+		if(affectedPlayer==null) affectedPlayer=p;
 		
 		if(args.length > 0) {
 			if(args[0].equals("all")) {
@@ -38,12 +53,12 @@ public class CommandUnlock implements CommandExecutor {
 			}
 		}
 		
-		AngelChest ac = AngelChestCommandUtils.argIdx2AngelChest(plugin, p, args);
+		AngelChest ac = AngelChestCommandUtils.argIdx2AngelChest(plugin, p, affectedPlayer, args);
 		if(ac == null) {
 			return true;
 		}
 
-		AngelChestCommandUtils.unlockSingleChest(plugin, p, ac);
+		AngelChestCommandUtils.unlockSingleChest(plugin, p, affectedPlayer, ac);
 		return true;
 	}
 }

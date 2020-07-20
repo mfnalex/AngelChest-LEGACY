@@ -47,18 +47,18 @@ public class AngelChestCommandUtils {
 	}
 
 	// Parses the first argument for the chest index in acinfo and returns a valid chest if it exists
-	protected static AngelChest argIdx2AngelChest(Main plugin, Player p, String[] args) {
+	protected static AngelChest argIdx2AngelChest(Main plugin, Player sendTo, Player affectedPlayer, String[] args) {
 		// Get all AngelChests by this player
-		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
+		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(affectedPlayer, plugin);
 
 		if(angelChestsFromThisPlayer.size()==0) {
-			p.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
+			sendTo.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
 			return null;
 		}
 
 		if(angelChestsFromThisPlayer.size() > 1 && args.length == 0) {
-			p.sendMessage(plugin.messages.MSG_PLEASE_SELECT_CHEST);
-			sendListOfAngelChests(plugin, p);
+			sendTo.sendMessage(plugin.messages.MSG_PLEASE_SELECT_CHEST);
+			sendListOfAngelChests(plugin, sendTo,affectedPlayer);
 			return null;
 		}
 
@@ -69,7 +69,7 @@ public class AngelChestCommandUtils {
 		}
 
 		if(chestIdx >= angelChestsFromThisPlayer.size() || chestIdx < 0) {
-			p.sendMessage(plugin.messages.ERR_INVALIDCHEST);
+			sendTo.sendMessage(plugin.messages.ERR_INVALIDCHEST);
 			return null;
 		}
 
@@ -135,23 +135,23 @@ public class AngelChestCommandUtils {
 		p.teleport(tploc, TeleportCause.PLUGIN);
 	}
 	
-	protected static void unlockSingleChest(Main plugin, Player p, AngelChest ac) {
+	protected static void unlockSingleChest(Main plugin, Player sendTo, Player affectedPlayer, AngelChest ac) {
 //		if(!p.hasPermission("angelchest.tp")) {
 //			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 //			return;
 //		}
 
-		if(!ac.owner.equals(p.getUniqueId())) {
-			p.sendMessage(plugin.messages.ERR_NOTOWNER);
+		if(!ac.owner.equals(affectedPlayer.getUniqueId())) {
+			affectedPlayer.sendMessage(plugin.messages.ERR_NOTOWNER);
 			return;
 		}
 		if(!ac.isProtected) {
-			p.sendMessage(plugin.messages.ERR_ALREADYUNLOCKED);
+			affectedPlayer.sendMessage(plugin.messages.ERR_ALREADYUNLOCKED);
 			return;
 		}
 		
 		ac.unlock();
-		p.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
+		sendTo.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
 	}
 
 	protected static void sendListOfAngelChests(Main plugin, Player sendTo, Player affectedPlayer) {
@@ -172,18 +172,21 @@ public class AngelChestCommandUtils {
 			int min = (remaining / 60) % 60;
 			int hour = (remaining / 60) / 60;
 
+			String affectedPlayerParameter = "";
+			if(!affectedPlayer.equals(sendTo)) affectedPlayerParameter = " "+affectedPlayer.getName();
+
 			b = angelChest.block;
 			String tpCommand=null;
 			String fetchCommand=null;
 			String unlockCommand=null;
 			if(sendTo.hasPermission("angelchest.tp")) {
-				tpCommand="/actp " + chestIndex;
+				tpCommand="/actp " + chestIndex + affectedPlayerParameter;
 			}
 			if(sendTo.hasPermission("angelchest.fetch")) {
-				fetchCommand="/acfetch " + chestIndex;
+				fetchCommand="/acfetch " + chestIndex + affectedPlayerParameter;
 			}
 			if(angelChest.isProtected) {
-				unlockCommand="/acunlock " + chestIndex;
+				unlockCommand="/acunlock " + chestIndex + affectedPlayerParameter;
 			}
 			
 			String text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
