@@ -1,7 +1,5 @@
 package de.jeff_media.AngelChest;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class CommandUnlock implements CommandExecutor {
 	
-	Main plugin;
+	final Main plugin;
 	
 	public CommandUnlock(Main plugin) {
 		this.plugin = plugin;

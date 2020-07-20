@@ -79,10 +79,10 @@ public class ConfigUtils {
 		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");
 		
 		ArrayList<String> dontSpawnOnTmp = (ArrayList<String>) main.getConfig().getStringList("dont-spawn-on");
-		main.dontSpawnOn = new ArrayList<Material>();
+		main.dontSpawnOn = new ArrayList<>();
 		
 		ArrayList<String> onlySpawnInTmp = (ArrayList<String>) main.getConfig().getStringList("only-spawn-in");
-		main.onlySpawnIn = new ArrayList<Material>();
+		main.onlySpawnIn = new ArrayList<>();
 		
 		for(String string : dontSpawnOnTmp) {
 			Material mat = Material.getMaterial(string.toUpperCase());

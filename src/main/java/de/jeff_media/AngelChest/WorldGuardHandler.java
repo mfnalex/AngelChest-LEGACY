@@ -7,7 +7,6 @@ import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.Objects;
 public class WorldGuardHandler {
 
 
-    Main main;
+    final Main main;
     WorldGuardPlugin wg;
     RegionContainer container;
     boolean disabled = false;

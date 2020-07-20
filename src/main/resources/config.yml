@@ -406,9 +406,9 @@ message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-you-got-part-of-your-inventory-back: "&eHas obtenido una parte de tu inventario de vuelta, pero algunos objetos siguen en tu AngelChest."
 #message-you-got-your-inventory-back: "&aHas obtenido tu inventario de vuelta!"
 #message-angelchest-location: "&eLugares de tus AngelChests:"
-#message-not-enough-money: "&cYou don't have enough money."
-#message-please-select-chest: "&7Please specify which AngelChest you would like to select."
-#message-already-unlocked: "&cThis AngelChest is already unlocked."
+#message-not-enough-money: "&cNo tienes dinero suficiente."
+#message-please-select-chest: "&7Especifica cuál AngelChest quisieras seleccionar."
+#message-already-unlocked: "&cEste AngelChest ya se encuentra desbloqueado."
 
 ##### Turkish
 #message-all-your-angelchests-were-already-unlocked: "&eTüm AngelChest'lerinin kilidi zaten açık."
@@ -436,4 +436,4 @@ message-already-unlocked: "&cThis AngelChest is already unlocked."
 debug: false
 
 # please do not change the following line manually!
-config-version: 35
+config-version: 36

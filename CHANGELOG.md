@@ -1,10 +1,11 @@
 # Changelog
 
-## 2.10.1-SNAPSHOT
+## 2.11.0
 - Added check if chunk is loaded on death. If not, AngelChest tries to load the chunk
 - Fixed AngelChests duplicating items when the chest material is one that drops when the block below is broken, e.g. torch, lantern, sign etc.
-- Made message "message-already-unlocked" configurable
 - Fixed holograms not being clickable
+- Made message "message-already-unlocked" configurable
+- Updated German, Spanish and Turkish translation
 
 ## 2.10.0
 - Added option to use custom player heads instead of the player's head using their base64 value

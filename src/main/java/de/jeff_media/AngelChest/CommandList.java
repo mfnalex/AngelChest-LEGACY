@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class CommandList implements CommandExecutor {
 	
-	Main plugin;
+	final Main plugin;
 	
 	public CommandList(Main plugin) {
 		this.plugin = plugin;

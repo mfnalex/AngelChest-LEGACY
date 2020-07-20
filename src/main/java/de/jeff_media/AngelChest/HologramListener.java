@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 
 public class HologramListener implements Listener {
 	
-	Main plugin;
+	final Main plugin;
 	
 	public HologramListener(Main plugin) {
 		this.plugin = plugin;

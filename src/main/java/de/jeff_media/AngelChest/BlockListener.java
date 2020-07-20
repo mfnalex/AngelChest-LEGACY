@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 
 public class BlockListener implements Listener {
 
-    Main plugin;
+    final Main plugin;
 
     public BlockListener(Main plugin) {
 

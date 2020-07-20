@@ -16,8 +16,8 @@ import java.lang.reflect.Method;
 
 public class WorldGuardLegacyHandler {
 
-    WorldGuardPlugin wgLegacy;
-    WorldGuardHandler handler;
+    final WorldGuardPlugin wgLegacy;
+    final WorldGuardHandler handler;
     RegionContainer container;
     Method toVectorMethod;
 
@@ -55,6 +55,7 @@ public class WorldGuardLegacyHandler {
         if(regions==null) return false;
         ApplicableRegionSet regionSet = null;
         try {
+            //noinspection rawtypes
             Class vectorClazz = Class.forName("com.sk89q.worldedit.Vector");
 
             Method getRegionsMethod = regions.getClass().getMethod("getApplicableRegions", vectorClazz);

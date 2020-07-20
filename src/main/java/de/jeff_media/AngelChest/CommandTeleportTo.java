@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class CommandTeleportTo implements CommandExecutor {
 
-	Main plugin;
+	final Main plugin;
 
 	public CommandTeleportTo(Main plugin) {
 		this.plugin = plugin;

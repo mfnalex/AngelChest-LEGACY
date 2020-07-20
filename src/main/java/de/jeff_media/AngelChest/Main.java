@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	int currentConfigVersion = 35;
+	final int currentConfigVersion = 36;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
@@ -51,9 +51,9 @@ public class Main extends JavaPlugin {
 
 		ConfigUtils.reloadCompleteConfig(this,false);
 
-		playerSettings = new HashMap<Player,PlayerSetting>();
-		angelChests = new LinkedHashMap<Block,AngelChest>();
-		blockArmorStandCombinations = new ArrayList<BlockArmorStandCombination>();
+		playerSettings = new HashMap<>();
+		angelChests = new LinkedHashMap<>();
+		blockArmorStandCombinations = new ArrayList<>();
 
 		debug("Loading AngelChests from disk");
 		loadAllAngelChestsFromFile();
@@ -63,30 +63,28 @@ public class Main extends JavaPlugin {
 		
 		// Deletes old armorstands and restores broken AngelChests (only case where I currently know this happens is when a endcrystal spanws in a chest)
 		Main plugin = this;
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-			public void run() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 
-				//getLogger().info(blockArmorStandCombinations.size()+"");
-				for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
-					if(!isAngelChest(comb.block)) {
-						comb.armorStand.remove();
-						blockArmorStandCombinations.remove(comb);
-						debug("Removing BlockArmorStandCombination because of missing AngelChest");
-						//getLogger().info("Removed armor stand that has been left behind at @ " + comb.block.getLocation().toString());
-					}
+			//getLogger().info(blockArmorStandCombinations.size()+"");
+			for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
+				if(!isAngelChest(comb.block)) {
+					comb.armorStand.remove();
+					blockArmorStandCombinations.remove(comb);
+					debug("Removing BlockArmorStandCombination because of missing AngelChest");
+					//getLogger().info("Removed armor stand that has been left behind at @ " + comb.block.getLocation().toString());
 				}
+			}
 
 
-				for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
-					/*if(!isAngelChest(entry.getKey())) {
-						entry.getValue().destroy();
-						debug("Removing block from list because it's no AngelChest");
-					}*/
-					if(isBrokenAngelChest(entry.getKey())) {
-						Block block = entry.getKey();
-						//debug("Fixing broken AngelChest at "+block.getLocation());
-						//entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
-					}
+			for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
+				/*if(!isAngelChest(entry.getKey())) {
+					entry.getValue().destroy();
+					debug("Removing block from list because it's no AngelChest");
+				}*/
+				if(isBrokenAngelChest(entry.getKey())) {
+					Block block = entry.getKey();
+					//debug("Fixing broken AngelChest at "+block.getLocation());
+					//entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
 				}
 			}
 		}, 0L, 2 * 20);
@@ -105,12 +103,9 @@ public class Main extends JavaPlugin {
 		
 		@SuppressWarnings("unused")
 		Metrics metrics = new Metrics(this,3194);
-		metrics.addCustomChart(new Metrics.SimplePie("material", new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				return chestMaterial.name();
-			}
-		}));
+		metrics.addCustomChart(new Metrics.SimplePie("material", () -> chestMaterial.name()));
+		metrics.addCustomChart(new Metrics.SimplePie("auto_respawn", () -> getConfig().getBoolean("auto-respawn")+""));
+		metrics.addCustomChart(new Metrics.SimplePie("totem_works_everywhere", () -> getConfig().getBoolean("totem-of-undying-works-everywhere")+""));
 		
 
 		if (debug) getLogger().info("Disabled Worlds: "+disabledWorlds.size());
@@ -118,22 +113,20 @@ public class Main extends JavaPlugin {
 		
 		
 		// Schedule DurationTimer
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-			public void run() {
-				Iterator<AngelChest> it = angelChests.values().iterator();
-				while(it.hasNext()) {
-					AngelChest ac = it.next();
-					if(ac==null) continue;
-					ac.secondsLeft--;
-					if(ac.secondsLeft<=0) {
-						if(getServer().getPlayer(ac.owner)!=null) {
-							getServer().getPlayer(ac.owner).sendMessage(messages.MSG_ANGELCHEST_DISAPPEARED);
-						}
-						ac.destroy();
-						it.remove();
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+			Iterator<AngelChest> it = angelChests.values().iterator();
+			while(it.hasNext()) {
+				AngelChest ac = it.next();
+				if(ac==null) continue;
+				ac.secondsLeft--;
+				if(ac.secondsLeft<=0) {
+					if(getServer().getPlayer(ac.owner)!=null) {
+						getServer().getPlayer(ac.owner).sendMessage(messages.MSG_ANGELCHEST_DISAPPEARED);
 					}
+					ac.destroy();
+					it.remove();
 				}
-			}	
+			}
 		}, 0, 20);
 		
 	}
@@ -166,12 +159,10 @@ public class Main extends JavaPlugin {
 
 	void saveAllAngelChestsToFile() {
 		// Destroy all Angel Chests, including hologram AND CONTENTS!
-		Iterator<Entry<Block, AngelChest>> it = angelChests.entrySet().iterator();
 		//for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
 		//	Utils.destroyAngelChest(entry.getKey(), entry.getValue(), this);
 		//}
-		while(it.hasNext()) {
-			Entry<Block,AngelChest> entry = (Entry<Block,AngelChest>) it.next();
+		for (Entry<Block, AngelChest> entry : angelChests.entrySet()) {
 			entry.getValue().saveToFile();
 			entry.getValue().hologram.destroy();
 		}
@@ -238,7 +229,7 @@ public class Main extends JavaPlugin {
 	}
 	
 	ArrayList<ArmorStand> getAllArmorStands() {
-		ArrayList<ArmorStand> armorStands = new ArrayList<ArmorStand>();
+		ArrayList<ArmorStand> armorStands = new ArrayList<>();
 		for(AngelChest ac : angelChests.values()) {
 			if(ac==null || ac.hologram==null) continue;
 			for(ArmorStand armorStand : ac.hologram.armorStands) {

@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 
 public class GroupUtils {
 
-    Main main;
+    final Main main;
     YamlConfiguration yaml;
     LinkedHashMap<String,Group> groups;
     GroupUtils(Main main, File yamlFile) {
@@ -19,7 +19,7 @@ public class GroupUtils {
             return;
         }
         this.yaml=YamlConfiguration.loadConfiguration(yamlFile);
-        groups = new LinkedHashMap<String,Group>();
+        groups = new LinkedHashMap<>();
 
         for(String groupName : yaml.getKeys(false)) {
             int angelchestDuration = yaml.getInt(groupName+".angelchest-duration",-1);
@@ -43,8 +43,8 @@ public class GroupUtils {
         return bestValueFound == -1 ? main.getConfig().getInt("angelchest-duration") : bestValueFound;
     }
 
-    class Group {
-        int angelchestDuration;
+    static class Group {
+        final int angelchestDuration;
 
         Group(int angelchestDuration) {
             this.angelchestDuration = angelchestDuration;

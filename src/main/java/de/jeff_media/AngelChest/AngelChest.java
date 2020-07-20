@@ -12,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +19,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 public class AngelChest {
@@ -280,7 +276,7 @@ public class AngelChest {
         this.isProtected = false;
     }
 
-    public File saveToFile() {
+    public void saveToFile() {
         File yamlFile = new File(plugin.getDataFolder() + File.separator + "angelchests",
                 this.hashCode() + ".yml");
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(yamlFile);
@@ -317,10 +313,8 @@ public class AngelChest {
         // Duplicate End
         try {
             yaml.save(yamlFile);
-            return yamlFile;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
     }
 

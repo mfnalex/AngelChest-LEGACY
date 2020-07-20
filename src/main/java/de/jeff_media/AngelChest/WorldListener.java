@@ -6,7 +6,7 @@ import org.bukkit.event.world.WorldLoadEvent;
 
 public class WorldListener implements Listener {
 
-    Main main;
+    final Main main;
 
     WorldListener(Main main) {
         this.main=main;

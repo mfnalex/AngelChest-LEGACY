@@ -1,13 +1,11 @@
 package de.jeff_media.AngelChest;
 
-import java.util.Objects;
-
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import org.bukkit.inventory.ItemStack;
 
 public class HookUtils {
 
-    Main main;
+    final Main main;
 
     HookUtils(Main main) {
         this.main=main;

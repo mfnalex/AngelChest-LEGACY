@@ -104,7 +104,7 @@ public class Utils {
 		if(!isEmpty(source.overflowInv))
 			return false; // Already applied inventory
 
-		ArrayList<ItemStack> overflow = new ArrayList<ItemStack>();
+		ArrayList<ItemStack> overflow = new ArrayList<>();
 		ItemStack[] armor_merged = dest.getArmorContents();
 		ItemStack[] storage_merged = dest.getStorageContents();
 		ItemStack[] extra_merged = dest.getExtraContents();
@@ -178,21 +178,19 @@ public class Utils {
 	}
 	
 	public static void sendDelayedMessage(Player p, String message, long delay, Main plugin) {
-		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run() {
-				if (p == null)
-					return;
-				if (!(p instanceof Player))
-					return;
-				if (!p.isOnline())
-					return;
-				p.sendMessage(message);
-			}
+		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+			if (p == null)
+				return;
+			if (!(p instanceof Player))
+				return;
+			if (!p.isOnline())
+				return;
+			p.sendMessage(message);
 		}, delay);
 	}
 
 	public static ArrayList<AngelChest> getAllAngelChestsFromPlayer(Player p, Main plugin) {
-		ArrayList<AngelChest> angelChests = new ArrayList<AngelChest>();
+		ArrayList<AngelChest> angelChests = new ArrayList<>();
 		for (AngelChest angelChest : plugin.angelChests.values()) {
 			if (!angelChest.owner.equals(p.getUniqueId()))
 				continue;
@@ -202,16 +200,14 @@ public class Utils {
 	}
 	
 	public static void sortBlocksByDistance(Block angelChestBlock, List<Block> blocksNearby) {
-		Collections.sort(blocksNearby, new Comparator<Block>() {
-			public int compare(Block b1, Block b2) {
-				double dist1 = b1.getLocation().distance(angelChestBlock.getLocation());
-				double dist2 = b2.getLocation().distance(angelChestBlock.getLocation());
-				if (dist1 > dist2)
-					return 1;
-				if (dist2 > dist1)
-					return -1;
-				return 0;
-			}
+		blocksNearby.sort((b1, b2) -> {
+			double dist1 = b1.getLocation().distance(angelChestBlock.getLocation());
+			double dist2 = b2.getLocation().distance(angelChestBlock.getLocation());
+			if (dist1 > dist2)
+				return 1;
+			if (dist2 > dist1)
+				return -1;
+			return 0;
 		});
 	}
 	
@@ -228,7 +224,7 @@ public class Utils {
 	    }*/
 	
 	 public static List<Block> getPossibleChestLocations(Location location, int radius, Main plugin) {
-	        List<Block> blocks = new ArrayList<Block>();
+	        List<Block> blocks = new ArrayList<>();
 	        for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
 	            for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
 	                for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {

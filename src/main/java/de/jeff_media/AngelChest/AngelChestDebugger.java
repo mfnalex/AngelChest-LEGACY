@@ -5,14 +5,12 @@ import org.bukkit.Bukkit;
 public class AngelChestDebugger {
 
 
-    Main main;
+    final Main main;
 
     public AngelChestDebugger(Main main) {
         this.main=main;
 
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(main,() -> {
-            printBlockArmorstandCombination();
-        },0,100L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(main, this::printBlockArmorstandCombination,0,100L);
 
     }
 

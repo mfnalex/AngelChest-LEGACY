@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.block.BlockFace;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.Directional;
-import org.bukkit.block.data.Rotatable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.Plugin;
@@ -114,7 +110,7 @@ public class AngelChestCommandUtils {
 				 default:
 					 break;
 			 }
-		 } catch (Throwable throwable) {
+		 } catch (Throwable ignored) {
 
 		 }
 

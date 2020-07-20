@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandReload implements CommandExecutor  {
 
-    Main main;
+    final Main main;
 
     CommandReload(Main main) {
         this.main=main;

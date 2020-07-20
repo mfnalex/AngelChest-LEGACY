@@ -12,9 +12,9 @@ import org.bukkit.util.Vector;
 
 public class Hologram {
 
-	ArrayList<ArmorStand> armorStands;
-	ArrayList<UUID> armorStandUUIDs;
-	double lineOffset = -0.2D;
+	final ArrayList<ArmorStand> armorStands;
+	final ArrayList<UUID> armorStandUUIDs;
+	final double lineOffset = -0.2D;
 	double currentOffset = 0.0D;
 	
 	public Hologram(Block block, String text,Main plugin) {
@@ -25,8 +25,8 @@ public class Hologram {
 
 		plugin.debug("Creating hologram with text " + text + " at "+location.toString());
 
-		armorStands = new ArrayList<ArmorStand>();
-		armorStandUUIDs = new ArrayList<UUID>();
+		armorStands = new ArrayList<>();
+		armorStandUUIDs = new ArrayList<>();
 
 		Scanner scanner = new Scanner(text);
 		while (scanner.hasNextLine()) {

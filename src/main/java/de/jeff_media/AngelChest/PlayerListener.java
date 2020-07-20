@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class PlayerListener implements Listener {
 
-	Main plugin;
+	final Main plugin;
 
 	PlayerListener(Main plugin) {
 		this.plugin = plugin;
@@ -145,15 +145,14 @@ public class PlayerListener implements Listener {
 			final int z = fixedAngelChestBlock.getZ();
 			final String world = fixedAngelChestBlock.getWorld().getName();
 			String locString = Utils.locationToString(fixedAngelChestBlock);*/
-			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-				public void run() {
-					//TpLinkUtil.sendLink(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , locString )+" ", "/acinfo tp "+x+" "+y+" "+z+" "+world);
-					try {
-						AngelChestCommandUtils.sendListOfAngelChests(plugin, p, p);
-					} catch(Throwable throwable) {
-						//e.printStackTrace();
-					}
-				}},2);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+				//TpLinkUtil.sendLink(p, String.format(plugin.messages.MSG_ANGELCHEST_LOCATION , locString )+" ", "/acinfo tp "+x+" "+y+" "+z+" "+world);
+				try {
+					AngelChestCommandUtils.sendListOfAngelChests(plugin, p, p);
+				} catch(Throwable throwable) {
+					//e.printStackTrace();
+				}
+			},2);
 		}
 
 		//Utils.reloadAngelChest(ac,plugin);
@@ -215,7 +214,7 @@ public class PlayerListener implements Listener {
 
 	}*/
 
-	@EventHandler(priority = EventPriority.LOWEST,ignoreCancelled = false)
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onAngelChestRightClick(PlayerInteractEvent event) {
 		Player p = event.getPlayer();
 		if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK))

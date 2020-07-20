@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 public class CommandFetch implements CommandExecutor {
 
-	Main plugin;
+	final Main plugin;
 
 	public CommandFetch(Main plugin) {
 		this.plugin = plugin;
