@@ -31,6 +31,7 @@ public class Hologram {
 		Scanner scanner = new Scanner(text);
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
+			if(line.equals("")) continue;
 
 			ArmorStand as = (ArmorStand) location.getWorld().spawnEntity(location.add(new Vector(0,lineOffset,0)), EntityType.ARMOR_STAND); // Spawn the ArmorStand
 			armorStandUUIDs.add(as.getUniqueId());

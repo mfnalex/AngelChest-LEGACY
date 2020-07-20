@@ -154,12 +154,12 @@ public class AngelChestCommandUtils {
 		p.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
 	}
 
-	protected static void sendListOfAngelChests(Main plugin, Player p) {
+	protected static void sendListOfAngelChests(Main plugin, Player sendTo, Player affectedPlayer) {
 		// Get all AngelChests by this player
-		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);
+		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(affectedPlayer, plugin);
 		
 		if(angelChestsFromThisPlayer.size()==0) {
-			p.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
+			sendTo.sendMessage(plugin.messages.MSG_YOU_DONT_HAVE_ANY_ANGELCHESTS);
 			return;
 		}
 		
@@ -176,10 +176,10 @@ public class AngelChestCommandUtils {
 			String tpCommand=null;
 			String fetchCommand=null;
 			String unlockCommand=null;
-			if(p.hasPermission("angelchest.tp")) {
+			if(sendTo.hasPermission("angelchest.tp")) {
 				tpCommand="/actp " + chestIndex;
 			}
-			if(p.hasPermission("angelchest.fetch")) {
+			if(sendTo.hasPermission("angelchest.fetch")) {
 				fetchCommand="/acfetch " + chestIndex;
 			}
 			if(angelChest.isProtected) {
@@ -189,7 +189,7 @@ public class AngelChestCommandUtils {
 			String text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
 				chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
 			);
-			p.spigot().sendMessage(LinkUtils.getLinks(p, text, tpCommand, unlockCommand, fetchCommand, plugin));
+			sendTo.spigot().sendMessage(LinkUtils.getLinks(sendTo, affectedPlayer, text, tpCommand, unlockCommand, fetchCommand, plugin));
 			chestIndex++;
 		}
 	}

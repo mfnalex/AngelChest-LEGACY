@@ -1,6 +1,10 @@
 # Changelog
 
-## 2.9.0-SNAPSHOT
+## 2.10.0
+- Added option to use custom player heads instead of the player's head using their base64 value
+- Added option to disable holograms for AngelChests
+
+## 2.9.0
 - Items with Slimefun's "Soulbound" enchantment will not be put into the chest but remain in the player inventory
 - Added config option to allow totems to be used from every inventory slot
 - Added config option "ignore-keep-inventory" so that a chest is spawned even if another plugin allows you to keep your inventory

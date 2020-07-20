@@ -67,6 +67,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("only-spawn-chests-if-player-may-build",false);
 		main.getConfig().addDefault("disable-worldguard-integration",false);
 		main.getConfig().addDefault("ignore-keep-inventory",false);
+		main.getConfig().addDefault("head-uses-player-name",true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
 		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");
@@ -109,7 +110,8 @@ public class ConfigUtils {
 		}
 		onlySpawnInTmp=null;
 		
-		
+		main.debug("Latest config version: "+main.currentConfigVersion);
+		main.debug("Your config version: "+main.getConfig().getInt("config-version"));
 		if (main.getConfig().getInt("config-version", 0) != main.currentConfigVersion) {
 			//System.out.println("ANGELCHEST DEBUG: " + main.getConfig().getInt("config-version",0)+" / "+main.currentConfigVersion);
 			showOldConfigWarning(main);

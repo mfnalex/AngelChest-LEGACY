@@ -48,8 +48,23 @@ show-location: true
 
 # You can choose the Material to use for the AngelChest,
 # e.g. CHEST, ENDER_CHEST, OBSIDIAN, ...
-# When using PLAYER_HEAD, the head of the player is used.
+# When using PLAYER_HEAD, you can use the head of the died
+# player or any other custom skull (see option below)
 material: CHEST
+
+# When set to true and material is set to PLAYER_HEAD,
+# AngelChest will use the player's head for the chest.
+# When set to false, you can define a custom head
+# via its base64 value (see option below)
+head-uses-player-name: true
+
+# You can also use a custom PLAYER_HEAD texture by using
+# its base64 value. For example, you can go to
+# https://minecraft-heads.com/custom-heads
+# and choose any head, then copy the "value" (at the
+# very bottom of the page) and paste it here.
+custom-head-base64: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmIxN2M1YTk5ZTg1ODE4NDgyY2Q2YzBjNzFiN2VmOTRhY2VkYjZiOGUxZDg5NDRhZGY5MWU1MWU1MDg2NTY2ZiJ9fX0="
+
 
 # You probably don't want your AngelChest to spawn on blocks like GRASS_PATH, FARMLAND, etc.
 # as that would destroy those blocks. You can blacklist them here.
@@ -165,6 +180,7 @@ only-spawn-chests-if-player-may-build: false
 # &n Underline    &r Reset
 
 ##### Hologram text and name of the AngelChest. %s is the player's name. \n is a new line.
+##### Use an empty string to disable the hologram.
 hologram-text: "&a&l[AngelChest]&r\n&b%s"
 angelchest-inventory-name: "&a[AngelChest] &b%s&r"
 
@@ -387,4 +403,4 @@ message-please-select-chest: "&7Please specify which AngelChest you would like t
 debug: false
 
 # please do not change the following line manually!
-config-version: 32
+config-version: 33

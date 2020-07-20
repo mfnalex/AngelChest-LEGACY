@@ -1,13 +1,20 @@
 package de.jeff_media.AngelChest;
 
+import java.util.Objects;
+
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 
+import io.github.thebusybiscuit.slimefun4.implementation.items.magical.SoulboundItem;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+
 public class HookUtils {
 
-    final static String SOULBOUND_LORE= ChatColor.GRAY + "Soulbound";
+    static final String SOULBOUND_LORE= ChatColor.GRAY+"Soulbound";
 
     static boolean isSlimefunSoulbound(ItemStack item) {
+
+
 
         if(item==null) return false;
         if(!item.hasItemMeta()) return false;

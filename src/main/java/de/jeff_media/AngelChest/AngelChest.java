@@ -1,8 +1,8 @@
 package de.jeff_media.AngelChest;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,10 +13,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AngelChest {
@@ -222,8 +228,52 @@ public class AngelChest {
                 plugin.getLogger().warning("Using a custom PLAYER_HEAD as chest material is NOT SUPPORTED in versions < 1.13. Consider using another chest material.");
             } else {
                 Skull state = (Skull) block.getState();
-                state.setOwningPlayer(plugin.getServer().getOfflinePlayer(uuid));
-                state.update();
+                ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
+                String skullName = plugin.getConfig().getString("custom-head");
+
+                if(plugin.getConfig().getBoolean("head-uses-player-name")) {
+                    plugin.debug("Player head = username");
+                    OfflinePlayer player = plugin.getServer().getOfflinePlayer(uuid);
+                    state.setOwningPlayer(player);
+                    state.update();
+                } else {
+                    plugin.debug("Player head = base64");
+                    String base64 = plugin.getConfig().getString("custom-head-base64");
+                    GameProfile profile = new GameProfile(UUID.randomUUID(), "");
+                    profile.getProperties().put("textures", new Property("textures", base64));
+
+                    Field profileField = null;
+                    try {
+                        /*profileField = state.getClass().getDeclaredField("profile");
+                        profileField.setAccessible(true);
+                        profileField.set(state, profile);*/
+
+                        // Some reflection because Spigot cannot place ItemStacks in the world, which ne need to keep the SkullMeta
+
+                        Object nmsWorld = block.getWorld().getClass().getMethod("getHandle").invoke(block.getWorld());
+
+                        String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+                        Class<?> blockPositionClass = Class.forName("net.minecraft.server." + version + ".BlockPosition");
+                        Class<?> tileEntityClass = Class.forName("net.minecraft.server." + version + ".TileEntitySkull");
+
+
+                        Constructor<?> cons = blockPositionClass.getConstructor(Integer.TYPE, Integer.TYPE, Integer.TYPE);
+                        Object blockPosition = cons.newInstance(block.getX(), block.getY(), block.getZ());
+
+                        Method getTileEntity = nmsWorld.getClass().getMethod("getTileEntity", blockPositionClass);
+                        Object tileEntity = tileEntityClass.cast(getTileEntity.invoke(nmsWorld, blockPosition));
+
+                        tileEntityClass.getMethod("setGameProfile", GameProfile.class).invoke(tileEntity, profile);
+
+                    } catch (IllegalArgumentException | IllegalAccessException | SecurityException | NoSuchMethodException | InvocationTargetException | ClassNotFoundException | InstantiationException e) {
+                        plugin.getLogger().warning("Could not set custom base64 player head.");
+                    }
+
+                }
+
+                //state.set);
+                //state.update();
+
             }
         }
         createHologram(plugin, block, uuid);
