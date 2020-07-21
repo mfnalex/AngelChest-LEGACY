@@ -87,6 +87,16 @@ public class ConfigUpdater {
 				}
 			}
 
+			else if (line.startsWith("disabled-materials:")) {
+				newline = null;
+				newLines.add("disabled-materials:");
+				if (plugin.disabledMaterials != null) {
+					for (String disabledMaterial : plugin.disabledMaterials) {
+						newLines.add("- " + disabledMaterial);
+					}
+				}
+			}
+
 			else if (line.startsWith("disabled-worldguard-regions:")) {
 				newline = null;
 				newLines.add("disabled-worldguard-regions:");

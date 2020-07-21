@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.13.0
+- Added disabled-materials list to prevent certain items from being put into the chest. This will later be improved by including custom display names or lores.
+
 ## 2.12.0
 - Added option to limit the maximum amount of AngelChests for all players and/or per group
 - /aclist will only show the amount of hours if the AngelChest's duration exceeds one hour

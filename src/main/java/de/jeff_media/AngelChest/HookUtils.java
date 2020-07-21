@@ -1,12 +1,13 @@
 package de.jeff_media.AngelChest;
 
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import org.bukkit.entity.Entity;
+
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
-public class HookUtils {
+public class HookUtils implements Listener {
 
     final Main main;
     //ArrayList<Entity> hologramsToBeSpawned = new ArrayList<Entity>();
@@ -29,9 +30,24 @@ public class HookUtils {
         }
     }
 
+    boolean isDisabledMaterial(ItemStack item) {
+        if(item==null) return false;
+        String type = item.getType().name();
+        for(String mat : main.disabledMaterials) {
+            if(mat.equalsIgnoreCase(type)) return true;
+        }
+        return false;
+    }
+
+    boolean removeOnDeath(ItemStack item) {
+        if(isDisabledMaterial(item)) return true;
+        return false;
+    }
+
     boolean keepOnDeath(ItemStack item) {
         if(item==null) return false;
-        return isSlimefunSoulbound(item);
+        if( isSlimefunSoulbound(item)) return true;
+        return false;
     }
 
 }

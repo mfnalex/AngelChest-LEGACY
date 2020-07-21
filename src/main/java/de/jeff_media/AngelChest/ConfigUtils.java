@@ -77,6 +77,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("use-slimefun",true);
 		main.getConfig().addDefault("show-links-on-separate-line",true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
+		main.disabledMaterials = (ArrayList<String>) main.getConfig().getStringList("disabled-materials");
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
 		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");
 		

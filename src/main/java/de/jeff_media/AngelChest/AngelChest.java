@@ -20,7 +20,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class AngelChest {
@@ -172,16 +171,19 @@ public class AngelChest {
     private void removeKeepedItems() {
 
         for(int i = 0; i <armorInv.length;i++) {
-            if(plugin.hookUtils.keepOnDeath(armorInv[i])) {
+            if(plugin.hookUtils.keepOnDeath(armorInv[i])
+                    || plugin.hookUtils.removeOnDeath(armorInv[i])) {
                 armorInv[i]=null;
             }
         }
         for(int i = 0; i <storageInv.length;i++) {
-            if(plugin.hookUtils.keepOnDeath(storageInv[i])) {
+            if(plugin.hookUtils.keepOnDeath(storageInv[i])
+                    || plugin.hookUtils.removeOnDeath(storageInv[i])) {
                 storageInv[i]=null;
             }
         }for(int i = 0; i <extraInv.length;i++) {
-            if(plugin.hookUtils.keepOnDeath(extraInv[i])) {
+            if(plugin.hookUtils.keepOnDeath(extraInv[i])
+                    || plugin.hookUtils.removeOnDeath(extraInv[i])) {
                 extraInv[i]=null;
             }
         }
@@ -200,6 +202,7 @@ public class AngelChest {
         if (MinepacksHook.isMinepacksBackpack(i, plugin)) {
             return true;
         }
+
 
         //if(m.hasLore() && m.getLore().contains)
 

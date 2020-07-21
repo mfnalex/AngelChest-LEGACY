@@ -139,6 +139,23 @@ price-teleport: 0
 price-fetch: 0
 
 #########################
+#### disabled items  ####
+#########################
+
+# Some plugins have items that you automatically get back after death. To
+# avoid those from being duplicated, you can just enter their material
+# type here. Future versions will also allow to filter for items by
+# lore or custom name and more 3rd party plugins hooks
+
+# Example:
+
+# disabled-materials:
+# - WOODEN_HOE
+# - COMPASS
+
+disabled-materials:
+
+#########################
 #### disabled worlds ####
 #########################
 
@@ -430,7 +447,7 @@ message-too-many-angelchests: "&cYou had more AngelChests than your Angel could 
 #message-angelchest-location: "&eРасположения ваших Ангельских сундуков:"
 #message-not-enough-money: "&cНе хватает денег."
 #message-please-select-chest: "&7Пожалуйста, укажите, какой Ангельский сундук желаете выбрать."
-#message-already-unlocked: "&cThis AngelChest is already unlocked."
+#message-already-unlocked: "&cЭтот &aАнгельский сундук &cуже разблокирован."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
 
 ##### Spanish
@@ -479,4 +496,4 @@ message-too-many-angelchests: "&cYou had more AngelChests than your Angel could 
 debug: false
 
 # please do not change the following line manually!
-config-version: 38
+config-version: 39

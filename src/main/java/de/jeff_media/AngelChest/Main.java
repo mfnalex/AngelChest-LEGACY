@@ -16,7 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 38;
+	final int currentConfigVersion = 39;
+
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
@@ -26,7 +27,8 @@ public class Main extends JavaPlugin {
 	CommandList commandListExecutor;
 
 	public boolean debug = false;
-	
+
+	ArrayList<String> disabledMaterials;
 	ArrayList<String> disabledWorlds;
 	ArrayList<String> disabledRegions;
 	ArrayList<Material> dontSpawnOn;
