@@ -23,8 +23,9 @@ public class GroupUtils {
 
         for(String groupName : yaml.getKeys(false)) {
             int angelchestDuration = yaml.getInt(groupName+".angelchest-duration",-1);
+            int chestsPerPlayer = yaml.getInt(groupName+".max-allowed-angelchests",-1);
             //System.out.println("Registering group "+groupName);
-            groups.put(groupName, new Group(angelchestDuration));
+            groups.put(groupName, new Group(angelchestDuration,chestsPerPlayer));
         }
     }
 
@@ -43,11 +44,29 @@ public class GroupUtils {
         return bestValueFound == -1 ? main.getConfig().getInt("angelchest-duration") : bestValueFound;
     }
 
+    int getChestsPerPlayer(Player p) {
+        if(yaml==null) return main.getConfig().getInt("max-allowed-angelchests");
+        Iterator<String> it = groups.keySet().iterator();
+        int bestValueFound = -1;
+        while(it.hasNext()) {
+            String group = it.next();
+            if(!p.hasPermission("angelchest.group."+group)) continue;
+            //System.out.println(" Player is in group "+group);
+            int chestsPerPlayer = groups.get(group).chestsPerPlayer;
+            bestValueFound = (chestsPerPlayer>bestValueFound) ? chestsPerPlayer : bestValueFound;
+            //System.out.println("best value found: "+bestValueFound);
+        }
+        return bestValueFound == -1 ? main.getConfig().getInt("max-allowed-angelchests") : bestValueFound;
+    }
+
     static class Group {
         final int angelchestDuration;
+        final int chestsPerPlayer;
 
-        Group(int angelchestDuration) {
+        Group(int angelchestDuration, int chestsPerPlayer) {
+
             this.angelchestDuration = angelchestDuration;
+            this.chestsPerPlayer = chestsPerPlayer;
         }
     }
 

@@ -21,17 +21,17 @@ public class LinkUtils {
 
 		  	TextComponent text = new TextComponent(preText);
 
-		  if(sendTo.hasPermission("angelchest.tp") && commandTp != null) {
+		  if(commandTp != null) {
 			  TextComponent link = createCommandLink(plugin.messages.LINK_TP,commandTp);
 			  text.addExtra(link);
 			  placeholder = " ";
 		  }
-		  if(sendTo.hasPermission("angelchest.fetch") && commandFetch != null) {
+		  if(commandFetch != null) {
 			TextComponent link = createCommandLink(plugin.messages.LINK_FETCH,commandFetch);
 			text.addExtra(placeholder);
 			text.addExtra(link);
 		}
-		  if(sendTo.hasPermission("angelchest.lock") && commandUnlock != null) {
+		  if(commandUnlock != null) {
 			  TextComponent link = createCommandLink(plugin.messages.LINK_UNLOCK,commandUnlock);
 			  text.addExtra(placeholder);
 			  text.addExtra(link);

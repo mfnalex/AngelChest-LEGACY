@@ -185,9 +185,16 @@ public class AngelChestCommandUtils {
 				unlockCommand="/acunlock " + chestIndex + affectedPlayerParameter;
 			}
 			
-			String text = String.format("\n[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
-				chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
-			);
+			String text;
+			if(hour>0) {
+				text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
+						chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+				);
+			} else {
+				text = String.format("[%d] %02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
+						chestIndex, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+				);
+			}
 			sendTo.spigot().sendMessage(LinkUtils.getLinks(sendTo, affectedPlayer, text, tpCommand, unlockCommand, fetchCommand, plugin));
 			chestIndex++;
 		}

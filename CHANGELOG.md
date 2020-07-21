@@ -1,7 +1,12 @@
 # Changelog
 
-## 2.11.3-SNAPSHOT
+## 2.12.0
+- Added option to limit the maximum amount of AngelChests for all players and/or per group
+- /aclist will only show the amount of hours if the AngelChest's duration exceeds one hour
+
+## 2.11.3
 - Added async chunk loading if Paper or forks of Paper are used. On Spigot, chunks will be loaded normally.
+- Fixed unlock, fetch and tp links not being shown in /aclist
 
 ## 2.11.2
 - Added Italian translation

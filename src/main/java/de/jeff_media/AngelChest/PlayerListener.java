@@ -18,6 +18,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -153,6 +154,19 @@ public class PlayerListener implements Listener {
 					//e.printStackTrace();
 				}
 			},2);
+		}
+
+		int maxChests = plugin.groupUtils.getChestsPerPlayer(p);
+		ArrayList<AngelChest> chests = Utils.getAllAngelChestsFromPlayer(p,plugin);
+		//System.out.println(chests.size()+" chests.size");
+		if(chests.size()>maxChests) {
+			chests.get(0).destroy();
+			chests.get(0).remove();
+			Bukkit.getScheduler().runTaskLater(plugin,() -> {
+				p.sendMessage(" ");
+				p.sendMessage(plugin.messages.MSG_ANGELCHEST_EXPLODED);
+			},3L);
+
 		}
 
 		//Utils.reloadAngelChest(ac,plugin);

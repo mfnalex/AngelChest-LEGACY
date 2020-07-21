@@ -3,10 +3,8 @@ package de.jeff_media.AngelChest;
 import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.concurrent.Callable;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
-import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 37;
+	final int currentConfigVersion = 38;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
