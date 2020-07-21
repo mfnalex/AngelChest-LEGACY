@@ -1,7 +1,11 @@
 # Changelog
 
-## 2.11.2-SNAPSHOT
+## 2.11.3-SNAPSHOT
+- Added async chunk loading if Paper or forks of Paper are used. On Spigot, chunks will be loaded normally.
+
+## 2.11.2
 - Added Italian translation
+- Added option to show links in /acinfo on a separate line (default: true)
 
 ## 2.11.1
 - Removed forgotten debug messages (sorry)

@@ -44,7 +44,7 @@ public class PlayerListener implements Listener {
 		plugin.unregisterPlayer(event.getPlayer());
 	}
 
-	@EventHandler(priority = EventPriority.LOWEST)
+	@EventHandler
 	public void spawnAngelChest(PlayerDeathEvent event) {
 
 		Objects.requireNonNull(plugin.chestMaterial,"Chest Material is null!");

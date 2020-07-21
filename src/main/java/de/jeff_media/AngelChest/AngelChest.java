@@ -2,6 +2,7 @@ package de.jeff_media.AngelChest;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import io.papermc.lib.PaperLib;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
@@ -80,10 +81,14 @@ public class AngelChest {
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getOfflinePlayer(owner).getName());
 
         if(!block.getChunk().isLoaded()) {
-            plugin.debug("Chunk is not loaded, trying to load Chunk...");
-            block.getChunk().load();
+            plugin.debug("Chunk is not loaded, trying to load chunk async...");
+            PaperLib.getChunkAtAsync(block.getLocation());
             if(!block.getChunk().isLoaded()) {
-                plugin.debug("The chunk is still unloaded... creating the chest will probably fail.");
+                plugin.debug("The chunk is still unloaded... Trying to load chunk synced...");
+                block.getChunk().load();
+                if(!block.getChunk().isLoaded()) {
+                    plugin.debug("The chunk is still unloaded... creating the chest will probably fail.");
+                }
             }
         }
 

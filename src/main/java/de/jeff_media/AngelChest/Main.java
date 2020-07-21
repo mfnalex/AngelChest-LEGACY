@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
+import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 36;
+	final int currentConfigVersion = 37;
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
@@ -48,6 +49,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 
 		//Main myself = this;
+
 
 		ConfigUtils.reloadCompleteConfig(this,false);
 

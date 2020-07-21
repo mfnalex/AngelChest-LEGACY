@@ -8,9 +8,19 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class LinkUtils {
 	
 	protected static TextComponent getLinks(Player sendTo, Player affectedPlayer, String preText, String commandTp, String commandUnlock, String commandFetch, Main plugin) {
-		  TextComponent text = new TextComponent(preText);
-		
-		  String placeholder = "";
+
+
+
+
+		  String placeholder = " ";
+		  if((sendTo.hasPermission("angelchest.tp") && commandTp!=null)
+				  || (sendTo.hasPermission("angelchest.fetch")&&commandFetch!=null)
+				  || (sendTo.hasPermission("angelchest.lock") && commandUnlock!=null)) {
+				if(plugin.getConfig().getBoolean("show-links-on-separate-line")) preText= preText+"\n";
+		  }
+
+		  	TextComponent text = new TextComponent(preText);
+
 		  if(sendTo.hasPermission("angelchest.tp") && commandTp != null) {
 			  TextComponent link = createCommandLink(plugin.messages.LINK_TP,commandTp);
 			  text.addExtra(link);
@@ -21,20 +31,11 @@ public class LinkUtils {
 			text.addExtra(placeholder);
 			text.addExtra(link);
 		}
-		  if(commandUnlock != null) {
+		  if(sendTo.hasPermission("angelchest.lock") && commandUnlock != null) {
 			  TextComponent link = createCommandLink(plugin.messages.LINK_UNLOCK,commandUnlock);
 			  text.addExtra(placeholder);
 			  text.addExtra(link);
 		  }
-		  
-		  //TextComponent placeholder = new TextComponent(" | ");
-		  //placeholder.setColor(net.md_5.bungee.api.ChatColor.GRAY);
-		  
-
-//		  text.addExtra(placeholder);
-//		  text.addExtra(donate);
-//		  text.addExtra(placeholder);
-//		  text.addExtra(changelog);
 	        
 		  return text;
 	}
@@ -46,10 +47,7 @@ public class LinkUtils {
                 .append(link).bold(false);*/
 		
 		TextComponent tc = new TextComponent(text);
-		//tc.setBold(true);
-		//tc.setColor(color);
 		tc.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND,command));
-		//tc.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, null));
 		return tc;
 	}
 

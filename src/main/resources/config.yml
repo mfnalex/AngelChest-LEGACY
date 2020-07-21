@@ -47,6 +47,10 @@ max-radius: 10
 # is located.
 show-location: true
 
+# When set to true, the links in the chat for teleportation, fetching or unlocking
+# an AngelChest will be sent on a separate line
+show-links-on-separate-line: true
+
 # You can choose the Material to use for the AngelChest,
 # e.g. CHEST, ENDER_CHEST, OBSIDIAN, ...
 # When using PLAYER_HEAD, you can use the head of the died
@@ -93,7 +97,6 @@ auto-respawn: false
 
 # When auto-respawn is true, you can define a delay in seconds before the player is respawned.
 auto-respawn-delay: 10
-
 
 # When false (default), AngelChest will only spawn the chest if the player would lose their inventory on death
 # When true, AngelChest will always spawn the chest and ignore whether other plugins would set keepInventory to true
@@ -454,4 +457,4 @@ message-already-unlocked: "&cThis AngelChest is already unlocked."
 debug: false
 
 # please do not change the following line manually!
-config-version: 36
+config-version: 37
