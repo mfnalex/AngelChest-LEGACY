@@ -69,6 +69,12 @@ public class Main extends JavaPlugin {
 
 			//getLogger().info(blockArmorStandCombinations.size()+"");
 			for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
+				if(!comb.block.getChunk().isLoaded()) {
+
+					// CONTINUE IF CHUNK IS NOT LOADED
+
+					continue;
+				}
 				if(!isAngelChest(comb.block)) {
 					comb.armorStand.remove();
 					blockArmorStandCombinations.remove(comb);
@@ -79,6 +85,14 @@ public class Main extends JavaPlugin {
 
 
 			for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
+
+				if(!entry.getKey().getChunk().isLoaded()) {
+
+
+					// CONTINUE IF CHUNK IS NOT LOADED
+
+					continue;
+				}
 				/*if(!isAngelChest(entry.getKey())) {
 					entry.getValue().destroy();
 					debug("Removing block from list because it's no AngelChest");

@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.14.1-SNAPSHOT
+- Fix repeating tasks if chunk is not loaded
+
 ## 2.14.0
 - Added option to not spawn a chest if player died in a PVP battle (thanks to Bibithom who let me kill them for "testing purposes" ^^)
 - Added option to move the hologram up or down (e.g. when using a head as chest material, you can move the hologram down so it looks better)
