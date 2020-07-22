@@ -57,10 +57,12 @@ public class ConfigUtils {
 
 		main.getConfig().addDefault("check-for-updates", "true");
 		main.getConfig().addDefault("check-interval",4);
+		main.getConfig().addDefault("allow-angelchest-in-pvp",true);
 		main.getConfig().addDefault("totem-of-undying-works-everywhere",true);
 		main.getConfig().addDefault("show-location", true);
 		main.getConfig().addDefault("angelchest-duration", 600);
 		main.getConfig().addDefault("max-allowed-angelchests",5);
+		main.getConfig().addDefault("hologram-offset",0.0);
 		main.getConfig().addDefault("max-radius", 10);
 		main.getConfig().addDefault("material", "CHEST");
 		main.getConfig().addDefault("player-head","{PLAYER}");

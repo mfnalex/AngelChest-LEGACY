@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.14.0-SNAPSHOT
+- Added option to not spawn a chest if player died in a PVP battle (experimental, I couldn't test it because of a lack of players)
+- Added option to move the hologram up or down (e.g. when using a head as chest material, you can move the hologram down so it looks better)
+
 ## 2.13.0
 - Added disabled-materials list to prevent certain items from being put into the chest. This will later be improved by including custom display names or lores.
 

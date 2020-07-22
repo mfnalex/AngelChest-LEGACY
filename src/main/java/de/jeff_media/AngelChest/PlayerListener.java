@@ -68,6 +68,9 @@ public class PlayerListener implements Listener {
 		if (event.getKeepInventory()) {
 			if(plugin.getConfig().getBoolean("ignore-keep-inventory",false)) {
 				plugin.debug("Cancelled: event#getKeepInventory() == true");
+				plugin.debug("Please check if your kept your inventory on death!");
+				plugin.debug("This is probably because some other plugin tries to handle your inv on death.");
+				plugin.debug(event.getEntity().getDisplayName()+" is OP: "+event.getEntity().isOp());
 				return;
 			} else {
 				plugin.debug("event#getKeepInventory() == true but we ignore it because of config settings");
@@ -93,9 +96,20 @@ public class PlayerListener implements Listener {
 
 		// Don't do anything if player's inventory is empty anyway
 		if (event.getDrops() == null || event.getDrops().size() == 0) {
-			plugin.debug("Cancelled: event#getDrops == null || event#getDrops#size =0 0");
+			plugin.debug("Cancelled: event#getDrops == null || event#getDrops#size == 0");
+			plugin.debug("Either your inventory was empty, or another plugin set your");
+			plugin.debug("drops to zero.");
 			Utils.sendDelayedMessage(p, plugin.messages.MSG_INVENTORY_WAS_EMPTY, 1, plugin);
 			return;
+		}
+
+		if(!plugin.getConfig().getBoolean("allow-angelchest-in-pvp")) {
+			if(event.getEntity().getKiller()!=null) {
+				plugin.debug("Cancelled: allow-angelchest-in-pvp is false and this seemed to be a pvp death");
+
+				Utils.sendDelayedMessage(p, plugin.messages.MSG_NO_CHEST_IN_PVP,1,plugin);
+				return;
+			}
 		}
 
 		// Enable keep inventory to prevent drops (this is not preventing the drops at the moment due to spigot)

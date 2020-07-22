@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 39;
+	final int currentConfigVersion = 41;
 
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
