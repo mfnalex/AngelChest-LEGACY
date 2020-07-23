@@ -90,7 +90,7 @@ public class Main extends JavaPlugin {
 				}
 			}
 
-
+			// The following might only be needed for chests destroyed by end crystals spawning during the init phase of the ender dragon
 			for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
 
 				if(!PaperLib.isChunkGenerated(entry.getKey().getLocation())) {
@@ -108,11 +108,12 @@ public class Main extends JavaPlugin {
 					entry.getValue().destroy();
 					debug("Removing block from list because it's no AngelChest");
 				}*/
-				if(isBrokenAngelChest(entry.getKey())) {
-					Block block = entry.getKey();
+				//if(isBrokenAngelChest(entry.getKey())) {
+					// TODO: Disabled for now, but left behind if someone still has missing chests upon end crystal generation
+					//Block block = entry.getKey();
 					//debug("Fixing broken AngelChest at "+block.getLocation());
 					//entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
-				}
+				//}
 			}
 		}, 0L, 2 * 20);
 		
