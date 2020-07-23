@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
+import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -69,8 +70,14 @@ public class Main extends JavaPlugin {
 
 			//getLogger().info(blockArmorStandCombinations.size()+"");
 			for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
-				if(!comb.block.getChunk().isLoaded()) {
 
+				if(!PaperLib.isChunkGenerated(comb.block.getLocation())) {
+					debug("Chunk at "+comb.block.getLocation().toString()+" has not been generated!");
+				}
+
+				if(!comb.block.getWorld().isChunkLoaded(comb.block.getX(),comb.block.getZ())) {
+
+					debug("Chunk at "+comb.block.getLocation().toString() + " is not loaded, skipping repeating task regarding BlockArmorstandCombination");
 					// CONTINUE IF CHUNK IS NOT LOADED
 
 					continue;
@@ -86,9 +93,13 @@ public class Main extends JavaPlugin {
 
 			for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
 
-				if(!entry.getKey().getChunk().isLoaded()) {
+				if(!PaperLib.isChunkGenerated(entry.getKey().getLocation())) {
+					debug("Chunk at "+entry.getKey().getLocation().toString()+" has not been generated!");
+				}
 
+				if(!entry.getKey().getWorld().isChunkLoaded(entry.getKey().getX(),entry.getKey().getZ())) {
 
+					debug("Chunk at "+entry.getKey().getLocation().toString() + " is not loaded, skipping repeating task regarding angelChests.entrySet()");
 					// CONTINUE IF CHUNK IS NOT LOADED
 
 					continue;

@@ -80,13 +80,13 @@ public class AngelChest {
         //String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getOfflinePlayer(owner).getName());
 
-        if(!block.getChunk().isLoaded()) {
+        if(!block.getWorld().isChunkLoaded(block.getX(),block.getZ())) {
             plugin.debug("Chunk is not loaded, trying to load chunk async...");
             PaperLib.getChunkAtAsync(block.getLocation());
-            if(!block.getChunk().isLoaded()) {
+            if(!block.getWorld().isChunkLoaded(block.getX(),block.getZ())) {
                 plugin.debug("The chunk is still unloaded... Trying to load chunk synced...");
                 block.getChunk().load();
-                if(!block.getChunk().isLoaded()) {
+                if(!block.getWorld().isChunkLoaded(block.getX(),block.getZ())) {
                     plugin.debug("The chunk is still unloaded... creating the chest will probably fail.");
                 }
             }
@@ -331,13 +331,13 @@ public class AngelChest {
     public void destroy() {
         plugin.debug("Destroying AngelChest");
 
-        if(!block.getChunk().isLoaded()) {
+        if(!block.getWorld().isChunkLoaded(block.getX(),block.getZ())) {
             plugin.debug("Chunk is not loaded, trying to load chunk async...");
             PaperLib.getChunkAtAsync(block.getLocation());
-            if(!block.getChunk().isLoaded()) {
+            if(!block.getWorld().isChunkLoaded(block.getX(),block.getZ())) {
                 plugin.debug("The chunk is still unloaded... Trying to load chunk synced...");
                 block.getChunk().load();
-                if(!block.getChunk().isLoaded()) {
+                if(!block.getWorld().isChunkLoaded(block.getX(),block.getZ())) {
                     plugin.debug("The chunk is still unloaded... destroying the chest will probably fail.");
                 }
             }
