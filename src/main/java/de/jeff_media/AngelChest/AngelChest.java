@@ -286,7 +286,7 @@ public class AngelChest {
         this.isProtected = false;
     }
 
-    public void saveToFile() {
+    public File saveToFile() {
         File yamlFile = new File(plugin.getDataFolder() + File.separator + "angelchests",
                 this.hashCode() + ".yml");
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(yamlFile);
@@ -326,6 +326,7 @@ public class AngelChest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return yamlFile;
     }
 
     public void destroy() {

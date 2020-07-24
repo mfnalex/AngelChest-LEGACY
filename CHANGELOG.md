@@ -1,7 +1,9 @@
 # Changelog
 
-## 2.14.1-SNAPSHOT
-- Fix repeating tasks if chunk is not loaded
+## 2.14.1
+- Fixed AngelChests being destroyed when player died in a massive TNT explosion
+- Fixed no AngelChest being spawned if player killed himself and "allow-angelchest-in-pvp" is false
+- Skip repeating tasks if chunk is not loaded
 
 ## 2.14.0
 - Added option to not spawn a chest if player died in a PVP battle (thanks to Bibithom who let me kill them for "testing purposes" ^^)

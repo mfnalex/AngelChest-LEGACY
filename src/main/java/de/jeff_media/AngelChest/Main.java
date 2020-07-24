@@ -108,12 +108,12 @@ public class Main extends JavaPlugin {
 					entry.getValue().destroy();
 					debug("Removing block from list because it's no AngelChest");
 				}*/
-				//if(isBrokenAngelChest(entry.getKey())) {
+				if(isBrokenAngelChest(entry.getKey())) {
 					// TODO: Disabled for now, but left behind if someone still has missing chests upon end crystal generation
-					//Block block = entry.getKey();
-					//debug("Fixing broken AngelChest at "+block.getLocation());
-					//entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
-				//}
+					Block block = entry.getKey();
+					debug("Fixing broken AngelChest at "+block.getLocation());
+					entry.setValue(new AngelChest(getAngelChest(block).saveToFile(),plugin));
+				}
 			}
 		}, 0L, 2 * 20);
 		

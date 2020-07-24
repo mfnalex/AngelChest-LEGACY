@@ -104,7 +104,7 @@ public class PlayerListener implements Listener {
 		}
 
 		if(!plugin.getConfig().getBoolean("allow-angelchest-in-pvp")) {
-			if(event.getEntity().getKiller()!=null) {
+			if(event.getEntity().getKiller()!=null && event.getEntity().getKiller() != event.getEntity()) {
 				plugin.debug("Cancelled: allow-angelchest-in-pvp is false and this seemed to be a pvp death");
 
 				Utils.sendDelayedMessage(p, plugin.messages.MSG_NO_CHEST_IN_PVP,1,plugin);
@@ -270,17 +270,18 @@ public class PlayerListener implements Listener {
 
 	void openAngelChest(Player p, Block block, AngelChest angelChest) {
 
-		if((p.hasPermission("angelchest.xp") || p.hasPermission("angelchest.xp.levels")) && angelChest.experience!=0) {
-			p.giveExp(angelChest.experience);
-			angelChest.levels = 0;
-			angelChest.experience=0;
-		}
 		if(p.hasPermission("angelchest.xp.levels") && angelChest.levels!=0 && angelChest.levels> p.getLevel()) {
 			p.setExp(0);
 			p.setLevel(angelChest.levels);
 			angelChest.levels = 0;
 			angelChest.experience = 0;
 		}
+		else if((p.hasPermission("angelchest.xp") || p.hasPermission("angelchest.xp.levels")) && angelChest.experience!=0) {
+			p.giveExp(angelChest.experience);
+			angelChest.levels = 0;
+			angelChest.experience=0;
+		}
+
 
 
 
