@@ -30,9 +30,10 @@
 ############################
 
 # After this amount of seconds, the AngelChest is automatically destroyed
-# and drops its contents. You can override this for certain players by
-# setting up groups and giving players the angelchest.group.<groupname>
-# permission. See groups.example.yml for more information.
+# and drops its contents. Use 0 for infinite duration.
+# You can override this for certain players by setting up groups and
+# giving players the angelchest.group.<groupname> permission. See
+# groups.example.yml for more information.
 # Default is 600 seconds = 10 minutes
 angelchest-duration: 600
 
@@ -518,4 +519,4 @@ no-angelchest-in-pvp: "&cAn Angel tried to collect your stuff but was put to fli
 debug: false
 
 # please do not change the following line manually!
-config-version: 41
+config-version: 42

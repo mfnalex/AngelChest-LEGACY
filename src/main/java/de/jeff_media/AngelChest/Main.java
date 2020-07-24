@@ -17,7 +17,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 41;
+	final int currentConfigVersion = 42;
 
 	boolean usingMatchingConfig = true;
 	HashMap<Player,PlayerSetting> playerSettings;
@@ -147,7 +147,7 @@ public class Main extends JavaPlugin {
 				AngelChest ac = it.next();
 				if(ac==null) continue;
 				ac.secondsLeft--;
-				if(ac.secondsLeft<=0) {
+				if(ac.secondsLeft<=0 && !ac.infinite) {
 					if(getServer().getPlayer(ac.owner)!=null) {
 						getServer().getPlayer(ac.owner).sendMessage(messages.MSG_ANGELCHEST_DISAPPEARED);
 					}

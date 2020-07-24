@@ -39,6 +39,7 @@ public class AngelChest {
     int secondsLeft;
     int experience = 0;
     int levels = 0;
+    boolean infinite = false;
     Main plugin;
 
     public AngelChest(File file, Main plugin) {
@@ -57,6 +58,7 @@ public class AngelChest {
         this.levels = yaml.getInt("levels", 0);
         this.isProtected = yaml.getBoolean("isProtected");
         this.secondsLeft = yaml.getInt("secondsLeft");
+        this.infinite = yaml.getBoolean("infinite",false);
 
         // Check if this is the current save format
         int saveVersion = yaml.getInt("angelchest-saveversion", 1);
@@ -145,6 +147,7 @@ public class AngelChest {
         this.block = block;
         this.isProtected = plugin.getServer().getPlayer(owner).hasPermission("angelchest.protect");
         this.secondsLeft = plugin.groupUtils.getDurationPerPlayer(plugin.getServer().getPlayer(owner));
+        if(secondsLeft<=0) infinite = true;
 
         String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getPlayer(owner).getName());
         overflowInv = Bukkit.createInventory(null, 54, inventoryName);
@@ -300,6 +303,7 @@ public class AngelChest {
         yaml.set("x", block.getX());
         yaml.set("y", block.getY());
         yaml.set("z", block.getZ());
+        yaml.set("infinite",infinite);
         yaml.set("owner", owner.toString());
         yaml.set("isProtected", isProtected);
         //yaml.set("configDuration", configDuration);

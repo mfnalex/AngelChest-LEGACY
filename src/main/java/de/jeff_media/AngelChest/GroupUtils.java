@@ -31,6 +31,7 @@ public class GroupUtils {
 
     int getDurationPerPlayer(Player p) {
         if(yaml==null) return main.getConfig().getInt("angelchest-duration");
+        if(main.getConfig().getInt("angelchest-duration")==0) return 0;
         Iterator<String> it = groups.keySet().iterator();
         int bestValueFound = -1;
         while(it.hasNext()) {
@@ -38,6 +39,7 @@ public class GroupUtils {
             if(!p.hasPermission("angelchest.group."+group)) continue;
             //System.out.println(" Player is in group "+group);
             int angelchestDuration = groups.get(group).angelchestDuration;
+            if(angelchestDuration==0) return 0;
             bestValueFound = (angelchestDuration>bestValueFound) ? angelchestDuration : bestValueFound;
             //System.out.println("best value found: "+bestValueFound);
         }

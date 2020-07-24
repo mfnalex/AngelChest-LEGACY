@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.14.2
+- Added possibility to use AngelChests of infinite duration (just set the duration to 0)
+
 ## 2.14.1
 - Fixed AngelChests being destroyed when player died in a massive TNT explosion
 - Fixed players with permission "angelchest.xp.levels" not getting their full levels restored

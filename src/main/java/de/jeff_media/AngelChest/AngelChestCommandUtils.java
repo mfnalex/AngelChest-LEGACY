@@ -186,7 +186,12 @@ public class AngelChestCommandUtils {
 			}
 			
 			String text;
-			if(hour>0) {
+			if(angelChest.infinite) {
+				text = String.format("[%d] §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
+						chestIndex, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+				);
+			}
+			else if(hour>0) {
 				text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
 						chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
 				);
