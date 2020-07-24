@@ -2,6 +2,7 @@
 
 ## 2.14.1
 - Fixed AngelChests being destroyed when player died in a massive TNT explosion
+- Fixed players with permission "angelchest.xp.levels" not getting their full levels restored
 - Fixed no AngelChest being spawned if player killed himself and "allow-angelchest-in-pvp" is false
 - Skip repeating tasks if chunk is not loaded
 
