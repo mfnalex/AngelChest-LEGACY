@@ -45,7 +45,7 @@ public class PlayerListener implements Listener {
 		plugin.unregisterPlayer(event.getPlayer());
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void spawnAngelChest(PlayerDeathEvent event) {
 
 		Objects.requireNonNull(plugin.chestMaterial,"Chest Material is null!");
@@ -66,7 +66,7 @@ public class PlayerListener implements Listener {
 		}
 
 		if (event.getKeepInventory()) {
-			if(plugin.getConfig().getBoolean("ignore-keep-inventory",false)) {
+			if(!plugin.getConfig().getBoolean("ignore-keep-inventory",false)) {
 				plugin.debug("Cancelled: event#getKeepInventory() == true");
 				plugin.debug("Please check if your kept your inventory on death!");
 				plugin.debug("This is probably because some other plugin tries to handle your inv on death.");
