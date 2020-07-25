@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.14.3
+- Fixed "ignore-keep-inventory" behaving opposite of how it should
+
 ## 2.14.2
 - Added possibility to use AngelChests of infinite duration (just set the duration to 0)
 
