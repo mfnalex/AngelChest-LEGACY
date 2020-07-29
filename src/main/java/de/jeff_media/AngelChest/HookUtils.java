@@ -1,8 +1,10 @@
 package de.jeff_media.AngelChest;
 
+import de.jeff_media.AngelChest.hooks.InventoryPagesHook;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -10,11 +12,13 @@ import java.util.ArrayList;
 public class HookUtils implements Listener {
 
     final Main main;
+    InventoryPagesHook inventoryPagesHook;
     //ArrayList<Entity> hologramsToBeSpawned = new ArrayList<Entity>();
     //boolean hologramToBeSpawned = false;
 
     HookUtils(Main main) {
         this.main=main;
+        this.inventoryPagesHook = new InventoryPagesHook(main);
     }
 
     boolean isSlimefunSoulbound(ItemStack item) {
@@ -41,6 +45,7 @@ public class HookUtils implements Listener {
 
     boolean removeOnDeath(ItemStack item) {
         if(isDisabledMaterial(item)) return true;
+        if(inventoryPagesHook.isButton(item)) return true;
         return false;
     }
 

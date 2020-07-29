@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.15.0
+- Added InventoryPages support (will be further improved in next releases)
+
+## 2.14.4
+- Fixed generated config is broken on 1.12.2
+- Fixed error when using "totem-of-undying-works-everywhere" on 1.12.2
+
 ## 2.14.3
 - Fixed "ignore-keep-inventory" behaving opposite of how it should
 

@@ -140,8 +140,11 @@ public class ConfigUpdater {
 					}
 				}
 			}
-			if (newline != null)
+			if (newline != null) {
 				newLines.add(newline);
+			} else {
+				//plugin.getLogger().severe("new line in config update is NULL");
+			}
 		}
 
 		BufferedWriter fw;

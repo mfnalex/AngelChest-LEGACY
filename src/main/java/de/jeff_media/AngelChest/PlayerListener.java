@@ -220,7 +220,7 @@ public class PlayerListener implements Listener {
 
 		for(ItemStack is : p.getInventory()) {
 			if(is==null) continue;
-			if(is.getType()== Material.TOTEM_OF_UNDYING) {
+			if(is.getType().name().equals("TOTEM_OF_UNDYING") || is.getType().name().equals("TOTEM")) {
 				e.setCancelled(false);
 				is.setAmount(is.getAmount()-1);
 				return;
