@@ -75,7 +75,7 @@ public class Main extends JavaPlugin {
 					debug("Chunk at "+comb.block.getLocation().toString()+" has not been generated!");
 				}
 
-				if(!comb.block.getWorld().isChunkLoaded(comb.block.getX(),comb.block.getZ())) {
+				if(!comb.block.getWorld().isChunkLoaded(comb.block.getX()/16,comb.block.getZ()/16)) {
 
 					debug("Chunk at "+comb.block.getLocation().toString() + " is not loaded, skipping repeating task regarding BlockArmorstandCombination");
 					// CONTINUE IF CHUNK IS NOT LOADED
@@ -97,7 +97,7 @@ public class Main extends JavaPlugin {
 					debug("Chunk at "+entry.getKey().getLocation().toString()+" has not been generated!");
 				}
 
-				if(!entry.getKey().getWorld().isChunkLoaded(entry.getKey().getX(),entry.getKey().getZ())) {
+				if(!entry.getKey().getWorld().isChunkLoaded(entry.getKey().getX()/16,entry.getKey().getZ()/16)) {
 
 					debug("Chunk at "+entry.getKey().getLocation().toString() + " is not loaded, skipping repeating task regarding angelChests.entrySet()");
 					// CONTINUE IF CHUNK IS NOT LOADED

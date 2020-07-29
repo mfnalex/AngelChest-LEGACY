@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.15.1
+- Fixed plugin not enabling when InventoryPages is not installed
+- Fixed chunk problems
+- Temporarily disabled Minepacks hook
+
 ## 2.15.0
 - Added InventoryPages support (will be further improved in next releases)
 

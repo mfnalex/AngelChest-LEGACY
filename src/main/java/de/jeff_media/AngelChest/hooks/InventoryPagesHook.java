@@ -22,10 +22,18 @@ public class InventoryPagesHook {
     Material prevMat, nextMat, noPageMat;
     String prevName, nextName, noPageName;
 
+    boolean disabled = false;
+
     public InventoryPagesHook(Main plugin) {
         this.plugin = plugin;
 
         File inventoryPagesConfigFile = new File(plugin.getDataFolder() + File.separator + ".." + File.separator + "InventoryPages" + File.separator + "config.yml");
+
+        if(!inventoryPagesConfigFile.exists()) {
+            disabled=true;
+            return;
+        }
+
         inventoryPagesConfig = YamlConfiguration.loadConfiguration(inventoryPagesConfigFile);
 
         plugin.getLogger().info("Succesfully hooked into InventoryPages");
@@ -47,6 +55,8 @@ public class InventoryPagesHook {
     }
 
     public boolean isButton(@Nullable ItemStack item/*, int slot, @NotNull Inventory inv*/) {
+
+        if(disabled) return false;
 
         if(item==null) return false;
         if(!item.hasItemMeta()) return false;
