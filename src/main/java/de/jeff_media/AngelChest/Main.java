@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 
+import de.jeff_media.AngelChest.hooks.MinepacksHook;
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import io.papermc.lib.PaperLib;
 import org.bstats.bukkit.Metrics;
@@ -40,6 +41,7 @@ public class Main extends JavaPlugin {
 	GroupUtils groupUtils;
 	WorldGuardHandler worldGuardHandler;
 	HookUtils hookUtils;
+	MinepacksHook minepacksHook;
 	AngelChestDebugger debugger;
 	
 	void debug(String t) {

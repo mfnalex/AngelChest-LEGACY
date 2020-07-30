@@ -2,6 +2,7 @@ package de.jeff_media.AngelChest;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import de.jeff_media.AngelChest.hooks.MinepacksHook;
 import io.papermc.lib.PaperLib;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -202,7 +203,7 @@ public class AngelChest {
                 && i.getEnchantments().containsKey(Enchantment.BINDING_CURSE)) {
             return true;
         }
-        if (MinepacksHook.isMinepacksBackpack(i, plugin)) {
+        if (plugin.minepacksHook.isMinepacksBackpack(i, plugin)) {
             return true;
         }
 

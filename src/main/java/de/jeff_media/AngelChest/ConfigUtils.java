@@ -3,6 +3,7 @@ package de.jeff_media.AngelChest;
 import java.io.File;
 import java.util.ArrayList;
 
+import de.jeff_media.AngelChest.hooks.MinepacksHook;
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import org.bukkit.Material;
 
@@ -32,6 +33,7 @@ public class ConfigUtils {
 		main.groupUtils = new GroupUtils(main,groupsFile);
 		main.worldGuardHandler = new WorldGuardHandler(main);
 		main.hookUtils = new HookUtils(main);
+		main.minepacksHook = new MinepacksHook();
 		//main.debugger = new AngelChestDebugger(main);
 		if(reload) {
 			main.loadAllAngelChestsFromFile();

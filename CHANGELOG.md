@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.15.2-SNAPSHOT
+- Will include Minepacks support again
+
 ## 2.15.1
 - Fixed plugin not enabling when InventoryPages is not installed
 - Fixed chunk problems
