@@ -59,7 +59,6 @@ public class WorldGuardHandler {
             } catch(NoClassDefFoundError e) {
                 // Ok, try again with version 6
                 legacyHandler = new WorldGuardLegacyHandler(this);
-                return;
             }
         }
 

@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class CommandUnlock implements CommandExecutor {
 	
@@ -16,7 +17,7 @@ public class CommandUnlock implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String alias, String[] args) {
+	public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String alias, String[] args) {
 		Player affectedPlayer = null;
 		if(!command.getName().equalsIgnoreCase("unlock")) return false;
 		

@@ -6,10 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class MinepacksHook {
 

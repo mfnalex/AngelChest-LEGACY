@@ -220,17 +220,14 @@ public class AngelChestCommandUtils {
 		
 		if(chestsUnlocked == 0) {
 			p.sendMessage(plugin.messages.MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED);
-			return;
 		}
 		
 		else if(chestsUnlocked == 1) {
 			p.sendMessage(plugin.messages.MSG_UNLOCKED_ONE_ANGELCHEST);
-			return;
 		}
 		
 		else {
 			p.sendMessage(String.format(plugin.messages.MSG_UNLOCKED_MORE_ANGELCHESTS,chestsUnlocked));
-			return;
 		}
 	}
 }

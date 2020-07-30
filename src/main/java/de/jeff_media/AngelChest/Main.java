@@ -71,13 +71,13 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 
 			//getLogger().info(blockArmorStandCombinations.size()+"");
-			for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[blockArmorStandCombinations.size()])) {
+			for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[0])) {
 
 				if(!PaperLib.isChunkGenerated(comb.block.getLocation())) {
 					debug("Chunk at "+comb.block.getLocation().toString()+" has not been generated!");
 				}
 
-				if(!comb.block.getWorld().isChunkLoaded(comb.block.getX()/16,comb.block.getZ()/16)) {
+				if(!comb.block.getWorld().isChunkLoaded(comb.block.getX() >> 4,comb.block.getZ() >> 4)) {
 
 					debug("Chunk at "+comb.block.getLocation().toString() + " is not loaded, skipping repeating task regarding BlockArmorstandCombination");
 					// CONTINUE IF CHUNK IS NOT LOADED
@@ -93,13 +93,13 @@ public class Main extends JavaPlugin {
 			}
 
 			// The following might only be needed for chests destroyed by end crystals spawning during the init phase of the ender dragon
-			for(Entry<Block,AngelChest> entry : angelChests.entrySet().toArray(new Entry[0])) {
+			for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
 
 				if(!PaperLib.isChunkGenerated(entry.getKey().getLocation())) {
 					debug("Chunk at "+entry.getKey().getLocation().toString()+" has not been generated!");
 				}
 
-				if(!entry.getKey().getWorld().isChunkLoaded(entry.getKey().getX()/16,entry.getKey().getZ()/16)) {
+				if(!entry.getKey().getWorld().isChunkLoaded(entry.getKey().getX() >> 4,entry.getKey().getZ() >> 4)) {
 
 					debug("Chunk at "+entry.getKey().getLocation().toString() + " is not loaded, skipping repeating task regarding angelChests.entrySet()");
 					// CONTINUE IF CHUNK IS NOT LOADED

@@ -14,6 +14,7 @@ import org.bukkit.block.Block;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@SuppressWarnings("JavaReflectionMemberAccess")
 public class WorldGuardLegacyHandler {
 
     final WorldGuardPlugin wgLegacy;
@@ -53,7 +54,7 @@ public class WorldGuardLegacyHandler {
         if(handler.main.disabledRegions==null || handler.main.disabledRegions.size()==0) return false;
         RegionManager regions = container.get(block.getWorld());
         if(regions==null) return false;
-        ApplicableRegionSet regionSet = null;
+        ApplicableRegionSet regionSet;
         try {
             //noinspection rawtypes
             Class vectorClazz = Class.forName("com.sk89q.worldedit.Vector");

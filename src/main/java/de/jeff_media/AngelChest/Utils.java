@@ -1,7 +1,5 @@
 package de.jeff_media.AngelChest;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,7 +144,7 @@ public class Utils {
 
 		// Try to place overflow items into empty storage slots
 		HashMap<Integer, ItemStack> unstorable = dest
-			.addItem(overflow.toArray(new ItemStack[overflow.size()]));
+			.addItem(overflow.toArray(new ItemStack[0]));
 		source.overflowInv.clear();
 
 		if (unstorable.size() == 0) {
@@ -154,7 +152,7 @@ public class Utils {
 		}
 
 		source.overflowInv.addItem(unstorable.values()
-			.toArray(new ItemStack[unstorable.size()]));
+			.toArray(new ItemStack[0]));
 
 		return false;
 	}
@@ -203,11 +201,7 @@ public class Utils {
 		blocksNearby.sort((b1, b2) -> {
 			double dist1 = b1.getLocation().distance(angelChestBlock.getLocation());
 			double dist2 = b2.getLocation().distance(angelChestBlock.getLocation());
-			if (dist1 > dist2)
-				return 1;
-			if (dist2 > dist1)
-				return -1;
-			return 0;
+			return Double.compare(dist1, dist2);
 		});
 	}
 	

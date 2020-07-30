@@ -40,7 +40,7 @@ public class GroupUtils {
             //System.out.println(" Player is in group "+group);
             int angelchestDuration = groups.get(group).angelchestDuration;
             if(angelchestDuration==0) return 0;
-            bestValueFound = (angelchestDuration>bestValueFound) ? angelchestDuration : bestValueFound;
+            bestValueFound = Math.max(angelchestDuration, bestValueFound);
             //System.out.println("best value found: "+bestValueFound);
         }
         return bestValueFound == -1 ? main.getConfig().getInt("angelchest-duration") : bestValueFound;
@@ -55,7 +55,7 @@ public class GroupUtils {
             if(!p.hasPermission("angelchest.group."+group)) continue;
             //System.out.println(" Player is in group "+group);
             int chestsPerPlayer = groups.get(group).chestsPerPlayer;
-            bestValueFound = (chestsPerPlayer>bestValueFound) ? chestsPerPlayer : bestValueFound;
+            bestValueFound = Math.max(chestsPerPlayer, bestValueFound);
             //System.out.println("best value found: "+bestValueFound);
         }
         return bestValueFound == -1 ? main.getConfig().getInt("max-allowed-angelchests") : bestValueFound;

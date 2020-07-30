@@ -2,7 +2,6 @@ package de.jeff_media.AngelChest;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
@@ -17,6 +16,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.RegisteredListener;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -48,6 +48,14 @@ public class PlayerListener implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void spawnAngelChest(PlayerDeathEvent event) {
 
+		if(plugin.debug) {
+			for (RegisteredListener registeredListener : event.getHandlers().getRegisteredListeners()) {
+				plugin.debug(registeredListener.getPlugin().getName()+": "+registeredListener.getListener().getClass().getName() + " @ "+registeredListener.getPriority().name());
+			}
+		}
+
+
+
 		Objects.requireNonNull(plugin.chestMaterial,"Chest Material is null!");
 
 		/*System.out.println("test");
@@ -66,7 +74,7 @@ public class PlayerListener implements Listener {
 		}
 
 		if (event.getKeepInventory()) {
-			if(plugin.getConfig().getBoolean("ignore-keep-inventory",false) == false) {
+			if(!plugin.getConfig().getBoolean("ignore-keep-inventory", false)) {
 				plugin.debug("Cancelled: event#getKeepInventory() == true");
 				plugin.debug("Please check if your kept your inventory on death!");
 				plugin.debug("This is probably because some other plugin tries to handle your inv on death.");
@@ -285,7 +293,7 @@ public class PlayerListener implements Listener {
 
 
 
-		boolean succesfullyStoredEverything = false;
+		boolean succesfullyStoredEverything;
 		boolean isOwnChest = angelChest.owner == p.getUniqueId();
 
 		succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());

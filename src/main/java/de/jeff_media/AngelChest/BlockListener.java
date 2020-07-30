@@ -4,11 +4,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.entity.EntitySpawnEvent;
 
 public class BlockListener implements Listener {
 
@@ -65,11 +63,7 @@ public class BlockListener implements Listener {
 
     @EventHandler
     public void onEntityExplode(EntityExplodeEvent event) {
-        for (Block block : event.blockList().toArray(new Block[event.blockList().size()])) {
-            if (plugin.isAngelChest(block)) {
-                event.blockList().remove(block);
-            }
-        }
+        event.blockList().removeIf(plugin::isAngelChest);
     }
 
 	/*@EventHandler
@@ -90,11 +84,7 @@ public class BlockListener implements Listener {
 
     @EventHandler
     public void onBlockExplode(BlockExplodeEvent event) {
-        for (Block block : event.blockList().toArray(new Block[event.blockList().size()])) {
-            if (plugin.isAngelChest(block)) {
-                event.blockList().remove(block);
-            }
-        }
+        event.blockList().removeIf(plugin::isAngelChest);
     }
 
     @EventHandler

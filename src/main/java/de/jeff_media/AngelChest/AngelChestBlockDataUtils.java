@@ -39,7 +39,6 @@ public class AngelChestBlockDataUtils {
                 b.setBlockData(blockData);
             } catch(Exception e2) {
                 // Can't set block rotation, probably because it doesn't support it
-                return;
             }
         }
     }
