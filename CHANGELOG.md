@@ -1,7 +1,7 @@
 # Changelog
 
-## 2.15.2-SNAPSHOT
-- Will include Minepacks support again
+## 2.15.2
+- Readded Minepacks support. Will instantly work with Spigot and Paper. Tuinity users have to wait for Minepacks update 2.3.14
 
 ## 2.15.1
 - Fixed plugin not enabling when InventoryPages is not installed

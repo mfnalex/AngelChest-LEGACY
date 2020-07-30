@@ -356,6 +356,12 @@ public class AngelChest {
         // remove the physical chest
         destroyChest(block);
 
+        for(UUID uuid : hologram.armorStandUUIDs) {
+            if(Bukkit.getEntity(uuid)!=null) {
+                Bukkit.getEntity(uuid).remove();
+            }
+        }
+
         // drop contents
         Utils.dropItems(block, armorInv);
         Utils.dropItems(block, storageInv);
