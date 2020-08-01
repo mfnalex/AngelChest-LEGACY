@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.15.3
+- Fixed AngelChest cancelling PlayerInteractEvents for armor stands that are not AngelChest holograms
+
 ## 2.15.2
 - Readded Minepacks support. Will instantly work with Spigot and Paper. Tuinity users have to wait for Minepacks update 2.3.14
 
