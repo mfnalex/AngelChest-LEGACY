@@ -18,9 +18,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 42;
+	final int currentConfigVersion = 43;
 
 	boolean usingMatchingConfig = true;
+	HashMap<UUID,PendingConfirm> pendingConfirms;
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
 	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;

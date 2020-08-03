@@ -1,12 +1,8 @@
 package de.jeff_media.AngelChest;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -22,6 +18,42 @@ import org.bukkit.inventory.PlayerInventory;
 
 
 public class Utils {
+
+	public static boolean isSafeSpot(Location location) {
+		if(!location.getBlock().getType().isSolid()
+				&&
+
+				(location.getBlock().getRelative(0,-1,0).getType().isSolid()
+						|| location.getBlock().getRelative(0,-1,0).getType() == Material.WATER)
+
+				&& !isAboveLava(location,10)
+				&& location.getBlockY() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public static List<Block> getPossibleTPLocations(Location location, int radius, Main plugin) {
+		List<Block> blocks = new ArrayList<>();
+		for(int x = location.getBlockX() - radius; x <= location.getBlockX() + radius; x++) {
+			for(int y = location.getBlockY() - radius; y <= location.getBlockY() + radius; y++) {
+				for(int z = location.getBlockZ() - radius; z <= location.getBlockZ() + radius; z++) {
+					Block block = location.getWorld().getBlockAt(x,y,z);
+					if(isSafeSpot(location))
+						blocks.add(block);
+				}
+			}
+		}
+		return blocks;
+	}
+
+	static boolean isAboveLava(Location loc, int height) {
+		Block block = loc.getBlock();
+		for(int i = 0; i < height; i++) {
+			if(block.getRelative(0,-i,0).getType()==Material.LAVA) return true;
+		}
+		return false;
+	}
 
 	public static boolean isEmpty(Inventory inv) {
 
@@ -163,6 +195,13 @@ public class Utils {
 				continue;
 			block.getWorld().dropItem(block.getLocation(), itemStack);
 		}
+	}
+
+	static <T> T[] appendToArray(T[] arr, T element) {
+		final int N = arr.length;
+		arr = Arrays.copyOf(arr, N + 1);
+		arr[N] = element;
+		return arr;
 	}
 	
 	public static void dropExp(Block block, int xp) {

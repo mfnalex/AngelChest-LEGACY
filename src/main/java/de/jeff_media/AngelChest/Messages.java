@@ -14,7 +14,7 @@ public class Messages {
 	MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED, MSG_UNLOCKED_ONE_ANGELCHEST, MSG_UNLOCKED_MORE_ANGELCHESTS, MSG_INVENTORY_WAS_EMPTY,
 	MSG_ANGELCHEST_CREATED, MSG_ANGELCHEST_DISAPPEARED, MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS, MSG_YOU_GOT_YOUR_INVENTORY_BACK
 	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION, MSG_NOT_ENOUGH_MONEY,
-	MSG_PLEASE_SELECT_CHEST, MSG_ANGELCHEST_EXPLODED, MSG_NO_CHEST_IN_PVP;
+	MSG_PLEASE_SELECT_CHEST, MSG_ANGELCHEST_EXPLODED, MSG_NO_CHEST_IN_PVP, MSG_RETRIEVED, MSG_CONFIRM;
 	
 	final String LINK_TP, LINK_FETCH, LINK_UNLOCK;
 
@@ -80,6 +80,10 @@ public class Messages {
 		MSG_ANGELCHEST_EXPLODED = getMsg("too-many-angelchests","&cYou had more AngelChests than your guardian angel could handle... Your oldest AngelChest has exploded.");
 
 		MSG_NO_CHEST_IN_PVP = getMsg("no-angelchest-in-pvp","&cAn Angel tried to collect your stuff but was put to flight by the presence of your killer.");
+
+		MSG_RETRIEVED = getMsg("angelchest-retrieved","&aAngelChest retrieved!");
+
+		MSG_CONFIRM = getMsg("confirm","&6You are about to spend {price}{currency}. Click this message to continue.");
 	}
 
 

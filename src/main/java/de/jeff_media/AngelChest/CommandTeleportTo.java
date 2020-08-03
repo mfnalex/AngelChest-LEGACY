@@ -51,7 +51,7 @@ public class CommandTeleportTo implements CommandExecutor {
             return true;
         }
 
-        AngelChestCommandUtils.teleportPlayerToChest(plugin, p, ac);
+        AngelChestCommandUtils.teleportPlayerToChest(plugin, p, ac, sender, args);
 
 		return true;
 	}

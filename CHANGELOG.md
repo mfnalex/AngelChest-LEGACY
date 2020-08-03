@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.16.0
+- Added confirmation message for actions that cost money (default: enabled)
+- Prevents player from spawning above lava when teleporting to the chest
+- Made message after fetching the AngelChest configurable
+- Fixed "no-angelchest-in-pvp" message not being configurable
+- Updated Polish translation
+
 ## 2.15.3
 - Fixed AngelChest cancelling PlayerInteractEvents for armor stands that are not AngelChest holograms
 

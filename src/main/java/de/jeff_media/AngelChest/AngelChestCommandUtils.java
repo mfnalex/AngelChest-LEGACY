@@ -1,11 +1,15 @@
 package de.jeff_media.AngelChest;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.plugin.Plugin;
@@ -39,7 +43,6 @@ public class AngelChestCommandUtils {
 			p.sendMessage(main.messages.MSG_NOT_ENOUGH_MONEY);
 			return false;
 		}
-
 	}
 
 	// Parses the first argument for the chest index in acinfo and returns a valid chest if it exists
@@ -72,9 +75,16 @@ public class AngelChestCommandUtils {
 		return angelChestsFromThisPlayer.get(chestIdx);
 	}
 
+	static void sendConfirmMessage(CommandSender sender, String command, double price , String message, Main main) {
+
+		TextComponent text = new TextComponent(message.replaceAll("\\{price}", String.valueOf(price)).replaceAll("\\{currency}",getCurrency(price,main)));
+		text.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, command));
+		sender.spigot().sendMessage(text);
+	}
 
 
-	protected static void teleportPlayerToChest(Main plugin, Player p, AngelChest ac) {
+
+	protected static void teleportPlayerToChest(Main plugin, Player p, AngelChest ac, CommandSender sender, String[] args) {
 		if(!p.hasPermission("angelchest.tp")) {
 			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());
 			return;
@@ -86,6 +96,18 @@ public class AngelChestCommandUtils {
 		}
 		
 		double price = plugin.getConfig().getDouble("price-teleport");
+
+		if (price > 0) {
+			PendingConfirm confirm = plugin.pendingConfirms.get(((Player) sender).getUniqueId());
+			if (confirm == null || !confirm.chest.equals(ac) || confirm.action != PendingConfirm.Action.TP) {
+				plugin.pendingConfirms.put(((Player) sender).getUniqueId(), new PendingConfirm(ac, PendingConfirm.Action.TP));
+				String confirmCommand = "/actp " + String.join(" ", args);
+				AngelChestCommandUtils.sendConfirmMessage(sender, confirmCommand, price, plugin.messages.MSG_CONFIRM, plugin);
+				return;
+			}
+			plugin.pendingConfirms.remove(((Player) sender).getUniqueId());
+		}
+
 		if(price>0 && !hasEnoughMoney(p,price,plugin)) {
 			return;
 		}
@@ -115,11 +137,14 @@ public class AngelChestCommandUtils {
 		 }
 
 		// Search for a safe spawn point
-		List<Block> possibleSpawnPoints = Utils.getPossibleChestLocations(tploc, plugin.getConfig().getInt("max-radius"), plugin);
+		List<Block> possibleSpawnPoints = Utils.getPossibleTPLocations(tploc, plugin.getConfig().getInt("max-radius"), plugin);
 		Utils.sortBlocksByDistance(tploc.getBlock(), possibleSpawnPoints);
 
 		if(possibleSpawnPoints.size()>0) {
 			tploc = possibleSpawnPoints.get(0).getLocation();
+		}
+		if(possibleSpawnPoints.size()==0) {
+			tploc = acloc.getBlock().getRelative(0,1,0).getLocation();
 		}
 
 		// Set yaw and pitch of camera
@@ -130,7 +155,25 @@ public class AngelChestCommandUtils {
 		
 		p.teleport(tploc, TeleportCause.PLUGIN);
 	}
-	
+
+	private static String getCurrency(double money, Main main) {
+
+		Plugin v = main.getServer().getPluginManager().getPlugin("Vault");
+		if(v==null) return "";
+
+		RegisteredServiceProvider<Economy> rsp = main.getServer().getServicesManager().getRegistration(Economy.class);
+		if(rsp == null) return "";
+
+		if(rsp.getProvider()==null) return "";
+
+		Economy econ = rsp.getProvider();
+
+		if(econ==null) return "";
+
+		return money == 1 ? econ.currencyNameSingular() : econ.currencyNamePlural();
+
+	}
+
 	protected static void unlockSingleChest(Main plugin, Player sendTo, Player affectedPlayer, AngelChest ac) {
 //		if(!p.hasPermission("angelchest.tp")) {
 //			p.sendMessage(plugin.getCommand("aclist").getPermissionMessage());

@@ -2,6 +2,8 @@ package de.jeff_media.AngelChest;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
 
 import de.jeff_media.AngelChest.hooks.MinepacksHook;
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
@@ -29,6 +31,7 @@ public class ConfigUtils {
 		initUpdateChecker(main);
 		main.debug = main.getConfig().getBoolean("debug",false);
 		main.messages = new Messages(main);
+		main.pendingConfirms = new HashMap<>();
 		File groupsFile = new File(main.getDataFolder()+File.separator+"groups.yml");
 		main.groupUtils = new GroupUtils(main,groupsFile);
 		main.worldGuardHandler = new WorldGuardHandler(main);
@@ -80,6 +83,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("play-can-skip-auto-respawn",false);
 		main.getConfig().addDefault("use-slimefun",true);
 		main.getConfig().addDefault("show-links-on-separate-line",true);
+		main.getConfig().addDefault("confirm",true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledMaterials = (ArrayList<String>) main.getConfig().getStringList("disabled-materials");
 		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
