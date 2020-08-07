@@ -7,6 +7,7 @@ import java.util.List;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -229,20 +230,31 @@ public class AngelChestCommandUtils {
 			}
 			
 			String text;
+			String time;
 			if(angelChest.infinite) {
-				text = String.format("[%d] §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
-						chestIndex, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
-				);
+				//text = String.format("[%d] §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
+				//		chestIndex, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+				time = "";
+				//);
 			}
 			else if(hour>0) {
-				text = String.format("[%d] %02d:%02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
-						chestIndex, hour, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+				time = String.format("%02d:%02d:%02d",
+						hour, min, sec
 				);
+
 			} else {
-				text = String.format("[%d] %02d:%02d §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
-						chestIndex, min, sec, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+				time = String.format("%02d:%02d",
+						min, sec
 				);
 			}
+			text = plugin.getConfig().getString("angelchest-list");
+			text = text.replaceAll("\\{id}", String.valueOf(chestIndex));
+			text = text.replaceAll("\\{x}", String.valueOf(b.getX()));
+			text = text.replaceAll("\\{y}", String.valueOf(b.getY()));
+			text = text.replaceAll("\\{z}", String.valueOf(b.getZ()));
+			text = text.replaceAll("\\{time}",time);
+			text = text.replaceAll("\\{world}",b.getWorld().getName());
+			text = ChatColor.translateAlternateColorCodes('&',text);
 			sendTo.spigot().sendMessage(LinkUtils.getLinks(sendTo, affectedPlayer, text, tpCommand, unlockCommand, fetchCommand, plugin));
 			chestIndex++;
 		}

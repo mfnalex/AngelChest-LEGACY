@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.16.1
+- Made /aclist text translatable
+
 ## 2.16.0
 - Added confirmation message for actions that cost money (default: enabled)
 - Prevents player from spawning above lava when teleporting to the chest

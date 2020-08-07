@@ -242,6 +242,7 @@ use-slimefun: true
 ##### Use an empty string to disable the hologram.
 hologram-text: "&a&l[AngelChest]&r\n&b%s"
 angelchest-inventory-name: "&a[AngelChest] &b%s&r"
+angelchest-list: "[{id}] {time} &aX:&f {x} &aY:&f {y} &aZ:&f {z} | {world} "
 
 ##### Hologram offset
 # If you think the hologram is displayed too high, you can change this number.
@@ -549,4 +550,4 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 debug: false
 
 # please do not change the following line manually!
-config-version: 43
+config-version: 44
