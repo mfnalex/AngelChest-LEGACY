@@ -45,15 +45,25 @@ public class PlayerListener implements Listener {
 		plugin.unregisterPlayer(event.getPlayer());
 	}
 
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void spawnAngelChest(PlayerDeathEvent event) {
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void spawnAngelChestHighest(PlayerDeathEvent event) {
+		if(!plugin.getConfig().getBoolean("ignore-keep-inventory")) {
+			spawnAngelChest(event);
+		}	}
 
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void spawnAngelChestLowest(PlayerDeathEvent event) {
+		if(plugin.getConfig().getBoolean("ignore-keep-inventory")) {
+			spawnAngelChest(event);
+		}
+	}
+
+	private void spawnAngelChest(PlayerDeathEvent event) {
 		if(plugin.debug) {
 			for (RegisteredListener registeredListener : event.getHandlers().getRegisteredListeners()) {
 				plugin.debug(registeredListener.getPlugin().getName()+": "+registeredListener.getListener().getClass().getName() + " @ "+registeredListener.getPriority().name());
 			}
 		}
-
 
 
 		Objects.requireNonNull(plugin.chestMaterial,"Chest Material is null!");
@@ -85,7 +95,7 @@ public class PlayerListener implements Listener {
 				event.setKeepInventory(false);
 			}
 		}
-		
+
 		if(!Utils.isWorldEnabled(p.getLocation().getWorld(), plugin)) {
 			plugin.debug("Cancelled: world disabled ("+p.getLocation().getWorld());
 			return;
@@ -134,14 +144,14 @@ public class PlayerListener implements Listener {
 		} else {
 			tmp = p.getLocation().getBlock();
 		}
-		
+
 		Block angelChestBlock = Utils.findSafeBlock(tmp, plugin);
 		plugin.debug("Debug 2");
 
 		AngelChest ac =new AngelChest(p,p.getUniqueId(), angelChestBlock, p.getInventory(), plugin);
 		plugin.angelChests.put(angelChestBlock,ac);
 		plugin.debug("Debug 3");
-		
+
 		if(!event.getKeepLevel() && event.getDroppedExp()!=0 && p.hasPermission("angelchest.xp")) {
 			if(p.hasPermission("angelchest.xp.levels")) {
 				ac.levels = p.getLevel();
@@ -152,13 +162,12 @@ public class PlayerListener implements Listener {
 
 		// Delete players inventory except excluded items
 		clearInventory(p.getInventory());
-		
+
 		// Clear the drops
 		event.getDrops().clear();
 
 		// send message after one twentieth second
 		Utils.sendDelayedMessage(p, plugin.messages.MSG_ANGELCHEST_CREATED, 1, plugin);
-
 
 
 		if(plugin.getConfig().getBoolean("show-location")) {
@@ -192,7 +201,6 @@ public class PlayerListener implements Listener {
 		}
 
 		//Utils.reloadAngelChest(ac,plugin);
-
 	}
 
 	private void clearInventory(Inventory inv) {

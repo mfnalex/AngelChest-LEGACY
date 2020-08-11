@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.16.2
+- Fixed essentials.keepinv not working anymore
+
 ## 2.16.1
 - Made /aclist text translatable
 
