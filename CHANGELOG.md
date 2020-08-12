@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.16.3
+- Fixed auto config updater causing exceptions on start
+
 ## 2.16.2
 - Fixed essentials.keepinv not working anymore
 

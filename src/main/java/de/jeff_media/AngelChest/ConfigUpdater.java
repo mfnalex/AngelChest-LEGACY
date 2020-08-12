@@ -128,7 +128,8 @@ public class ConfigUpdater {
 						//if (node.equalsIgnoreCase("sorting-method")) // needs single quotes
 						//	quotes = "'";
 						if (node.startsWith("message-") || node.startsWith("link-") || node.equalsIgnoreCase("hologram-text")
-								|| node.equalsIgnoreCase("angelchest-inventory-name")) // needs double quotes
+								|| node.equalsIgnoreCase("angelchest-inventory-name")
+								|| node.equalsIgnoreCase("angelchest-list")) // needs double quotes
 							quotes = "\"";
 						
 						
