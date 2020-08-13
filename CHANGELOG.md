@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.16.4-SNAPSHOT
+- Fixed exception when using unsupported WorldGuard versions
+
 ## 2.16.3
 - Fixed auto config updater causing exceptions on start
 
