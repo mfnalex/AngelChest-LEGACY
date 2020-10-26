@@ -1,5 +1,18 @@
 # Changelog
 
+# 2.17.0
+- Added option to show remaining in AngelChest hologram (will be updated every second).
+- IMPORTANT: Please note that you have to replace the old "%s" for the player's name with the new placeholder "{player}". The new default value now is this:
+```yaml
+##### Hologram text and name of the AngelChest.
+# {player} is the player's name.
+# {time} is the amount of time left.
+# \n is a new line.
+##### Use an empty string to disable the hologram.
+hologram-text: "&a&l[AngelChest]&r\n&b{player}\n&6{time}"
+angelchest-inventory-name: "&a[AngelChest] &b{player}&r"
+```
+
 ## 2.16.4-SNAPSHOT
 - Fixed exception when using unsupported WorldGuard versions
 

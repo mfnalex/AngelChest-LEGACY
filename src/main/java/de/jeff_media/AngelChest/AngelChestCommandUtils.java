@@ -207,10 +207,7 @@ public class AngelChestCommandUtils {
 		Block b;
 
 		for(AngelChest angelChest : angelChestsFromThisPlayer) {
-			int remaining = angelChest.secondsLeft;
-			int sec = remaining % 60;
-			int min = (remaining / 60) % 60;
-			int hour = (remaining / 60) / 60;
+
 
 			String affectedPlayerParameter = "";
 			if(!affectedPlayer.equals(sendTo)) affectedPlayerParameter = " "+affectedPlayer.getName();
@@ -230,29 +227,13 @@ public class AngelChestCommandUtils {
 			}
 			
 			String text;
-			String time;
-			if(angelChest.infinite) {
-				//text = String.format("[%d] §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
-				//		chestIndex, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
-				time = "";
-				//);
-			}
-			else if(hour>0) {
-				time = String.format("%02d:%02d:%02d",
-						hour, min, sec
-				);
 
-			} else {
-				time = String.format("%02d:%02d",
-						min, sec
-				);
-			}
 			text = plugin.getConfig().getString("angelchest-list");
 			text = text.replaceAll("\\{id}", String.valueOf(chestIndex));
 			text = text.replaceAll("\\{x}", String.valueOf(b.getX()));
 			text = text.replaceAll("\\{y}", String.valueOf(b.getY()));
 			text = text.replaceAll("\\{z}", String.valueOf(b.getZ()));
-			text = text.replaceAll("\\{time}",time);
+			text = text.replaceAll("\\{time}",getTimeLeft(angelChest));
 			text = text.replaceAll("\\{world}",b.getWorld().getName());
 			text = ChatColor.translateAlternateColorCodes('&',text);
 			sendTo.spigot().sendMessage(LinkUtils.getLinks(sendTo, affectedPlayer, text, tpCommand, unlockCommand, fetchCommand, plugin));
@@ -260,6 +241,32 @@ public class AngelChestCommandUtils {
 		}
 	}
 
+	public static String getTimeLeft(AngelChest angelChest) {
+		int remaining = angelChest.secondsLeft;
+		int sec = remaining % 60;
+		int min = (remaining / 60) % 60;
+		int hour = (remaining / 60) / 60;
+
+		String time;
+		if(angelChest.infinite) {
+			//text = String.format("[%d] §aX:§f %d §aY:§f %d §aZ:§f %d | %s ",
+			//		chestIndex, b.getX(), b.getY(), b.getZ(), b.getWorld().getName()
+			time = "∞";
+			//);
+		}
+		else if(hour>0) {
+			time = String.format("%02d:%02d:%02d",
+					hour, min, sec
+			);
+
+		} else {
+			time = String.format("%02d:%02d",
+					min, sec
+			);
+		}
+
+		return time;
+	}
 
 	protected static void unlockAllChests(Main plugin, Player p) {
 		ArrayList<AngelChest> angelChestsFromThisPlayer = Utils.getAllAngelChestsFromPlayer(p, plugin);

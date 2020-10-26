@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 45;
+	final int currentConfigVersion = 46;
 
 	boolean usingMatchingConfig = true;
 	HashMap<UUID,PendingConfirm> pendingConfirms;
@@ -69,6 +69,14 @@ public class Main extends JavaPlugin {
 		
 		// Deletes old armorstands and restores broken AngelChests (only case where I currently know this happens is when a endcrystal spanws in a chest)
 		Main plugin = this;
+
+		// Rename holograms
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+			for(AngelChest chest : angelChests.values()) {
+				chest.hologram.update(chest);
+			}
+		},20l,20l);
+
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 
 			//getLogger().info(blockArmorStandCombinations.size()+"");

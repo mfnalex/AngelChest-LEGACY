@@ -14,16 +14,36 @@ public class Hologram {
 
 	final ArrayList<ArmorStand> armorStands;
 	final ArrayList<UUID> armorStandUUIDs;
+	final String text;
 	final double lineOffset = -0.2D;
 	double currentOffset = 0.0D;
-	
-	public Hologram(Block block, String text,Main plugin) {
-		this(block.getLocation().add(new Vector(0.5,-0.5+plugin.getConfig().getDouble("hologram-offset"),0.5)),block,text,plugin);
+
+	public Hologram(Block block, String text,Main plugin, AngelChest chest) {
+		this(block.getLocation().add(new Vector(0.5,-0.5+plugin.getConfig().getDouble("hologram-offset"),0.5)),block,text,plugin,chest);
 	}
 
-	public Hologram(Location location, Block block, String text, Main plugin) {
+	public void update(AngelChest chest) {
+		Scanner scanner = new Scanner(text);
+		int lineNumber = 0;
+		while (scanner.hasNextLine()) {
+
+			String line = scanner.nextLine();
+			line = line.replaceAll("\\{time}", AngelChestCommandUtils.getTimeLeft(chest));
+			if (line.equals("")) continue;
+			if(armorStands.get(lineNumber) !=null) {
+				armorStands.get(lineNumber).setCustomName(line);
+			} /*else if(armorStandUUIDs.get(lineNumber) != null) {
+
+			}*/
+
+			lineNumber++;
+		}
+	}
+
+	public Hologram(Location location, Block block, String text, Main plugin, AngelChest chest) {
 
 		plugin.debug("Creating hologram with text " + text + " at "+location.toString());
+		this.text = text;
 
 		armorStands = new ArrayList<>();
 		armorStandUUIDs = new ArrayList<>();
@@ -31,6 +51,7 @@ public class Hologram {
 		Scanner scanner = new Scanner(text);
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
+			line = line.replaceAll("\\{time}",AngelChestCommandUtils.getTimeLeft(chest));
 			if(line.equals("")) continue;
 
 			//plugin.hookUtils.hologramToBeSpawned=true;

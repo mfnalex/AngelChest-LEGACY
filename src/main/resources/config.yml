@@ -241,10 +241,13 @@ use-slimefun: true
 # &l Bold         &o Italic
 # &n Underline    &r Reset
 
-##### Hologram text and name of the AngelChest. %s is the player's name. \n is a new line.
+##### Hologram text and name of the AngelChest.
+# {player} is the player's name.
+# {time} is the amount of time left.
+# \n is a new line.
 ##### Use an empty string to disable the hologram.
-hologram-text: "&a&l[AngelChest]&r\n&b%s"
-angelchest-inventory-name: "&a[AngelChest] &b%s&r"
+hologram-text: "&a&l[AngelChest]&r\n&b{player}\n&6{time}"
+angelchest-inventory-name: "&a[AngelChest] &b{player}&r"
 angelchest-list: "[{id}] {time} &aX:&f {x} &aY:&f {y} &aZ:&f {z} | {world} "
 
 ##### Hologram offset
@@ -553,4 +556,4 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 debug: false
 
 # please do not change the following line manually!
-config-version: 45
+config-version: 46

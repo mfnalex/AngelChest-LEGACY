@@ -80,7 +80,7 @@ public class AngelChest {
         }
 
         //String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getPlayer(owner).getName());
-        String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getOfflinePlayer(owner).getName());
+        String inventoryName = plugin.messages.ANGELCHEST_INVENTORY_NAME.replaceAll("\\{player}",plugin.getServer().getOfflinePlayer(owner).getName());
 
         if(!block.getWorld().isChunkLoaded(block.getX() >> 4,block.getZ() >> 4)) {
             plugin.debug("Chunk is not loaded, trying to load chunk async...");
@@ -149,7 +149,7 @@ public class AngelChest {
         this.secondsLeft = plugin.groupUtils.getDurationPerPlayer(plugin.getServer().getPlayer(owner));
         if(secondsLeft<=0) infinite = true;
 
-        String inventoryName = String.format(plugin.messages.ANGELCHEST_INVENTORY_NAME, plugin.getServer().getPlayer(owner).getName());
+        String inventoryName = plugin.messages.ANGELCHEST_INVENTORY_NAME.replaceAll("\\{player}", plugin.getServer().getPlayer(owner).getName());
         overflowInv = Bukkit.createInventory(null, 54, inventoryName);
         createChest(block,p.getUniqueId());
 
@@ -378,8 +378,10 @@ public class AngelChest {
     }
     
 	public void createHologram(Main plugin, Block block, UUID uuid) {
-		String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getOfflinePlayer(uuid).getName());
-		hologram = new Hologram(block, hologramText, plugin);
+		//String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getOfflinePlayer(uuid).getName());
+        String hologramText = plugin.messages.HOLOGRAM_TEXT
+                .replaceAll("\\{player}",plugin.getServer().getOfflinePlayer(uuid).getName());
+		hologram = new Hologram(block, hologramText, plugin,this);
 	}
 
 	public void destroyHologram(Main plugin) {

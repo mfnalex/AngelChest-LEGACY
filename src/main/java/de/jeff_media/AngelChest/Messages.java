@@ -61,9 +61,9 @@ public class Messages {
 
 		MSG_NOT_ENOUGH_MONEY = ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("message-not-enough-money","&cYou don't have enough money."));
 		
-		HOLOGRAM_TEXT = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("hologram-text","&a&l[AngelChest]&r\n&b%s"));
+		HOLOGRAM_TEXT = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("hologram-text","&a&l[AngelChest]&r\n&b{player}\n&6{time}"));
 		
-		ANGELCHEST_INVENTORY_NAME = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("angelchest-inventory-name","&a[AngelChest] &b%s&r"));
+		ANGELCHEST_INVENTORY_NAME = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("angelchest-inventory-name","&a[AngelChest] &b{player}&r"));
 		
 		MSG_ANGELCHEST_LOCATION = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-angelchest-location","&eLocation of your AngelChests:").replaceAll(": %s", ""));
 
