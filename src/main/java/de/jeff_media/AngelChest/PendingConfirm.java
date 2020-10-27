@@ -2,8 +2,8 @@ package de.jeff_media.AngelChest;
 
 public class PendingConfirm {
 
-    AngelChest chest;
-    Action action;
+    final AngelChest chest;
+    final Action action;
     enum Action {
         TP, Fetch
     }

@@ -31,11 +31,11 @@ public class Main extends JavaPlugin {
 
 	public boolean debug = false;
 
-	ArrayList<String> disabledMaterials;
-	ArrayList<String> disabledWorlds;
-	ArrayList<String> disabledRegions;
-	ArrayList<Material> dontSpawnOn;
-	ArrayList<Material> onlySpawnIn;
+	List<String> disabledMaterials;
+	List<String> disabledWorlds;
+	List<String> disabledRegions;
+	List<Material> dontSpawnOn;
+	List<Material> onlySpawnIn;
 	
 	Messages messages;
 	PluginUpdateChecker updateChecker;

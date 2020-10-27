@@ -3,7 +3,7 @@ package de.jeff_media.AngelChest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.List;
 
 import de.jeff_media.AngelChest.hooks.MinepacksHook;
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
@@ -85,14 +85,14 @@ public class ConfigUtils {
 		main.getConfig().addDefault("show-links-on-separate-line",false);
 		main.getConfig().addDefault("confirm",true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
-		main.disabledMaterials = (ArrayList<String>) main.getConfig().getStringList("disabled-materials");
-		main.disabledWorlds = (ArrayList<String>) main.getConfig().getStringList("disabled-worlds");
-		main.disabledRegions = (ArrayList<String>) main.getConfig().getStringList("disabled-worldguard-regions");
+		main.disabledMaterials = main.getConfig().getStringList("disabled-materials");
+		main.disabledWorlds =  main.getConfig().getStringList("disabled-worlds");
+		main.disabledRegions =  main.getConfig().getStringList("disabled-worldguard-regions");
 		
-		ArrayList<String> dontSpawnOnTmp = (ArrayList<String>) main.getConfig().getStringList("dont-spawn-on");
+		List<String> dontSpawnOnTmp = main.getConfig().getStringList("dont-spawn-on");
 		main.dontSpawnOn = new ArrayList<>();
 		
-		ArrayList<String> onlySpawnInTmp = (ArrayList<String>) main.getConfig().getStringList("only-spawn-in");
+		List<String> onlySpawnInTmp =  main.getConfig().getStringList("only-spawn-in");
 		main.onlySpawnIn = new ArrayList<>();
 		
 		for(String string : dontSpawnOnTmp) {
@@ -108,7 +108,6 @@ public class ConfigUtils {
 			//System.out.println(mat.name() + " added to blacklist");
 			main.dontSpawnOn.add(mat);
 		}
-		dontSpawnOnTmp=null;
 
 		if(false) return;
 		

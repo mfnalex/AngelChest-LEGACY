@@ -1,6 +1,9 @@
 # Changelog
 
-# 2.17.0
+## 2.17.1-SNAPSHOT
+- Added compatibility for SSSpigot (a fork of Paper or something, IDK)
+
+## 2.17.0
 - Added option to show remaining in AngelChest hologram (will be updated every second).
 - IMPORTANT: Please note that you have to replace the old "%s" for the player's name with the new placeholder "{player}". The new default value now is this:
 ```yaml
