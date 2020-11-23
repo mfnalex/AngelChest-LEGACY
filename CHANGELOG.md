@@ -1,6 +1,9 @@
 # Changelog
 
-## 2.17.1-SNAPSHOT
+## 2.17.2
+- Updated Turkish translation (thanks to @Cazcez)
+
+## 2.17.1
 - Added compatibility for SSSpigot (a fork of Paper or something, IDK)
 
 ## 2.17.0
