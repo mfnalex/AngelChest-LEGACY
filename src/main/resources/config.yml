@@ -542,10 +542,10 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-angelchest-location: "&eAngelChest'lerinin konumu:"
 #message-not-enough-money: "&cYeterli paraya sahip değilsin."
 #message-already-unlocked: "&cBu AngelChest'in kilidi zaten açık."
-#message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
-#message-no-angelchest-in-pvp: "&cAn Angel tried to collect your stuff but was put to flight by the presence of your killer."
-#message-angelchest-retrieved: "&aAngelChest retrieved!"
-#message-confirm: "&6You are about to spend {price}{currency}. Click this message to continue."
+#message-too-many-angelchests: "&cSahip olabileceğinden daha fazla AngelChest'in var... En eski AngelChest'in yok edildi."
+#message-no-angelchest-in-pvp: "&cBir melek eşyalarını toplamayı denedi fakat katiliniz tarafından engellendi."
+#message-angelchest-retrieved: "&aAngelChest yanınıza çağrıldı!"
+#message-confirm: "&6{price}{currency} harcamak üzeresin. Devam etmek için mesaja tıkla."
 
 
 #########################
