@@ -2,6 +2,7 @@
 
 ## 2.17.4
 - Fixed duplication bug when breaking an AngelChest with a piston while attempting to remove stuff from the chest
+- Improved error message when using outdated WorldGuard versions
 
 ## 2.17.2
 - Updated Turkish translation (thanks to @Cazcez)
