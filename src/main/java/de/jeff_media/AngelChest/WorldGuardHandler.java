@@ -61,7 +61,7 @@ public class WorldGuardHandler {
                 legacyHandler = new WorldGuardLegacyHandler(this);
             } catch(NullPointerException e) {
                 disabled = true;
-                main.getLogger().info("You are using a version of WorldGuard that does fully support your Minecraft version. WorldGuard integration is disabled.");
+                main.getLogger().info("You are using a version of WorldGuard that does not fully support your Minecraft version. WorldGuard integration is disabled.");
             }
         }
 
