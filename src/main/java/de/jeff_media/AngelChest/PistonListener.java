@@ -1,6 +1,7 @@
 package de.jeff_media.AngelChest;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,7 +27,7 @@ public class PistonListener implements Listener {
         }
 
         for(Block block : affectedBlocks) {
-            if(main.isAngelChest(block)) {
+            if(main.isAngelChest(block) || main.isAngelChest(block.getRelative(BlockFace.UP))) {
                 e.setCancelled(true);
                 main.debug("BlockPistonExtendEvent cancelled because AngelChest is affected");
                 return;
@@ -43,7 +44,7 @@ public class PistonListener implements Listener {
         }
 
         for(Block block : affectedBlocks) {
-            if(main.isAngelChest(block)) {
+            if(main.isAngelChest(block) || main.isAngelChest(block.getRelative(BlockFace.UP))) {
                 e.setCancelled(true);
                 main.debug("BlockPistonRetractEvent cancelled because AngelChest is affected");
                 return;

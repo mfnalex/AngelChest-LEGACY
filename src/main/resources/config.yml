@@ -69,6 +69,9 @@ show-links-on-separate-line: false
 # When using PLAYER_HEAD, you can use the head of the died
 # player or any other custom skull (see option below)
 # Tip: SOUL_CAMPFIRE looks awesome (1.16+ only)
+# Tip: Try to avoid using blocks that break when the block below
+# is updated, like TORCH or SOUL_LANTERN because that could be
+# exploited by using pistons below that block
 material: CHEST
 
 # When set to true and material is set to PLAYER_HEAD,
