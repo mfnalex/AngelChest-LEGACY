@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.18.0
+- Added support for Vanilla Tweaks Player Head Drops datapack
+
 ## 2.17.4
 - Fixed duplication bug when breaking an AngelChest with a piston while attempting to remove stuff from the chest
 - Improved error message when using outdated WorldGuard versions

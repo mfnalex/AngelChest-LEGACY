@@ -1,5 +1,6 @@
 package de.jeff_media.AngelChest;
 
+import de.jeff_media.AngelChest.hooks.PlayerHeadDropsHook;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -147,6 +148,17 @@ public class PlayerListener implements Listener {
 
 		Block angelChestBlock = Utils.findSafeBlock(tmp, plugin);
 		plugin.debug("Debug 2");
+
+		/*if(plugin.debug) {
+			for(ItemStack item : event.getDrops()) {
+				if(item==null) continue;
+				plugin.debug("Found drop "+item.toString());
+			}
+		}*/
+
+		if(plugin.getConfig().getBoolean("detect-player-head-drops")) {
+			PlayerHeadDropsHook.applyPlayerHeadDrops(p.getInventory(), event.getDrops(), plugin);
+		}
 
 		AngelChest ac =new AngelChest(p,p.getUniqueId(), angelChestBlock, p.getInventory(), plugin);
 		plugin.angelChests.put(angelChestBlock,ac);

@@ -158,7 +158,7 @@ public class AngelChest {
             if (Utils.isEmpty(playerItems.getItem(i))) {
                 continue;
             }
-
+            plugin.debug("Slot "+i+": "+playerItems.getItem(i));
             if(toBeRemoved(playerItems.getItem(i))) playerItems.setItem(i,null);
         }
 

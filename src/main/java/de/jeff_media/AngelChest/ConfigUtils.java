@@ -61,6 +61,7 @@ public class ConfigUtils {
 		createDirectories(main);
 
 		main.getConfig().addDefault("check-for-updates", "true");
+		main.getConfig().addDefault("detect-player-head-drops",true);
 		main.getConfig().addDefault("check-interval",4);
 		main.getConfig().addDefault("allow-angelchest-in-pvp",true);
 		main.getConfig().addDefault("totem-of-undying-works-everywhere",true);

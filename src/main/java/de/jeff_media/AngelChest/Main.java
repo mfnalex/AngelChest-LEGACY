@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 46;
+	final int currentConfigVersion = 47;
 
 	boolean usingMatchingConfig = true;
 	HashMap<UUID,PendingConfirm> pendingConfirms;
@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
 	MinepacksHook minepacksHook;
 	AngelChestDebugger debugger;
 	
-	void debug(String t) {
+	public void debug(String t) {
 		if(debug) getLogger().info("[DEBUG] " + t);
 	}
 	
