@@ -95,7 +95,7 @@ public class AngelChestPlaceholders extends PlaceholderExpansion {
         }
 
         if(id >= allChests.size()) {
-            return null;
+            return "";
         }
         switch(split[0]) {
             case "time":

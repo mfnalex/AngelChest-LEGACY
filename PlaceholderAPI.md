@@ -12,13 +12,13 @@ AngelChest features some placeholders to use with PlaceholderAPI. If `<ID>` is i
 
 `%angelchest_isactive_<ID>%`: Returns "true" when the player has an AngelChest with this ID, otherwise "false"
 
-`%angelchest_time_<ID>%`: Remaining time for this AngelChest
+`%angelchest_time_<ID>%`: Remaining time for this AngelChest. Returns an empty String if no AngelChest with this ID exists.
 
-`%angelchest_x_<ID>%`: X coordinate of this AngelChest
+`%angelchest_x_<ID>%`: X coordinate of this AngelChest. Returns an empty String if no AngelChest with this ID exists.
 
-`%angelchest_y_<ID>%`: Y coordinate of this AngelChest
+`%angelchest_y_<ID>%`: Y coordinate of this AngelChest. Returns an empty String if no AngelChest with this ID exists.
 
-`%angelchest_z_<ID>%`: Z coordinate of this AngelChest
+`%angelchest_z_<ID>%`: Z coordinate of this AngelChest. Returns an empty String if no AngelChest with this ID exists.
 
-`%angelchest_world_<ID>%`: World name of this AngelChest
+`%angelchest_world_<ID>%`: World name of this AngelChest. Returns an empty String if no AngelChest with this ID exists.
 
