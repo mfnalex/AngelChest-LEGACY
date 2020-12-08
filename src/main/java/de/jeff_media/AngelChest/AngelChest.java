@@ -29,10 +29,10 @@ public class AngelChest {
     ItemStack[] extraInv;
     Inventory overflowInv;
     boolean success = true;
-    Block block;
-    UUID worldid;
-    UUID owner;
-    Hologram hologram;
+    public Block block;
+    public UUID worldid;
+    public UUID owner;
+    public Hologram hologram;
     boolean isProtected;
     //long configDuration;
     //long taskStart;

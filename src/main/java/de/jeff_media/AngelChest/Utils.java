@@ -4,10 +4,7 @@ import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -226,7 +223,7 @@ public class Utils {
 		}, delay);
 	}
 
-	public static ArrayList<AngelChest> getAllAngelChestsFromPlayer(Player p, Main plugin) {
+	public static ArrayList<AngelChest> getAllAngelChestsFromPlayer(OfflinePlayer p, Main plugin) {
 		ArrayList<AngelChest> angelChests = new ArrayList<>();
 		for (AngelChest angelChest : plugin.angelChests.values()) {
 			if (!angelChest.owner.equals(p.getUniqueId()))

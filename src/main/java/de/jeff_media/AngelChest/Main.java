@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 
+import de.jeff_media.AngelChest.hooks.AngelChestPlaceholders;
 import de.jeff_media.AngelChest.hooks.MinepacksHook;
 import de.jeff_media.PluginUpdateChecker.PluginUpdateChecker;
 import io.papermc.lib.PaperLib;
@@ -134,6 +135,12 @@ public class Main extends JavaPlugin {
 		this.getCommand("acfetch").setExecutor(new CommandFetch(this));
 		this.getCommand("actp").setExecutor(new CommandTeleportTo(this));
 		this.getCommand("acreload").setExecutor(new CommandReload(this));
+
+		if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+			new AngelChestPlaceholders(this).register();
+		}
+
+		//this.getCommand("acd").setExecutor(new CommandDebug());
 
 		debug("Registering listeners");
 		getServer().getPluginManager().registerEvents(new PlayerListener(this),this);
