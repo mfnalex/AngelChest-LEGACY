@@ -131,6 +131,10 @@ public class PlayerListener implements Listener {
 			}
 		}
 
+		if(!AngelChestCommandUtils.hasEnoughMoney(event.getEntity(),plugin.getConfig().getDouble("price"),plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY_CHEST)) {
+			return;
+		}
+
 		// Enable keep inventory to prevent drops (this is not preventing the drops at the moment due to spigot)
 		event.setKeepInventory(true);
 

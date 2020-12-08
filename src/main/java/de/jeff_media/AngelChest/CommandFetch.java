@@ -77,7 +77,7 @@ public class CommandFetch implements CommandExecutor {
             plugin.pendingConfirms.remove(((Player) sender).getUniqueId());
         }
 
-        if (price > 0 && !AngelChestCommandUtils.hasEnoughMoney(sendTo, price, plugin)) {
+        if (price > 0 && !AngelChestCommandUtils.hasEnoughMoney(sendTo, price, plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY)) {
             return true;
         }
 

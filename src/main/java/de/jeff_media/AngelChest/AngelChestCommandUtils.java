@@ -17,30 +17,42 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class AngelChestCommandUtils {
 
-	static boolean hasEnoughMoney(Player p, double money, Main main) {
+	static boolean hasEnoughMoney(Player p, double money, Main main, String messageWhenNotEnoughMoney) {
+
+		main.debug("Checking if "+p.getName()+" has at least " + money + " money...");
 
 		if(money <= 0) {
+			main.debug("yes: money <= 0");
 			return true;
 		}
 
 		Plugin v = main.getServer().getPluginManager().getPlugin("Vault");
 
 		if(v == null) {
+			main.debug("yes: vault is null");
 			return true;
 		}
 
 		RegisteredServiceProvider<Economy> rsp = main.getServer().getServicesManager().getRegistration(Economy.class);
-		if(rsp == null) return true;
+		if(rsp == null) {
+			main.debug("yes: registered service provider<Economy> is null");
+			return true;
+		}
 
-		if(rsp.getProvider()==null) return true;
+		if(rsp.getProvider()==null) {
+			main.debug("yes: provider is null");
+			return true;
+		}
 
 		Economy econ = rsp.getProvider();
 
 		if(econ.getBalance(p)>=money) {
-			econ.withdrawPlayer(p,"AngelChest Teleport",money);
+			econ.withdrawPlayer(p,"AngelChest",money);
+			main.debug("yes, enough money and paid");
 			return true;
 		} else {
-			p.sendMessage(main.messages.MSG_NOT_ENOUGH_MONEY);
+			main.debug("no, not enough money - nothing paid");
+			p.sendMessage(messageWhenNotEnoughMoney);
 			return false;
 		}
 	}
@@ -108,7 +120,7 @@ public class AngelChestCommandUtils {
 			plugin.pendingConfirms.remove(((Player) sender).getUniqueId());
 		}
 
-		if(price>0 && !hasEnoughMoney(p,price,plugin)) {
+		if(price>0 && !hasEnoughMoney(p,price,plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY)) {
 			return;
 		}
 

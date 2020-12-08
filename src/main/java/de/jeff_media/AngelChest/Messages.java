@@ -14,7 +14,8 @@ public class Messages {
 	MSG_ALL_YOUR_ANGELCHESTS_WERE_ALREADY_UNLOCKED, MSG_UNLOCKED_ONE_ANGELCHEST, MSG_UNLOCKED_MORE_ANGELCHESTS, MSG_INVENTORY_WAS_EMPTY,
 	MSG_ANGELCHEST_CREATED, MSG_ANGELCHEST_DISAPPEARED, MSG_NOT_ALLOWED_TO_OPEN_OTHER_ANGELCHESTS, MSG_YOU_GOT_YOUR_INVENTORY_BACK
 	, MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK, HOLOGRAM_TEXT, ANGELCHEST_INVENTORY_NAME, MSG_ANGELCHEST_LOCATION, MSG_NOT_ENOUGH_MONEY,
-	MSG_PLEASE_SELECT_CHEST, MSG_ANGELCHEST_EXPLODED, MSG_NO_CHEST_IN_PVP, MSG_RETRIEVED, MSG_CONFIRM;
+	MSG_PLEASE_SELECT_CHEST, MSG_ANGELCHEST_EXPLODED, MSG_NO_CHEST_IN_PVP, MSG_RETRIEVED, MSG_CONFIRM,
+	MSG_NOT_ENOUGH_MONEY_CHEST;
 	
 	final String LINK_TP, LINK_FETCH, LINK_UNLOCK;
 
@@ -60,6 +61,8 @@ public class Messages {
 		MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK = ChatColor.translateAlternateColorCodes('&',  plugin.getConfig().getString("message-you-got-part-of-your-inventory-back", "&eYou got a part of your inventory back, but some items are still in the AngelChest."));
 
 		MSG_NOT_ENOUGH_MONEY = ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("message-not-enough-money","&cYou don't have enough money."));
+
+		MSG_NOT_ENOUGH_MONEY_CHEST = ChatColor.translateAlternateColorCodes('&',plugin.getConfig().getString("message-not-enough-money2","&cAn Angel tried to collect your stuff but you didn't have enough money."));
 		
 		HOLOGRAM_TEXT = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("hologram-text","&a&l[AngelChest]&r\n&b{player}\n&6{time}"));
 		

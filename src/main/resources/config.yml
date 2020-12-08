@@ -143,6 +143,11 @@ check-interval: 4
 # leave a message in the SpigotMC discussion or open an issue at GitHub.
 # If you request a feature in the review section, it will probably be ignored.
 
+# How much does it cost to spawn the AngelChest? The amount will automatically
+# be taken from the player on death if they have enough money, otherwise
+# the chest will not spawn and the items drop normally
+price: 0
+
 # How much does it cost to teleport yourself to one of your AngelChests
 price-teleport: 0
 
@@ -282,6 +287,7 @@ message-you-got-part-of-your-inventory-back: "&eYou got a part of your inventory
 message-you-got-your-inventory-back: "&aYou got your inventory back!"
 message-angelchest-location: "&eLocations of your AngelChests:"
 message-not-enough-money: "&cYou don't have enough money."
+message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 message-already-unlocked: "&cThis AngelChest is already unlocked."
 message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -306,6 +312,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aYou got your inventory back!"
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 #message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -328,6 +335,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&a你成功地取回了你的物品!"
 #message-angelchest-location: "&e你的天御之箱的位置:"
 #message-not-enough-money: "&c你没有足够的金钱."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7请指定你要选择的天御之箱."
 #message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -350,6 +358,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&a成功將物品取回!"
 #message-angelchest-location: "&e你的小天使箱子的位置:"
 #message-not-enough-money: "&c你沒有足夠的金錢."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7請指定你要選擇的小天使箱子."
 #message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -372,6 +381,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aJe hebt je inventaris terug gekregen!"
 #message-angelchest-location: "&eLocatie van je AngelChest: %s"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 #message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -394,6 +404,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aVous avez récuperer votre inventaire."
 #message-angelchest-location: "&eLocations of your AngelChests:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 #message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -416,6 +427,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aDein Inventar wurde wiederhergestellt!"
 #message-angelchest-location: "&ePositionen deiner AngelChests:"
 #message-not-enough-money: "&cDu hast nicht genug Geld."
+#message-not-enough-money2: "&cEin Engel hat versucht deine Sachen einzusammeln, aber du hattest nicht genug Geld."
 #message-please-select-chest: "&7Bitte gib an welche AngelChest du auswählen möchtest."
 #message-already-unlocked: "&cDiese AngelChest war bereits aufgeschlossen."
 #message-too-many-angelchests: "&cDu hattest mehr AngelChests als dein Engel handhaben konnte... deine älteste AngelChest ist explodiert."
@@ -438,6 +450,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aHai ricevuto il tuo inventario!"
 #message-angelchest-location: "&eEcco dove sono le tue AngelChests:"
 #message-not-enough-money: "&cNon hai abbastanza soldi."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Per piacere, specifica quale AngelChest vuoi selezionare."
 #message-already-unlocked: "&cQuesta AngelChest è già stata sbloccata."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -460,6 +473,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aOdzyskałeś swój ekwipunek!"
 #message-angelchest-location: "&eLokalizacja Twojej AnielskiejSkrzyni:"
 #message-not-enough-money: "&cNie masz wystarczająco pieniędzy."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Określ, którą AnielskąSkrzynię chciałbyś wybrać."
 #message-already-unlocked: "&cTa AnielskaSkrzynia jest już odblokowana."
 #message-too-many-angelchests: "&cMiałeś więcej AnielskichSkrzyń, niż twój anioł mógł znieść... Twoja najstarsza AnielskaSkrzynia eksplodowała."
@@ -482,6 +496,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aVocê recuperou seu inventário!"
 #message-angelchest-location: "&eLocal do seu AngelChest:"
 #message-not-enough-money: "&cYou don't have enough money."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Please specify which AngelChest you would like to select."
 #message-already-unlocked: "&cThis AngelChest is already unlocked."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -504,6 +519,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aВаши вещи вернулись!"
 #message-angelchest-location: "&eРасположения ваших Ангельских сундуков:"
 #message-not-enough-money: "&cНе хватает денег."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Пожалуйста, укажите, какой Ангельский сундук желаете выбрать."
 #message-already-unlocked: "&cЭтот &aАнгельский сундук &cуже разблокирован."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -526,6 +542,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aHas obtenido tu inventario de vuelta!"
 #message-angelchest-location: "&eLugares de tus AngelChests:"
 #message-not-enough-money: "&cNo tienes dinero suficiente."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-please-select-chest: "&7Especifica cuál AngelChest quisieras seleccionar."
 #message-already-unlocked: "&cEste AngelChest ya se encuentra desbloqueado."
 #message-too-many-angelchests: "&cYou had more AngelChests than your Angel could handle... Your oldest AngelChest has exploded."
@@ -548,6 +565,7 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #message-you-got-your-inventory-back: "&aEnvanterini geri aldın!"
 #message-angelchest-location: "&eAngelChest'lerinin konumu:"
 #message-not-enough-money: "&cYeterli paraya sahip değilsin."
+#message-not-enough-money2: "&cAn Angel tried to collect your stuff but you didn't have enough money."
 #message-already-unlocked: "&cBu AngelChest'in kilidi zaten açık."
 #message-too-many-angelchests: "&cSahip olabileceğinden daha fazla AngelChest'in var... En eski AngelChest'in yok edildi."
 #message-no-angelchest-in-pvp: "&cBir melek eşyalarını toplamayı denedi fakat katiliniz tarafından engellendi."
@@ -563,4 +581,4 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 debug: false
 
 # please do not change the following line manually!
-config-version: 47
+config-version: 48
