@@ -257,6 +257,7 @@ detect-player-head-drops: true
 # {player} is the player's name.
 # {time} is the amount of time left.
 # \n is a new line.
+##### The hologram text also allows you to use PlacerholderAPI placeholders
 ##### Use an empty string to disable the hologram.
 hologram-text: "&a&l[AngelChest]&r\n&b{player}\n&6{time}"
 angelchest-inventory-name: "&a[AngelChest] &b{player}&r"
@@ -581,4 +582,4 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 debug: false
 
 # please do not change the following line manually!
-config-version: 48
+config-version: 49

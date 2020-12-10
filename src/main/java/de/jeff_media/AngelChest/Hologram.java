@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
@@ -17,6 +19,7 @@ public class Hologram {
 	final String text;
 	final double lineOffset = -0.2D;
 	double currentOffset = 0.0D;
+	boolean usePapi = false;
 
 	public Hologram(Block block, String text,Main plugin, AngelChest chest) {
 		this(block.getLocation().add(new Vector(0.5,-0.5+plugin.getConfig().getDouble("hologram-offset"),0.5)),block,text,plugin,chest);
@@ -30,6 +33,11 @@ public class Hologram {
 			String line = scanner.nextLine();
 			line = line.replaceAll("\\{time}", AngelChestCommandUtils.getTimeLeft(chest));
 			if (line.equals("")) continue;
+
+			if(usePapi) {
+				line = PlaceholderAPI.setPlaceholders(Bukkit.getOfflinePlayer(chest.owner),line);
+			}
+
 			if(armorStands.get(lineNumber) !=null) {
 				armorStands.get(lineNumber).setCustomName(line);
 			} /*else if(armorStandUUIDs.get(lineNumber) != null) {
@@ -41,6 +49,10 @@ public class Hologram {
 	}
 
 	public Hologram(Location location, Block block, String text, Main plugin, AngelChest chest) {
+
+		if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+			usePapi = true;
+		}
 
 		plugin.debug("Creating hologram with text " + text + " at "+location.toString());
 		this.text = text;

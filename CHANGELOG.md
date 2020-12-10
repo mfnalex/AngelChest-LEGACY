@@ -1,8 +1,11 @@
 # Changelog
 
+## 2.19.1
+- Added PlacerholderAPI support for the hologram text
+
 ## 2.19.0
 - Added configurable price to spawn the chest (default: 0)
-- Added support for PlaceholderAPI, see here:  
+- Added support for PlaceholderAPI, see here: https://github.com/JEFF-Media-GbR/Spigot-AngelChest/blob/master/PlaceholderAPI.md 
 
 ## 2.18.0
 - Added support for Vanilla Tweaks Player Head Drops datapack
