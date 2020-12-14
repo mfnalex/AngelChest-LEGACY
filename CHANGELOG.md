@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.19.2
+- Added option to log player accesses to AngelChests to console
+
 ## 2.19.1
 - Added PlacerholderAPI support for the hologram text
 

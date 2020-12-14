@@ -578,8 +578,12 @@ message-confirm: "&6You are about to spend {price}{currency}. Click this message
 #####     Done!     #####
 #########################
 
+# Verbose options
+# Whether to show a console message when a player opens an AngelChest
+console-message-on-open: false
+
 # Debug mode - you probably do not want this.
 debug: false
 
 # please do not change the following line manually!
-config-version: 49
+config-version: 50

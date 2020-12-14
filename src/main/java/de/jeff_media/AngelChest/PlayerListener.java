@@ -325,9 +325,13 @@ public class PlayerListener implements Listener {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
 			angelChest.destroy();
 			angelChest.remove();
+			if(plugin.getConfig().getBoolean("console-message-on-open")) {
+				plugin.getLogger().info(p.getName()+" emptied the AngelChest of "+Bukkit.getOfflinePlayer(angelChest.owner).getName()+" at "+angelChest.block.getLocation());
+			}
 		} else {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_PART_OF_YOUR_INVENTORY_BACK);
 			p.openInventory(angelChest.overflowInv);
+			plugin.getLogger().info(p.getName()+" opened the AngelChest of "+Bukkit.getOfflinePlayer(angelChest.owner).getName()+" at "+angelChest.block.getLocation());
 		}
 	}
 

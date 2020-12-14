@@ -88,6 +88,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("price",0.0d);
 		main.getConfig().addDefault("price-teleport",0.0d);
 		main.getConfig().addDefault("price-fetch",0.0d);
+		main.getConfig().addDefault("console-message-on-open",true);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledMaterials = main.getConfig().getStringList("disabled-materials");
 		main.disabledWorlds =  main.getConfig().getStringList("disabled-worlds");
