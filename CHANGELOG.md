@@ -1,7 +1,7 @@
 # Changelog
 
 ## 2.19.3
-- Added Soulbound detection for basically every plugin offering soulbound items
+- Added Soulbound detection for basically every plugin offering soulbound items.
 
 ## 2.19.2
 - Added option to log player accesses to AngelChests to console
