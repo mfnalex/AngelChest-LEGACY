@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 50;
+	final int currentConfigVersion = 51;
 
 	boolean usingMatchingConfig = true;
 	HashMap<UUID,PendingConfirm> pendingConfirms;
