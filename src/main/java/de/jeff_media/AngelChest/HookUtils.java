@@ -39,6 +39,10 @@ public class HookUtils implements Listener {
         if(!item.hasItemMeta()) return false;
         ItemMeta meta = item.getItemMeta();
 
+        if(meta.getLore()==null) {
+            return false;
+        }
+
         for(String line : meta.getLore()) {
             if(line.toLowerCase().contains("soulbound")) {
                 main.debug(item.toString() + "is a GENERIC SOULBOUND ITEM. Lore: " + line);
@@ -58,6 +62,7 @@ public class HookUtils implements Listener {
     }
 
     boolean removeOnDeath(ItemStack item) {
+        if(item==null) return false;
         if(isDisabledMaterial(item)) return true;
         if(inventoryPagesHook.isButton(item)) return true;
         if(isGenericSoulbound(item)) return true;

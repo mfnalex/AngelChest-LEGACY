@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.19.5
+- Fixed Exception (again, sorry)
+
+## 2.19.4
+- Fixed Exception
+
 ## 2.19.3
 - Added Soulbound detection for basically every plugin offering soulbound items.
 
