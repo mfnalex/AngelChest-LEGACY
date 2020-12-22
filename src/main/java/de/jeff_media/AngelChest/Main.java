@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 51;
+	final int currentConfigVersion = 52;
 
 	boolean usingMatchingConfig = true;
 	HashMap<UUID,PendingConfirm> pendingConfirms;
@@ -170,7 +170,7 @@ public class Main extends JavaPlugin {
 					if(getServer().getPlayer(ac.owner)!=null) {
 						getServer().getPlayer(ac.owner).sendMessage(messages.MSG_ANGELCHEST_DISAPPEARED);
 					}
-					ac.destroy();
+					ac.destroy(true);
 					it.remove();
 				}
 			}

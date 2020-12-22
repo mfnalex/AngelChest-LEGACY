@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.20.0
+- Added option to refund players when they don't open their AngelChest before it expires (default: false)
+
 ## 2.19.5
 - Fixed Exception (again, sorry)
 

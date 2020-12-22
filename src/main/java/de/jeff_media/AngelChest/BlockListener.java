@@ -39,7 +39,7 @@ public class BlockListener implements Listener {
             event.setCancelled(true);
             return;
         }
-        angelChest.destroy();
+        angelChest.destroy(false);
         angelChest.remove();
     }
 

@@ -131,7 +131,7 @@ public class PlayerListener implements Listener {
 			}
 		}
 
-		if(!AngelChestCommandUtils.hasEnoughMoney(event.getEntity(),plugin.getConfig().getDouble("price"),plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY_CHEST)) {
+		if(!AngelChestCommandUtils.hasEnoughMoney(event.getEntity(),plugin.getConfig().getDouble("price"),plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY_CHEST,"AngelChest spawned")) {
 			return;
 		}
 
@@ -207,7 +207,7 @@ public class PlayerListener implements Listener {
 		ArrayList<AngelChest> chests = Utils.getAllAngelChestsFromPlayer(p,plugin);
 		//System.out.println(chests.size()+" chests.size");
 		if(chests.size()>maxChests) {
-			chests.get(0).destroy();
+			chests.get(0).destroy(true);
 			chests.get(0).remove();
 			Bukkit.getScheduler().runTaskLater(plugin,() -> {
 				p.sendMessage(" ");
@@ -323,7 +323,7 @@ public class PlayerListener implements Listener {
 		succesfullyStoredEverything = Utils.tryToMergeInventories(angelChest, p.getInventory());
 		if (succesfullyStoredEverything) {
 			p.sendMessage(plugin.messages.MSG_YOU_GOT_YOUR_INVENTORY_BACK);
-			angelChest.destroy();
+			angelChest.destroy(false);
 			angelChest.remove();
 			if(plugin.getConfig().getBoolean("console-message-on-open")) {
 				plugin.getLogger().info(p.getName()+" emptied the AngelChest of "+Bukkit.getOfflinePlayer(angelChest.owner).getName()+" at "+angelChest.block.getLocation());
@@ -350,7 +350,7 @@ public class PlayerListener implements Listener {
 					&& Utils.isEmpty(angelChest.storageInv)) {
 				// plugin.angelChests.remove(Utils.getKeyByValue(plugin.angelChests,
 				// angelChest));
-				angelChest.destroy();
+				angelChest.destroy(false);
 
 				plugin.debug("Inventory empty, removing chest");
 				// event.getPlayer().sendMessage("You have emptied an AngelChest. It is now

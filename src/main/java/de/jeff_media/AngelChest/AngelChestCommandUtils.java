@@ -8,6 +8,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,7 +18,35 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class AngelChestCommandUtils {
 
-	static boolean hasEnoughMoney(Player p, double money, Main main, String messageWhenNotEnoughMoney) {
+	static void payMoney(OfflinePlayer p, double money, Main main, String reason) {
+
+		if(money <= 0) {
+			return;
+		}
+
+		Plugin v = main.getServer().getPluginManager().getPlugin("Vault");
+
+		if(v == null) {
+			main.debug("pay: vault is null");
+			return;
+		}
+
+		RegisteredServiceProvider<Economy> rsp = main.getServer().getServicesManager().getRegistration(Economy.class);
+		if(rsp == null) {
+			main.debug("pay: registered service provider<Economy> is null");
+			return;
+		}
+
+		if(rsp.getProvider()==null) {
+			main.debug("pay: provider is null");
+			return;
+		}
+
+		Economy econ = rsp.getProvider();
+		econ.depositPlayer(p,reason,money);
+	}
+
+	static boolean hasEnoughMoney(Player p, double money, Main main, String messageWhenNotEnoughMoney, String reason) {
 
 		main.debug("Checking if "+p.getName()+" has at least " + money + " money...");
 
@@ -47,7 +76,7 @@ public class AngelChestCommandUtils {
 		Economy econ = rsp.getProvider();
 
 		if(econ.getBalance(p)>=money) {
-			econ.withdrawPlayer(p,"AngelChest",money);
+			econ.withdrawPlayer(p,reason,money);
 			main.debug("yes, enough money and paid");
 			return true;
 		} else {
@@ -120,7 +149,7 @@ public class AngelChestCommandUtils {
 			plugin.pendingConfirms.remove(((Player) sender).getUniqueId());
 		}
 
-		if(price>0 && !hasEnoughMoney(p,price,plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY)) {
+		if(price>0 && !hasEnoughMoney(p,price,plugin,plugin.messages.MSG_NOT_ENOUGH_MONEY,"AngelChest TP")) {
 			return;
 		}
 

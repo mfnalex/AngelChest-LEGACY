@@ -148,6 +148,10 @@ check-interval: 4
 # the chest will not spawn and the items drop normally
 price: 0
 
+# You can refund the price when a player does not to open their AngelChest
+# before it expires
+refund-expired-chests: false
+
 # How much does it cost to teleport yourself to one of your AngelChests
 price-teleport: 0
 
@@ -590,4 +594,4 @@ console-message-on-open: false
 debug: false
 
 # please do not change the following line manually!
-config-version: 51
+config-version: 52

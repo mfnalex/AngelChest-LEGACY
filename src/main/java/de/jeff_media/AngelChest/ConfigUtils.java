@@ -87,6 +87,7 @@ public class ConfigUtils {
 		main.getConfig().addDefault("show-links-on-separate-line",false);
 		main.getConfig().addDefault("confirm",true);
 		main.getConfig().addDefault("price",0.0d);
+		main.getConfig().addDefault("refund-expired-chests",true);
 		main.getConfig().addDefault("price-teleport",0.0d);
 		main.getConfig().addDefault("price-fetch",0.0d);
 		main.getConfig().addDefault("console-message-on-open",true);

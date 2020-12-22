@@ -39,6 +39,7 @@ public class AngelChest {
     int secondsLeft;
     int experience = 0;
     int levels = 0;
+    double price = 0;
     boolean infinite = false;
     Main plugin;
 
@@ -50,6 +51,7 @@ public class AngelChest {
         } catch (Throwable t) {
             plugin.getLogger().warning("Could not load legacy AngelChest file " + file.getName());
             success = false;
+            t.printStackTrace();
             return;
         }
         this.plugin = plugin;
@@ -59,6 +61,7 @@ public class AngelChest {
         this.isProtected = yaml.getBoolean("isProtected");
         this.secondsLeft = yaml.getInt("secondsLeft");
         this.infinite = yaml.getBoolean("infinite",false);
+        this.price = yaml.getDouble("price",plugin.getConfig().getDouble("price"));
 
         // Check if this is the current save format
         int saveVersion = yaml.getInt("angelchest-saveversion", 1);
@@ -68,12 +71,17 @@ public class AngelChest {
                 this.worldid = block.getWorld().getUID();
             } catch (Exception ignored) {
                 success = false;
+
+                plugin.getLogger().warning("Failed to create AngelChest from file");
+                ignored.printStackTrace();
+
             }
             if (!success) return;
         } else {
             this.worldid = UUID.fromString(yaml.getString("worldid"));
             if (plugin.getServer().getWorld(worldid) == null) {
                 success = false;
+                plugin.getLogger().warning("Failed to create AngelChest because no world with this id could be found");
                 return;
             }
             this.block = plugin.getServer().getWorld(worldid).getBlockAt(yaml.getInt("x"), yaml.getInt("y"), yaml.getInt("z"));
@@ -135,7 +143,7 @@ public class AngelChest {
 
     public AngelChest(Player p, Block block, Main plugin) {
     	this(p, p.getUniqueId(), block, p.getInventory(), plugin);
-	}
+    }
 
 
     public AngelChest(Player p, UUID owner, Block block, PlayerInventory playerItems, Main plugin) {
@@ -145,6 +153,7 @@ public class AngelChest {
         this.plugin = plugin;
         this.owner = owner;
         this.block = block;
+        this.price = plugin.getConfig().getDouble("price");
         this.isProtected = plugin.getServer().getPlayer(owner).hasPermission("angelchest.protect");
         this.secondsLeft = plugin.groupUtils.getDurationPerPlayer(plugin.getServer().getPlayer(owner));
         if(secondsLeft<=0) infinite = true;
@@ -167,7 +176,6 @@ public class AngelChest {
         extraInv = playerItems.getExtraContents();
 
         removeKeepedItems();
-
     }
 
 
@@ -294,10 +302,6 @@ public class AngelChest {
                 this.hashCode() + ".yml");
         YamlConfiguration yaml = YamlConfiguration.loadConfiguration(yamlFile);
         yaml.set("angelchest-saveversion", 2);
-        yaml.set("armorInv", armorInv);
-        yaml.set("storageInv", storageInv);
-        yaml.set("extraInv", extraInv);
-        yaml.set("overflowInv", overflowInv.getContents());
         yaml.set("worldid", block.getLocation().getWorld().getUID().toString());
         //yaml.set("block", block.getLocation());
         yaml.set("x", block.getX());
@@ -311,6 +315,11 @@ public class AngelChest {
         yaml.set("secondsLeft", secondsLeft);
         yaml.set("experience", experience);
         yaml.set("levels", levels);
+        yaml.set("price",price);
+        yaml.set("storageInv", storageInv);
+        yaml.set("armorInv", armorInv);
+        yaml.set("extraInv", extraInv);
+        yaml.set("overflowInv", overflowInv.getContents());
 
         // Duplicate Start
         block.setType(Material.AIR);
@@ -333,7 +342,7 @@ public class AngelChest {
         return yamlFile;
     }
 
-    public void destroy() {
+    public void destroy(boolean refund) {
         plugin.debug("Destroying AngelChest");
 
         if(!block.getWorld().isChunkLoaded(block.getX() >> 4,block.getZ() >> 4)) {
@@ -370,13 +379,19 @@ public class AngelChest {
         if (experience > 0) {
             Utils.dropExp(block, experience);
         }
+
+        if(refund
+                && plugin.getConfig().getBoolean("refund-expired-chests")
+                && plugin.getConfig().getDouble("price") > 0) {
+            AngelChestCommandUtils.payMoney(Bukkit.getOfflinePlayer(owner),price,plugin,"AngelChest expired");
+        }
     }
 
     void remove() {
         plugin.debug("Removing AngelChest");
         plugin.angelChests.remove(block);
     }
-    
+
 	public void createHologram(Main plugin, Block block, UUID uuid) {
 		//String hologramText = String.format(plugin.messages.HOLOGRAM_TEXT, plugin.getServer().getOfflinePlayer(uuid).getName());
         String hologramText = plugin.messages.HOLOGRAM_TEXT
