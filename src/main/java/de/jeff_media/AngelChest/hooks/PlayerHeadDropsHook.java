@@ -15,11 +15,11 @@ public class PlayerHeadDropsHook {
     public static void applyPlayerHeadDrops(PlayerInventory inventory, List<ItemStack> drops, Main main) {
 
         for(ItemStack item : drops) {
-            main.debug("Checking if drop is Vanilla Tweaks Player Head Drop: "+item.toString());
             if(item == null) {
                 main.debug("false: null");
                 continue;
             }
+            main.debug("Checking if drop is Vanilla Tweaks Player Head Drop: "+item.toString());
             if(!item.getType().name().equals("PLAYER_HEAD")) {
                 main.debug("false: type != PLAYER_HEAD");
                 continue;

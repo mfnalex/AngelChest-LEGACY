@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.20.1
+- Fixed rare exception on death
+
 ## 2.20.0
 - Added option to refund players when they don't open their AngelChest before it expires (default: false)
 
