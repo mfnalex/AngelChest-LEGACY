@@ -107,6 +107,11 @@ public class ConfigUpdater {
 				}
 			}
 
+			else if(line.startsWith("event-priority") && plugin.getConfig().isSet("ignore-keep-inventory")) {
+				newline = null;
+				newLines.add("event-priority: " + (plugin.getConfig().getBoolean("ignore-keep-inventory",false) ? "LOWEST" : "NORMAL"));
+			}
+
 			else if (line.startsWith("dont-spawn-on:")) {
 				newline = null;
 				newLines.add("dont-spawn-on:");

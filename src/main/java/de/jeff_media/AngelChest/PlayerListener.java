@@ -35,29 +35,58 @@ public class PlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
-
 		plugin.registerPlayer(event.getPlayer());
-
 	}
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-
 		plugin.unregisterPlayer(event.getPlayer());
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void spawnAngelChestHighest(PlayerDeathEvent event) {
-		if(!plugin.getConfig().getBoolean("ignore-keep-inventory")) {
-			spawnAngelChest(event);
-		}	}
-
-	@EventHandler(priority = EventPriority.LOWEST)
-	public void spawnAngelChestLowest(PlayerDeathEvent event) {
-		if(plugin.getConfig().getBoolean("ignore-keep-inventory")) {
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void spawnAngelChestMonitor(PlayerDeathEvent event) {
+		if(Utils.getEventPriority(plugin.getConfig().getString("event-priority")) == EventPriority.MONITOR) {
+			plugin.debug("PlayerDeathEvent Priority MONITOR");
 			spawnAngelChest(event);
 		}
 	}
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void spawnAngelChestHighest(PlayerDeathEvent event) {
+		if(Utils.getEventPriority(plugin.getConfig().getString("event-priority")) == EventPriority.HIGHEST) {
+			plugin.debug("PlayerDeathEvent Priority HIGHEST");
+			spawnAngelChest(event);
+		}
+	}
+	@EventHandler(priority = EventPriority.HIGH)
+	public void spawnAngelChestHigh(PlayerDeathEvent event) {
+		if(Utils.getEventPriority(plugin.getConfig().getString("event-priority")) == EventPriority.HIGH) {
+			plugin.debug("PlayerDeathEvent Priority HIGH");
+			spawnAngelChest(event);
+		}
+	}
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void spawnAngelChestNormal(PlayerDeathEvent event) {
+		if(Utils.getEventPriority(plugin.getConfig().getString("event-priority")) == EventPriority.NORMAL) {
+			plugin.debug("PlayerDeathEvent Priority NORMAL");
+			spawnAngelChest(event);
+		}
+	}
+	@EventHandler(priority = EventPriority.LOW)
+	public void spawnAngelChestLow(PlayerDeathEvent event) {
+		if(Utils.getEventPriority(plugin.getConfig().getString("event-priority")) == EventPriority.LOW) {
+			plugin.debug("PlayerDeathEvent Priority LOW");
+			spawnAngelChest(event);
+		}
+	}
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void spawnAngelChestLowest(PlayerDeathEvent event) {
+		if(Utils.getEventPriority(plugin.getConfig().getString("event-priority")) == EventPriority.LOWEST) {
+			plugin.debug("PlayerDeathEvent Priority LOWEST");
+			spawnAngelChest(event);
+		}
+	}
+
+
 
 	private void spawnAngelChest(PlayerDeathEvent event) {
 		if(plugin.debug) {

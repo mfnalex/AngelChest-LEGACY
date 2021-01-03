@@ -4,11 +4,13 @@ import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 
+import com.google.common.base.Enums;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventPriority;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -117,6 +119,10 @@ public class Utils {
 		}
 
 		return fixedAngelChestBlock;
+	}
+
+	public static EventPriority getEventPriority(String configuredPriority) {
+		return Enums.getIfPresent(EventPriority.class,configuredPriority).or(EventPriority.NORMAL);
 	}
 
 

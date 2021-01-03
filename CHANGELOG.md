@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.21.0
+- Added config option to change the listener priority for spawning of AngelChests. This allows you to better control what other plugins can manipulate the player drops and whether AngelChest will be able to put custom items into the chest.
+- Default EventPriority is now NORMAL instead of HIGHEST. If you want the old default behaviour, set "event-priority" to "HIGHEST"
+- Removed "ignore-keep-inventory" option. This can now be controlled with the above mentioned event priority setting (if you had "ignore-keep-inventory" set to true, you can achieve the same behaviour by setting "event-priority" to "LOWEST". However, the automatic config updater will do this automatically for you.)
+
 ## 2.20.1
 - Fixed rare exception on death
 

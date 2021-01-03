@@ -21,7 +21,7 @@ public class MinepacksHook {
 		}
 		Plugin minepacksCandidate = Bukkit.getPluginManager().getPlugin("Minepacks");
 		if(minepacksCandidate == null) {
-			plugin.getLogger().warning("Minepacks is null");
+			plugin.debug("Minepacks is not installed");
 			disabled = true;
 			return false;
 		}

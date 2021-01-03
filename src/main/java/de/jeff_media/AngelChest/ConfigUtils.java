@@ -61,7 +61,7 @@ public class ConfigUtils {
 		createDirectories(main);
 
 		main.getConfig().addDefault("check-for-updates", "true");
-		main.getConfig().addDefault("detect-player-head-drops",true);
+		main.getConfig().addDefault("detect-player-head-drops",false);
 		main.getConfig().addDefault("check-interval",4);
 		main.getConfig().addDefault("allow-angelchest-in-pvp",true);
 		main.getConfig().addDefault("totem-of-undying-works-everywhere",true);
@@ -77,7 +77,8 @@ public class ConfigUtils {
 		main.getConfig().addDefault("remove-curse-of-binding",true);
 		main.getConfig().addDefault("only-spawn-chests-if-player-may-build",false);
 		main.getConfig().addDefault("disable-worldguard-integration",false);
-		main.getConfig().addDefault("ignore-keep-inventory",false);
+		//main.getConfig().addDefault("ignore-keep-inventory",false);
+		main.getConfig().addDefault("event-priority","NORMAL");
 		main.getConfig().addDefault("head-uses-player-name",true);
 		main.getConfig().addDefault("auto-respawn",false);
 		main.getConfig().addDefault("auto-respawn-delay",10);
