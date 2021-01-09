@@ -167,19 +167,25 @@ public class PlayerListener implements Listener {
 		// Enable keep inventory to prevent drops (this is not preventing the drops at the moment due to spigot)
 		event.setKeepInventory(true);
 
-		Block tmp;
+		Block tmpPosition;
 
 		plugin.debug("Debug 1");
 
 		if(p.getLocation().getBlockY() < 1) {
-			Location ltmp = p.getLocation();
-			ltmp.setY(1);
-			tmp = ltmp.getBlock();
+			//Location ltmp = p.getLocation();
+			//ltmp.setY(1);
+			//tmpPosition = ltmp.getBlock();
+			tmpPosition = plugin.lastPlayerPositions.get(p.getUniqueId());
+			if(tmpPosition == null) {
+				Location ltmp = p.getLocation();
+				ltmp.setY(1);
+				tmpPosition = ltmp.getBlock();
+			}
 		} else {
-			tmp = p.getLocation().getBlock();
+			tmpPosition = p.getLocation().getBlock();
 		}
 
-		Block angelChestBlock = Utils.findSafeBlock(tmp, plugin);
+		Block angelChestBlock = Utils.findSafeBlock(tmpPosition, plugin);
 		plugin.debug("Debug 2");
 
 		/*if(plugin.debug) {

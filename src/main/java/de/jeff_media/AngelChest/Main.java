@@ -26,6 +26,7 @@ public class Main extends JavaPlugin {
 	HashMap<Player,PlayerSetting> playerSettings;
 	LinkedHashMap<Block,AngelChest> angelChests;
 	ArrayList<BlockArmorStandCombination> blockArmorStandCombinations;
+	HashMap<UUID,Block> lastPlayerPositions;
 	Material chestMaterial;
 	
 	CommandList commandListExecutor;
@@ -61,6 +62,7 @@ public class Main extends JavaPlugin {
 		playerSettings = new HashMap<>();
 		angelChests = new LinkedHashMap<>();
 		blockArmorStandCombinations = new ArrayList<>();
+		lastPlayerPositions = new HashMap<>();
 
 		debug("Loading AngelChests from disk");
 		loadAllAngelChestsFromFile();
@@ -75,6 +77,16 @@ public class Main extends JavaPlugin {
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
 			for(AngelChest chest : angelChests.values()) {
 				chest.hologram.update(chest);
+			}
+		},20l,20l);
+
+		// Track player positions
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
+			for(Player player : Bukkit.getOnlinePlayers()) {
+				Entity entity = (Entity) player;
+				if(entity.isOnGround()) {
+					lastPlayerPositions.put(player.getUniqueId(),entity.getLocation().getBlock());
+				}
 			}
 		},20l,20l);
 

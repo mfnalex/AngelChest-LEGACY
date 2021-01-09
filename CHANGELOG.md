@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.22.0
+- When players die in the void, AngelChest tries to spawn the chest at the last position a player was standing 
+
 ## 2.21.0
 - Added config option to change the listener priority for spawning of AngelChests. This allows you to better control what other plugins can manipulate the player drops and whether AngelChest will be able to put custom items into the chest.
 - Default EventPriority is now NORMAL instead of HIGHEST. If you want the old default behaviour, set "event-priority" to "HIGHEST"
