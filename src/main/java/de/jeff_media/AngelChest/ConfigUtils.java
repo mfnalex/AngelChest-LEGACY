@@ -30,6 +30,7 @@ public class ConfigUtils {
 		}
 		initUpdateChecker(main);
 		main.debug = main.getConfig().getBoolean("debug",false);
+		main.verbose = main.getConfig().getBoolean("verbose",false);
 		main.messages = new Messages(main);
 		main.pendingConfirms = new HashMap<>();
 		File groupsFile = new File(main.getDataFolder()+File.separator+"groups.yml");
@@ -88,10 +89,12 @@ public class ConfigUtils {
 		main.getConfig().addDefault("show-links-on-separate-line",false);
 		main.getConfig().addDefault("confirm",true);
 		main.getConfig().addDefault("price",0.0d);
+		main.getConfig().addDefault("void-detection",true);
 		main.getConfig().addDefault("refund-expired-chests",true);
 		main.getConfig().addDefault("price-teleport",0.0d);
 		main.getConfig().addDefault("price-fetch",0.0d);
 		main.getConfig().addDefault("console-message-on-open",true);
+		main.getConfig().addDefault("tp-distance",2);
 		main.getConfig().addDefault("full-xp", false); // Currently not in config because there is no way to get players XP
 		main.disabledMaterials = main.getConfig().getStringList("disabled-materials");
 		main.disabledWorlds =  main.getConfig().getStringList("disabled-worlds");

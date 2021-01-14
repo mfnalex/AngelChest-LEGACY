@@ -172,10 +172,12 @@ public class PlayerListener implements Listener {
 		plugin.debug("Debug 1");
 
 		if(p.getLocation().getBlockY() < 1) {
-			//Location ltmp = p.getLocation();
-			//ltmp.setY(1);
-			//tmpPosition = ltmp.getBlock();
-			tmpPosition = plugin.lastPlayerPositions.get(p.getUniqueId());
+			tmpPosition = null;
+			if(plugin.getConfig().getBoolean("void-detection")) {
+				if(plugin.lastPlayerPositions.containsKey(p.getUniqueId())) {
+					tmpPosition = plugin.lastPlayerPositions.get(p.getUniqueId());
+				}
+			}
 			if(tmpPosition == null) {
 				Location ltmp = p.getLocation();
 				ltmp.setY(1);

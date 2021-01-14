@@ -19,7 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-	final int currentConfigVersion = 53;
+	final int currentConfigVersion = 54;
 
 	boolean usingMatchingConfig = true;
 	HashMap<UUID,PendingConfirm> pendingConfirms;
@@ -32,6 +32,7 @@ public class Main extends JavaPlugin {
 	CommandList commandListExecutor;
 
 	public boolean debug = false;
+	public boolean verbose = false;
 
 	List<String> disabledMaterials;
 	List<String> disabledWorlds;
@@ -49,6 +50,10 @@ public class Main extends JavaPlugin {
 	
 	public void debug(String t) {
 		if(debug) getLogger().info("[DEBUG] " + t);
+	}
+
+	public void verbose(String t) {
+		if(verbose) getLogger().info("[DEBUG] [VERBOSE] " + t);
 	}
 	
 	@Override
@@ -96,12 +101,12 @@ public class Main extends JavaPlugin {
 			for(BlockArmorStandCombination comb : blockArmorStandCombinations.toArray(new BlockArmorStandCombination[0])) {
 
 				if(!PaperLib.isChunkGenerated(comb.block.getLocation())) {
-					debug("Chunk at "+comb.block.getLocation().toString()+" has not been generated!");
+					verbose("Chunk at "+comb.block.getLocation().toString()+" has not been generated!");
 				}
 
 				if(!comb.block.getWorld().isChunkLoaded(comb.block.getX() >> 4,comb.block.getZ() >> 4)) {
 
-					debug("Chunk at "+comb.block.getLocation().toString() + " is not loaded, skipping repeating task regarding BlockArmorstandCombination");
+					verbose("Chunk at "+comb.block.getLocation().toString() + " is not loaded, skipping repeating task regarding BlockArmorstandCombination");
 					// CONTINUE IF CHUNK IS NOT LOADED
 
 					continue;
@@ -118,12 +123,12 @@ public class Main extends JavaPlugin {
 			for(Entry<Block,AngelChest> entry : angelChests.entrySet()) {
 
 				if(!PaperLib.isChunkGenerated(entry.getKey().getLocation())) {
-					debug("Chunk at "+entry.getKey().getLocation().toString()+" has not been generated!");
+					verbose("Chunk at "+entry.getKey().getLocation().toString()+" has not been generated!");
 				}
 
 				if(!entry.getKey().getWorld().isChunkLoaded(entry.getKey().getX() >> 4,entry.getKey().getZ() >> 4)) {
 
-					debug("Chunk at "+entry.getKey().getLocation().toString() + " is not loaded, skipping repeating task regarding angelChests.entrySet()");
+					verbose("Chunk at "+entry.getKey().getLocation().toString() + " is not loaded, skipping repeating task regarding angelChests.entrySet()");
 					// CONTINUE IF CHUNK IS NOT LOADED
 
 					continue;

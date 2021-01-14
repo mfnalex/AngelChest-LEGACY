@@ -3,6 +3,7 @@ package de.jeff_media.AngelChest;
 import de.jeff_media.AngelChest.hooks.InventoryPagesHook;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -30,6 +31,19 @@ public class HookUtils implements Listener {
             main.getConfig().set("use-slimefun",false);
             return false;
         }
+    }
+
+    boolean isNativeSoulbound(ItemStack item) {
+        if(item==null) return false;
+        if(!item.hasItemMeta()) return false;
+        ItemMeta meta = item.getItemMeta();
+        if(!meta.hasEnchants()) return false;
+        for(Enchantment enchant : meta.getEnchants().keySet()) {
+            if(enchant.getKey().getKey().equals("soulbound")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     boolean isGenericSoulbound(ItemStack item) {
@@ -72,6 +86,7 @@ public class HookUtils implements Listener {
     boolean keepOnDeath(ItemStack item) {
         if(item==null) return false;
         if( isSlimefunSoulbound(item)) return true;
+        if(isNativeSoulbound(item)) return true;
         return false;
     }
 

@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.22.1
+- Updated Russian translation
+- Improved debug/verbose mode
+- Added soulbound detection for EcoEnchants
+
 ## 2.22.0
 - When players die in the void, AngelChest tries to spawn the chest at the last position a player was standing 
 

@@ -155,20 +155,21 @@ public class AngelChestCommandUtils {
 
 		Location acloc = ac.block.getLocation();
 		Location tploc = acloc.clone();
+		double tpDistance = plugin.getConfig().getDouble("tp-distance");
 		 try {
 			 // offset the target location
 			 switch (AngelChestBlockDataUtils.getBlockDirection(ac.block)) {
 				 case SOUTH:
-					 tploc.add(0, 0, 2);
+					 tploc.add(0, 0, tpDistance);
 					 break;
 				 case WEST:
-					 tploc.add(-2, 0, 0);
+					 tploc.add(-tpDistance, 0, 0);
 					 break;
 				 case NORTH:
-					 tploc.add(0, 0, -2);
+					 tploc.add(0, 0, -tpDistance);
 					 break;
 				 case EAST:
-					 tploc.add(2, 0, 0);
+					 tploc.add(tpDistance, 0, 0);
 					 break;
 				 default:
 					 break;
