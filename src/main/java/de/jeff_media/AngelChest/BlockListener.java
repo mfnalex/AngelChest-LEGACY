@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 
 public class BlockListener implements Listener {
 
@@ -27,6 +28,17 @@ public class BlockListener implements Listener {
             plugin.debug("Trying to prevent cancellation of EntitySpawnEvent for the hologram");
             e.setCancelled(false);
     }*/
+
+    /**
+     * Called when a bucket is emptied inside the block of an AngelChest
+     * @param event PlayerBucketEmptyEvent
+     */
+    @EventHandler
+    public void onBucketEmpty(PlayerBucketEmptyEvent event) {
+        if(plugin.isAngelChest(event.getBlock())) {
+            event.setCancelled(true);
+        }
+    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

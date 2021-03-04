@@ -1,5 +1,8 @@
 # Changelog
 
+# 2.22.2
+- Fixed players being able to duplicate player heads (if you set this as your chest material) by putting water "inside" the head block
+
 # 2.22.1
 - Updated Russian translation
 - Improved debug/verbose mode
