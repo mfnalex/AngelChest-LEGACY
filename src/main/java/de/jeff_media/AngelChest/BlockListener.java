@@ -35,7 +35,13 @@ public class BlockListener implements Listener {
      */
     @EventHandler
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        if(plugin.isAngelChest(event.getBlock())) {
+        Block block;
+        try {
+            block = event.getBlock();
+        } catch (Throwable t) {
+            block = event.getBlockClicked();
+        }
+        if(plugin.isAngelChest(block)) {
             event.setCancelled(true);
         }
     }
